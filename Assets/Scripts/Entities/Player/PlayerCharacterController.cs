@@ -46,9 +46,6 @@ public class PlayerCharacterController : MonoBehaviour
     [Tooltip("Rotation speed for moving the camera")]
     public float RotationSpeed = 200f;
 
-    [Header("Abilities")]
-    public Ability[] abilities;
-
 
     public float RotationMultiplier
     {
@@ -63,6 +60,7 @@ public class PlayerCharacterController : MonoBehaviour
     public bool IsGrounded { get; private set; } = true;
     CharacterController m_Controller;
     PlayerInputHandler m_InputHandler;
+    LoadoutManager m_LoadoutManager;
     Vector3 m_CharacterVelocity;
     Vector3 m_LatestImpactSpeed;
     Vector3 m_GroundNormal;
@@ -79,6 +77,7 @@ public class PlayerCharacterController : MonoBehaviour
         MoveVelocity = new Vector3(0f, 0f, 0f);
         m_Controller = GetComponent<CharacterController>();
         m_InputHandler = GetComponent<PlayerInputHandler>();
+        m_LoadoutManager = GetComponent<LoadoutManager>();
     }
 
     // Update is called once per frame
@@ -87,9 +86,9 @@ public class PlayerCharacterController : MonoBehaviour
         CameraMovement();
         CharacterMovement();
 
-        for (int i = 0; i < abilities.Length; i++)
-            if (m_InputHandler.GetAbility(i+1))
-                abilities[i].Execute();
+        for (int i = 0; i < m_LoadoutManager.GetCurrentLoadout().Length; i++)
+            if (m_InputHandler.GetAbilityDown(i + 1) || (m_InputHandler.GetAbility(i + 1) && m_LoadoutManager.GetCurrentLoadout()[i].HoldAbility))
+                m_LoadoutManager.GetCurrentLoadout()[i].Activate();
     }
 
 
@@ -161,7 +160,6 @@ public class PlayerCharacterController : MonoBehaviour
         MoveVelocity = new Vector3(MoveVelocity.x, JumpForce, MoveVelocity.z);
         m_LastTimeJumped = Time.time;
         IsGrounded = false;
-        Debug.Log("JUMP");
     }
 
 

@@ -17,11 +17,24 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField]
     private bool InvertXAxis = false;
 
+    static Dictionary<KeyCode, int> keycodes = null;
+
     private bool inputEnabled { get; set; } = true;
+
+    private float abilityTimer = 0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        if (keycodes == null)
+        {
+            keycodes = new Dictionary<KeyCode, int>();
+            keycodes.Add(KeyCode.Alpha1, 1); keycodes.Add(KeyCode.Alpha2, 2); keycodes.Add(KeyCode.Alpha3, 3);
+            keycodes.Add(KeyCode.Alpha4, 4); keycodes.Add(KeyCode.Alpha5, 5); keycodes.Add(KeyCode.Alpha6, 6);
+            keycodes.Add(KeyCode.Alpha7, 7); keycodes.Add(KeyCode.Alpha8, 8); keycodes.Add(KeyCode.Alpha9, 9);
+        }
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -65,7 +78,37 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool GetAbility(int number)
     {
+        if (Input.GetButton(Constants.Ability + number.ToString()))
+            abilityTimer -= Time.deltaTime;
+
+        if (abilityTimer <= 0f)
+        {
+            abilityTimer = 0.1f;
+            return true;
+        }
+
+        return false;
+        
+    }
+
+    public bool GetAbilityDown(int number)
+    {
         return Input.GetButtonDown(Constants.Ability + number.ToString());
+    }
+
+
+    public int GetSelectWeaponInput()
+    {
+        if (inputEnabled)
+        {
+            foreach (KeyCode key in keycodes.Keys)
+            {
+                if (Input.GetKeyDown(key))
+                    return keycodes[key];
+            }
+        }
+
+        return 0;
     }
 
 

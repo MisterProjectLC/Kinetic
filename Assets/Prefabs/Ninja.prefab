@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 958540071565868630}
   - component: {fileID: 8953040495514145204}
   - component: {fileID: 6682568287999204924}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -94,9 +94,13 @@ GameObject:
   - component: {fileID: 4021532750877547998}
   - component: {fileID: 3979511783900690487}
   - component: {fileID: 3804878940635823621}
+  - component: {fileID: 7838017393941009792}
+  - component: {fileID: 3807759192281930911}
+  - component: {fileID: 8479089956554939356}
   - component: {fileID: 4065190915646592250}
+  - component: {fileID: 7329920808643962349}
   - component: {fileID: 3891292215102862298}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ninja
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,8 +163,49 @@ MonoBehaviour:
   AirborneMaxSpeed: 8
   AirborneAcceleration: 8
   RotationSpeed: 200
-  abilities:
-  - {fileID: 4065190915646592250}
+--- !u!114 &7838017393941009792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089919347116189794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701dbbd430e1007459b3b9bddcaed722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Affiliation: 0
+--- !u!114 &3807759192281930911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089919347116189794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHealth: 5
+  MaxHealth: 5
+--- !u!114 &8479089956554939356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089919347116189794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 828e7fcac643e6a40879b668a6204f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Loadouts:
+  - abilities:
+    - {fileID: 4065190915646592250}
+    - {fileID: 7329920808643962349}
 --- !u!114 &4065190915646592250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +218,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f34d66262a7a84ea4759f0f96dc261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cooldown: 5
+  HoldAbility: 0
   DashSpeed: 10
   DashDuration: 0.5
+  DashDamage: 2
+--- !u!114 &7329920808643962349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089919347116189794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cooldown: 5
+  HoldAbility: 0
+  WeaponRef: {fileID: 0}
 --- !u!143 &3891292215102862298
 CharacterController:
   m_ObjectHideFlags: 0

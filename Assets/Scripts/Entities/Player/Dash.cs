@@ -11,8 +11,13 @@ public class Dash : Ability
     [Tooltip("Dash duration")]
     public float DashDuration = 0.5f;
 
+    [Tooltip("Dash damage")]
+    public int DashDamage = 2;
+
     PlayerCharacterController player;
     PlayerInputHandler input;
+
+    bool dashing = false;
 
     public void Start()
     {
@@ -22,20 +27,35 @@ public class Dash : Ability
 
     public override void Execute()
     {
+
+        dashing = true;
+        player.gameObject.layer = LayerMask.NameToLayer("Shifted");
         player.MoveControlEnabled = false;
         player.MoveVelocity = DashSpeed * player.PlayerCamera.transform.TransformVector(input.GetMoveInput());
-        Debug.Log("Teste1");
         StartCoroutine("EndDash");
-        Debug.Log("Teste3");
     }
 
 
     IEnumerator EndDash()
     {
-        Debug.Log("Teste");
         yield return new WaitForSeconds(DashDuration);
+        dashing = false;
+        player.gameObject.layer = LayerMask.NameToLayer("Player");
         player.MoveControlEnabled = true;
         player.MoveVelocity = Vector3.zero;
-        Debug.Log("Teste2");
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Damageable damageable = other.gameObject.GetComponent<Damageable>();
+        if (damageable && dashing)
+        {
+            if (damageable.GetAffiliation() != player.gameObject.GetComponent<Actor>().Affiliation)
+            {
+                Debug.Log("DAMAGE");
+                damageable.InflictDamage(DashDamage);
+            }
+        }
     }
 }
