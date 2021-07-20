@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LoadoutManager : MonoBehaviour
 {
+    // Loadouts
     [System.Serializable]
     public struct Loadout
     {
@@ -13,18 +14,137 @@ public class LoadoutManager : MonoBehaviour
     [Tooltip("List of currently equipped loadouts")]
     public Loadout[] Loadouts;
 
-    private int currentLoadout = 0;
+    [Header("Cooldown timers")]
+    [Tooltip("Time to put the weapon down")]
+    public float DownCooldown = 0.1f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [Tooltip("Time to put the weapon up")]
+    public float UpCooldown = 0.1f;
+
+    [Header("Positions")]
+    [Tooltip("Down position")]
+    public Transform DownTransform;
+
+    [Tooltip("Up position")]
+    public Transform UpTransform;
+
+    private int currentLoadout = 0;
+    private Weapon currentWeapon;
+    private Weapon newWeapon;
+
+    private float animProgression = 0f;
+    
+    [HideInInspector]
+    public AnimationStage AnimStage { get; private set; } = AnimationStage.WeaponReady;
+    public enum AnimationStage {
+        WeaponDown,
+        WeaponUp,
+        WeaponReady
     }
 
-    // Update is called once per frame
+
+    // References
+    PlayerInputHandler m_InputHandler;
+
+
+    void Start()
+    {
+        m_InputHandler = GetComponent<PlayerInputHandler>();
+        foreach (Ability ab in GetCurrentLoadout())
+            if (ab is WeaponAbility)
+            {
+                currentWeapon = ((WeaponAbility)ab).WeaponRef;
+                break;
+            }
+    }
+
+
     void Update()
     {
-        
+        ActivateAbilities();
+        ManageLoadouts();
+        ManageWeapons();
+    }
+
+
+    public void ActivateAbilities()
+    {
+        for (int i = 0; i < GetCurrentLoadout().Length; i++)
+            if (m_InputHandler.GetAbilityDown(i + 1) || (m_InputHandler.GetAbility(i + 1) && GetCurrentLoadout()[i].HoldAbility))
+            {
+                if (AnimStage != AnimationStage.WeaponReady)
+                    return;
+
+                // Activate
+                GetCurrentLoadout()[i].Activate();
+
+                // Switch weapons
+                if (GetCurrentLoadout()[i] is WeaponAbility)
+                    SwitchWeapon(i);
+            }
+    }
+
+
+    public void SwitchWeapon(int weaponIndex)
+    {
+        newWeapon = ((WeaponAbility)GetCurrentLoadout()[weaponIndex]).WeaponRef;
+        if (newWeapon != currentWeapon)
+        {
+            AnimStage = AnimationStage.WeaponDown;
+            animProgression = DownCooldown;
+        }
+    }
+
+
+    public void ManageLoadouts()
+    {
+
+    }
+
+
+    public void ManageWeapons()
+    {
+        // Animation End
+        if (animProgression <= 0f)
+        {
+            switch (AnimStage)
+            {
+                case AnimationStage.WeaponDown:
+                    AnimStage = AnimationStage.WeaponUp;
+                    animProgression = UpCooldown;
+                    currentWeapon.gameObject.SetActive(false);
+                    currentWeapon = newWeapon;
+                    currentWeapon.gameObject.SetActive(true);
+                    break;
+
+                case AnimationStage.WeaponUp:
+                    AnimStage = AnimationStage.WeaponReady;
+                    break;
+            }
+        }
+
+        // Animation Progress
+        else
+        {
+            switch (AnimStage)
+            {
+                case AnimationStage.WeaponDown:
+                    currentWeapon.gameObject.transform.position = Vector3.Lerp(UpTransform.position, DownTransform.position,
+                        (DownCooldown - animProgression) / DownCooldown);
+                    currentWeapon.gameObject.transform.rotation = Quaternion.Lerp(UpTransform.rotation, DownTransform.rotation,
+                        (DownCooldown - animProgression) / DownCooldown);
+                    break;
+
+                case AnimationStage.WeaponUp:
+                    currentWeapon.gameObject.transform.position = Vector3.Lerp(DownTransform.position, UpTransform.position,
+                        (UpCooldown - animProgression) / UpCooldown);
+                    currentWeapon.gameObject.transform.rotation = Quaternion.Lerp(DownTransform.rotation, UpTransform.rotation,
+                        (UpCooldown - animProgression) / UpCooldown);
+                    break;
+            }
+
+            animProgression -= Time.deltaTime;
+        }
     }
 
 

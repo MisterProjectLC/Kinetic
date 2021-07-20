@@ -48,11 +48,14 @@ MonoBehaviour:
   Mouth: {fileID: 8284263616901066762}
   HitLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 320
   MaxDistance: 100
-  MaxSpreadAngle: 5
+  BackwardsForce: 10
+  MaxSpreadAngle: 0
   BulletCount: 12
   BulletDamage: 1
+  Automatic: 0
+  FireCooldown: 0
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
 --- !u!1 &7729609463737601107
 GameObject:

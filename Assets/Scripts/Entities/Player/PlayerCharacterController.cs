@@ -60,7 +60,6 @@ public class PlayerCharacterController : MonoBehaviour
     public bool IsGrounded { get; private set; } = true;
     CharacterController m_Controller;
     PlayerInputHandler m_InputHandler;
-    LoadoutManager m_LoadoutManager;
     Vector3 m_CharacterVelocity;
     Vector3 m_LatestImpactSpeed;
     Vector3 m_GroundNormal;
@@ -77,7 +76,6 @@ public class PlayerCharacterController : MonoBehaviour
         MoveVelocity = new Vector3(0f, 0f, 0f);
         m_Controller = GetComponent<CharacterController>();
         m_InputHandler = GetComponent<PlayerInputHandler>();
-        m_LoadoutManager = GetComponent<LoadoutManager>();
     }
 
     // Update is called once per frame
@@ -85,10 +83,6 @@ public class PlayerCharacterController : MonoBehaviour
     {
         CameraMovement();
         CharacterMovement();
-
-        for (int i = 0; i < m_LoadoutManager.GetCurrentLoadout().Length; i++)
-            if (m_InputHandler.GetAbilityDown(i + 1) || (m_InputHandler.GetAbility(i + 1) && m_LoadoutManager.GetCurrentLoadout()[i].HoldAbility))
-                m_LoadoutManager.GetCurrentLoadout()[i].Activate();
     }
 
 
@@ -222,5 +216,12 @@ public class PlayerCharacterController : MonoBehaviour
     Vector3 GetCapsuleTopHemisphere()
     {
         return transform.position + (transform.up * (m_Controller.height - m_Controller.radius));
+    }
+
+    void OnDrawGizmos()
+    {
+        m_Controller = GetComponent<CharacterController>();
+        Gizmos.DrawSphere(GetCapsuleBottomHemisphere(), m_Controller.radius);
+        Gizmos.DrawSphere(GetCapsuleTopHemisphere(), m_Controller.radius);
     }
 }
