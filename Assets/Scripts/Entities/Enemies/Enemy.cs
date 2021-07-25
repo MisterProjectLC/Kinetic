@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
+    float clock = 0f;
+
+    [SerializeField]
+    Weapon weapon;
+
     void Start()
     {
         
@@ -13,6 +17,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Weapon
+        clock += Time.deltaTime;
+        if (clock > weapon.FireCooldown)
+        {
+            clock = 0f;
+            weapon.Fire();
+        }
+
+        // Gravity
+        //MoveVelocity += Vector3.down * Constants.Gravity * GravityMultiplier * Time.deltaTime;
+        //Move(MoveVelocity * Time.deltaTime);
     }
 }

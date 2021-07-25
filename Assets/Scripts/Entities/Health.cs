@@ -5,12 +5,13 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField]
-    private int CurrentHealth = 5;
+    public int CurrentHealth = 5;
     public int MaxHealth = 5;
 
     [HideInInspector]
     public UnityAction OnDamage;
+    [HideInInspector]
+    public UnityAction OnHeal;
     [HideInInspector]
     public UnityAction OnDie;
 
@@ -20,10 +21,6 @@ public class Health : MonoBehaviour
         CurrentHealth = MaxHealth;
     }
 
-    public int GetCurrentHealth()
-    {
-        return CurrentHealth;
-    }
 
     public void InflictDamage(int damage)
     {
@@ -38,5 +35,7 @@ public class Health : MonoBehaviour
     public void Heal(int heal)
     {
         CurrentHealth = Mathf.Min(MaxHealth, CurrentHealth + heal);
+        if (OnHeal != null)
+            OnHeal.Invoke();
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5135531782038433102}
   - component: {fileID: 2456668826152063561}
+  - component: {fileID: -6176156119343333749}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -46,17 +47,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 8284263616901066762}
+  Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
+  BulletType: 0
   HitLayers:
     serializedVersion: 2
     m_Bits: 320
   MaxDistance: 100
+  Projectile: {fileID: 0}
   BackwardsForce: 10
   MaxSpreadAngle: 0
   BulletCount: 12
-  BulletDamage: 1
   Automatic: 0
   FireCooldown: 0
-  Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
+--- !u!114 &-6176156119343333749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6010344891319437048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 1
 --- !u!1 &7729609463737601107
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +96,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7729609463737601107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.22, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5135531782038433102}
@@ -113,13 +128,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9209886546851730388}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5135531782038433102}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &6588919937581388495
 MeshFilter:
   m_ObjectHideFlags: 0

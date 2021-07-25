@@ -42,7 +42,6 @@ public class LoadoutManager : MonoBehaviour
         WeaponReady
     }
 
-
     // References
     PlayerInputHandler m_InputHandler;
 
@@ -95,10 +94,37 @@ public class LoadoutManager : MonoBehaviour
         }
     }
 
+    public void SwitchWeapon(Weapon weapon, bool forceSwitch)
+    {
+        newWeapon = weapon;
+        if (newWeapon != currentWeapon || forceSwitch)
+        {
+            AnimStage = AnimationStage.WeaponDown;
+            animProgression = DownCooldown;
+        }
+    }
+
 
     public void ManageLoadouts()
     {
+        int weaponButton = m_InputHandler.GetSelectWeaponInput()-1;
 
+        if (weaponButton != -2 && weaponButton != currentLoadout && weaponButton < Loadouts.Length)
+        {
+            currentLoadout = weaponButton;
+            Weapon weapon = null;
+            foreach (Ability ab in GetCurrentLoadout())
+                if (ab is WeaponAbility)
+                {
+                    weapon = ((WeaponAbility)ab).WeaponRef;
+                    break;
+                }
+
+            if (weapon == null)
+                Debug.Log("Loadout lacks a weapon");
+            SwitchWeapon(weapon, true);
+
+        }
     }
 
 
@@ -112,9 +138,11 @@ public class LoadoutManager : MonoBehaviour
                 case AnimationStage.WeaponDown:
                     AnimStage = AnimationStage.WeaponUp;
                     animProgression = UpCooldown;
-                    currentWeapon.gameObject.SetActive(false);
+                    if (currentWeapon != null)
+                        currentWeapon.gameObject.SetActive(false);
                     currentWeapon = newWeapon;
-                    currentWeapon.gameObject.SetActive(true);
+                    if (currentWeapon != null)
+                        currentWeapon.gameObject.SetActive(true);
                     break;
 
                 case AnimationStage.WeaponUp:
@@ -126,22 +154,23 @@ public class LoadoutManager : MonoBehaviour
         // Animation Progress
         else
         {
-            switch (AnimStage)
-            {
-                case AnimationStage.WeaponDown:
-                    currentWeapon.gameObject.transform.position = Vector3.Lerp(UpTransform.position, DownTransform.position,
-                        (DownCooldown - animProgression) / DownCooldown);
-                    currentWeapon.gameObject.transform.rotation = Quaternion.Lerp(UpTransform.rotation, DownTransform.rotation,
-                        (DownCooldown - animProgression) / DownCooldown);
-                    break;
+            if (currentWeapon != null)
+                switch (AnimStage)
+                {
+                    case AnimationStage.WeaponDown:
+                        currentWeapon.gameObject.transform.position = Vector3.Lerp(UpTransform.position, DownTransform.position,
+                            (DownCooldown - animProgression) / DownCooldown);
+                        currentWeapon.gameObject.transform.rotation = Quaternion.Lerp(UpTransform.rotation, DownTransform.rotation,
+                            (DownCooldown - animProgression) / DownCooldown);
+                        break;
 
-                case AnimationStage.WeaponUp:
-                    currentWeapon.gameObject.transform.position = Vector3.Lerp(DownTransform.position, UpTransform.position,
-                        (UpCooldown - animProgression) / UpCooldown);
-                    currentWeapon.gameObject.transform.rotation = Quaternion.Lerp(DownTransform.rotation, UpTransform.rotation,
-                        (UpCooldown - animProgression) / UpCooldown);
-                    break;
-            }
+                    case AnimationStage.WeaponUp:
+                        currentWeapon.gameObject.transform.position = Vector3.Lerp(DownTransform.position, UpTransform.position,
+                            (UpCooldown - animProgression) / UpCooldown);
+                        currentWeapon.gameObject.transform.rotation = Quaternion.Lerp(DownTransform.rotation, UpTransform.rotation,
+                            (UpCooldown - animProgression) / UpCooldown);
+                        break;
+                }
 
             animProgression -= Time.deltaTime;
         }

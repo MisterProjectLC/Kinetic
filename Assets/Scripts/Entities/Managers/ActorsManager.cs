@@ -9,7 +9,7 @@ public class ActorsManager : MonoBehaviour
     public static Dictionary<int, List<Actor>> Actors;
 
     [SerializeField]
-    public Actor PlayerSerialized;
+    private Actor PlayerSerialized;
     public static Actor Player;
 
 

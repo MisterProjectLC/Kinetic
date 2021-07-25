@@ -108,7 +108,7 @@ public class PlayerInputHandler : MonoBehaviour
             }
         }
 
-        return 0;
+        return -1;
     }
 
 
