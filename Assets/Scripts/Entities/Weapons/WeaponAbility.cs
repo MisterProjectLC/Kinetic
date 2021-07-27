@@ -13,7 +13,8 @@ public class WeaponAbility : Ability
 
     public void Start()
     {
-        player = GetComponent<PlayerCharacterController>();
+        player = GetComponentInParent<PlayerCharacterController>();
+        DisplayName = WeaponRef.DisplayName;
         HoldAbility = WeaponRef.Automatic;
         Cooldown = WeaponRef.FireCooldown;
         BackwardsForce = WeaponRef.BackwardsForce;

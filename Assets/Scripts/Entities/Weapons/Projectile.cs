@@ -22,9 +22,13 @@ public class Projectile : MonoBehaviour
 
     public void Setup(Vector3 moveDirection, LayerMask layerMask, GameObject sparks)
     {
+        clock = 0f;
         hitLayers = layerMask;
         moveVelocity = moveDirection.normalized* MoveSpeed;
+        transform.right = moveDirection.normalized;
         Sparks = sparks;
+
+        m_LastRootPosition = Root.position;
     }
 
     private void OnEnable()
@@ -65,7 +69,6 @@ public class Projectile : MonoBehaviour
         }
 
         m_LastRootPosition = Root.position;
-        transform.right = moveVelocity.normalized;
     }
 
 

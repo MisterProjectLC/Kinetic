@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LoadoutManager : MonoBehaviour
 {
@@ -33,7 +32,10 @@ public class LoadoutManager : MonoBehaviour
     private Weapon newWeapon;
 
     private float animProgression = 0f;
-    
+
+    public UnityAction<Weapon> OnWeaponSwitch;
+    public UnityAction OnLoadoutSwitch;
+
     [HideInInspector]
     public AnimationStage AnimStage { get; private set; } = AnimationStage.WeaponReady;
     public enum AnimationStage {
@@ -46,7 +48,7 @@ public class LoadoutManager : MonoBehaviour
     PlayerInputHandler m_InputHandler;
 
 
-    void Start()
+    void Awake()
     {
         m_InputHandler = GetComponent<PlayerInputHandler>();
         foreach (Ability ab in GetCurrentLoadout())
@@ -86,12 +88,7 @@ public class LoadoutManager : MonoBehaviour
 
     public void SwitchWeapon(int weaponIndex)
     {
-        newWeapon = ((WeaponAbility)GetCurrentLoadout()[weaponIndex]).WeaponRef;
-        if (newWeapon != currentWeapon)
-        {
-            AnimStage = AnimationStage.WeaponDown;
-            animProgression = DownCooldown;
-        }
+        SwitchWeapon(((WeaponAbility)GetCurrentLoadout()[weaponIndex]).WeaponRef, false);
     }
 
     public void SwitchWeapon(Weapon weapon, bool forceSwitch)
@@ -102,6 +99,8 @@ public class LoadoutManager : MonoBehaviour
             AnimStage = AnimationStage.WeaponDown;
             animProgression = DownCooldown;
         }
+
+        OnWeaponSwitch.Invoke(weapon);
     }
 
 
@@ -122,8 +121,8 @@ public class LoadoutManager : MonoBehaviour
 
             if (weapon == null)
                 Debug.Log("Loadout lacks a weapon");
+            OnLoadoutSwitch.Invoke();
             SwitchWeapon(weapon, true);
-
         }
     }
 
@@ -180,5 +179,11 @@ public class LoadoutManager : MonoBehaviour
     public Ability[] GetCurrentLoadout()
     {
         return Loadouts[currentLoadout].abilities;
+    }
+
+
+    public Weapon GetCurrentWeapon()
+    {
+        return currentWeapon;
     }
 }

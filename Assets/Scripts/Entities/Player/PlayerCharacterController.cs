@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 //[RequireComponent(typeof(PlayerInputHandler))]
 public class PlayerCharacterController : MonoBehaviour
@@ -68,6 +67,9 @@ public class PlayerCharacterController : MonoBehaviour
 
     const float k_JumpGroundingPreventionTime = 0.2f;
     const float k_GroundCheckDistanceInAir = 0.07f;
+
+    [HideInInspector]
+    public UnityAction<Collider> OnTrigger;
 
 
     // Start is called before the first frame update
@@ -223,5 +225,11 @@ public class PlayerCharacterController : MonoBehaviour
         m_Controller = GetComponent<CharacterController>();
         Gizmos.DrawSphere(GetCapsuleBottomHemisphere(), m_Controller.radius);
         Gizmos.DrawSphere(GetCapsuleTopHemisphere(), m_Controller.radius);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        OnTrigger.Invoke(other);
     }
 }

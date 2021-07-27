@@ -1,33 +1,32 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 public class Dash : Ability
 {
     [Tooltip("Dash intensity")]
-    public float DashSpeed = 10f;
+    public float DashSpeed = 50f;
 
     [Tooltip("Dash duration")]
-    public float DashDuration = 0.5f;
-
-    [Tooltip("Dash damage")]
-    public int DashDamage = 2;
+    public float DashDuration = 0.25f;
 
     PlayerCharacterController player;
     PlayerInputHandler input;
+    Attack attack;
 
     bool dashing = false;
 
     public void Start()
     {
-        player = GetComponent<PlayerCharacterController>();
-        input = GetComponent<PlayerInputHandler>();
+        player = GetComponentInParent<PlayerCharacterController>();
+        player.OnTrigger += OnTrigger;
+        input = GetComponentInParent<PlayerInputHandler>();
+        attack = GetComponent<Attack>();
+        attack.OnKill += ResetCooldown;
     }
 
     public override void Execute()
     {
-
         dashing = true;
         player.gameObject.layer = LayerMask.NameToLayer("Shifted");
         player.MoveControlEnabled = false;
@@ -46,16 +45,14 @@ public class Dash : Ability
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTrigger(Collider other)
     {
-        Damageable damageable = other.gameObject.GetComponent<Damageable>();
-        if (damageable && dashing)
-        {
-            if (damageable.GetAffiliation() != player.gameObject.GetComponent<Actor>().Affiliation)
-            {
-                Debug.Log("DAMAGE");
-                damageable.InflictDamage(DashDamage);
-            }
-        }
+        if (dashing)
+            attack.InflictDamage(other.gameObject);
+    }
+
+    private void ResetCooldown()
+    {
+        Timer = 0;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    [HideInInspector]
     public int CurrentHealth = 5;
     public int MaxHealth = 5;
 

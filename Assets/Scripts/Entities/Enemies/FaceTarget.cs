@@ -9,37 +9,34 @@ public class FaceTarget : MonoBehaviour
     [SerializeField]
     private float updateCooldown = 0.1f;
 
-    [Tooltip("How radically does the object rotate to match")]
-    [Range(0f, 1f)] [SerializeField]
-    private float lerpSpeed = 0.5f;
+    [Tooltip("How fast does the object rotate to face the target")]
+    [SerializeField]
+    private float turnSpeed = 10f;
 
-    private Vector3 oldTargetPosition;
+    private Quaternion currentPosition;
     private Vector3 newTargetPosition;
     private float clock = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        Transform cameraTransform = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform;
-        oldTargetPosition = cameraTransform.position;
-        newTargetPosition = cameraTransform.position;
+        newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Constant rotation
-        Vector3 currentTargetPosition = Vector3.Slerp(oldTargetPosition, newTargetPosition, lerpSpeed);
-        oldTargetPosition = currentTargetPosition;
-        transform.LookAt(currentTargetPosition);
+        transform.rotation = Quaternion.RotateTowards(currentPosition, Quaternion.LookRotation(newTargetPosition - transform.position),
+            turnSpeed*Time.deltaTime);
+        currentPosition = transform.rotation;
 
         // Update targetting
         clock += Time.deltaTime;
         if (clock > updateCooldown)
         {
             clock = 0f;
-            Transform cameraTransform = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform;
-            newTargetPosition = cameraTransform.position;
+            newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
         }
     }
 }

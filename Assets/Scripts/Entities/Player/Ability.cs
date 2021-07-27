@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Ability : MonoBehaviour
 {
+    public string DisplayName = "";
+
     [Tooltip("Cooldown")]
     public float Cooldown = 5f;
-    private float Timer = 0f;
+    public float Timer { get; protected set; } = 0f;
 
     public bool HoldAbility = false;
+    public UnityAction OnExecute;
+
 
     private void Update()
     {
@@ -21,6 +24,8 @@ public abstract class Ability : MonoBehaviour
         {
             Timer = Cooldown;
             Execute();
+            if (OnExecute != null)
+                OnExecute.Invoke();
         }
     }
 

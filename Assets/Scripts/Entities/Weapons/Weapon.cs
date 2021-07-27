@@ -11,13 +11,15 @@ public class Weapon : MonoBehaviour
     [Tooltip("Prefab containing hit animation")]
     public GameObject Sparks;
 
-    [Header("Attack Type")]
+    [Header("General")]
+    public string DisplayName = "";
+
     public ObjectManager.PoolableType BulletType;
 
-    [Header("Hitscan")]
     [Tooltip("Layer mask")]
     public LayerMask HitLayers;
 
+    [Header("Hitscan")]
     [Tooltip("Max distance to which the bullets travel")]
     public float MaxDistance = 100f;
 
@@ -47,12 +49,12 @@ public class Weapon : MonoBehaviour
         {
             // Get Direction
             float spread = Random.Range(0f, MaxSpreadAngle);
-            Vector3 direction = Vector3.Slerp(transform.forward, Random.insideUnitSphere, spread);
+            Vector3 direction = Vector3.Slerp(Mouth.forward, Random.insideUnitSphere, spread);
 
             // Projectile attack
             if (Projectile != null)
             {
-                GameObject instance = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.LaserProjectile, Projectile).gameObject;
+                GameObject instance = ObjectManager.OM.SpawnObjectFromPool(BulletType, Projectile).gameObject;
                 instance.transform.position = Mouth.position;
                 instance.GetComponent<Projectile>().Setup(direction, HitLayers, Sparks);
 

@@ -25,7 +25,13 @@ public class Damageable : MonoBehaviour
 
     public void InflictDamage(int damage)
     {
-        Debug.Log(gameObject.name);
         HealthRef.InflictDamage((int)Mathf.Floor(damage*DamageSensitivity));
+    }
+
+    public void InflictDamage(int damage, Attack attack)
+    {
+        HealthRef.OnDie += attack.OnKill;
+        HealthRef.InflictDamage((int)Mathf.Floor(damage * DamageSensitivity));
+        HealthRef.OnDie -= attack.OnKill;
     }
 }
