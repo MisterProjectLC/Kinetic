@@ -63,11 +63,19 @@ public class PlayerCharacterController : MonoBehaviour
     Vector3 m_LatestImpactSpeed;
     Vector3 m_GroundNormal;
     float m_LastTimeJumped = 0f;
+    Vector3 m_LastWallDirection;
     float m_CameraVerticalAngle = 0f;
 
     const float k_JumpGroundingPreventionTime = 0.2f;
     const float k_GroundCheckDistanceInAir = 0.07f;
 
+    // Events
+    [HideInInspector]
+    public UnityAction OnJumpAir;
+    [HideInInspector]
+    public UnityAction<Collision> OnCollision;
+    [HideInInspector]
+    public UnityAction<Collision> OffCollision;
     [HideInInspector]
     public UnityAction<Collider> OnTrigger;
 
@@ -130,8 +138,9 @@ public class PlayerCharacterController : MonoBehaviour
                 if (m_InputHandler.GetJump())
                     Jump();
 
-                // Air Movement
+                
             }
+            // Air Movement
             else
             {
                 MoveVelocity += moveInput * AirborneAcceleration * Time.deltaTime;
@@ -141,6 +150,10 @@ public class PlayerCharacterController : MonoBehaviour
                 Vector3 horizontalVelocity = Vector3.ProjectOnPlane(MoveVelocity, Vector3.up);
                 horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, AirborneMaxSpeed);
                 MoveVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
+
+                // Wall checks
+                if (m_InputHandler.GetJump())
+                    OnJumpAir.Invoke();
 
                 // Gravity
                 MoveVelocity += Vector3.down * Constants.Gravity * GravityMultiplier * Time.deltaTime;
@@ -193,6 +206,18 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
 
+    public RaycastHit? WallCheck()
+    {
+        if (Physics.CapsuleCast(GetCapsuleTopHemisphere(), GetCapsuleBottomHemisphere(), m_Controller.radius - Physics.defaultContactOffset,
+            MoveVelocity, out RaycastHit hit, k_GroundCheckDistanceInAir, GroundCheckLayers))
+        {
+            return hit;
+        }
+
+        return null;
+    }
+
+
     // Returns true if the slope angle represented by the given normal is under the slope angle limit of the character controller
     bool IsNormalUnderSlopeLimit(Vector3 normal)
     {
@@ -227,6 +252,18 @@ public class PlayerCharacterController : MonoBehaviour
         Gizmos.DrawSphere(GetCapsuleTopHemisphere(), m_Controller.radius);
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collided with " + collision.collider.name);
+        OnCollision.Invoke(collision);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Debug.Log("Decollided with " + collision.collider.name);
+        OffCollision.Invoke(collision);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
