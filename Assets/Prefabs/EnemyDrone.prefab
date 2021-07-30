@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouth: {fileID: 3100332752659761561}
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
+  DisplayName: 
   BulletType: 1
   HitLayers:
     serializedVersion: 2
@@ -304,6 +305,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 1575834425217545803}
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  Movable: 1
+  Height: 1
 --- !u!114 &260070860282569955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateCooldown: 0.1
-  lerpSpeed: 0.5
+  turnSpeed: 10
 --- !u!1 &5749944733704972615
 GameObject:
   m_ObjectHideFlags: 0

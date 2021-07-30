@@ -50,9 +50,4 @@ public class Dash : Ability
         if (dashing)
             attack.InflictDamage(other.gameObject);
     }
-
-    private void ResetCooldown()
-    {
-        Timer = 0;
-    }
 }

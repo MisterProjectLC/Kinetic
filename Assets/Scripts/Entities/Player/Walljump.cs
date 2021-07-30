@@ -32,7 +32,6 @@ public class Walljump : MonoBehaviour
         {
             playerController.MoveVelocity = (Vector3.up + new Vector3(wallDirection.x, 0f, wallDirection.z).normalized) * 
                 playerController.JumpForce * 1.5f;
-            Debug.Log("Executed");
         }
     }
 

@@ -10,8 +10,11 @@ public class LoadoutManager : MonoBehaviour
         public Ability[] abilities;
     }
 
+    [Header("General")]
     [Tooltip("List of currently equipped loadouts")]
     public Loadout[] Loadouts;
+
+    public bool AbilitiesEnabled = true;
 
     [Header("Cooldown timers")]
     [Tooltip("Time to put the weapon down")]
@@ -19,6 +22,7 @@ public class LoadoutManager : MonoBehaviour
 
     [Tooltip("Time to put the weapon up")]
     public float UpCooldown = 0.1f;
+
 
     [Header("Positions")]
     [Tooltip("Down position")]
@@ -28,6 +32,7 @@ public class LoadoutManager : MonoBehaviour
     public Transform UpTransform;
 
     private int currentLoadout = 0;
+    private int lastLoadout = 0;
     private Weapon currentWeapon;
     private Weapon newWeapon;
 
@@ -70,6 +75,9 @@ public class LoadoutManager : MonoBehaviour
 
     public void ActivateAbilities()
     {
+        if (!AbilitiesEnabled)
+            return;
+
         for (int i = 0; i < GetCurrentLoadout().Length; i++)
             if (m_InputHandler.GetAbilityDown(i + 1) || (m_InputHandler.GetAbility(i + 1) && GetCurrentLoadout()[i].HoldAbility))
             {

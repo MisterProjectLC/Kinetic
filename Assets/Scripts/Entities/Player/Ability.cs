@@ -30,4 +30,10 @@ public abstract class Ability : MonoBehaviour
     }
 
     public abstract void Execute();
+
+
+    protected void ResetCooldown()
+    {
+        Timer = 0;
+    }
 }

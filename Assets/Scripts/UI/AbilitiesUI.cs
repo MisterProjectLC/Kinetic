@@ -13,12 +13,12 @@ public class AbilitiesUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AbilitySize = SkillImages[0].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta;
+
         loadoutManager = ActorsManager.Player.GetComponent<LoadoutManager>();
         loadoutManager.OnWeaponSwitch += WeaponUpdate;
         loadoutManager.OnLoadoutSwitch += LoadoutUpdate;
         LoadoutUpdate();
-
-        AbilitySize = SkillImages[0].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta;
     }
 
 
@@ -61,6 +61,8 @@ public class AbilitiesUI : MonoBehaviour
             SkillImages[skillCount].GetComponentInChildren<Text>().text = ability.DisplayName;
             if (!(ability is WeaponAbility))
                 SkillImages[skillCount].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta = Vector2.zero;
+            else
+                SkillImages[skillCount].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta = AbilitySize;
             skillCount++;
         }
         WeaponUpdate(loadoutManager.GetCurrentWeapon());

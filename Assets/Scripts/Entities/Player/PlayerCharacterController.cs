@@ -198,7 +198,7 @@ public class PlayerCharacterController : MonoBehaviour
                     IsGrounded = true;
 
                     // handle snapping to the ground
-                    if (hit.distance > m_Controller.skinWidth)
+                    if (hit.distance > m_Controller.skinWidth && MoveControlEnabled)
                         m_Controller.Move(Vector3.down * hit.distance);
                 }
             }
@@ -210,9 +210,7 @@ public class PlayerCharacterController : MonoBehaviour
     {
         if (Physics.CapsuleCast(GetCapsuleTopHemisphere(), GetCapsuleBottomHemisphere(), m_Controller.radius - Physics.defaultContactOffset,
             MoveVelocity, out RaycastHit hit, k_GroundCheckDistanceInAir, GroundCheckLayers))
-        {
             return hit;
-        }
 
         return null;
     }
