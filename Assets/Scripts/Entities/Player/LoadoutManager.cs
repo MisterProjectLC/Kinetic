@@ -114,11 +114,16 @@ public class LoadoutManager : MonoBehaviour
 
     public void ManageLoadouts()
     {
-        int weaponButton = m_InputHandler.GetSelectWeaponInput()-1;
+        int loadoutButton = -1;
+        if (m_InputHandler.GetSwitch())
+            loadoutButton = lastLoadout;
+        else
+            loadoutButton = m_InputHandler.GetSelectLoadoutInput()-1;
 
-        if (weaponButton != -2 && weaponButton != currentLoadout && weaponButton < Loadouts.Length)
+        if (loadoutButton != -2 && loadoutButton != currentLoadout && loadoutButton < Loadouts.Length)
         {
-            currentLoadout = weaponButton;
+            lastLoadout = currentLoadout;
+            currentLoadout = loadoutButton;
             Weapon weapon = null;
             foreach (Ability ab in GetCurrentLoadout())
                 if (ab is WeaponAbility)

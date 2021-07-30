@@ -48,6 +48,6 @@ public class Dash : Ability
     private void OnTrigger(Collider other)
     {
         if (dashing)
-            attack.InflictDamage(other.gameObject);
+            attack.AttackTarget(other.gameObject);
     }
 }

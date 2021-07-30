@@ -21,10 +21,12 @@ public class FaceTarget : MonoBehaviour
     void Start()
     {
         newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
+
+        GetComponent<Enemy>().OnActiveUpdate += OnActiveUpdate;
     }
 
     // Update is called once per frame
-    void Update()
+    void OnActiveUpdate()
     {
         // Constant rotation
         transform.rotation = Quaternion.RotateTowards(currentPosition, Quaternion.LookRotation(newTargetPosition - transform.position),

@@ -9,6 +9,7 @@ public class Constants
     public const string JoystickHorizontal = "Look X";
 
     public const string Jump = "Jump";
+    public const string Switch = "Switch";
     public const string Ability = "Ability";
 
     public const float Gravity = 20f;

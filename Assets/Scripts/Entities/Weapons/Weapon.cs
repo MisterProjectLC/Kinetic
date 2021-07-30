@@ -71,7 +71,7 @@ public class Weapon : MonoBehaviour
                     GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.LaserSparks, Sparks);
                     newObject.transform.position = hit.point;
                     newObject.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(Random.insideUnitSphere, hit.normal), hit.normal);
-                    GetComponent<Attack>().InflictDamage(hit.collider.gameObject);
+                    GetComponent<Attack>().AttackTarget(hit.collider.gameObject);
                 }
             }
         }

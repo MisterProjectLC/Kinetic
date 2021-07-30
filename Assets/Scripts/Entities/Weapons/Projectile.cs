@@ -80,7 +80,7 @@ public class Projectile : MonoBehaviour
 
     private void OnHit(Collider collider)
     {
-        GetComponent<Attack>().InflictDamage(collider.gameObject);
+        GetComponent<Attack>().AttackTarget(collider.gameObject);
         GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.LaserSparks, Sparks).gameObject;
         newObject.transform.position = transform.position;
         ObjectManager.OM.EraseObject(GetComponent<Poolable>());

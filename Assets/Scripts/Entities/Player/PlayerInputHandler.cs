@@ -76,6 +76,12 @@ public class PlayerInputHandler : MonoBehaviour
         return Input.GetButtonDown(Constants.Jump);
     }
 
+
+    public bool GetSwitch()
+    {
+        return Input.GetButtonDown(Constants.Switch);
+    }
+
     public bool GetAbility(int number)
     {
         if (Input.GetButton(Constants.Ability + number.ToString()))
@@ -97,7 +103,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
-    public int GetSelectWeaponInput()
+    public int GetSelectLoadoutInput()
     {
         if (inputEnabled)
         {
