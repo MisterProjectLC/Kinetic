@@ -7,7 +7,7 @@ public class FaceTarget : MonoBehaviour
     [Header("Stats")]
     [Tooltip("How much time it takes to update the player's supposed position")]
     [SerializeField]
-    private float updateCooldown = 0.1f;
+    private float updateCooldown = 0.2f;
 
     [Tooltip("How fast does the object rotate to face the target")]
     [SerializeField]

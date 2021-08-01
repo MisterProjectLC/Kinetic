@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class ParticleScript : MonoBehaviour
 {
-    private ParticleSystem particles;
+    private ParticleSystem[] particles;
 
     // Start is called before the first frame update
     void Start()
     {
-        particles = GetComponent<ParticleSystem>();
-        particles.playOnAwake = true;
+        particles = GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem ps in particles)
+            ps.playOnAwake = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!particles.isPlaying)
+        bool isPlaying = false;
+        foreach (ParticleSystem ps in particles)
+            if (ps.isPlaying)
+            {
+                isPlaying = true;
+                break;
+            }
+
+        if (!isPlaying)
             ObjectManager.OM.EraseObject(GetComponent<Poolable>());
     }
 }

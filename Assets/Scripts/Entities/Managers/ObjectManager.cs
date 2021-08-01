@@ -15,6 +15,8 @@ public class ObjectManager : MonoBehaviour
     {
         LaserSparks = 0,
         LaserProjectile,
+        ShellBomb,
+        ShellBombExplosion,
         Count
     }
 

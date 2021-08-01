@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
     [Header("References")]
     public Transform Root;
     public Transform Tip;
-    public GameObject Sparks;
 
     [Header("Attributes")]
     public float MoveSpeed = 5f;
+    public float GravitySpeed = 0f;
     public float MaxLifetime = 2f;
     public float Radius = 20f;
     public Color RadiusColor;
@@ -20,13 +19,15 @@ public class Projectile : MonoBehaviour
     private Vector3 m_LastRootPosition;
     private LayerMask hitLayers;
 
-    public void Setup(Vector3 moveDirection, LayerMask layerMask, GameObject sparks)
+    [HideInInspector]
+    public UnityAction<Collider> OnHit;
+
+    public void Setup(Vector3 moveDirection, LayerMask layerMask)
     {
         clock = 0f;
         hitLayers = layerMask;
         moveVelocity = moveDirection.normalized* MoveSpeed;
         transform.right = moveDirection.normalized;
-        Sparks = sparks;
 
         m_LastRootPosition = Root.position;
     }
@@ -39,6 +40,9 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GravitySpeed != 0f)
+            moveVelocity += Vector3.down * GravitySpeed * Time.deltaTime;
+
         // Bullet lifetime
         transform.position += moveVelocity * Time.deltaTime;
         clock += Time.deltaTime;
@@ -65,7 +69,7 @@ public class Projectile : MonoBehaviour
             }
 
             if (foundHit)              
-                OnHit(closestHit.collider);
+                OnHit.Invoke(closestHit.collider);
         }
 
         m_LastRootPosition = Root.position;
@@ -75,15 +79,6 @@ public class Projectile : MonoBehaviour
     private bool isHitValid(RaycastHit hit)
     {
         return true;
-    }
-
-
-    private void OnHit(Collider collider)
-    {
-        GetComponent<Attack>().AttackTarget(collider.gameObject);
-        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.LaserSparks, Sparks).gameObject;
-        newObject.transform.position = transform.position;
-        ObjectManager.OM.EraseObject(GetComponent<Poolable>());
     }
 
 

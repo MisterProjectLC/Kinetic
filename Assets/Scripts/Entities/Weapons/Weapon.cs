@@ -8,9 +8,6 @@ public class Weapon : MonoBehaviour
     [Tooltip("Where the bullets exit from")]
     public Transform Mouth;
 
-    [Tooltip("Prefab containing hit animation")]
-    public GameObject Sparks;
-
     [Header("General")]
     public string DisplayName = "";
 
@@ -22,6 +19,9 @@ public class Weapon : MonoBehaviour
     [Header("Hitscan")]
     [Tooltip("Max distance to which the bullets travel")]
     public float MaxDistance = 100f;
+
+    [Tooltip("Prefab containing hit animation")]
+    public GameObject Sparks;
 
     [Header("Projectile")]
     public GameObject Projectile;
@@ -56,7 +56,7 @@ public class Weapon : MonoBehaviour
             {
                 GameObject instance = ObjectManager.OM.SpawnObjectFromPool(BulletType, Projectile).gameObject;
                 instance.transform.position = Mouth.position;
-                instance.GetComponent<Projectile>().Setup(direction, HitLayers, Sparks);
+                instance.GetComponent<Projectile>().Setup(direction, HitLayers);
 
             // Hitscan attack
             } else { 

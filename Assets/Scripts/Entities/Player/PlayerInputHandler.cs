@@ -124,8 +124,10 @@ public class PlayerInputHandler : MonoBehaviour
             return 0f;
 
         // Check if this look input is coming from the mouse
-        bool isGamepad = Input.GetAxis(stickInputName) != 0f;
-        float i = isGamepad ? Input.GetAxis(stickInputName) : Input.GetAxisRaw(mouseInputName);
+        //bool isGamepad = Input.GetAxis(stickInputName) != 0f;
+        //float i = isGamepad ? Input.GetAxis(stickInputName) : Input.GetAxisRaw(mouseInputName);
+        bool isGamepad = false;
+        float i = Input.GetAxisRaw(mouseInputName);
 
         // handle inverting vertical input
         if (inverter)

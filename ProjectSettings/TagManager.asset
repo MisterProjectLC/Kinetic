@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Shootable
   - Bullet
   layers:
   - Default
@@ -12,15 +13,15 @@ TagManager:
   - 
   - Water
   - UI
+  - 
+  - 
+  - Lighting
   - Wall
-  - Shifted
+  - Postprocessing
   - Enemy
   - Player
-  - EnemyDamage
-  - PlayerDamage
-  - EnemyAttack
-  - 
-  - 
+  - Shifted
+  - Damage
   - 
   - 
   - 
@@ -39,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Fire
+    uniqueID: 3804908061
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

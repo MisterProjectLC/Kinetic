@@ -1,7 +1,5 @@
 using System.Collections;
 using UnityEngine;
-
-
 public class Dash : Ability
 {
     [Tooltip("Dash intensity")]

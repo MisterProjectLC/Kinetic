@@ -59,11 +59,8 @@ public class PlayerCharacterController : MonoBehaviour
     public bool IsGrounded { get; private set; } = true;
     CharacterController m_Controller;
     PlayerInputHandler m_InputHandler;
-    Vector3 m_CharacterVelocity;
-    Vector3 m_LatestImpactSpeed;
     Vector3 m_GroundNormal;
     float m_LastTimeJumped = 0f;
-    Vector3 m_LastWallDirection;
     float m_CameraVerticalAngle = 0f;
 
     const float k_JumpGroundingPreventionTime = 0.2f;
