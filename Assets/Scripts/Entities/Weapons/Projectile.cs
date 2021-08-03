@@ -40,11 +40,12 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Movement
         if (GravitySpeed != 0f)
             moveVelocity += Vector3.down * GravitySpeed * Time.deltaTime;
+        transform.position += moveVelocity * Time.deltaTime;
 
         // Bullet lifetime
-        transform.position += moveVelocity * Time.deltaTime;
         clock += Time.deltaTime;
         if (clock > MaxLifetime)
             ObjectManager.OM.EraseObject(GetComponent<Poolable>());

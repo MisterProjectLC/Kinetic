@@ -15,6 +15,9 @@ public class Destructable : MonoBehaviour
 
     void OnDie()
     {
-        Destroy(gameObject);
+        if (GetComponent<Poolable>())
+            ObjectManager.OM.EraseObject(GetComponent<Poolable>());
+        else
+            Destroy(gameObject);
     }
 }

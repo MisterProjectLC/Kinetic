@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {  
     [Header("References")]
     [SerializeField]
-    Weapon weapon;
+    Weapon[] weapons;
 
     public LayerMask GroundLayers;
 
@@ -21,23 +21,28 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float updateCooldown = 0.25f;
 
-    float[] clocks = new float[2];
+    float navClock = 0f;
+    float[] weaponClocks;
     private NavMeshAgent pathAgent;
 
     public UnityAction OnActiveUpdate;
 
     void Start()
     {
-        for (int i = 0; i < clocks.Length; i++)
-            clocks[i] = 0f;
+        weaponClocks = new float[weapons.Length];
+        for (int i = 0; i < weaponClocks.Length; i++)
+            weaponClocks[i] = 0f;
         pathAgent = GetComponent<NavMeshAgent>();
+        if (pathAgent) {
+            pathAgent.updateRotation = false;
+            pathAgent.updateUpAxis = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < clocks.Length; i++)
-            clocks[i] += Time.deltaTime;
+        navClock += Time.deltaTime;
 
         FeelGravity();
 
@@ -54,18 +59,25 @@ public class Enemy : MonoBehaviour
 
     private void ActivateWeapons()
     {
-        if (clocks[0] > weapon.FireCooldown)
+        int i = 0;
+        foreach (Weapon weapon in weapons)
         {
-            clocks[0] = 0f;
-            weapon.Fire();
+            weaponClocks[i] += Time.deltaTime;
+            if (weapon)
+                if (weaponClocks[i] > weapon.FireCooldown)
+                {
+                    weaponClocks[i] = 0f;
+                    weapon.Fire();
+                }
+            i++;
         }
     }
 
     private void ManageNavigation()
     {
-        if (clocks[1] > updateCooldown)
+        if (navClock > updateCooldown)
         {
-            clocks[1] = 0f;
+            navClock = 0f;
             Transform cameraTransform = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform;
             if (pathAgent.isOnNavMesh)
                 pathAgent.SetDestination(cameraTransform.position);

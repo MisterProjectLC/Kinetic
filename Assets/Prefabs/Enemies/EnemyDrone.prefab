@@ -110,12 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdcfe09036bdacd4a9670462fd94898f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mouth: {fileID: 3100332752659761561}
+  Mouth: {fileID: 3561694850552336349}
   DisplayName: 
   BulletType: 1
   HitLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4608
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 5835460606851386295}
   - component: {fileID: 6873437428079399595}
   - component: {fileID: 6319508750748539345}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980188568300184120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.14}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6273964803224925662}
@@ -305,10 +305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a9523b8ea0e3b4c988b499dc997b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1575834425217545803}
+  weapons:
+  - {fileID: 1575834425217545803}
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 512
   Movable: 1
   Height: 1
   Stunned: 0
@@ -351,7 +352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateCooldown: 0.1
-  turnSpeed: 10
+  turnSpeed: 100
+  turnVertical: 1
 --- !u!1 &5749944733704972615
 GameObject:
   m_ObjectHideFlags: 0

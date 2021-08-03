@@ -39,8 +39,6 @@ public class Weapon : MonoBehaviour
 
     [Tooltip("If enabled, holding the button engages repeated shooting")]
     public bool Automatic = false;
-
-    [Tooltip("If enabled, holding the button engages repeated shooting")]
     public float FireCooldown = 0f;
 
     public void Fire()

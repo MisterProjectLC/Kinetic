@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FaceTarget : MonoBehaviour
 {
@@ -13,6 +12,9 @@ public class FaceTarget : MonoBehaviour
     [SerializeField]
     private float turnSpeed = 10f;
 
+    [SerializeField]
+    private bool turnVertical = true;
+
     private Quaternion currentPosition;
     private Vector3 newTargetPosition;
     private float clock = 0f;
@@ -21,7 +23,6 @@ public class FaceTarget : MonoBehaviour
     void Start()
     {
         newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
-
         GetComponent<Enemy>().OnActiveUpdate += OnActiveUpdate;
     }
 
@@ -39,6 +40,8 @@ public class FaceTarget : MonoBehaviour
         {
             clock = 0f;
             newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
+            //if (!turnVertical)
+                //newTargetPosition = new Vector3(newTargetPosition.x, transform.position.y, newTargetPosition.z);
         }
     }
 }

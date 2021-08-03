@@ -9,7 +9,7 @@ public class Damageable : MonoBehaviour
     private Health HealthRef;
     private Actor actor;
 
-    [Range (0, 1f)]
+    [Range (0, 3f)]
     public float DamageSensitivity = 1f;
 
 
