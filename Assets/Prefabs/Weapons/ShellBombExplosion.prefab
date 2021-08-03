@@ -14719,7 +14719,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6fdf4473511d041b1aa747a562b39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 2
+  Radius: 1.5
+  HitLayers:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &4274277110719107929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14732,7 +14735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 5
+  Damage: 4
   Effects: []
 --- !u!114 &4796216369014699922
 MonoBehaviour:

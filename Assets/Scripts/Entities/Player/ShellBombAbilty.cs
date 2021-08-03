@@ -10,6 +10,7 @@ public class ShellBombAbilty : Ability
     [Header("Attributes")]
     public int ShellCount = 3;
     public float ShellCooldown = 0.1f;
+    public float BackwardsForce = 2f;
 
     PlayerCharacterController player;
 
@@ -35,6 +36,7 @@ public class ShellBombAbilty : Ability
 
     void ShootShellBombs()
     {
+        player.MoveVelocity -= BackwardsForce * player.PlayerCamera.transform.forward;
         GameObject newInstance = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.ShellBomb, ShellBomb);
         newInstance.transform.position = player.PlayerCamera.transform.position;
         newInstance.GetComponent<Projectile>().Setup(player.PlayerCamera.transform.forward, HitLayers);

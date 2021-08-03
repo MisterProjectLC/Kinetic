@@ -40,8 +40,8 @@ public class FaceTarget : MonoBehaviour
         {
             clock = 0f;
             newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
-            //if (!turnVertical)
-                //newTargetPosition = new Vector3(newTargetPosition.x, transform.position.y, newTargetPosition.z);
+            if (!turnVertical)
+                newTargetPosition = new Vector3(newTargetPosition.x, transform.position.y, newTargetPosition.z);
         }
     }
 }

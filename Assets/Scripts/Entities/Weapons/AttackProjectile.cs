@@ -19,6 +19,7 @@ public class AttackProjectile : MonoBehaviour
             GetComponent<Attack>().AttackTarget(collider.gameObject);
         GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactType, ImpactObject).gameObject;
         newObject.transform.position = transform.position;
+
         if (PenetrateCount > 0)
             PenetrateCount--;
         else

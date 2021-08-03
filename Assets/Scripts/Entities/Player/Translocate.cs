@@ -44,7 +44,8 @@ public class Translocate : Ability
 
     IEnumerator RunTranslocate(GameObject target)
     {
-        Vector3 myCoords = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        Vector3 myCoords = new Vector3(player.PlayerCamera.transform.position.x, player.PlayerCamera.transform.position.y, 
+            player.PlayerCamera.transform.position.z);
         Vector3 targetCoords = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
         player.GetComponent<CharacterController>().enabled = false;
         player.MoveControlEnabled = false;

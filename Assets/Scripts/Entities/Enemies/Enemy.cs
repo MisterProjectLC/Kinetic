@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Attributes")]
     public bool Movable = true;
-    public float Height = 1f;
+    public float HoverHeight = 1f;
     float fallSpeed = 0f;
 
     public float Stunned = 0f;
@@ -42,8 +42,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        navClock += Time.deltaTime;
-
         FeelGravity();
 
         if (Stunned <= 0f)
@@ -75,17 +73,24 @@ public class Enemy : MonoBehaviour
 
     private void ManageNavigation()
     {
+        navClock += Time.deltaTime;
         if (navClock > updateCooldown)
         {
             navClock = 0f;
             Transform cameraTransform = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform;
             if (pathAgent.isOnNavMesh)
+            {
+                pathAgent.isStopped = false;
                 pathAgent.SetDestination(cameraTransform.position);
+            }
         }
     }
 
     private void FeelGravity()
     {
+        if (!Movable)
+            return;
+
         if (RayToGround().collider == null)
         {
             fallSpeed += Constants.Gravity * Time.deltaTime;
@@ -103,7 +108,7 @@ public class Enemy : MonoBehaviour
     public RaycastHit RayToGround()
     {
         Ray ray = new Ray(transform.position, Vector3.down);
-        Physics.Raycast(ray, out RaycastHit hitInfo, Height, GroundLayers, QueryTriggerInteraction.Ignore);
+        Physics.Raycast(ray, out RaycastHit hitInfo, HoverHeight, GroundLayers, QueryTriggerInteraction.Ignore);
         return hitInfo;
     }
 
@@ -111,7 +116,7 @@ public class Enemy : MonoBehaviour
     public void ReceiveStun(float duration)
     {
         Stunned = duration;
-        if (pathAgent.enabled && pathAgent.isOnNavMesh)
-            pathAgent.SetDestination(transform.position);
+        if (pathAgent && pathAgent.enabled && pathAgent.isOnNavMesh)
+            pathAgent.isStopped = true;
     }
 }

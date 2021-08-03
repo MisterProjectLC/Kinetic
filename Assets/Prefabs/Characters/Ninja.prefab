@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: Translocate
-  Cooldown: 5
+  Cooldown: 4
   HoldAbility: 0
   Range: 100
   TargetLayers:
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: 
-  Cooldown: 5
+  Cooldown: 2
   HoldAbility: 0
   DashSpeed: 50
   DashDuration: 0.25
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: Shell Bombs
-  Cooldown: 5
+  Cooldown: 8
   HoldAbility: 0
   ShellBomb: {fileID: 5531395347504132974, guid: 0dfe44ab5c4c87a4ea669bf65a283434,
     type: 3}
@@ -488,6 +488,7 @@ MonoBehaviour:
     m_Bits: 2560
   ShellCount: 3
   ShellCooldown: 0.1
+  BackwardsForce: 2
 --- !u!1 &5935564171822933945
 GameObject:
   m_ObjectHideFlags: 0

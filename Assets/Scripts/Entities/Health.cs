@@ -33,6 +33,11 @@ public class Health : MonoBehaviour
             OnDie.Invoke();
     }
 
+    public void Kill()
+    {
+        OnDie.Invoke();
+    }
+
     public void Heal(int heal)
     {
         CurrentHealth = Mathf.Min(MaxHealth, CurrentHealth + heal);
