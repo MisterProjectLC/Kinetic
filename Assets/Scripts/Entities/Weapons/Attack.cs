@@ -26,5 +26,8 @@ public class Attack : MonoBehaviour
         if (target.GetComponentInParent<Enemy>())
             foreach(StatusEffect effect in Effects)
                 effect.OnApply(target.GetComponentInParent<Enemy>());
+
+        if (target.GetComponentInParent<Enemy>())
+            target.GetComponentInParent<Enemy>().ReceiveKnockback((target.transform.position-transform.position).normalized * 20f);
     }
 }
