@@ -19,7 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     static Dictionary<KeyCode, int> keycodes = null;
 
-    private bool inputEnabled { get; set; } = true;
+    public bool inputEnabled { get; set; } = true;
 
     private float abilityTimer = 0f;
 
@@ -37,12 +37,6 @@ public class PlayerInputHandler : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public Vector3 GetMoveInput()
@@ -73,14 +67,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool GetJump()
     {
-        return Input.GetButtonDown(Constants.Jump);
+        return inputEnabled && Input.GetButtonDown(Constants.Jump);
     }
-
 
     public bool GetSwitch()
     {
-        return Input.GetButtonDown(Constants.Switch);
+        return inputEnabled && Input.GetButtonDown(Constants.Switch);
     }
+
 
     public bool GetAbility(int number)
     {

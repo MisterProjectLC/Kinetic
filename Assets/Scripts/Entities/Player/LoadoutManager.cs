@@ -79,7 +79,8 @@ public class LoadoutManager : MonoBehaviour
             return;
 
         for (int i = 0; i < GetCurrentLoadout().Length; i++)
-            if (m_InputHandler.GetAbilityDown(i + 1) || (m_InputHandler.GetAbility(i + 1) && GetCurrentLoadout()[i].HoldAbility))
+            if (GetCurrentLoadout()[i] && 
+                (m_InputHandler.GetAbilityDown(i + 1) || (m_InputHandler.GetAbility(i + 1) && GetCurrentLoadout()[i].HoldAbility)))
             {
                 if (AnimStage != AnimationStage.WeaponReady)
                     return;
@@ -186,6 +187,22 @@ public class LoadoutManager : MonoBehaviour
 
             animProgression -= Time.deltaTime;
         }
+    }
+
+
+    public void SetAbility(GameObject ability, int loadout, int abilityNumber)
+    {
+        if (ability != null)
+            Loadouts[loadout].abilities[abilityNumber] = ability.GetComponent<Ability>();
+        else
+            Loadouts[loadout].abilities[abilityNumber] = null;
+
+        OnLoadoutSwitch.Invoke();
+    }
+
+    public void SetPassive(GameObject passive, bool isActivated)
+    {
+        passive.SetActive(isActivated);
     }
 
 

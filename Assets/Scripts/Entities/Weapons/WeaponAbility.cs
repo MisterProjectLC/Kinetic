@@ -11,7 +11,7 @@ public class WeaponAbility : Ability
     private float BackwardsForce = 10f;
 
 
-    public void Start()
+    public void Awake()
     {
         player = GetComponentInParent<PlayerCharacterController>();
         DisplayName = WeaponRef.DisplayName;

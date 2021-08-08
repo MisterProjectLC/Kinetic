@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour
 {
     [Header("Attributes")]
     public int Damage = 1;
+    public float Knockback = 0f;
     public StatusEffect[] Effects;
 
     [HideInInspector]
@@ -28,6 +29,6 @@ public class Attack : MonoBehaviour
                 effect.OnApply(target.GetComponentInParent<Enemy>());
 
         if (target.GetComponentInParent<Enemy>())
-            target.GetComponentInParent<Enemy>().ReceiveKnockback((target.transform.position-transform.position).normalized * 20f);
+            target.GetComponentInParent<Enemy>().ReceiveKnockback((target.transform.position-transform.position).normalized * Knockback);
     }
 }

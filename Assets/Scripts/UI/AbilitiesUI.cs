@@ -11,13 +11,17 @@ public class AbilitiesUI : MonoBehaviour
     Vector2 AbilitySize;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         AbilitySize = SkillImages[0].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta;
 
         loadoutManager = ActorsManager.Player.GetComponent<LoadoutManager>();
         loadoutManager.OnWeaponSwitch += WeaponUpdate;
         loadoutManager.OnLoadoutSwitch += LoadoutUpdate;
+    }
+
+    private void Start()
+    {
         LoadoutUpdate();
     }
 
@@ -27,7 +31,7 @@ public class AbilitiesUI : MonoBehaviour
         for (int i = 0; i < loadoutManager.GetCurrentLoadout().Length; i++)
         {
             Ability currentAbility = loadoutManager.GetCurrentLoadout()[i];
-            if (!(currentAbility is WeaponAbility))
+            if (currentAbility && !(currentAbility is WeaponAbility))
                 SkillImages[i].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta =
                     AbilitySize * new Vector2(1f - (currentAbility.Timer/currentAbility.Cooldown), 1f);
         }
@@ -36,6 +40,9 @@ public class AbilitiesUI : MonoBehaviour
 
     void WeaponUpdate(Weapon weapon)
     {
+        if (!weapon)
+            return;
+
         foreach (Image image in SkillImages)
         {
             Color color = image.color;
@@ -54,18 +61,26 @@ public class AbilitiesUI : MonoBehaviour
             image.gameObject.SetActive(false);
 
         Ability[] abilities = loadoutManager.GetCurrentLoadout();
-        int skillCount = 0;
-        foreach (Ability ability in abilities)
+        for (int i = 0; i < SkillImages.Length; i++)
         {
-            SkillImages[skillCount].gameObject.SetActive(true);
-            SkillImages[skillCount].GetComponentInChildren<Text>().text = ability.DisplayName;
-            if (!(ability is WeaponAbility))
-                SkillImages[skillCount].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta = Vector2.zero;
+            if (abilities[i] == null)
+            {
+                SkillImages[i].gameObject.SetActive(false);
+                continue;
+            }
+
+
+            SkillImages[i].gameObject.SetActive(true);
+            SkillImages[i].GetComponentInChildren<Text>().text = abilities[i].DisplayName;
+            if (!(abilities[i] is WeaponAbility))
+                SkillImages[i].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta = Vector2.zero;
             else
-                SkillImages[skillCount].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta = AbilitySize;
-            skillCount++;
+                SkillImages[i].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta = AbilitySize;
         }
-        WeaponUpdate(loadoutManager.GetCurrentWeapon());
+
+        Weapon currentWeapon = loadoutManager.GetCurrentWeapon();
+        if (currentWeapon)
+            WeaponUpdate(currentWeapon);
     }
 
     
