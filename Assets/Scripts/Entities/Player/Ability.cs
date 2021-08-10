@@ -11,11 +11,13 @@ public abstract class Ability : MonoBehaviour
 
     public bool HoldAbility = false;
     public UnityAction OnExecute;
-
+    protected UnityAction OnUpdate;
 
     private void Update()
     {
         Timer = Timer > 0f ? Timer - Time.deltaTime : 0f;
+        if (OnUpdate != null)
+            OnUpdate.Invoke();
     }
 
     public void Activate()
