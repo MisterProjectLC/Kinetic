@@ -15,10 +15,14 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     private void Awake()
     {
+        OnInsert += assignToSlot;
+    }
+
+    private void Start()
+    {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
-        OnInsert += assignToSlot;
     }
 
     void assignToSlot(DropSlot slot)

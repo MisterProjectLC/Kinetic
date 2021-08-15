@@ -7,8 +7,9 @@ public class Killheal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = GetComponent<Health>();
-        foreach(Attack attack in GetComponentsInChildren<Attack>())
+        health = GetComponentInParent<Health>();
+
+        foreach(Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
         {
             attack.OnKill += Heal;
         }

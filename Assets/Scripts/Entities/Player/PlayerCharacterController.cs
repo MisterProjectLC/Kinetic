@@ -149,7 +149,7 @@ public class PlayerCharacterController : MonoBehaviour
                 MoveVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
 
                 // Wall checks
-                if (m_InputHandler.GetJump())
+                if (m_InputHandler.GetJump() && OnJumpAir != null)
                     OnJumpAir.Invoke();
 
                 // Gravity
