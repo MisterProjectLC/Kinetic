@@ -36,7 +36,7 @@ public class ShellBombAbilty : Ability
 
     void ShootShellBombs()
     {
-        player.MoveVelocity -= BackwardsForce * player.PlayerCamera.transform.forward;
+        player.ApplyForce(-BackwardsForce * player.PlayerCamera.transform.forward);
         GameObject newInstance = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.ShellBomb, ShellBomb);
         newInstance.transform.position = player.PlayerCamera.transform.position;
         newInstance.GetComponent<Projectile>().Setup(player.PlayerCamera.transform.forward, HitLayers);

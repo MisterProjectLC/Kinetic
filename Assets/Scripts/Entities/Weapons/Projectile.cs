@@ -20,14 +20,30 @@ public class Projectile : MonoBehaviour
     private LayerMask hitLayers;
 
     [HideInInspector]
+    public bool KeepAlive;
+    [HideInInspector]
+    public bool Stopped;
+
+    [HideInInspector]
     public UnityAction<Collider> OnHit;
+
+    [HideInInspector]
+    public GameObject Shooter;
 
     public void Setup(Vector3 moveDirection, LayerMask layerMask)
     {
+        Setup(moveDirection, layerMask, null);
+    }
+
+    public void Setup(Vector3 moveDirection, LayerMask layerMask, GameObject shooter)
+    {
         clock = 0f;
+        KeepAlive = false;
+        Stopped = false;
         hitLayers = layerMask;
-        moveVelocity = moveDirection.normalized* MoveSpeed;
+        moveVelocity = moveDirection.normalized * MoveSpeed;
         transform.right = moveDirection.normalized;
+        Shooter = shooter;
 
         m_LastRootPosition = Root.position;
     }
@@ -43,12 +59,21 @@ public class Projectile : MonoBehaviour
         // Movement
         if (GravitySpeed != 0f)
             moveVelocity += Vector3.down * GravitySpeed * Time.deltaTime;
-        transform.position += moveVelocity * Time.deltaTime;
+        if (!Stopped)
+            transform.position += moveVelocity * Time.deltaTime;
 
         // Bullet lifetime
-        clock += Time.deltaTime;
-        if (clock > MaxLifetime)
-            ObjectManager.OM.EraseObject(GetComponent<Poolable>());
+        if (!KeepAlive)
+        {
+            clock += Time.deltaTime;
+            if (clock > MaxLifetime)
+            {
+                if (GetComponent<Poolable>())
+                    ObjectManager.OM.EraseObject(GetComponent<Poolable>());
+                else
+                    gameObject.SetActive(false);
+            }
+        }
 
         // Hit detection
         {

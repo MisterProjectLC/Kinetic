@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -31,11 +32,17 @@ public class PlayerCharacterController : MonoBehaviour
     [Tooltip("Vertical movement on jumping")]
     public float JumpForce = 10f;
 
-    [Tooltip("Max movement speed airborne")]
+    [Tooltip("Multiplier for gravity force")]
     public float GravityMultiplier = 1f;
 
+    [Tooltip("Enable or disable gravity")]
+    public bool GravityEnabled = true;
+
     [Tooltip("Max movement speed airborne")]
-    public float AirborneMaxSpeed = 8f;
+    public float AirborneMaxStrafeSpeed = 8f;
+
+    [Tooltip("Air movement speed hard cap")]
+    public float AirborneMaxSpeed = 75f;
 
 
     [Tooltip("Sharpness for the movement when airborne")]
@@ -56,6 +63,7 @@ public class PlayerCharacterController : MonoBehaviour
 
 
     public Vector3 MoveVelocity { get; set; }
+    private Queue<Vector3> Forces;
     public bool IsGrounded { get; private set; } = true;
     CharacterController m_Controller;
     PlayerInputHandler m_InputHandler;
@@ -80,6 +88,7 @@ public class PlayerCharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Forces = new Queue<Vector3>();
         MoveVelocity = new Vector3(0f, 0f, 0f);
         m_Controller = GetComponent<CharacterController>();
         m_InputHandler = GetComponent<PlayerInputHandler>();
@@ -140,29 +149,48 @@ public class PlayerCharacterController : MonoBehaviour
             // Air Movement
             else
             {
-                MoveVelocity += moveInput * AirborneAcceleration * Time.deltaTime;
+                // Horizontal air movement
+                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(MoveVelocity, Vector3.up);
+                Vector3 newHorizontalVelocity = horizontalVelocity + (moveInput * AirborneAcceleration * Time.deltaTime);
+                if (horizontalVelocity.magnitude < AirborneMaxStrafeSpeed || newHorizontalVelocity.magnitude < horizontalVelocity.magnitude)
+                    MoveVelocity = newHorizontalVelocity + (MoveVelocity.y * Vector3.up);
 
                 // limit air speed to a maximum, but only horizontally
+                /*
                 float verticalVelocity = MoveVelocity.y;
                 Vector3 horizontalVelocity = Vector3.ProjectOnPlane(MoveVelocity, Vector3.up);
                 horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, AirborneMaxSpeed);
                 MoveVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
+                */
 
                 // Wall checks
                 if (m_InputHandler.GetJump() && OnJumpAir != null)
                     OnJumpAir.Invoke();
 
                 // Gravity
-                MoveVelocity += Vector3.down * Constants.Gravity * GravityMultiplier * Time.deltaTime;
+                if (GravityEnabled)
+                    MoveVelocity += Vector3.down * Constants.Gravity * GravityMultiplier * Time.deltaTime;
+
+                MoveVelocity = Vector3.ClampMagnitude(MoveVelocity, AirborneMaxSpeed);
             }
         }
+
+        while (Forces.Count > 0)
+            MoveVelocity += Forces.Dequeue();
 
         m_Controller.Move(MoveVelocity * Time.deltaTime);
     }
 
 
+    public void ApplyForce(Vector3 Force)
+    {
+        Forces.Enqueue(Force);
+    }
+
+
     public void Jump()
     {
+        MoveVelocity = Vector3.ClampMagnitude(MoveVelocity, AirborneMaxStrafeSpeed);
         MoveVelocity = new Vector3(MoveVelocity.x, JumpForce, MoveVelocity.z);
         m_LastTimeJumped = Time.time;
         IsGrounded = false;

@@ -10,6 +10,7 @@ public abstract class Ability : MonoBehaviour
     public float Timer { get; protected set; } = 0f;
 
     public bool HoldAbility = false;
+
     public UnityAction OnExecute;
     protected UnityAction OnUpdate;
 
@@ -33,6 +34,10 @@ public abstract class Ability : MonoBehaviour
 
     public abstract void Execute();
 
+    protected void SetOffCooldown()
+    {
+        Timer = Cooldown;
+    }
 
     protected void ResetCooldown()
     {

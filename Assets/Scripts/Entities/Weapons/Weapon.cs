@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -54,7 +52,7 @@ public class Weapon : MonoBehaviour
             {
                 GameObject instance = ObjectManager.OM.SpawnObjectFromPool(BulletType, Projectile).gameObject;
                 instance.transform.position = Mouth.position;
-                instance.GetComponent<Projectile>().Setup(direction, HitLayers);
+                instance.GetComponent<Projectile>().Setup(direction, HitLayers, GetComponentInParent<Actor>().gameObject);
 
             // Hitscan attack
             } else { 
@@ -66,9 +64,13 @@ public class Weapon : MonoBehaviour
                     while (Vector3.Dot(randomVector, hit.normal) == 0)
                         randomVector = Random.insideUnitSphere;
 
-                    GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.LaserSparks, Sparks);
-                    newObject.transform.position = hit.point;
-                    newObject.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(Random.insideUnitSphere, hit.normal), hit.normal);
+                    if (Sparks != null)
+                    {
+                        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.LaserSparks, Sparks);
+                        newObject.transform.position = hit.point;
+                        newObject.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(Random.insideUnitSphere, hit.normal), 
+                            hit.normal);
+                    }
                     GetComponent<Attack>().AttackTarget(hit.collider.gameObject);
                 }
             }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5135531782038433102}
   - component: {fileID: 2456668826152063561}
   - component: {fileID: -6176156119343333749}
+  - component: {fileID: 3002650016982282744}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -72,7 +73,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
+  Knockback: 0
   Effects: []
+--- !u!114 &3002650016982282744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6010344891319437048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc627d0a5d9b6f345bd4f4febc86ec2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftHand: {fileID: 0}
 --- !u!1 &9209886546851730388
 GameObject:
   m_ObjectHideFlags: 0

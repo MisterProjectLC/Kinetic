@@ -16,7 +16,7 @@ public class AbilitiesUI : MonoBehaviour
         AbilitySize = SkillImages[0].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta;
 
         loadoutManager = ActorsManager.Player.GetComponent<LoadoutManager>();
-        loadoutManager.OnWeaponSwitch += WeaponUpdate;
+        loadoutManager.OnDeviceSwitch += DeviceUpdate;
         loadoutManager.OnLoadoutSwitch += LoadoutUpdate;
     }
 
@@ -38,15 +38,15 @@ public class AbilitiesUI : MonoBehaviour
     }
 
 
-    void WeaponUpdate(Weapon weapon)
+    void DeviceUpdate(Device device)
     {
-        if (!weapon)
+        if (!device)
             return;
 
         foreach (Image image in SkillImages)
         {
             Color color = image.color;
-            if (image.GetComponentInChildren<Text>().text == weapon.gameObject.name)
+            if (image.GetComponentInChildren<Text>().text == device.gameObject.name)
                 image.color = new Color(color.r, color.g, color.b, 1);
             else
                 image.color = new Color(color.r, color.g, color.b, 0.4f);
@@ -78,9 +78,9 @@ public class AbilitiesUI : MonoBehaviour
                 SkillImages[i].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta = AbilitySize;
         }
 
-        Weapon currentWeapon = loadoutManager.GetCurrentWeapon();
-        if (currentWeapon)
-            WeaponUpdate(currentWeapon);
+        Device currentDevice = loadoutManager.GetCurrentDevice();
+        if (currentDevice)
+            DeviceUpdate(currentDevice);
     }
 
     

@@ -17,10 +17,10 @@ public class LoadoutManager : MonoBehaviour
     public bool AbilitiesEnabled = true;
 
     [Header("Cooldown timers")]
-    [Tooltip("Time to put the weapon down")]
+    [Tooltip("Time to put the Device down")]
     public float DownCooldown = 0.1f;
 
-    [Tooltip("Time to put the weapon up")]
+    [Tooltip("Time to put the Device up")]
     public float UpCooldown = 0.1f;
 
 
@@ -33,33 +33,33 @@ public class LoadoutManager : MonoBehaviour
 
     private int currentLoadout = 0;
     private int lastLoadout = 0;
-    private Weapon currentWeapon;
-    private Weapon newWeapon;
+    private Device currentDevice;
+    private Device newDevice;
 
     private float animProgression = 0f;
 
-    public UnityAction<Weapon> OnWeaponSwitch;
+    public UnityAction<Device> OnDeviceSwitch;
     public UnityAction OnLoadoutSwitch;
 
     [HideInInspector]
-    public AnimationStage AnimStage { get; private set; } = AnimationStage.WeaponReady;
+    public AnimationStage AnimStage { get; private set; } = AnimationStage.DeviceReady;
     public enum AnimationStage {
-        WeaponDown,
-        WeaponUp,
-        WeaponReady
+        DeviceDown,
+        DeviceUp,
+        DeviceReady
     }
 
     // References
     PlayerInputHandler m_InputHandler;
 
 
-    void Awake()
+    void Start()
     {
         m_InputHandler = GetComponent<PlayerInputHandler>();
         foreach (Ability ab in GetCurrentLoadout())
-            if (ab is WeaponAbility)
+            if (ab.GetComponent<Device>())
             {
-                currentWeapon = ((WeaponAbility)ab).WeaponRef;
+                currentDevice = ab.GetComponent<Device>();
                 break;
             }
     }
@@ -69,7 +69,7 @@ public class LoadoutManager : MonoBehaviour
     {
         ActivateAbilities();
         ManageLoadouts();
-        ManageWeapons();
+        ManageDevices();
     }
 
 
@@ -82,34 +82,34 @@ public class LoadoutManager : MonoBehaviour
             if (GetCurrentLoadout()[i] && 
                 (m_InputHandler.GetAbilityDown(i + 1) || (m_InputHandler.GetAbility(i + 1) && GetCurrentLoadout()[i].HoldAbility)))
             {
-                if (AnimStage != AnimationStage.WeaponReady)
+                if (AnimStage != AnimationStage.DeviceReady)
                     return;
 
                 // Activate
                 GetCurrentLoadout()[i].Activate();
 
-                // Switch weapons
-                if (GetCurrentLoadout()[i] is WeaponAbility)
-                    SwitchWeapon(i);
+                // Switch Devices
+                if (GetCurrentLoadout()[i].GetComponent<Device>())
+                    SwitchDevice(i);
             }
     }
 
 
-    public void SwitchWeapon(int weaponIndex)
+    public void SwitchDevice(int DeviceIndex)
     {
-        SwitchWeapon(((WeaponAbility)GetCurrentLoadout()[weaponIndex]).WeaponRef, false);
+        SwitchDevice(GetCurrentLoadout()[DeviceIndex].GetComponent<Device>(), false);
     }
 
-    public void SwitchWeapon(Weapon weapon, bool forceSwitch)
+    public void SwitchDevice(Device Device, bool forceSwitch)
     {
-        newWeapon = weapon;
-        if (newWeapon != currentWeapon || forceSwitch)
+        newDevice = Device;
+        if (newDevice != currentDevice || forceSwitch)
         {
-            AnimStage = AnimationStage.WeaponDown;
+            AnimStage = AnimationStage.DeviceDown;
             animProgression = DownCooldown;
         }
 
-        OnWeaponSwitch.Invoke(weapon);
+        OnDeviceSwitch.Invoke(Device);
     }
 
 
@@ -125,41 +125,41 @@ public class LoadoutManager : MonoBehaviour
         {
             lastLoadout = currentLoadout;
             currentLoadout = loadoutButton;
-            Weapon weapon = null;
+            Device Device = null;
             foreach (Ability ab in GetCurrentLoadout())
-                if (ab is WeaponAbility)
+                if (ab.GetComponent<Device>())
                 {
-                    weapon = ((WeaponAbility)ab).WeaponRef;
+                    Device = ab.GetComponent<Device>();
                     break;
                 }
 
-            if (weapon == null)
-                Debug.Log("Loadout lacks a weapon");
+            if (Device == null)
+                Debug.Log("Loadout lacks a Device");
             OnLoadoutSwitch.Invoke();
-            SwitchWeapon(weapon, true);
+            SwitchDevice(Device, true);
         }
     }
 
 
-    public void ManageWeapons()
+    public void ManageDevices()
     {
         // Animation End
         if (animProgression <= 0f)
         {
             switch (AnimStage)
             {
-                case AnimationStage.WeaponDown:
-                    AnimStage = AnimationStage.WeaponUp;
+                case AnimationStage.DeviceDown:
+                    AnimStage = AnimationStage.DeviceUp;
                     animProgression = UpCooldown;
-                    if (currentWeapon != null)
-                        currentWeapon.gameObject.SetActive(false);
-                    currentWeapon = newWeapon;
-                    if (currentWeapon != null)
-                        currentWeapon.gameObject.SetActive(true);
+                    if (currentDevice != null)
+                        currentDevice.gameObject.SetActive(false);
+                    currentDevice = newDevice;
+                    if (currentDevice != null)
+                        currentDevice.gameObject.SetActive(true);
                     break;
 
-                case AnimationStage.WeaponUp:
-                    AnimStage = AnimationStage.WeaponReady;
+                case AnimationStage.DeviceUp:
+                    AnimStage = AnimationStage.DeviceReady;
                     break;
             }
         }
@@ -167,20 +167,20 @@ public class LoadoutManager : MonoBehaviour
         // Animation Progress
         else
         {
-            if (currentWeapon != null)
+            if (currentDevice != null)
                 switch (AnimStage)
                 {
-                    case AnimationStage.WeaponDown:
-                        currentWeapon.gameObject.transform.position = Vector3.Lerp(UpTransform.position, DownTransform.position,
+                    case AnimationStage.DeviceDown:
+                        currentDevice.gameObject.transform.position = Vector3.Lerp(UpTransform.position, DownTransform.position,
                             (DownCooldown - animProgression) / DownCooldown);
-                        currentWeapon.gameObject.transform.rotation = Quaternion.Lerp(UpTransform.rotation, DownTransform.rotation,
+                        currentDevice.gameObject.transform.rotation = Quaternion.Lerp(UpTransform.rotation, DownTransform.rotation,
                             (DownCooldown - animProgression) / DownCooldown);
                         break;
 
-                    case AnimationStage.WeaponUp:
-                        currentWeapon.gameObject.transform.position = Vector3.Lerp(DownTransform.position, UpTransform.position,
+                    case AnimationStage.DeviceUp:
+                        currentDevice.gameObject.transform.position = Vector3.Lerp(DownTransform.position, UpTransform.position,
                             (UpCooldown - animProgression) / UpCooldown);
-                        currentWeapon.gameObject.transform.rotation = Quaternion.Lerp(DownTransform.rotation, UpTransform.rotation,
+                        currentDevice.gameObject.transform.rotation = Quaternion.Lerp(DownTransform.rotation, UpTransform.rotation,
                             (UpCooldown - animProgression) / UpCooldown);
                         break;
                 }
@@ -212,8 +212,8 @@ public class LoadoutManager : MonoBehaviour
     }
 
 
-    public Weapon GetCurrentWeapon()
+    public Device GetCurrentDevice()
     {
-        return currentWeapon;
+        return currentDevice;
     }
 }
