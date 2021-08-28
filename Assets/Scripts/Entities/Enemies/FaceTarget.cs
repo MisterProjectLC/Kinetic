@@ -19,20 +19,23 @@ public class FaceTarget : MonoBehaviour
     private Vector3 newTargetPosition;
     private float clock = 0f;
 
+    Enemy enemy;
+
     // Start is called before the first frame update
     void Start()
     {
         newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
-        GetComponent<Enemy>().OnActiveUpdate += OnActiveUpdate;
+        enemy = GetComponent<Enemy>();
+        enemy.OnActiveUpdate += OnActiveUpdate;
     }
 
     // Update is called once per frame
     void OnActiveUpdate()
     {
         // Constant rotation
-        transform.rotation = Quaternion.RotateTowards(currentPosition, Quaternion.LookRotation(newTargetPosition - transform.position),
-            turnSpeed*Time.deltaTime);
-        currentPosition = transform.rotation;
+        enemy.Model.transform.rotation = Quaternion.RotateTowards(currentPosition, 
+            Quaternion.LookRotation(newTargetPosition - enemy.Model.transform.position), turnSpeed*Time.deltaTime);
+        currentPosition = enemy.Model.transform.rotation;
 
         // Update targetting
         clock += Time.deltaTime;
@@ -41,7 +44,7 @@ public class FaceTarget : MonoBehaviour
             clock = 0f;
             newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
             if (!turnVertical)
-                newTargetPosition = new Vector3(newTargetPosition.x, transform.position.y, newTargetPosition.z);
+                newTargetPosition = new Vector3(newTargetPosition.x, enemy.Model.transform.position.y, newTargetPosition.z);
         }
     }
 }

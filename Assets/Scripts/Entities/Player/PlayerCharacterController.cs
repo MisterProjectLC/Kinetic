@@ -13,6 +13,9 @@ public class PlayerCharacterController : MonoBehaviour
     [Tooltip("distance from the bottom of the character controller capsule to test for grounded")]
     public float GroundCheckDistance = 0.1f;
 
+    [Tooltip("distance from the bottom of the character controller capsule to test for grounded")]
+    public float SideGroundCheckDistance = 0.1f;
+
     [Tooltip("Physic layers checked to consider the player grounded")]
     public LayerMask GroundCheckLayers = -1;
 
@@ -64,7 +67,7 @@ public class PlayerCharacterController : MonoBehaviour
 
     public Vector3 MoveVelocity { get; set; }
     private Queue<Vector3> Forces;
-    public bool IsGrounded { get; private set; } = true;
+    public bool IsGrounded = true;
     CharacterController m_Controller;
     PlayerInputHandler m_InputHandler;
     Vector3 m_GroundNormal;
@@ -210,7 +213,8 @@ public class PlayerCharacterController : MonoBehaviour
         if (Time.time >= m_LastTimeJumped + k_JumpGroundingPreventionTime)
         {
             // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
-            if (Physics.SphereCast(GetCapsuleBottomHemisphere(), m_Controller.radius - Physics.defaultContactOffset, Vector3.down, out RaycastHit hit,
+            if (Physics.SphereCast(GetCapsuleBottomHemisphere() - SideGroundCheckDistance * transform.up, 
+                m_Controller.radius - SideGroundCheckDistance, Vector3.down, out RaycastHit hit,
                 chosenGroundCheckDistance, GroundCheckLayers, QueryTriggerInteraction.Ignore))
             {
                 // storing the upward direction for the surface found
@@ -278,13 +282,11 @@ public class PlayerCharacterController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided with " + collision.collider.name);
         OnCollision.Invoke(collision);
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        Debug.Log("Decollided with " + collision.collider.name);
         OffCollision.Invoke(collision);
     }
 

@@ -57,7 +57,7 @@ public class LoadoutManager : MonoBehaviour
     {
         m_InputHandler = GetComponent<PlayerInputHandler>();
         foreach (Ability ab in GetCurrentLoadout())
-            if (ab.GetComponent<Device>())
+            if (ab && ab.GetComponent<Device>())
             {
                 currentDevice = ab.GetComponent<Device>();
                 break;
@@ -127,7 +127,7 @@ public class LoadoutManager : MonoBehaviour
             currentLoadout = loadoutButton;
             Device Device = null;
             foreach (Ability ab in GetCurrentLoadout())
-                if (ab.GetComponent<Device>())
+                if (ab && ab.GetComponent<Device>())
                 {
                     Device = ab.GetComponent<Device>();
                     break;

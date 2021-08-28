@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     Weapon[] weapons;
 
+    [SerializeField]
+    public GameObject Model;
+
     public LayerMask GroundLayers;
 
     [Header("Attributes")]
@@ -21,6 +24,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float updateCooldown = 0.25f;
 
+    bool airborne = false;
     private Vector3 knockbackForce;
     float navClock = 0f;
     float[] weaponClocks;
@@ -51,7 +55,8 @@ public class Enemy : MonoBehaviour
         {
             ActivateWeapons();
             ManageNavigation();
-            OnActiveUpdate.Invoke();
+            if (OnActiveUpdate != null)
+                OnActiveUpdate.Invoke();
         }
         else
             Stunned -= Time.deltaTime;
@@ -113,20 +118,24 @@ public class Enemy : MonoBehaviour
 
     private void FeelGravity()
     {
-        if (!Movable)
+        if (!Movable || !airborne)
             return;
 
         // Air
-        if (RayToGround().collider == null)
+        RaycastHit hit = RayToGround();
+        if (hit.collider == null)
         {
             fallSpeed += Constants.Gravity * Time.deltaTime;
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+            Debug.Log("Flying: " + gameObject.name);
         }
 
         // Ground
         else
         {
+            airborne = false;
             fallSpeed = 0f;
+            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
             if (pathAgent)
             {
                 if (!pathAgent.enabled)
@@ -145,8 +154,12 @@ public class Enemy : MonoBehaviour
 
     public RaycastHit RayToGround()
     {
-        Ray ray = new Ray(transform.position, Vector3.down);
-        Physics.Raycast(ray, out RaycastHit hitInfo, HoverHeight, GroundLayers, QueryTriggerInteraction.Ignore);
+        Ray ray;
+        if (!pathAgent)
+            ray = new Ray(transform.position, Vector3.down);
+        else
+            ray = new Ray(pathAgent.nextPosition + Vector3.up, Vector3.down);
+        Physics.Raycast(ray, out RaycastHit hitInfo, HoverHeight + 1f, GroundLayers, QueryTriggerInteraction.Ignore);
         return hitInfo;
     }
 
@@ -166,5 +179,22 @@ public class Enemy : MonoBehaviour
         knockbackForce = knockback;
         if (pathAgent)
             pathAgent.updatePosition = false;
+    }
+
+    public void WarpPosition(Vector3 newPosition)
+    {
+        airborne = true;
+        transform.position = newPosition;
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        if (GetComponent<NavMeshAgent>())
+        {
+            Ray ray = new Ray(GetComponent<NavMeshAgent>().nextPosition, Vector3.down);
+            //Ray ray = new Ray(Model.transform.position, Vector3.down);
+            Gizmos.DrawRay(ray);
+        }
     }
 }

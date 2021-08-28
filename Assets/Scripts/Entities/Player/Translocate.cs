@@ -66,10 +66,10 @@ public class Translocate : Ability
 
 
         // Translocate
-        target.transform.position = new Vector3(0f, 1000f, 0f);
+        target.GetComponent<Enemy>().WarpPosition(new Vector3(0f, 1000f, 0f));
         player.transform.position = targetCoords;
         yield return new WaitForSecondsRealtime(0.001f);
-        target.transform.position = myCoords;
+        target.GetComponent<Enemy>().WarpPosition(myCoords);
         
 
         abilities.AbilitiesEnabled = true;
