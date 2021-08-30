@@ -8,6 +8,8 @@ public class Hook : MonoBehaviour
     Projectile projectile;
     LineRenderer line;
     GameObject hookedObject;
+    Vector3 relativePosition;
+
     [HideInInspector]
     public GrapplingHook Ability;
 
@@ -47,6 +49,8 @@ public class Hook : MonoBehaviour
 
             if (!hookedObject || !hookedObject.activeInHierarchy)
                 gameObject.SetActive(false);
+            else
+                transform.position = hookedObject.transform.position + relativePosition;
             
 
         }
@@ -59,6 +63,7 @@ public class Hook : MonoBehaviour
             return;
 
         hookedObject = collider.gameObject;
+        relativePosition = transform.position - hookedObject.transform.position;
         projectile.KeepAlive = true;
         projectile.Stopped = true;
         //projectile.Shooter.GetComponent<PlayerCharacterController>().MoveVelocity = (transform.position -

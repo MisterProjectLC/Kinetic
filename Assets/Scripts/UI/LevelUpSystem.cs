@@ -55,6 +55,9 @@ public class LevelUpSystem : MonoBehaviour
 
     void ChooseOption(LoadoutOption option)
     {
+        if (!optionsShown.Contains(option))
+            return;
+
         optionsShown.Remove(option);
         foreach (LoadoutOption shownOption in optionsShown)
         {
