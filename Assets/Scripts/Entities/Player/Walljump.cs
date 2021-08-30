@@ -30,12 +30,12 @@ public class Walljump : MonoBehaviour
     {
         if (OnWallAir())
         {
-            playerController.MoveVelocity = (Vector3.up + new Vector3(wallDirection.x, 0f, wallDirection.z).normalized) * 
+            playerController.MoveVelocity = (Vector3.up + new Vector3(wallDirection.x, 0f, wallDirection.z).normalized) *
                 playerController.JumpForce * 1.5f;
         }
     }
 
-    bool OnWallAir()
+    public bool OnWallAir()
     {
         return Time.time <= m_LastTimeWallAirTouched + k_WallAirDetectionTime;
     }
