@@ -178,8 +178,13 @@ public class PlayerCharacterController : MonoBehaviour
             }
         }
 
+        Vector3 saved = MoveVelocity;
+        Vector3 saved2 = Vector3.zero;
         while (Forces.Count > 0)
+        {
+            saved2 = Forces.Peek();
             MoveVelocity += Forces.Dequeue();
+        }
 
         m_Controller.Move(MoveVelocity * Time.deltaTime);
     }

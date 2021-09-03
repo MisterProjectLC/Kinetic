@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 2620657794665027557}
-  jumpDirection: {x: 0, y: 10, z: 10}
+  moveDirection: {x: 0, y: 30, z: -30}
   detectLayers:
     serializedVersion: 2
     m_Bits: 4096
+  isJump: 1
 --- !u!1 &2517669965050839375
 GameObject:
   m_ObjectHideFlags: 0
