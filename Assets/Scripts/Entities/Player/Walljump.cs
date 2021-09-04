@@ -7,6 +7,7 @@ public class Walljump : MonoBehaviour
     PlayerCharacterController playerController;
 
     float m_LastTimeWallAirTouched = 0f;
+    [SerializeField]
     const float k_WallAirDetectionTime = 0.2f;
     Vector3 wallDirection;
 
@@ -14,16 +15,25 @@ public class Walljump : MonoBehaviour
     {
         playerController = GetComponentInParent<PlayerCharacterController>();
         playerController.OnJumpAir += Execute;
+        playerController.OnCollision += OnWallCollision;
     }
 
     private void Update()
     {
         RaycastHit? hit = playerController.WallCheck();
         if (hit != null)
-        {
-            m_LastTimeWallAirTouched = Time.time;
-            wallDirection = hit.Value.normal;
-        }
+            TouchWall(hit.Value.normal);
+    }
+
+    public void OnWallCollision(ControllerColliderHit hit)
+    {
+        TouchWall(hit.normal);
+    }
+
+    public void TouchWall(Vector3 normal)
+    {
+        m_LastTimeWallAirTouched = Time.time;
+        wallDirection = normal;
     }
 
     public void Execute()

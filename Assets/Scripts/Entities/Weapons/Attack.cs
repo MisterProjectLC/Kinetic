@@ -15,6 +15,17 @@ public class Attack : MonoBehaviour
     [HideInInspector]
     public UnityAction OnKill;
 
+    private void Start()
+    {
+        OnKill += Kill;
+    }
+
+    void Kill()
+    {
+        Debug.Log("kill: " + gameObject.name);
+    }
+
+
     public void AttackTarget(GameObject target)
     {
         if (target.GetComponent<Damageable>())

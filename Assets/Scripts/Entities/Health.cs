@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     [HideInInspector]
     public int CurrentHealth = 5;
     public int MaxHealth = 5;
+    bool died = false;
 
     [HideInInspector]
     public UnityAction OnDamage;
@@ -25,12 +26,18 @@ public class Health : MonoBehaviour
 
     public void InflictDamage(int damage)
     {
+        if (died)
+            return;
+
         CurrentHealth -= damage;
 
         if (OnDamage != null)
             OnDamage.Invoke();
         if (CurrentHealth <= 0 && OnDie != null)
+        {
             OnDie.Invoke();
+            died = true;
+        }
     }
 
     public void Kill()

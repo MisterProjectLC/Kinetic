@@ -81,9 +81,7 @@ public class PlayerCharacterController : MonoBehaviour
     [HideInInspector]
     public UnityAction OnJumpAir;
     [HideInInspector]
-    public UnityAction<Collision> OnCollision;
-    [HideInInspector]
-    public UnityAction<Collision> OffCollision;
+    public UnityAction<ControllerColliderHit> OnCollision;
     [HideInInspector]
     public UnityAction<Collider> OnTrigger;
 
@@ -95,6 +93,8 @@ public class PlayerCharacterController : MonoBehaviour
         MoveVelocity = new Vector3(0f, 0f, 0f);
         m_Controller = GetComponent<CharacterController>();
         m_InputHandler = GetComponent<PlayerInputHandler>();
+        OnCollision += StopOnCollision;
+        OnTrigger += StopOnTrigger;
     }
 
     // Update is called once per frame
@@ -250,6 +250,21 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
 
+    public void StopOnCollision(ControllerColliderHit hit)
+    {
+        if (Vector3.Dot(hit.moveDirection, hit.normal) <= 0)
+            MoveVelocity = Vector3.ProjectOnPlane(MoveVelocity, hit.normal);
+        
+    }
+
+    public void StopOnTrigger(Collider other)
+    {
+        Vector3 print = MoveVelocity;
+        MoveVelocity = Vector3.ProjectOnPlane(MoveVelocity, other.ClosestPoint(transform.position));
+        Debug.Log(print + ", " + MoveVelocity);
+    }
+
+
     // Returns true if the slope angle represented by the given normal is under the slope angle limit of the character controller
     bool IsNormalUnderSlopeLimit(Vector3 normal)
     {
@@ -285,14 +300,9 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        OnCollision.Invoke(collision);
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        OffCollision.Invoke(collision);
+        OnCollision.Invoke(hit);
     }
 
     private void OnTriggerEnter(Collider other)
