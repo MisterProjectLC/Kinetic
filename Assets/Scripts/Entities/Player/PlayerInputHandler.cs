@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    const string MoveVertical = "Vertical";
+    const string MoveHorizontal = "Horizontal";
+
+    const string MouseVertical = "Mouse Y";
+    const string MouseHorizontal = "Mouse X";
+    const string JoystickVertical = "Look Y";
+    const string JoystickHorizontal = "Look X";
+
+    const string Jump = "Jump";
+    const string Switch = "Switch";
+    const string Ability = "Ability";
+    const string Slowtime = "Slowtime";
+
     [Tooltip("Sensitivity multiplier for moving the camera around")]
     [SerializeField]
     private float LookSensitivity = 1f;
@@ -41,9 +54,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     public Vector3 GetMoveInput()
     {
-        if (inputEnabled)
+        if (inputEnabled && !Pause.Paused)
         {
-            Vector3 move = new Vector3(Input.GetAxisRaw(Constants.MoveHorizontal), 0f, Input.GetAxisRaw(Constants.MoveVertical));
+            Vector3 move = new Vector3(Input.GetAxisRaw(MoveHorizontal), 0f, Input.GetAxisRaw(MoveVertical));
 
             // constrain move input to a maximum magnitude of 1, otherwise diagonal movement might exceed the max move speed defined
             move = Vector3.ClampMagnitude(move, 1);
@@ -56,29 +69,34 @@ public class PlayerInputHandler : MonoBehaviour
 
     public float GetLookInputsHorizontal()
     {
-        return GetMouseOrStickLookAxis(Constants.MouseHorizontal, Constants.JoystickHorizontal, InvertXAxis);
+        return GetMouseOrStickLookAxis(MouseHorizontal, JoystickHorizontal, InvertXAxis);
     }
 
     public float GetLookInputsVertical()
     {
-        return GetMouseOrStickLookAxis(Constants.MouseVertical, Constants.JoystickVertical, !InvertYAxis);
+        return GetMouseOrStickLookAxis(MouseVertical, JoystickVertical, !InvertYAxis);
     }
 
 
     public bool GetJump()
     {
-        return inputEnabled && Input.GetButtonDown(Constants.Jump);
+        return inputEnabled && !Pause.Paused && Input.GetButtonDown(Jump);
     }
 
     public bool GetSwitch()
     {
-        return inputEnabled && Input.GetButtonDown(Constants.Switch);
+        return inputEnabled && !Pause.Paused && Input.GetButtonDown(Switch);
+    }
+
+    public bool GetSlowtime()
+    {
+        return inputEnabled && !Pause.Paused && Input.GetButtonDown(Slowtime);
     }
 
 
     public bool GetAbility(int number)
     {
-        if (Input.GetButton(Constants.Ability + number.ToString()))
+        if (Input.GetButton(Ability + number.ToString()))
             abilityTimer -= Time.deltaTime;
 
         if (abilityTimer <= 0f)
@@ -93,13 +111,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool GetAbilityDown(int number)
     {
-        return Input.GetButtonDown(Constants.Ability + number.ToString());
+        return Input.GetButtonDown(Ability + number.ToString());
     }
 
 
     public int GetSelectLoadoutInput()
     {
-        if (inputEnabled)
+        if (inputEnabled && !Pause.Paused)
         {
             foreach (KeyCode key in keycodes.Keys)
             {
@@ -114,7 +132,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     float GetMouseOrStickLookAxis(string mouseInputName, string stickInputName, bool inverter)
     {
-        if (!inputEnabled)
+        if (!inputEnabled || Pause.Paused)
             return 0f;
 
         // Check if this look input is coming from the mouse

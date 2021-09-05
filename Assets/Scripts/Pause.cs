@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
+    public static bool Paused { get; private set; } = false;
+    const string PauseB = "Pause";
+
     PlayerInputHandler playerInput;
     [Tooltip("Shown when playing")]
     public GameObject[] PlayObjects;
     [Tooltip("Shown when paused")]
     public GameObject[] PausedObjects;
 
+    float oldTimeScale = 1f;
+
     private void Start()
     {
-        playerInput = ActorsManager.Player.GetComponent<PlayerInputHandler>();
         StartCoroutine(InitialClose());
     }
 
@@ -20,12 +24,13 @@ public class Pause : MonoBehaviour
     {
         if (GetPause())
         {
+            Paused = !Paused;
             // Pause
-            if (Time.timeScale != 0)
+            if (Paused)
             {
                 Cursor.lockState = CursorLockMode.Confined;
+                oldTimeScale = Time.timeScale;
                 Time.timeScale = 0;
-                playerInput.inputEnabled = false;
                 foreach (GameObject GO in PausedObjects)
                     GO.SetActive(true);
                 foreach (GameObject GO in PlayObjects)
@@ -36,8 +41,7 @@ public class Pause : MonoBehaviour
             else
             {
                 Cursor.lockState = CursorLockMode.Locked;
-                Time.timeScale = 1;
-                playerInput.inputEnabled = true;
+                Time.timeScale = oldTimeScale;
                 foreach (GameObject GO in PausedObjects)
                     GO.SetActive(false);
                 foreach (GameObject GO in PlayObjects)
@@ -57,6 +61,6 @@ public class Pause : MonoBehaviour
 
     public bool GetPause()
     {
-        return Input.GetButtonDown(Constants.Pause);
+        return Input.GetButtonDown(PauseB);
     }
 }
