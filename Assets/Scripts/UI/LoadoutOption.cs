@@ -6,6 +6,7 @@ public class LoadoutOption : MonoBehaviour
 {
     public GameObject Ability;
     public bool isPassive = false;
+    public bool isHeavy = false;
     public UnityAction<LoadoutOption> OnInsert;
 
     // Start is called before the first frame update
@@ -23,8 +24,8 @@ public class LoadoutOption : MonoBehaviour
         }
         GetComponent<DragDrop>().OnInsert += OnInsertFunc;
         GetComponent<DragDrop>().OnRemove += OnRemove;
-        if (GetComponent<DragDrop>().assignedSlot)
-            OnInsertFunc(GetComponent<DragDrop>().assignedSlot);
+        if (GetComponent<DragDrop>().AssignedSlot)
+            OnInsertFunc(GetComponent<DragDrop>().AssignedSlot);
     }
 
     void OnInsertFunc(DropSlot dropSlot)

@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthbarUI : MonoBehaviour
+public class HealthbarUI : BarUI
 {
     Health playerHealth;
-
-    [SerializeField]
-    RectTransform healthbar;
-    Vector2 healthbarSize;
 
     // Start is called before the first frame update
     void Start()
@@ -17,18 +13,10 @@ public class HealthbarUI : MonoBehaviour
         playerHealth = ActorsManager.Player.GetComponent<Health>();
         playerHealth.OnDamage += UpdateHealth;
         playerHealth.OnHeal += UpdateHealth;
-
-        healthbarSize = healthbar.sizeDelta;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void UpdateHealth()
     {
-        healthbar.sizeDelta = healthbarSize * new Vector2((float)playerHealth.CurrentHealth / (float)playerHealth.MaxHealth, 1f);
+        UpdateBar(playerHealth.CurrentHealth, playerHealth.MaxHealth);
     }
 }

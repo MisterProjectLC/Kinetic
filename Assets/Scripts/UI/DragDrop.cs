@@ -11,7 +11,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     public int Type = 0;
     public UnityAction<DropSlot> OnInsert;
     public UnityAction<DropSlot> OnRemove;
-    public DropSlot assignedSlot;
+    public DropSlot AssignedSlot;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     void assignToSlot(DropSlot slot)
     {
-        assignedSlot = slot;
+        AssignedSlot = slot;
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData)
@@ -38,10 +38,10 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = false;
-        if (assignedSlot)
+        if (AssignedSlot)
         {
-            OnRemove.Invoke(assignedSlot);
-            assignedSlot = null;
+            OnRemove.Invoke(AssignedSlot);
+            AssignedSlot = null;
         }
     }
 
