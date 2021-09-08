@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,8 +13,12 @@ public class LoadoutManager : MonoBehaviour
 
     [Header("General")]
     [Tooltip("List of currently equipped loadouts")]
+    [HideInInspector]
     public Loadout[] Loadouts;
+    public List<LevelUpSystem.Option> InitialOptions;
+    public List<LevelUpSystem.Option> Options;
 
+    [HideInInspector]
     public bool AbilitiesEnabled = true;
 
     [Header("Cooldown timers")]

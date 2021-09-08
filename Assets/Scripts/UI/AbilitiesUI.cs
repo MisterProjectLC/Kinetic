@@ -69,7 +69,6 @@ public class AbilitiesUI : MonoBehaviour
                 continue;
             }
 
-
             SkillImages[i].gameObject.SetActive(true);
             SkillImages[i].GetComponentInChildren<Text>().text = abilities[i].DisplayName;
             if (!(abilities[i] is WeaponAbility))

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +11,13 @@ public class LevelUpSystem : MonoBehaviour
         public bool isHeavy;
     }
 
+    [SerializeField]
+    List<RectTransform> initialSlots;
+
     [Header("Prefab References")]
     public GameObject optionPrefab;
     public GameObject heavyOptionPrefab;
 
-    [SerializeField]
-    List<Option> options;
     List<LoadoutOption> optionsBank;
     List<LoadoutOption> optionsShown;
 
@@ -27,32 +27,48 @@ public class LevelUpSystem : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        LoadoutManager loadout = ActorsManager.Player.GetComponent<LoadoutManager>();
         optionsBank = new List<LoadoutOption>();
         optionsShown = new List<LoadoutOption>();
         siblingBaseCount = transform.GetChildCount();
 
-        foreach (Option option in options)
+        int i = 0;
+        foreach (Option option in loadout.InitialOptions)
         {
-            GameObject newInstance = null;
-            if (!option.isHeavy)
-                newInstance = Instantiate(optionPrefab);
-            else
-                newInstance = Instantiate(heavyOptionPrefab);
-            
+            LoadoutOption loadoutOption = GenerateOptionInstance(option).GetComponent<LoadoutOption>();
+            loadoutOption.GetComponent<RectTransform>().anchoredPosition = initialSlots[i].anchoredPosition;
+            loadoutOption.GetComponent<DragDrop>().AssignedSlot = initialSlots[i++].GetComponent<DropSlot>();
+        }
 
-            LoadoutOption loadoutOption = newInstance.GetComponent<LoadoutOption>();
-            newInstance.transform.SetParent(transform);
-            if (option.isHeavy)
-                newInstance.transform.SetSiblingIndex(siblingBaseCount);
-
-            loadoutOption.Ability = option.ability;
-            loadoutOption.isPassive = option.isPassive;
-            loadoutOption.OnInsert += ChooseOption;
+        foreach (Option option in loadout.Options)
+        {
+            GameObject GO = GenerateOptionInstance(option);
+            GO.SetActive(false);
+            LoadoutOption loadoutOption = GO.GetComponent<LoadoutOption>();
             optionsBank.Add(loadoutOption);
-
-            newInstance.SetActive(false);
         }
     }
+
+    GameObject GenerateOptionInstance(Option option)
+    {
+        GameObject newInstance = null;
+        if (!option.isHeavy)
+            newInstance = Instantiate(optionPrefab);
+        else
+            newInstance = Instantiate(heavyOptionPrefab);
+
+        LoadoutOption loadoutOption = newInstance.GetComponent<LoadoutOption>();
+        newInstance.transform.SetParent(transform);
+        if (option.isHeavy)
+            newInstance.transform.SetSiblingIndex(siblingBaseCount);
+
+        loadoutOption.Ability = option.ability;
+        loadoutOption.isPassive = option.isPassive;
+        loadoutOption.OnInsert += ChooseOption;
+
+        return newInstance;
+    }
+
 
     public void LevelUp()
     {

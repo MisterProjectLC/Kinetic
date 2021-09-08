@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
+    [Header("Attributes")]
+    [Tooltip("Explosion range")]
     public float Radius = 5f;
+
+    [Range(0f, 1f)]
+    [Tooltip("Percentage damage at the radius' edge")]
+    public float FallOffRate = 1f;
+
+    [Range(0f, 1f)]
+    [Tooltip("Percentage damage against neutered layers")]
+    public float NeuteredRate = 1f;
+
+    [Header("Hit layers")]
     public LayerMask HitLayers;
+    public LayerMask NeuteredHitLayers;
     //public float KnockbackForce = 5f;
 
     Attack attack;
@@ -21,6 +34,7 @@ public class Explosion : MonoBehaviour
 
     private void OnEnable()
     {
+        colliders = new Collider[maxColliders];
         StartCoroutine("Explode");
     }
 
@@ -33,7 +47,10 @@ public class Explosion : MonoBehaviour
             if (!collider)
                 break;
 
-            attack.AttackTarget(collider.gameObject);
+            float rate = ((NeuteredHitLayers.value >> collider.gameObject.layer) == 1) ? NeuteredRate : 1f;
+
+            float distanceToTarget = (transform.position - collider.ClosestPoint(transform.position)).magnitude / Radius;
+            attack.AttackTarget(collider.gameObject, rate * (1f - distanceToTarget*(1f - FallOffRate)));
         }
     }
 }

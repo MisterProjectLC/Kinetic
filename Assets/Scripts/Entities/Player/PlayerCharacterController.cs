@@ -91,6 +91,7 @@ public class PlayerCharacterController : MonoBehaviour
     {
         Forces = new Queue<Vector3>();
         MoveVelocity = new Vector3(0f, 0f, 0f);
+        MoveControlEnabled = true;
         m_Controller = GetComponent<CharacterController>();
         m_InputHandler = GetComponent<PlayerInputHandler>();
         OnCollision += StopOnCollision;
@@ -253,7 +254,12 @@ public class PlayerCharacterController : MonoBehaviour
     public void StopOnCollision(ControllerColliderHit hit)
     {
         if (Vector3.Dot(hit.moveDirection, hit.normal) <= 0)
+        {
             MoveVelocity = Vector3.ProjectOnPlane(MoveVelocity, hit.normal);
+            // Ricochet off the ceiling
+            if (Vector3.Dot(Vector3.down, hit.normal) >= 0.5)
+                MoveVelocity += Vector3.down;
+        }
         
     }
 

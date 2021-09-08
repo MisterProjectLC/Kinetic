@@ -21,7 +21,8 @@ public class ActorsManager : MonoBehaviour
         else
         {
             AM = this;
-            Player = PlayerSerialized;
+            if (PlayerSerialized)
+                Player = PlayerSerialized;
             Actors = new Dictionary<int, List<Actor>>();
         }
     }
@@ -33,5 +34,14 @@ public class ActorsManager : MonoBehaviour
             Actors.Add(actor.Affiliation, new List<Actor>());
 
         Actors[actor.Affiliation].Add(actor);
+    }
+
+
+    public Actor GetPlayer()
+    {
+        if (Player)
+            return Player;
+        else
+            return PlayerSerialized;
     }
 }
