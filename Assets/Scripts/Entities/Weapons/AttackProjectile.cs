@@ -23,6 +23,17 @@ public class AttackProjectile : MonoBehaviour
         if (PenetrateCount > 0)
             PenetrateCount--;
         else
-            ObjectManager.OM.EraseObject(GetComponent<Poolable>());
+            GetComponent<Projectile>().Destroy();
+    }
+
+    public void Detonate()
+    {
+        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactType, ImpactObject).gameObject;
+        newObject.transform.position = transform.position;
+
+        if (PenetrateCount > 0)
+            PenetrateCount--;
+        else
+            GetComponent<Projectile>().Destroy();
     }
 }

@@ -8,7 +8,8 @@ public class LevelUpSystem : MonoBehaviour
     {
         public GameObject ability;
         public bool isPassive;
-        public bool isHeavy;
+        [Tooltip("Leave empty if none")]
+        public string secondaryAbility;
     }
 
     [SerializeField]
@@ -36,8 +37,9 @@ public class LevelUpSystem : MonoBehaviour
         foreach (Option option in loadout.InitialOptions)
         {
             LoadoutOption loadoutOption = GenerateOptionInstance(option).GetComponent<LoadoutOption>();
-            loadoutOption.GetComponent<RectTransform>().anchoredPosition = initialSlots[i].anchoredPosition;
-            loadoutOption.GetComponent<DragDrop>().AssignedSlot = initialSlots[i++].GetComponent<DropSlot>();
+            DropSlot dropSlot = initialSlots[i].GetComponent<DropSlot>();
+            dropSlot.OnDrop(loadoutOption.gameObject);
+            i++;
         }
 
         foreach (Option option in loadout.Options)
@@ -52,14 +54,17 @@ public class LevelUpSystem : MonoBehaviour
     GameObject GenerateOptionInstance(Option option)
     {
         GameObject newInstance = null;
-        if (!option.isHeavy)
+        if (option.secondaryAbility.Length <= 0)
             newInstance = Instantiate(optionPrefab);
         else
+        {
             newInstance = Instantiate(heavyOptionPrefab);
+            newInstance.GetComponent<BigLoadoutOption>().SetSecondaryAbility(option.secondaryAbility);
+        }
 
         LoadoutOption loadoutOption = newInstance.GetComponent<LoadoutOption>();
         newInstance.transform.SetParent(transform);
-        if (option.isHeavy)
+        if (option.secondaryAbility.Length > 0)
             newInstance.transform.SetSiblingIndex(siblingBaseCount);
 
         loadoutOption.Ability = option.ability;
@@ -82,7 +87,7 @@ public class LevelUpSystem : MonoBehaviour
             optionsBank[rnd].gameObject.SetActive(true);
             optionsShown.Add(optionsBank[rnd]);
             optionsBank[rnd].GetComponent<RectTransform>().anchoredPosition = new Vector2(-40 + i*258, 166);
-            if (optionsBank[rnd].isHeavy)
+            if (optionsBank[rnd].GetComponent<BigLoadoutOption>())
                 SetLoweredMenu(true);
 
             optionsBank.RemoveAt(rnd);

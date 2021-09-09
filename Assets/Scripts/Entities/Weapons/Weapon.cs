@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Weapon : MonoBehaviour
 {
@@ -16,28 +18,42 @@ public class Weapon : MonoBehaviour
 
     [Header("Hitscan")]
     [Tooltip("Max distance to which the bullets travel")]
-    public float MaxDistance = 100f;
+    [SerializeField]
+    private float MaxDistance = 100f;
 
     [Tooltip("Prefab containing hit animation")]
-    public GameObject Sparks;
+    [SerializeField]
+    private GameObject Sparks;
 
     [Header("Projectile")]
-    public GameObject Projectile;
+    [SerializeField]
+    private GameObject Projectile;
+    [HideInInspector]
+    public List<GameObject> ActiveProjectiles;
 
     [Header("Attributes")]
     [Tooltip("Pushback force when firing the gun")]
-    public float BackwardsForce = 10f;
+    [SerializeField]
+    private float backwardsForce = 10f;
+    public float BackwardsForce { get { return backwardsForce; } }
 
     [Tooltip("Max angle at which the bullets spread from the center")]
     [Range(0f, 0.25f)]
-    public float MaxSpreadAngle = 0f;
+    [SerializeField]
+    private float MaxSpreadAngle = 0f;
 
     [Tooltip("Amount of bullets sent")]
-    public int BulletCount = 12;
+    [SerializeField]
+    private int BulletCount = 12;
 
     [Tooltip("If enabled, holding the button engages repeated shooting")]
     public bool Automatic = false;
     public float FireCooldown = 0f;
+
+    private void Start()
+    {
+        ActiveProjectiles = new List<GameObject>(BulletCount);
+    }
 
     public void Fire()
     {
@@ -53,6 +69,8 @@ public class Weapon : MonoBehaviour
                 GameObject instance = ObjectManager.OM.SpawnObjectFromPool(BulletType, Projectile).gameObject;
                 instance.transform.position = Mouth.position;
                 instance.GetComponent<Projectile>().Setup(direction, HitLayers, GetComponentInParent<Actor>().gameObject);
+                instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;
+                ActiveProjectiles.Add(instance);
 
             // Hitscan attack
             } else { 
@@ -75,5 +93,11 @@ public class Weapon : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void RemoveProjectileFromList(Projectile proj)
+    {
+        proj.gameObject.GetComponent<Projectile>().OnDestroy -= RemoveProjectileFromList;
+        ActiveProjectiles.Remove(proj.gameObject);
     }
 }

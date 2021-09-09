@@ -6,7 +6,6 @@ public class LoadoutOption : MonoBehaviour
 {
     public GameObject Ability;
     public bool isPassive = false;
-    public bool isHeavy = false;
     public UnityAction<LoadoutOption> OnInsert;
 
     // Start is called before the first frame update
@@ -15,13 +14,17 @@ public class LoadoutOption : MonoBehaviour
         if (!isPassive)
         {
             GetComponentInChildren<Text>().text = Ability.GetComponent<Ability>().DisplayName;
-            GetComponent<DragDrop>().Type = 0;
+            GetComponent<DragDrop>().Type = "Ability";
         }
         else
         {
             GetComponentInChildren<Text>().text = Ability.gameObject.name;
-            GetComponent<DragDrop>().Type = 1;
+            GetComponent<DragDrop>().Type = "Passive";
         }
+
+        if (Ability.GetComponent<Ability>() is SecondaryAbility)
+            GetComponent<DragDrop>().Type = Ability.GetComponent<Ability>().DisplayName;
+
         GetComponent<DragDrop>().OnInsert += OnInsertFunc;
         GetComponent<DragDrop>().OnRemove += OnRemove;
         if (GetComponent<DragDrop>().AssignedSlot)

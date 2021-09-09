@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
 
     [HideInInspector]
     public UnityAction<Collider> OnHit;
+    public UnityAction<Projectile> OnDestroy;
 
     [HideInInspector]
     public GameObject Shooter;
@@ -99,6 +100,18 @@ public class Projectile : MonoBehaviour
         }
 
         m_LastRootPosition = Root.position;
+    }
+
+
+    public void Destroy()
+    {
+        if (OnDestroy != null)
+            OnDestroy.Invoke(this);
+
+        if (GetComponent<Poolable>())
+            ObjectManager.OM.EraseObject(GetComponent<Poolable>());
+        else
+            gameObject.SetActive(false);
     }
 
 

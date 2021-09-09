@@ -34,12 +34,12 @@ public abstract class Ability : MonoBehaviour
 
     public abstract void Execute();
 
-    protected void SetOffCooldown()
+    public void SetOffCooldown()
     {
         Timer = Cooldown;
     }
 
-    protected void ResetCooldown()
+    public void ResetCooldown()
     {
         Timer = 0;
     }

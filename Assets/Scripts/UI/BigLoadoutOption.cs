@@ -1,19 +1,39 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BigLoadoutOption : MonoBehaviour
 {
     LoadoutSlot secondarySlot;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         secondarySlot = GetComponentInChildren<LoadoutSlot>();
+        secondarySlot.GetComponent<DropSlot>().OnInserted += OnSecondaryInsert;
         DragDrop dragDrop = GetComponent<DragDrop>();
-        dragDrop.OnInsert += OnInsert;
-        dragDrop.OnRemove += OnRemove;
+        dragDrop.OnInsert += OnPrimaryInsert;
+        dragDrop.OnRemove += OnPrimaryRemove;
     }
 
-    void OnInsert(DropSlot slot)
+    private void Start()
+    {
+        secondarySlot.GetComponent<DropSlot>().Offset = GetComponent<RectTransform>().anchoredPosition;
+    }
+
+
+    public void SetSecondaryAbility(string secondaryAbility)
+    {
+        secondarySlot.GetComponent<DropSlot>().Type = secondaryAbility;
+        secondarySlot.GetComponentInChildren<Text>().text = secondaryAbility;
+    }
+
+    void OnSecondaryInsert(DragDrop option)
+    {
+        option.GetComponent<LoadoutOption>().Ability.GetComponent<SecondaryAbility>().ParentAbility = 
+            GetComponent<LoadoutOption>().Ability.GetComponent<Ability>();
+    }
+
+    public void OnPrimaryInsert(DropSlot slot)
     {
         LoadoutSlot primarySlot = slot.GetComponent<LoadoutSlot>();
         if (primarySlot.AbilityNumber >= Constants.SlotsPerLoadout - 1)
@@ -27,9 +47,8 @@ public class BigLoadoutOption : MonoBehaviour
 
         secondarySlot.GetComponent<DropSlot>().Offset = GetComponent<RectTransform>().anchoredPosition;
     }
-    
 
-    void OnRemove(DropSlot slot)
+    void OnPrimaryRemove(DropSlot slot)
     {
         secondarySlot.gameObject.SetActive(false);
     }

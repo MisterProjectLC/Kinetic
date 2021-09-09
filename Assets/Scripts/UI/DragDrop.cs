@@ -8,7 +8,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     Canvas canvas;
     CanvasGroup canvasGroup;
 
-    public int Type = 0;
+    public string Type = "Ability";
     public UnityAction<DropSlot> OnInsert;
     public UnityAction<DropSlot> OnRemove;
     public DropSlot AssignedSlot;

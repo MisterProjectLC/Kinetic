@@ -313,7 +313,8 @@ MonoBehaviour:
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 0}
-  BackwardsForce: 0
+  ActiveProjectiles: []
+  backwardsForce: 0
   MaxSpreadAngle: 0.05
   BulletCount: 1
   Automatic: 0
@@ -1175,41 +1176,41 @@ MonoBehaviour:
   InitialOptions:
   - ability: {fileID: 6923643163349663185}
     isPassive: 0
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 2225249382224139414}
     isPassive: 0
-    isHeavy: 0
+    secondaryAbility: 
   Options:
   - ability: {fileID: 3284626973075478747}
     isPassive: 0
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 7349922464857806567}
     isPassive: 0
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 1292416793624679719}
     isPassive: 0
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 758061105512210739}
     isPassive: 0
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 8006630410610024068}
     isPassive: 0
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 5307980427766246164}
     isPassive: 0
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 4382853588751367982}
     isPassive: 1
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 4101398689657722995}
     isPassive: 1
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 8791866288957817034}
     isPassive: 1
-    isHeavy: 0
+    secondaryAbility: 
   - ability: {fileID: 8791866288957817034}
     isPassive: 1
-    isHeavy: 0
+    secondaryAbility: 
   AbilitiesEnabled: 1
   DownCooldown: 0.1
   UpCooldown: 0.1
@@ -1420,6 +1421,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MaxSpreadAngle
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456668826152063561, guid: 919676ddd85f17b4f9da93768b124e55,
+        type: 3}
+      propertyPath: backwardsForce
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5135531782038433102, guid: 919676ddd85f17b4f9da93768b124e55,
         type: 3}

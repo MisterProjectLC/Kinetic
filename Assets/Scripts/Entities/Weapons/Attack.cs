@@ -22,7 +22,7 @@ public class Attack : MonoBehaviour
 
     void Kill()
     {
-        Debug.Log("kill: " + gameObject.name);
+        //Debug.Log("kill: " + gameObject.name);
     }
 
 
