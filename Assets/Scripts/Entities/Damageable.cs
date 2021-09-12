@@ -25,11 +25,13 @@ public class Damageable : MonoBehaviour
 
     public void InflictDamage(int damage)
     {
+        Debug.Log("British");
         HealthRef.InflictDamage((int)Mathf.Floor(damage*DamageSensitivity));
     }
 
     public void InflictDamage(int damage, Attack attack)
     {
+        Debug.Log("British");
         HealthRef.OnDie += attack.OnKill;
         HealthRef.InflictDamage((int)Mathf.Floor(damage * DamageSensitivity));
         HealthRef.OnDie -= attack.OnKill;

@@ -50,6 +50,10 @@ public class BigLoadoutOption : MonoBehaviour
 
     void OnPrimaryRemove(DropSlot slot)
     {
+        DropSlot secondaryDropSlot = secondarySlot.GetComponent<DropSlot>();
+
+        if (secondaryDropSlot.InsertedDragDrop && secondaryDropSlot.InsertedDragDrop.OnRemove != null)
+            secondaryDropSlot.InsertedDragDrop.OnRemove.Invoke(secondaryDropSlot);
         secondarySlot.gameObject.SetActive(false);
     }
 }

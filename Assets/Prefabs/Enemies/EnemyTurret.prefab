@@ -256,12 +256,13 @@ MonoBehaviour:
   BulletType: 1
   HitLayers:
     serializedVersion: 2
-    m_Bits: 4608
+    m_Bits: 135680
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
     type: 3}
-  BackwardsForce: 0
+  ActiveProjectiles: []
+  backwardsForce: 10
   MaxSpreadAngle: 0.05
   BulletCount: 1
   Automatic: 0
@@ -1007,12 +1008,13 @@ MonoBehaviour:
   BulletType: 1
   HitLayers:
     serializedVersion: 2
-    m_Bits: 4608
+    m_Bits: 135680
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
     type: 3}
-  BackwardsForce: 0
+  ActiveProjectiles: []
+  backwardsForce: 10
   MaxSpreadAngle: 0.05
   BulletCount: 1
   Automatic: 0

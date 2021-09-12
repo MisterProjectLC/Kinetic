@@ -40,6 +40,8 @@ public class LevelUpSystem : MonoBehaviour
             DropSlot dropSlot = initialSlots[i].GetComponent<DropSlot>();
             dropSlot.OnDrop(loadoutOption.gameObject);
             i++;
+            if (option.secondaryAbility.Length > 0)
+                i++;
         }
 
         foreach (Option option in loadout.Options)

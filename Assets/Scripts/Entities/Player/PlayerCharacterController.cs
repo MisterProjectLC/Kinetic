@@ -141,7 +141,7 @@ public class PlayerCharacterController : MonoBehaviour
             // Ground Movement
             if (IsGrounded)
             {
-                Vector3 targetVelocity = moveInput * GroundWalkSpeed;
+                Vector3 targetVelocity = moveInput * GroundWalkSpeed * SpeedMultiplier;
                 targetVelocity = GetDirectionReorientedOnSlope(targetVelocity.normalized, m_GroundNormal) * targetVelocity.magnitude;
                 MoveVelocity = Vector3.Lerp(MoveVelocity, targetVelocity, GroundAcceleration * Time.deltaTime);
 
@@ -251,6 +251,12 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
 
+    public void SetSlowdown(float slowdown)
+    {
+        SpeedMultiplier = slowdown;
+    }
+
+
     public void StopOnCollision(ControllerColliderHit hit)
     {
         if (Vector3.Dot(hit.moveDirection, hit.normal) <= 0)
@@ -279,7 +285,7 @@ public class PlayerCharacterController : MonoBehaviour
 
 
     // Gets a reoriented direction that is tangent to a given slope
-    public Vector3 GetDirectionReorientedOnSlope(Vector3 direction, Vector3 slopeNormal)
+    Vector3 GetDirectionReorientedOnSlope(Vector3 direction, Vector3 slopeNormal)
     {
         Vector3 directionRight = Vector3.Cross(direction, transform.up);
         return Vector3.Cross(slopeNormal, directionRight).normalized;

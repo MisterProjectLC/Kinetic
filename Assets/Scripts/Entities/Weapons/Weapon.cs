@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
     public float BackwardsForce { get { return backwardsForce; } }
 
     [Tooltip("Max angle at which the bullets spread from the center")]
-    [Range(0f, 0.25f)]
+    [Range(0f, 10f)]
     [SerializeField]
     private float MaxSpreadAngle = 0f;
 
@@ -53,6 +53,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         ActiveProjectiles = new List<GameObject>(BulletCount);
+        MaxSpreadAngle /= 100f;
     }
 
     public void Fire()

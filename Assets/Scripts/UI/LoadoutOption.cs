@@ -26,7 +26,7 @@ public class LoadoutOption : MonoBehaviour
             GetComponent<DragDrop>().Type = Ability.GetComponent<Ability>().DisplayName;
 
         GetComponent<DragDrop>().OnInsert += OnInsertFunc;
-        GetComponent<DragDrop>().OnRemove += OnRemove;
+        GetComponent<DragDrop>().OnRemove += RemoveFromSlot;
         if (GetComponent<DragDrop>().AssignedSlot)
             OnInsertFunc(GetComponent<DragDrop>().AssignedSlot);
     }
@@ -39,7 +39,7 @@ public class LoadoutOption : MonoBehaviour
             OnInsert.Invoke(this);
     }
 
-    void OnRemove(DropSlot dropSlot)
+    void RemoveFromSlot(DropSlot dropSlot)
     {
         LoadoutSlot slot = dropSlot.GetComponent<LoadoutSlot>();
         slot.SetAbility(Ability, slot, false);

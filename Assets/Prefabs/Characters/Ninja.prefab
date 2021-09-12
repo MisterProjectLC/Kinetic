@@ -1271,13 +1271,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2456668826152063561, guid: 919676ddd85f17b4f9da93768b124e55,
         type: 3}
+      propertyPath: MaxDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456668826152063561, guid: 919676ddd85f17b4f9da93768b124e55,
+        type: 3}
       propertyPath: FireCooldown
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2456668826152063561, guid: 919676ddd85f17b4f9da93768b124e55,
         type: 3}
       propertyPath: MaxSpreadAngle
-      value: 0.4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5135531782038433102, guid: 919676ddd85f17b4f9da93768b124e55,
         type: 3}
@@ -1420,7 +1425,7 @@ PrefabInstance:
     - target: {fileID: 2456668826152063561, guid: 919676ddd85f17b4f9da93768b124e55,
         type: 3}
       propertyPath: MaxSpreadAngle
-      value: 0.05
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2456668826152063561, guid: 919676ddd85f17b4f9da93768b124e55,
         type: 3}

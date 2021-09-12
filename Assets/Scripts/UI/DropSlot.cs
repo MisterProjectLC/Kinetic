@@ -8,6 +8,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
     [HideInInspector]
     public Vector2 Offset = Vector2.zero;
 
+    public DragDrop InsertedDragDrop;
     public UnityAction<DragDrop> OnInserted;
 
     public void OnDrop(PointerEventData eventData)
@@ -21,9 +22,10 @@ public class DropSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(GameObject dragDrop)
     {
+        InsertedDragDrop = dragDrop.GetComponent<DragDrop>();
         dragDrop.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + Offset;
-        dragDrop.GetComponent<DragDrop>().OnInsert.Invoke(this);
+        InsertedDragDrop.OnInsert.Invoke(this);
         if (OnInserted != null)
-            OnInserted.Invoke(dragDrop.GetComponent<DragDrop>());
+            OnInserted.Invoke(InsertedDragDrop);
     }
 }
