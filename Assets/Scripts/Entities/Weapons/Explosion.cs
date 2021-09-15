@@ -41,6 +41,10 @@ public class Explosion : MonoBehaviour
     IEnumerator Explode()
     {
         yield return new WaitForSeconds(0.01f);
+        // Emit sound
+        if (GetComponent<AudioSource>())
+            GetComponent<AudioSource>().Play();
+
         Physics.OverlapSphereNonAlloc(transform.position, Radius, colliders, HitLayers);
         foreach (Collider collider in colliders)
         {

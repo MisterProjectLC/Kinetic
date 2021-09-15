@@ -56,13 +56,15 @@ public class Translocate : Ability
             target.GetComponent<NavMeshAgent>().enabled = false;
 
         // Animation
+        GetComponent<AudioSource>().Play();
+        float lastTimeScale = Time.timeScale;
         Time.timeScale = 0f;
         for (int i = 0; i < 10; i++)
         {
             player.transform.position = Vector3.Lerp(player.transform.position, targetCoords, 0.04f);
             yield return new WaitForSecondsRealtime(0.01f);
         }
-        Time.timeScale = 1f;
+        Time.timeScale = lastTimeScale;
 
 
         // Translocate
@@ -70,7 +72,7 @@ public class Translocate : Ability
         player.transform.position = targetCoords;
         yield return new WaitForSecondsRealtime(0.001f);
         target.GetComponent<Enemy>().WarpPosition(myCoords);
-        
+
 
         abilities.AbilitiesEnabled = true;
         player.MoveControlEnabled = true;

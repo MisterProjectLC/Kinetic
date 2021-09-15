@@ -11,6 +11,9 @@ public abstract class Ability : MonoBehaviour
 
     public bool HoldAbility = false;
 
+    [SerializeField]
+    bool EmitSoundEffectOnExecute = false;
+
     public UnityAction OnExecute;
     protected UnityAction OnUpdate;
 
@@ -27,6 +30,8 @@ public abstract class Ability : MonoBehaviour
         {
             Timer = Cooldown;
             Execute();
+            if (EmitSoundEffectOnExecute)
+                GetComponent<AudioSource>().Play();
             if (OnExecute != null)
                 OnExecute.Invoke();
         }

@@ -90,12 +90,12 @@ public class LoadoutManager : MonoBehaviour
                 if (AnimStage != AnimationStage.DeviceReady)
                     return;
 
-                // Activate
-                GetCurrentLoadout()[i].Activate();
-
                 // Switch Devices
                 if (GetCurrentLoadout()[i].GetComponent<Device>())
                     SwitchDevice(i);
+
+                // Activate
+                GetCurrentLoadout()[i].Activate();
             }
     }
 
@@ -113,6 +113,7 @@ public class LoadoutManager : MonoBehaviour
             AnimStage = AnimationStage.DeviceDown;
             animProgression = DownCooldown;
         }
+        Device.gameObject.SetActive(true);
 
         OnDeviceSwitch.Invoke(Device);
     }
@@ -157,10 +158,12 @@ public class LoadoutManager : MonoBehaviour
                     AnimStage = AnimationStage.DeviceUp;
                     animProgression = UpCooldown;
                     if (currentDevice != null)
+                    {
+                        if (currentDevice.GetComponent<WeaponAbility>())
+                            currentDevice.GetComponent<WeaponAbility>().ResetCooldown();
                         currentDevice.gameObject.SetActive(false);
+                    }
                     currentDevice = newDevice;
-                    if (currentDevice != null)
-                        currentDevice.gameObject.SetActive(true);
                     break;
 
                 case AnimationStage.DeviceUp:

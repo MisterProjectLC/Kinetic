@@ -81,10 +81,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Root: {fileID: 3149814663973454075}
   Tip: {fileID: 8055671280752586125}
-  MoveSpeed: 20
-  MaxLifetime: 2
-  Radius: 0.3
-  RadiusColor: {r: 0, g: 0.15447187, b: 1, a: 0}
+  Attributes: {fileID: 11400000, guid: cff56816a29d05641941d1a845ee7e89, type: 2}
+  KeepAlive: 0
+  Stopped: 0
+  Shooter: {fileID: 0}
 --- !u!114 &2654886744593558617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
+  Knockback: 0
   Effects: []
 --- !u!114 &3536989481799197300
 MonoBehaviour:

@@ -8,11 +8,7 @@ public class Projectile : MonoBehaviour
     public Transform Tip;
 
     [Header("Attributes")]
-    public float MoveSpeed = 5f;
-    public float GravitySpeed = 0f;
-    public float MaxLifetime = 2f;
-    public float Radius = 20f;
-    public Color RadiusColor;
+    public ProjectileConfig Attributes;
 
     private float clock = 0f;
     private Vector3 moveVelocity;
@@ -42,7 +38,7 @@ public class Projectile : MonoBehaviour
         KeepAlive = false;
         Stopped = false;
         hitLayers = layerMask;
-        moveVelocity = moveDirection.normalized * MoveSpeed;
+        moveVelocity = moveDirection.normalized * Attributes.MoveSpeed;
         transform.right = moveDirection.normalized;
         Shooter = shooter;
 
@@ -58,8 +54,8 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         // Movement
-        if (GravitySpeed != 0f)
-            moveVelocity += Vector3.down * GravitySpeed * Time.deltaTime;
+        if (Attributes.GravitySpeed != 0f)
+            moveVelocity += Vector3.down * Attributes.GravitySpeed * Time.deltaTime;
         if (!Stopped)
             transform.position += moveVelocity * Time.deltaTime;
 
@@ -67,7 +63,7 @@ public class Projectile : MonoBehaviour
         if (!KeepAlive)
         {
             clock += Time.deltaTime;
-            if (clock > MaxLifetime)
+            if (clock > Attributes.MaxLifetime)
             {
                 if (GetComponent<Poolable>())
                     ObjectManager.OM.EraseObject(GetComponent<Poolable>());
@@ -84,7 +80,7 @@ public class Projectile : MonoBehaviour
 
             // Sphere cast
             Vector3 displacementSinceLastFrame = Tip.position - m_LastRootPosition;
-            RaycastHit[] hits = Physics.SphereCastAll(m_LastRootPosition, Radius,
+            RaycastHit[] hits = Physics.SphereCastAll(m_LastRootPosition, Attributes.Radius,
                 displacementSinceLastFrame.normalized, displacementSinceLastFrame.magnitude, hitLayers, QueryTriggerInteraction.Ignore);
             foreach (var hit in hits)
             {
@@ -118,12 +114,5 @@ public class Projectile : MonoBehaviour
     private bool isHitValid(RaycastHit hit)
     {
         return true;
-    }
-
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = RadiusColor;
-        Gizmos.DrawSphere(transform.position, Radius);
     }
 }
