@@ -23,7 +23,7 @@ public class GrapplingHook : Ability
         }
     }
 
-    public override void Execute()
+    public override void Execute(Input input)
     {
         hook.gameObject.SetActive(!hook.gameObject.activeInHierarchy);
 

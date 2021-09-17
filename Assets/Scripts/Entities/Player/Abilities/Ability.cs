@@ -9,12 +9,18 @@ public abstract class Ability : MonoBehaviour
     public float Cooldown = 5f;
     public float Timer { get; protected set; } = 0f;
 
+    public enum Input {
+        ButtonUp,
+        ButtonDown
+    }
+
     public bool HoldAbility = false;
+    public bool ReleaseAbility = false;
 
     [SerializeField]
     bool EmitSoundEffectOnExecute = false;
 
-    public UnityAction OnExecute;
+    public UnityAction<Input> OnExecute;
     protected UnityAction OnUpdate;
 
     private void Update()
@@ -24,20 +30,27 @@ public abstract class Ability : MonoBehaviour
             OnUpdate.Invoke();
     }
 
+
     public void Activate()
+    {
+        Activate(Input.ButtonDown);
+    }
+
+    public void Activate(Input input)
     {
         if (Timer <= 0f)
         {
             Timer = Cooldown;
-            Execute();
+            Execute(input);
             if (EmitSoundEffectOnExecute)
                 GetComponent<AudioSource>().Play();
             if (OnExecute != null)
-                OnExecute.Invoke();
+                OnExecute.Invoke(input);
         }
     }
 
-    public abstract void Execute();
+    public abstract void Execute(Input input);
+
 
     public void SetOffCooldown()
     {

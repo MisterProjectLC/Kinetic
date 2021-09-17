@@ -30,6 +30,7 @@ public class PlayerCharacterController : MonoBehaviour
     public bool MoveControlEnabled = true;
     [HideInInspector]
     public float SpeedMultiplier = 1f;
+    Dictionary<string, float> groundSlowdowns = new Dictionary<string, float>();
 
     [Header ("Airborne")]
     [Tooltip("Vertical movement on jumping")]
@@ -37,6 +38,9 @@ public class PlayerCharacterController : MonoBehaviour
 
     [Tooltip("Multiplier for gravity force")]
     public float GravityMultiplier = 1f;
+
+    float AirMultiplier = 1f;
+    Dictionary<string, float> airSlowdowns = new Dictionary<string, float>();
 
     [Tooltip("Enable or disable gravity")]
     public bool GravityEnabled = true;
@@ -155,7 +159,7 @@ public class PlayerCharacterController : MonoBehaviour
             {
                 // Horizontal air movement
                 Vector3 horizontalVelocity = Vector3.ProjectOnPlane(MoveVelocity, Vector3.up);
-                Vector3 newHorizontalVelocity = horizontalVelocity + (moveInput * AirborneAcceleration * Time.deltaTime);
+                Vector3 newHorizontalVelocity = horizontalVelocity + (moveInput * AirborneAcceleration * AirMultiplier * Time.deltaTime);
                 if (horizontalVelocity.magnitude < AirborneMaxStrafeSpeed || newHorizontalVelocity.magnitude < horizontalVelocity.magnitude)
                     MoveVelocity = newHorizontalVelocity + (MoveVelocity.y * Vector3.up);
 
@@ -173,17 +177,16 @@ public class PlayerCharacterController : MonoBehaviour
 
                 // Gravity
                 if (GravityEnabled)
-                    MoveVelocity += Vector3.down * Constants.Gravity * GravityMultiplier * Time.deltaTime;
+                    MoveVelocity += Vector3.down * Constants.Gravity * GravityMultiplier * (MoveVelocity.y < 0f ? AirMultiplier:1f) * Time.deltaTime;
 
                 MoveVelocity = Vector3.ClampMagnitude(MoveVelocity, AirborneMaxSpeed);
             }
         }
 
-        Vector3 saved = MoveVelocity;
-        Vector3 saved2 = Vector3.zero;
+        //Vector3 saved2 = Vector3.zero;
         while (Forces.Count > 0)
         {
-            saved2 = Forces.Peek();
+            //saved2 = Forces.Peek();
             MoveVelocity += Forces.Dequeue();
         }
 
@@ -194,6 +197,11 @@ public class PlayerCharacterController : MonoBehaviour
     public void ApplyForce(Vector3 Force)
     {
         Forces.Enqueue(Force);
+    }
+
+    public void Translate(Vector3 movement)
+    {
+        m_Controller.Move(movement);
     }
 
 
@@ -251,9 +259,28 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
 
-    public void SetSlowdown(float slowdown)
+    public void SetSlowdown(float slow, string name, bool ground = true)
     {
-        SpeedMultiplier = slowdown;
+        bool found = false;
+        float slowest = slow;
+        foreach(string slowdown in (ground ? groundSlowdowns : airSlowdowns).Keys)
+        {
+            if (slowdown == name)
+                found = true;
+                
+            if (slow < slowest)
+                slowest = slow;
+        }
+
+        if (found)
+            (ground ? groundSlowdowns : airSlowdowns)[name] = slow;
+        else
+            (ground ? groundSlowdowns : airSlowdowns).Add(name, slow);
+
+        if (ground)
+            SpeedMultiplier = slowest;
+        else
+            AirMultiplier = slowest;
     }
 
 
@@ -273,7 +300,7 @@ public class PlayerCharacterController : MonoBehaviour
     {
         Vector3 print = MoveVelocity;
         MoveVelocity = Vector3.ProjectOnPlane(MoveVelocity, other.ClosestPoint(transform.position));
-        Debug.Log(print + ", " + MoveVelocity);
+        //Debug.Log(print + ", " + MoveVelocity);
     }
 
 

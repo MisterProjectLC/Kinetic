@@ -17,18 +17,14 @@ public class Minigun : MonoBehaviour
     }
 
 
-    private void Update()
+    public void Execute(Ability.Input input)
     {
-        player.SetSlowdown(1f - slowdown);
-        if (slowdown > 0f)
-            slowdown -= Time.deltaTime;
-    }
-
-
-    public void Execute()
-    {
-        if (slowdown < MaxSlowdown)
-            slowdown += 0.2f;
-        weaponAbility.Execute();
+        if (input == Ability.Input.ButtonDown)
+            if (slowdown < MaxSlowdown)
+                slowdown += 0.1f;
+            else
+                slowdown = 1f;
+        player.SetSlowdown(slowdown, "minigun");
+        //weaponAbility.Execute(Ability.Input.ButtonDown);
     }
 }

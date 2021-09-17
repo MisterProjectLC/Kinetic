@@ -9,7 +9,7 @@ public class Dash : Ability
     public float DashDuration = 0.25f;
 
     PlayerCharacterController player;
-    PlayerInputHandler input;
+    PlayerInputHandler inputHandler;
     Attack attack;
 
     bool dashing = false;
@@ -18,17 +18,17 @@ public class Dash : Ability
     {
         player = GetComponentInParent<PlayerCharacterController>();
         player.OnTrigger += OnTrigger;
-        input = GetComponentInParent<PlayerInputHandler>();
+        inputHandler = GetComponentInParent<PlayerInputHandler>();
         attack = GetComponent<Attack>();
         attack.OnKill += ResetCooldown;
     }
 
-    public override void Execute()
+    public override void Execute(Input input)
     {
         dashing = true;
         player.gameObject.layer = LayerMask.NameToLayer("Shifted");
         player.MoveControlEnabled = false;
-        player.MoveVelocity = DashSpeed * player.PlayerCamera.transform.TransformVector(input.GetMoveInput());
+        player.MoveVelocity = DashSpeed * player.PlayerCamera.transform.TransformVector(inputHandler.GetMoveInput());
         StartCoroutine("EndDash");
     }
 

@@ -21,7 +21,7 @@ public class WeaponAbility : Ability
     }
 
 
-    public override void Execute()
+    public override void Execute(Input input)
     {
         player.MoveVelocity -= BackwardsForce * player.PlayerCamera.transform.forward;
         WeaponRef.Fire();

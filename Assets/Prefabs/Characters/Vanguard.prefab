@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1056472193603156170
 MonoBehaviour:
@@ -47,6 +47,7 @@ MonoBehaviour:
   DisplayName: Translocate
   Cooldown: 4
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 1
   Range: 100
   TargetLayers:
@@ -195,6 +196,7 @@ MonoBehaviour:
   DisplayName: 
   Cooldown: 2
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 0
   DashSpeed: 50
   DashDuration: 0.25
@@ -243,6 +245,75 @@ Transform:
   m_Father: {fileID: 958540071565868630}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1875275233879253910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4763104984783528517}
+  - component: {fileID: 2862948054975451143}
+  - component: {fileID: 6106698216625119604}
+  m_Layer: 12
+  m_Name: Charge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4763104984783528517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875275233879253910}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4021532750877547998}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2862948054975451143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875275233879253910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b67c2eeefab334194801a17e79d04f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayName: Charge
+  Cooldown: 5
+  HoldAbility: 1
+  ReleaseAbility: 1
+  EmitSoundEffectOnExecute: 0
+  MinimumForce: 10
+  MaximumForce: 100
+  MaxCharge: 2.25
+  MaxGroundSlowdown: 0.25
+  MaxAirSlowdown: 0.25
+--- !u!114 &6106698216625119604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875275233879253910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 4
+  Knockback: 20
+  Effects: []
 --- !u!1 &4101398689657722995
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +343,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5917140286660060292
 MonoBehaviour:
@@ -389,7 +460,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5273812271440728085
 MonoBehaviour:
@@ -406,6 +477,7 @@ MonoBehaviour:
   DisplayName: Shell Bombs
   Cooldown: 8
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 0
   ShellBomb: {fileID: 5531395347504132974, guid: 0dfe44ab5c4c87a4ea669bf65a283434,
     type: 3}
@@ -426,7 +498,7 @@ GameObject:
   - component: {fileID: 6279062331169241278}
   - component: {fileID: 3645659837728276841}
   m_Layer: 0
-  m_Name: Frontal Shield Ability
+  m_Name: Frontal Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -444,7 +516,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3645659837728276841
 MonoBehaviour:
@@ -461,6 +533,7 @@ MonoBehaviour:
   DisplayName: Frontal Shield
   Cooldown: 10
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 0
   ParentAbility: {fileID: 0}
   shield: {fileID: 6357191845059044570}
@@ -1104,17 +1177,9 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 0}
   m_IsSelectable: 1
-  m_SelectedFaces: 0d000000
-  m_SelectedEdges:
-  - a: 60
-    b: 61
-  - a: 62
-    b: 60
-  - a: 61
-    b: 63
-  - a: 63
-    b: 62
-  m_SelectedVertices: 3c0000003d0000003e0000003f000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!23 &3292636054676373735
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1235,7 +1300,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &262964791305891837
 MonoBehaviour:
@@ -1252,6 +1317,7 @@ MonoBehaviour:
   DisplayName: Detonate
   Cooldown: 0.05
   HoldAbility: 1
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 0
   ParentAbility: {fileID: 0}
 --- !u!82 &4005569321094570978
@@ -1365,6 +1431,7 @@ MonoBehaviour:
   DisplayName: 
   Cooldown: 5
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 1
   WeaponRef: {fileID: 1255210564078578016}
 --- !u!114 &2509313351557390932
@@ -1382,6 +1449,7 @@ MonoBehaviour:
   DisplayName: 
   Cooldown: 5
   HoldAbility: 0
+  ReleaseAbility: 1
   EmitSoundEffectOnExecute: 0
   WeaponRef: {fileID: 1909303568159808551}
 --- !u!1 &8110950932023223649
@@ -1481,6 +1549,7 @@ Transform:
   m_Children:
   - {fileID: 958540071565868630}
   - {fileID: 53945362300564579}
+  - {fileID: 4763104984783528517}
   - {fileID: 7478956445705428809}
   - {fileID: 1751639598095803834}
   - {fileID: 5018184844825464172}
@@ -1612,6 +1681,12 @@ MonoBehaviour:
     secondaryAbility: Frontal Shield
   Options:
   - ability: {fileID: 6554826155812535130}
+    isPassive: 1
+    secondaryAbility: 
+  - ability: {fileID: 5349026757627506031}
+    isPassive: 1
+    secondaryAbility: 
+  - ability: {fileID: 1875275233879253910}
     isPassive: 0
     secondaryAbility: 
   AbilitiesEnabled: 1

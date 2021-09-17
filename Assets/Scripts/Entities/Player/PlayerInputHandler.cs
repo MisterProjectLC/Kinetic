@@ -115,6 +115,12 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
+    public bool GetAbilityUp(int number)
+    {
+        return Input.GetButtonUp(Ability + number.ToString());
+    }
+
+
     public int GetSelectLoadoutInput()
     {
         if (inputEnabled && !Pause.Paused)

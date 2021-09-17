@@ -18,7 +18,7 @@ public class Translocate : Ability
     }
 
 
-    public override void Execute()
+    public override void Execute(Input input)
     {
         // Send Ray and get Info
         Ray ray = new Ray(player.PlayerCamera.transform.position, player.PlayerCamera.transform.forward);

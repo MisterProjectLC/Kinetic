@@ -84,8 +84,15 @@ public class LoadoutManager : MonoBehaviour
             return;
 
         for (int i = 0; i < GetCurrentLoadout().Length; i++)
-            if (GetCurrentLoadout()[i] && 
-                (m_InputHandler.GetAbilityDown(i + 1) || (m_InputHandler.GetAbility(i + 1) && GetCurrentLoadout()[i].HoldAbility)))
+        {
+            if (!GetCurrentLoadout()[i])
+                continue;
+
+            bool down = m_InputHandler.GetAbilityDown(i + 1);
+            bool hold = (m_InputHandler.GetAbility(i + 1) && GetCurrentLoadout()[i].HoldAbility);
+            bool up = (m_InputHandler.GetAbilityUp(i + 1) && GetCurrentLoadout()[i].ReleaseAbility);
+
+            if (down || hold || up)
             {
                 if (AnimStage != AnimationStage.DeviceReady)
                     return;
@@ -95,8 +102,9 @@ public class LoadoutManager : MonoBehaviour
                     SwitchDevice(i);
 
                 // Activate
-                GetCurrentLoadout()[i].Activate();
+                GetCurrentLoadout()[i].Activate(down || hold ? Ability.Input.ButtonDown : Ability.Input.ButtonUp);
             }
+        }
     }
 
 

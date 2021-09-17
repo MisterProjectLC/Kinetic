@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Detonate : SecondaryAbility
 {
-    public override void Execute()
+    public override void Execute(Input input)
     {
         while (((WeaponAbility)ParentAbility).WeaponRef.ActiveProjectiles.Count > 0)
         {

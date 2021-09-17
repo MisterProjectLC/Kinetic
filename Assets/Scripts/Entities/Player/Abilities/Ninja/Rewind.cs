@@ -49,7 +49,7 @@ public class Rewind : Ability
         }
     }
 
-    public override void Execute()
+    public override void Execute(Input input)
     {
         StartCoroutine(ExecuteRewind());
     }

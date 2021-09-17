@@ -484,6 +484,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 94610522}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &186842326 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7838017393941009792, guid: f98c177337679c440a7b062a5b94b329,
+    type: 3}
+  m_PrefabInstance: {fileID: 1928743331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701dbbd430e1007459b3b9bddcaed722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &198505099 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5935564171822933945, guid: 8c84573c6f3ef0f48b35407f5cd2f08d,
@@ -1961,7 +1973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5510f8ec65646484597c80c971ff06e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerSerialized: {fileID: 1775494390}
+  PlayerSerialized: {fileID: 186842326}
 --- !u!114 &964505561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3807,12 +3819,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1564646709}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1585036931 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5349026757627506031, guid: f98c177337679c440a7b062a5b94b329,
-    type: 3}
-  m_PrefabInstance: {fileID: 1928743331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1615352613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4002,18 +4008,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1766908295}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1775494390 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7838017393941009792, guid: 8c84573c6f3ef0f48b35407f5cd2f08d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1898038065}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 701dbbd430e1007459b3b9bddcaed722, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1778760415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4243,7 +4237,7 @@ PrefabInstance:
     - target: {fileID: 9089919347116189794, guid: 8c84573c6f3ef0f48b35407f5cd2f08d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c84573c6f3ef0f48b35407f5cd2f08d, type: 3}
@@ -5351,6 +5345,11 @@ PrefabInstance:
       propertyPath: MaxSlowdown
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 5349026757627506031, guid: f98c177337679c440a7b062a5b94b329,
+        type: 3}
+      propertyPath: m_Name
+      value: Frontal Shield
+      objectReference: {fileID: 0}
     - target: {fileID: 6357191845059044570, guid: f98c177337679c440a7b062a5b94b329,
         type: 3}
       propertyPath: m_IsActive
@@ -5388,33 +5387,8 @@ PrefabInstance:
       objectReference: {fileID: 1422048459}
     - target: {fileID: 8479089956554939356, guid: f98c177337679c440a7b062a5b94b329,
         type: 3}
-      propertyPath: Options.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8479089956554939356, guid: f98c177337679c440a7b062a5b94b329,
-        type: 3}
       propertyPath: InitialOptions.Array.size
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8479089956554939356, guid: f98c177337679c440a7b062a5b94b329,
-        type: 3}
-      propertyPath: Options.Array.data[0].ability
-      value: 
-      objectReference: {fileID: 1928743332}
-    - target: {fileID: 8479089956554939356, guid: f98c177337679c440a7b062a5b94b329,
-        type: 3}
-      propertyPath: Options.Array.data[1].ability
-      value: 
-      objectReference: {fileID: 1585036931}
-    - target: {fileID: 8479089956554939356, guid: f98c177337679c440a7b062a5b94b329,
-        type: 3}
-      propertyPath: InitialOptions.Array.data[0].isHeavy
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8479089956554939356, guid: f98c177337679c440a7b062a5b94b329,
-        type: 3}
-      propertyPath: InitialOptions.Array.data[0].secondaryAbility
-      value: Detonate
       objectReference: {fileID: 0}
     - target: {fileID: 8494101619295909639, guid: f98c177337679c440a7b062a5b94b329,
         type: 3}
@@ -5954,16 +5928,10 @@ PrefabInstance:
     - target: {fileID: 9089919347116189794, guid: f98c177337679c440a7b062a5b94b329,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f98c177337679c440a7b062a5b94b329, type: 3}
---- !u!1 &1928743332 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6554826155812535130, guid: f98c177337679c440a7b062a5b94b329,
-    type: 3}
-  m_PrefabInstance: {fileID: 1928743331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1988666755
 GameObject:
   m_ObjectHideFlags: 0
