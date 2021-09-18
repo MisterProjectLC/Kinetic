@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     [Header("Attributes")]
     public bool Movable = true;
     public float HoverHeight = 1f;
-    float fallSpeed = 0f;
+    Vector3 moveVelocity = Vector3.zero;
 
     public float Stunned = 0f;
 
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     private float updateCooldown = 0.25f;
 
     bool airborne = false;
-    private Vector3 knockbackForce;
+    //private Vector3 knockbackForce;
     float navClock = 0f;
     float[] weaponClocks;
     private NavMeshAgent pathAgent;
@@ -48,8 +48,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FeelKnockback();
         FeelGravity();
+        FeelKnockback();
 
         if (Stunned <= 0f)
         {
@@ -95,19 +95,50 @@ public class Enemy : MonoBehaviour
     }
 
 
+    private void FeelGravity()
+    {
+        if (!Movable)
+            return;
+        RaycastHit hit = RayToGround();
+        airborne = (hit.collider == null);
+
+        // Air
+        if (airborne)
+            moveVelocity += Vector3.down * Constants.Gravity * Time.deltaTime;
+
+        // Ground
+        else
+        {
+            // Parar no chão
+            if (moveVelocity.y < 0f)
+                moveVelocity = Vector3.ProjectOnPlane(moveVelocity, Vector3.up);
+
+            if (pathAgent)
+            {
+                if (!pathAgent.enabled)
+                    pathAgent.enabled = true;
+
+                // Slowdown
+                if (!pathAgent.updatePosition)
+                    moveVelocity = Vector3.MoveTowards(moveVelocity, Vector3.zero, Mathf.Max(1f, moveVelocity.magnitude) * Time.deltaTime);
+            }
+        }
+    }
+
+
     private void FeelKnockback()
     {
         if (pathAgent && !pathAgent.updatePosition)
         {
             // Collision
-            Ray ray = new Ray(transform.position, knockbackForce);
-            Physics.Raycast(ray, out RaycastHit hitInfo, 0.5f, GroundLayers, QueryTriggerInteraction.Ignore);
+            Ray ray = new Ray(transform.position, moveVelocity);
+            Physics.Raycast(ray, out RaycastHit hitInfo, 1f, GroundLayers, QueryTriggerInteraction.Ignore);
             if (hitInfo.collider)
-                knockbackForce = Vector3.zero;
+                moveVelocity = Vector3.zero;
 
             // Movement
-            transform.position += knockbackForce * Time.deltaTime;
-            if (knockbackForce == Vector3.zero)
+            transform.position += moveVelocity * Time.deltaTime;
+            if (moveVelocity == Vector3.zero)
             {
                 pathAgent.updatePosition = true;
                 pathAgent.Warp(transform.position);
@@ -116,47 +147,11 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void FeelGravity()
-    {
-        if (!Movable || !airborne)
-            return;
-
-        // Air
-        RaycastHit hit = RayToGround();
-        if (hit.collider == null)
-        {
-            fallSpeed += Constants.Gravity * Time.deltaTime;
-            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
-            Debug.Log("Flying: " + gameObject.name);
-        }
-
-        // Ground
-        else
-        {
-            airborne = false;
-            fallSpeed = 0f;
-            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
-            if (pathAgent)
-            {
-                if (!pathAgent.enabled)
-                    pathAgent.enabled = true;
-
-                if (!pathAgent.updatePosition)
-                {
-                    if (knockbackForce.y != 0f)
-                        knockbackForce = new Vector3(knockbackForce.x, 0f, knockbackForce.z);
-                    knockbackForce = Vector3.MoveTowards(knockbackForce, Vector3.zero, Mathf.Max(1f, knockbackForce.magnitude) * Time.deltaTime);
-                }
-            }
-        }
-    }
-
-
     public RaycastHit RayToGround()
     {
         Ray ray;
-        if (!pathAgent)
-            ray = new Ray(transform.position, Vector3.down);
+        if (!pathAgent || !pathAgent.updatePosition)
+            ray = new Ray(transform.position + Vector3.up, Vector3.down);
         else
             ray = new Ray(pathAgent.nextPosition + Vector3.up, Vector3.down);
         Physics.Raycast(ray, out RaycastHit hitInfo, HoverHeight + 1f, GroundLayers, QueryTriggerInteraction.Ignore);
@@ -176,7 +171,14 @@ public class Enemy : MonoBehaviour
         if (!Movable)
             return;
 
-        knockbackForce = knockback;
+        moveVelocity += (knockback / 2);
+
+        // Parar no chão
+        if (moveVelocity.y < 0f)
+            moveVelocity = Vector3.ProjectOnPlane(moveVelocity, Vector3.up);
+
+        Debug.Log(moveVelocity + ", " + transform.position + ", " + (RayToGround().collider == null));
+
         if (pathAgent)
             pathAgent.updatePosition = false;
     }
@@ -192,7 +194,11 @@ public class Enemy : MonoBehaviour
     {
         if (GetComponent<NavMeshAgent>())
         {
-            Ray ray = new Ray(GetComponent<NavMeshAgent>().nextPosition, Vector3.down);
+            Ray ray;
+            if (!pathAgent)
+                ray = new Ray(transform.position, Vector3.down);
+            else
+                ray = new Ray(pathAgent.nextPosition + Vector3.up, Vector3.down);
             //Ray ray = new Ray(Model.transform.position, Vector3.down);
             Gizmos.DrawRay(ray);
         }

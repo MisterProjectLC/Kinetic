@@ -143,6 +143,7 @@ MonoBehaviour:
   DisplayName: Translocate
   Cooldown: 4
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 1
   Range: 100
   TargetLayers:
@@ -291,6 +292,7 @@ MonoBehaviour:
   DisplayName: Dash
   Cooldown: 2
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 0
   DashSpeed: 50
   DashDuration: 0.25
@@ -354,6 +356,7 @@ MonoBehaviour:
   DisplayName: Assault Rifle
   Cooldown: 5
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 0
   WeaponRef: {fileID: 8043274007985553447}
 --- !u!1 &3284626973075478747
@@ -466,6 +469,7 @@ MonoBehaviour:
   DisplayName: Stun Wave
   Cooldown: 5
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 1
   WeaponRef: {fileID: 6695596221482437738}
 --- !u!114 &1837573154940863638
@@ -739,6 +743,7 @@ MonoBehaviour:
   DisplayName: Shell Bombs
   Cooldown: 8
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 0
   ShellBomb: {fileID: 5531395347504132974, guid: 0dfe44ab5c4c87a4ea669bf65a283434,
     type: 3}
@@ -850,7 +855,7 @@ GameObject:
   - component: {fileID: 1280739795873682838}
   - component: {fileID: 3914573725090297544}
   m_Layer: 12
-  m_Name: Extra Jump (1)
+  m_Name: Extra Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -993,6 +998,7 @@ MonoBehaviour:
   DisplayName: 
   Cooldown: 5
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 1
   WeaponRef: {fileID: 1255210564078578016}
 --- !u!1 &7349922464857806567
@@ -1043,6 +1049,7 @@ MonoBehaviour:
   DisplayName: Grappling Hook
   Cooldown: 0.5
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 0
   hookPrefab: {fileID: 5282472407548579809, guid: f4f3e33d5a1d13d4ba3e63e00c50e24f,
     type: 3}
@@ -1109,6 +1116,7 @@ MonoBehaviour:
   DisplayName: Rewind
   Cooldown: 5
   HoldAbility: 0
+  ReleaseAbility: 0
   EmitSoundEffectOnExecute: 0
   SecondsBack: 5
 --- !u!1 &8110950932023223649
@@ -1506,7 +1514,7 @@ MonoBehaviour:
   - ability: {fileID: 8791866288957817034}
     isPassive: 1
     secondaryAbility: 
-  - ability: {fileID: 8791866288957817034}
+  - ability: {fileID: 6358242602411863829}
     isPassive: 1
     secondaryAbility: 
   AbilitiesEnabled: 1

@@ -28,10 +28,11 @@ public class ExtraJump : MonoBehaviour
 
     public void Execute()
     {
+        if (!walljump)
+            walljump = playerController.gameObject.GetComponentInChildren<Walljump>();
+
         if (walljump && walljump.OnWallAir())
-        {
             jumpAvailable = true;
-        }
 
         else if (takenCareOf)
             takenCareOf = false;
