@@ -16,8 +16,12 @@ public class Enemy : MonoBehaviour
     [Header("Attributes")]
     public bool Movable = true;
     public float HoverHeight = 1f;
+    public float GravityMultiplier = 1f;
+    public float AirDesacceleration = 0f;
+
     Vector3 moveVelocity = Vector3.zero;
 
+    [HideInInspector]
     public float Stunned = 0f;
 
     [Tooltip("How much time it takes to update path")]
@@ -38,6 +42,7 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < weaponClocks.Length; i++)
             weaponClocks[i] = 0f;
 
+        navClock = updateCooldown;
         pathAgent = GetComponent<NavMeshAgent>();
         if (pathAgent) {
             pathAgent.updateRotation = false;
@@ -104,12 +109,12 @@ public class Enemy : MonoBehaviour
 
         // Air
         if (airborne)
-            moveVelocity += Vector3.down * Constants.Gravity * Time.deltaTime;
+            moveVelocity += Vector3.down * GravityMultiplier * Constants.Gravity * Time.deltaTime;
 
         // Ground
         else
         {
-            // Parar no chão
+            // Stop on the ground
             if (moveVelocity.y < 0f)
                 moveVelocity = Vector3.ProjectOnPlane(moveVelocity, Vector3.up);
 
@@ -128,6 +133,14 @@ public class Enemy : MonoBehaviour
 
     private void FeelKnockback()
     {
+        // Automatic desacceleration (for airborne enemies)
+        if (AirDesacceleration > 0 && moveVelocity.magnitude > 0)
+        {
+            moveVelocity -= moveVelocity.normalized * AirDesacceleration * Time.deltaTime;
+            if (moveVelocity.magnitude < 0.5f)
+                moveVelocity = Vector3.zero;
+        }
+
         if (pathAgent && !pathAgent.updatePosition)
         {
             // Collision
@@ -137,12 +150,12 @@ public class Enemy : MonoBehaviour
                 moveVelocity = Vector3.zero;
 
             // Movement
-            transform.position += moveVelocity * Time.deltaTime;
             if (moveVelocity == Vector3.zero)
             {
                 pathAgent.updatePosition = true;
                 pathAgent.Warp(transform.position);
-            }
+            } else
+                transform.position += moveVelocity * Time.deltaTime;
         }
     }
 
@@ -176,8 +189,6 @@ public class Enemy : MonoBehaviour
         // Parar no chão
         if (moveVelocity.y < 0f)
             moveVelocity = Vector3.ProjectOnPlane(moveVelocity, Vector3.up);
-
-        Debug.Log(moveVelocity + ", " + transform.position + ", " + (RayToGround().collider == null));
 
         if (pathAgent)
             pathAgent.updatePosition = false;

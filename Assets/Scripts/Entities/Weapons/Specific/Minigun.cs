@@ -20,10 +20,12 @@ public class Minigun : MonoBehaviour
     public void Execute(Ability.Input input)
     {
         if (input == Ability.Input.ButtonDown)
+        {
             if (slowdown < MaxSlowdown)
                 slowdown += 0.1f;
-            else
-                slowdown = 1f;
+        }
+        else
+            slowdown = 1f;
         player.SetSlowdown(slowdown, "minigun");
         //weaponAbility.Execute(Ability.Input.ButtonDown);
     }

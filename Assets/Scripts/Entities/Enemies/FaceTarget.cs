@@ -17,6 +17,7 @@ public class FaceTarget : MonoBehaviour
 
     private Quaternion currentPosition;
     private Vector3 newTargetPosition;
+    PlayerCharacterController player;
     private float clock = 0f;
 
     Enemy enemy;
@@ -24,7 +25,8 @@ public class FaceTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
+        player = ActorsManager.Player.GetComponent<PlayerCharacterController>();
+        newTargetPosition = player.PlayerCamera.transform.position;
         enemy = GetComponent<Enemy>();
         enemy.OnActiveUpdate += OnActiveUpdate;
     }
@@ -42,7 +44,7 @@ public class FaceTarget : MonoBehaviour
         if (clock > updateCooldown)
         {
             clock = 0f;
-            newTargetPosition = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position;
+            newTargetPosition = player.PlayerCamera.transform.position;
             if (!turnVertical)
                 newTargetPosition = new Vector3(newTargetPosition.x, enemy.Model.transform.position.y, newTargetPosition.z);
         }

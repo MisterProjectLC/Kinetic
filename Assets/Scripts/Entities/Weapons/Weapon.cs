@@ -70,6 +70,8 @@ public class Weapon : MonoBehaviour
                 GameObject instance = ObjectManager.OM.SpawnObjectFromPool(BulletType, Projectile).gameObject;
                 instance.transform.position = Mouth.position;
                 instance.GetComponent<Projectile>().Setup(direction, HitLayers, GetComponentInParent<Actor>().gameObject);
+                if (instance.GetComponent<Attack>() && GetComponent<Attack>() && GetComponent<Attack>().OnKill != null)
+                    instance.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
                 instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;
                 ActiveProjectiles.Add(instance);
 
