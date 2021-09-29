@@ -18,7 +18,7 @@ public abstract class Ability : MonoBehaviour
     public bool ReleaseAbility = false;
 
     [SerializeField]
-    bool EmitSoundEffectOnExecute = false;
+    AudioClip[] SoundEffects;
 
     public UnityAction<Input> OnExecute;
     protected UnityAction OnUpdate;
@@ -42,8 +42,11 @@ public abstract class Ability : MonoBehaviour
         {
             Timer = Cooldown;
             Execute(input);
-            if (EmitSoundEffectOnExecute)
+            if (SoundEffects.Length > 0)
+            {
+                GetComponent<AudioSource>().clip = SoundEffects[Random.Range(0, SoundEffects.Length)];
                 GetComponent<AudioSource>().Play();
+            }
             if (OnExecute != null)
                 OnExecute.Invoke(input);
         }

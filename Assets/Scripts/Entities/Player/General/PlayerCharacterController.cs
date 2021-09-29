@@ -207,6 +207,7 @@ public class PlayerCharacterController : MonoBehaviour
 
     public void Jump()
     {
+        GetComponent<AudioSource>().Play();
         MoveVelocity = Vector3.ClampMagnitude(MoveVelocity, AirborneMaxStrafeSpeed);
         MoveVelocity = new Vector3(MoveVelocity.x, JumpForce, MoveVelocity.z);
         m_LastTimeJumped = Time.time;
