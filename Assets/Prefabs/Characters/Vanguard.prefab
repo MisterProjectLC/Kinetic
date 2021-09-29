@@ -213,8 +213,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 2
-  Knockback: 0
-  Effects: []
 --- !u!1 &1315662451312288977
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +254,7 @@ GameObject:
   - component: {fileID: 4763104984783528517}
   - component: {fileID: 2862948054975451143}
   - component: {fileID: 6106698216625119604}
+  - component: {fileID: 5777217409242534307}
   m_Layer: 12
   m_Name: Charge
   m_TagString: Untagged
@@ -312,7 +311,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 4
-  Knockback: 20
+--- !u!114 &5777217409242534307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875275233879253910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Knockback: 100
   Effects: []
 --- !u!1 &4101398689657722995
 GameObject:

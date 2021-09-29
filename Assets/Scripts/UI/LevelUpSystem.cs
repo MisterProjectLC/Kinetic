@@ -3,15 +3,6 @@ using UnityEngine;
 
 public class LevelUpSystem : MonoBehaviour
 {
-    [System.Serializable]
-    public struct Option
-    {
-        public GameObject ability;
-        public bool isPassive;
-        [Tooltip("Leave empty if none")]
-        public string secondaryAbility;
-    }
-
     [SerializeField]
     List<RectTransform> initialSlots;
 
@@ -34,7 +25,7 @@ public class LevelUpSystem : MonoBehaviour
         siblingBaseCount = transform.GetChildCount();
 
         int i = 0;
-        foreach (Option option in loadout.InitialOptions)
+        foreach (LoadoutManager.Option option in loadout.InitialOptions)
         {
             LoadoutOption loadoutOption = GenerateOptionInstance(option).GetComponent<LoadoutOption>();
             DropSlot dropSlot = initialSlots[i].GetComponent<DropSlot>();
@@ -44,7 +35,7 @@ public class LevelUpSystem : MonoBehaviour
                 i++;
         }
 
-        foreach (Option option in loadout.Options)
+        foreach (LoadoutManager.Option option in loadout.Options)
         {
             GameObject GO = GenerateOptionInstance(option);
             GO.SetActive(false);
@@ -53,7 +44,7 @@ public class LevelUpSystem : MonoBehaviour
         }
     }
 
-    GameObject GenerateOptionInstance(Option option)
+    GameObject GenerateOptionInstance(LoadoutManager.Option option)
     {
         GameObject newInstance = null;
         if (option.secondaryAbility.Length <= 0)

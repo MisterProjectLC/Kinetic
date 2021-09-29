@@ -90,7 +90,7 @@ public class Enemy : MonoBehaviour
         if (navClock > updateCooldown)
         {
             navClock = 0f;
-            Transform cameraTransform = ActorsManager.Player.GetComponent<PlayerCharacterController>().PlayerCamera.transform;
+            Transform cameraTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
             if (pathAgent.isOnNavMesh)
             {
                 pathAgent.isStopped = false;

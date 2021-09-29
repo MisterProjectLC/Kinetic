@@ -11,12 +11,21 @@ public class LoadoutManager : MonoBehaviour
         public Ability[] abilities;
     }
 
+    [System.Serializable]
+    public struct Option
+    {
+        public GameObject ability;
+        public bool isPassive;
+        [Tooltip("Leave empty if none")]
+        public string secondaryAbility;
+    }
+
     [Header("General")]
     [Tooltip("List of currently equipped loadouts")]
     [HideInInspector]
     public Loadout[] Loadouts;
-    public List<LevelUpSystem.Option> InitialOptions;
-    public List<LevelUpSystem.Option> Options;
+    public List<Option> InitialOptions;
+    public List<Option> Options;
 
     [HideInInspector]
     public bool AbilitiesEnabled = true;

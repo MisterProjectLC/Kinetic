@@ -14674,6 +14674,7 @@ GameObject:
   - component: {fileID: 4274277110719107929}
   - component: {fileID: 4796216369014699922}
   - component: {fileID: 7171234845455418299}
+  - component: {fileID: 2912308150987345688}
   m_Layer: 14
   m_Name: RocketLauncherExplosion
   m_TagString: Untagged
@@ -14742,8 +14743,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 6
-  Knockback: 100
-  Effects: []
 --- !u!114 &4796216369014699922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14853,3 +14852,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2912308150987345688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396919937828005916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Knockback: 100
+  Effects: []

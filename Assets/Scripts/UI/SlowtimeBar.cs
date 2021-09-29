@@ -16,7 +16,6 @@ public class SlowtimeBar : BarUI
 
     void UpdateSlowtimebar()
     {
-        Debug.Log(slowtime.JuiceLeft + " " + slowtime.JuiceMax);
         UpdateBar(slowtime.JuiceLeft, slowtime.JuiceMax);
     }
 

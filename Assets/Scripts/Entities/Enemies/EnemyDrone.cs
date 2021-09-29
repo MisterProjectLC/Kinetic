@@ -5,14 +5,14 @@ using UnityEngine.AI;
 
 public class EnemyDrone : MonoBehaviour
 {
-    PlayerCharacterController player;
+    Transform playerPosition;
     Enemy enemy;
     NavMeshAgent meshAgent;
     const float leeway = 1f;
 
     private void Start()
     {
-        player = ActorsManager.Player.GetComponent<PlayerCharacterController>();
+        playerPosition = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
         enemy = GetComponent<Enemy>();
         meshAgent = GetComponent<NavMeshAgent>();
         enemy.OnActiveUpdate += OnActiveUpdate;
@@ -24,7 +24,7 @@ public class EnemyDrone : MonoBehaviour
             enemy.Model.transform.localPosition = Vector3.zero;
         else
             enemy.Model.transform.position = Vector3.Lerp(enemy.Model.transform.position,
-                new Vector3(enemy.Model.transform.position.x, player.PlayerCamera.transform.position.y, enemy.Model.transform.position.z),
+                new Vector3(enemy.Model.transform.position.x, playerPosition.position.y, enemy.Model.transform.position.z),
                 0.4f * Time.deltaTime);
 
         DetectNewGround();
