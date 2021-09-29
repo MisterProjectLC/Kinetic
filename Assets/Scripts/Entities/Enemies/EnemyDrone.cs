@@ -5,50 +5,54 @@ using UnityEngine.AI;
 
 public class EnemyDrone : MonoBehaviour
 {
-    Transform playerPosition;
+    Transform playerTransform;
     Enemy enemy;
-    NavMeshAgent meshAgent;
     const float leeway = 1f;
+
+    [SerializeField]
+    float MotorSpeed = 1f;
+
+    [SerializeField]
+    float MinimumDistance = 3f;
 
     private void Start()
     {
-        playerPosition = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
+        playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
         enemy = GetComponent<Enemy>();
-        meshAgent = GetComponent<NavMeshAgent>();
         enemy.OnActiveUpdate += OnActiveUpdate;
     }
 
     void OnActiveUpdate()
     {
-        if (enemy.Model.transform.localPosition.y < 0f)
-            enemy.Model.transform.localPosition = Vector3.zero;
-        else
-            enemy.Model.transform.position = Vector3.Lerp(enemy.Model.transform.position,
-                new Vector3(enemy.Model.transform.position.x, playerPosition.position.y, enemy.Model.transform.position.z),
-                0.4f * Time.deltaTime);
+        Vector3 playerDistance = playerTransform.position - enemy.Model.transform.position;
 
-        DetectNewGround();
+        // Check if inside field of view
+        if (Vector3.Dot(enemy.Model.transform.forward, playerDistance) < 0f)
+            return;
+
+
+        // Check if view is obstructed
+        Ray ray = new Ray(enemy.Model.transform.position, playerTransform.position - enemy.Model.transform.position);
+        Physics.Raycast(ray, out RaycastHit hit, 100f, enemy.GroundLayers, QueryTriggerInteraction.Ignore);
+        if (hit.collider && (hit.distance < playerDistance.magnitude))
+            return;
+
+        playerDistance = Vector3.ProjectOnPlane(playerDistance, Vector3.up);
+        // X movement
+        if (playerDistance.magnitude > MinimumDistance)
+            transform.position += playerDistance.normalized * MotorSpeed * Time.deltaTime;
+
+        // Y movement
+        if (!DetectGroundOverPlayer())
+            transform.position = Vector3.Lerp(transform.position,
+                new Vector3(transform.position.x, playerTransform.position.y, transform.position.z), 0.4f * Time.deltaTime);
     }
 
-    void DetectNewGround()
+    bool DetectGroundOverPlayer()
     {
-        
-        Ray ray = new Ray(enemy.Model.transform.position, Vector3.down);
-        Physics.Raycast(ray, out RaycastHit hit, enemy.Model.transform.localPosition.y, enemy.GroundLayers, QueryTriggerInteraction.Ignore);
-
-        if (Mathf.Abs(hit.point.y - enemy.transform.position.y) > leeway)
-        {
-            Debug.Log("Warping");
-            Vector3 oldPosition = new Vector3(enemy.Model.transform.position.x, enemy.Model.transform.position.y, enemy.Model.transform.position.z);
-            meshAgent.Warp(hit.point);
-            enemy.Model.transform.position = oldPosition;
-        }
-        UpdateHeight();
+        Ray ray = new Ray(transform.position, Vector3.down);
+        Physics.Raycast(ray, out RaycastHit hit, transform.position.y, enemy.GroundLayers, QueryTriggerInteraction.Ignore);
+        return hit.point.y > playerTransform.position.y;
     }
 
-    void UpdateHeight()
-    {
-        enemy.HoverHeight = enemy.Model.transform.position.y;
-        //meshAgent.height = enemy.HoverHeight + 1;
-    }
 }

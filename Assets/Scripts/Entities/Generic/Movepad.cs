@@ -74,6 +74,6 @@ public class Movepad : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawCube(meshRenderer.bounds.center + detectPosOffset, detectSize);
+        //Gizmos.DrawCube(meshRenderer.bounds.center + detectPosOffset, detectSize);
     }
 }

@@ -345,6 +345,8 @@ MonoBehaviour:
     m_Bits: 512
   Movable: 1
   HoverHeight: 1
+  GravityMultiplier: 1
+  AirDesacceleration: 0
   Stunned: 0
   updateCooldown: 0.25
 --- !u!114 &260070860282569955
@@ -458,7 +460,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ff54414f99ef9094f8c465c29f67e701, type: 2}
+  - {fileID: 2100000, guid: 1e7c3fbc694d95e4e89b573d3a8dd5d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

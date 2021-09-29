@@ -3,7 +3,10 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
-{  
+{
+    [SerializeField]
+    bool debug = false;
+
     [Header("References")]
     [SerializeField]
     Weapon[] weapons;
@@ -86,6 +89,9 @@ public class Enemy : MonoBehaviour
 
     private void ManageNavigation()
     {
+        if (!pathAgent)
+            return;
+
         navClock += Time.deltaTime;
         if (navClock > updateCooldown)
         {
@@ -141,7 +147,7 @@ public class Enemy : MonoBehaviour
                 moveVelocity = Vector3.zero;
         }
 
-        if (pathAgent && !pathAgent.updatePosition)
+        if (!pathAgent || !pathAgent.updatePosition)
         {
             // Collision
             Ray ray = new Ray(transform.position, moveVelocity);
@@ -152,8 +158,11 @@ public class Enemy : MonoBehaviour
             // Movement
             if (moveVelocity == Vector3.zero)
             {
-                pathAgent.updatePosition = true;
-                pathAgent.Warp(transform.position);
+                if (pathAgent)
+                {
+                    pathAgent.updatePosition = true;
+                    pathAgent.Warp(transform.position);
+                }
             } else
                 transform.position += moveVelocity * Time.deltaTime;
         }

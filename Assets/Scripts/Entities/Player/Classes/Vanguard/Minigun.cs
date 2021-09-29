@@ -21,8 +21,8 @@ public class Minigun : MonoBehaviour
     {
         if (input == Ability.Input.ButtonDown)
         {
-            if (slowdown < MaxSlowdown)
-                slowdown += 0.1f;
+            if (slowdown > MaxSlowdown)
+                slowdown -= 0.1f;
         }
         else
             slowdown = 1f;

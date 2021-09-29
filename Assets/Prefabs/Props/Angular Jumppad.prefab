@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 2620657794665027557}
-  moveDirection: {x: 0, y: 30, z: -30}
   detectLayers:
     serializedVersion: 2
     m_Bits: 4096
+  detectSize: {x: 1, y: 1, z: 2}
+  detectPosOffset: {x: 0, y: 0, z: 0}
+  moveDirection: {x: 0, y: 30, z: -30}
   isJump: 1
 --- !u!1 &2517669965050839375
 GameObject:
@@ -320,7 +322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 08e116c8a52958948a2c46af05247ad4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -634,7 +636,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ff54414f99ef9094f8c465c29f67e701, type: 2}
+  - {fileID: 2100000, guid: 1e7c3fbc694d95e4e89b573d3a8dd5d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
