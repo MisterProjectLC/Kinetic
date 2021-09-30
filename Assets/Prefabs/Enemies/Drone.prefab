@@ -140,7 +140,6 @@ GameObject:
   - component: {fileID: 260070860282569955}
   - component: {fileID: 4664983332930980881}
   - component: {fileID: 4667401134277738239}
-  - component: {fileID: 3538263600158351026}
   m_Layer: 11
   m_Name: Drone
   m_TagString: Untagged
@@ -176,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 5
-  MaxHealth: 5
+  MaxHealth: 6
 --- !u!114 &8041429361272883083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ac156716879634485f322747ac5fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BrokenModelPrefab: {fileID: 4464070307709363231, guid: b0a2f618ee126294594ac191ec9caf2e,
+    type: 3}
+  OriginalModel: {fileID: 2216102364452169466}
 --- !u!114 &2793335532290284254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +213,7 @@ MonoBehaviour:
   Movable: 1
   HoverHeight: 2
   GravityMultiplier: 0
-  AirDesacceleration: 1
+  AirDesacceleration: 100
   Stunned: 0
   updateCooldown: 0.25
 --- !u!114 &260070860282569955
@@ -239,8 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fdfb782be6743046861eb32409794d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MotorSpeed: 1
-  MinimumDistance: 3
+  MotorSpeed: 10
+  MinimumDistance: 12
 --- !u!114 &4667401134277738239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,28 +258,6 @@ MonoBehaviour:
   updateCooldown: 0.1
   turnSpeed: 100
   turnVertical: 1
---- !u!195 &3538263600158351026
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2428469021606675725}
-  m_Enabled: 0
-  m_AgentTypeID: -1372625422
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 0
-  m_StoppingDistance: 10
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 3
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 2
 --- !u!1 &3801270060314867548
 GameObject:
   m_ObjectHideFlags: 0

@@ -282,8 +282,6 @@ public class PlayerCharacterController : MonoBehaviour
             SpeedMultiplier = slowest;
         else
             AirMultiplier = slowest;
-
-        Debug.Log(groundSlowdowns["minigun"]);
     }
 
 

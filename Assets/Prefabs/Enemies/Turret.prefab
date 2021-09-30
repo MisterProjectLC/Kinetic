@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1088624069320341115}
   - component: {fileID: 4055349453416937278}
   m_Layer: 11
-  m_Name: Cannon 1
+  m_Name: Cannon Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,6 +263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ac156716879634485f322747ac5fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BrokenModelPrefab: {fileID: 2231542979478134141, guid: 712e322d910a4c0428d577fb5e0ad109,
+    type: 3}
+  OriginalModel: {fileID: 0}
 --- !u!1 &4655438382437377873
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +330,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ac156716879634485f322747ac5fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BrokenModelPrefab: {fileID: 2231542979478134141, guid: 644d9da0f51a7574b889d6b791d699aa,
+    type: 3}
+  OriginalModel: {fileID: 7081833998942313528}
 --- !u!114 &5182302744470206594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a9523b8ea0e3b4c988b499dc997b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   weapons:
   - {fileID: 3898002601432345426}
   - {fileID: 6963166280264872520}
@@ -411,7 +418,7 @@ GameObject:
   - component: {fileID: 604446897212688494}
   - component: {fileID: 8263236216365052999}
   m_Layer: 11
-  m_Name: Cannon 2
+  m_Name: Cannon Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -535,6 +542,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ac156716879634485f322747ac5fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BrokenModelPrefab: {fileID: 2231542979478134141, guid: 41de8f354d363e24cb7cee3daf1684c7,
+    type: 3}
+  OriginalModel: {fileID: 0}
 --- !u!1 &7081833998942313528
 GameObject:
   m_ObjectHideFlags: 0

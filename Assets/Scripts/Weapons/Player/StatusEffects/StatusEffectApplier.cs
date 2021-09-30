@@ -28,5 +28,8 @@ public class StatusEffectApplier : MonoBehaviour
 
         else if (target.GetComponent<PlayerCharacterController>())
             target.GetComponent<PlayerCharacterController>().ApplyForce(knockbackForce);
+
+        else if (target.GetComponent<Rigidbody>())
+            target.GetComponent<Rigidbody>().AddForce(knockbackForce, ForceMode.Impulse);
     }
 }

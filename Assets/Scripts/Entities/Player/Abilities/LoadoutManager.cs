@@ -130,7 +130,9 @@ public class LoadoutManager : MonoBehaviour
             AnimStage = AnimationStage.DeviceDown;
             animProgression = DownCooldown;
         }
-        Device.gameObject.SetActive(true);
+
+        if (Device)
+            Device.gameObject.SetActive(true);
 
         OnDeviceSwitch.Invoke(Device);
     }

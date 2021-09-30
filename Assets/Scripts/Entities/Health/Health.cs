@@ -33,16 +33,19 @@ public class Health : MonoBehaviour
 
         if (OnDamage != null)
             OnDamage.Invoke();
-        if (CurrentHealth <= 0 && OnDie != null)
-        {
-            OnDie.Invoke();
-            died = true;
-        }
+
+        if (CurrentHealth <= 0)
+            Kill();
     }
 
     public void Kill()
     {
-        OnDie.Invoke();
+        if (died)
+            return;
+
+        died = true;
+        if (OnDie != null)
+            OnDie.Invoke();
     }
 
     public void Heal(int heal)
