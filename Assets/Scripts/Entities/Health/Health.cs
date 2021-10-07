@@ -7,11 +7,14 @@ public class Health : MonoBehaviour
 {
     [HideInInspector]
     public int CurrentHealth = 5;
+    public int CriticalHealth = 1;
     public int MaxHealth = 5;
     bool died = false;
 
     [HideInInspector]
     public UnityAction OnDamage;
+    [HideInInspector]
+    public UnityAction OnCriticalLevel;
     [HideInInspector]
     public UnityAction OnHeal;
     [HideInInspector]
@@ -33,6 +36,10 @@ public class Health : MonoBehaviour
 
         if (OnDamage != null)
             OnDamage.Invoke();
+
+        if (CurrentHealth <= CriticalHealth)
+            if (OnCriticalLevel != null)
+                OnCriticalLevel.Invoke();
 
         if (CurrentHealth <= 0)
             Kill();
