@@ -1,0 +1,599 @@
+fileFormatVersion: 2
+guid: fe8bb5221257840c2805e380fc94544a
+timeCreated: 1517919751
+licenseType: Store
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Barrell_001
+    100002: Barrier_Border_001
+    100004: Camera
+    100006: Console_001
+    100008: Crate_001
+    100010: Crate_002
+    100012: Crate_003
+    100014: Crate_004
+    100016: Door_Left_001
+    100018: Door_Right_001
+    100020: Doorway_001
+    100022: Doorway_002
+    100024: Floor_001
+    100026: Floor_002
+    100028: Floor_003
+    100030: Floor_004
+    100032: Floor_005
+    100034: Glass_Barrier_001
+    100036: Glass_Barrier_Broken_001
+    100038: Lamp
+    100040: Locker_001
+    100042: //RootNode
+    100044: Panel_001
+    100046: Pod_001
+    100048: Pod_002
+    100050: Pod_Broken_001
+    100052: Roof_Light_001
+    100054: Roof_Light_002
+    100056: Roof_Light_003
+    100058: Screen_001
+    100060: Wall_2_Column
+    100062: Wall_2_Corner_L
+    100064: Wall_2_Corner_T
+    100066: Wall_2_Corner_X
+    100068: Wall_2_Doorway
+    100070: Wall_2_Window
+    100072: Wall_2_Window_002
+    100074: Wall_2_X05
+    100076: Wall_2_X1
+    100078: Wall_2_X2
+    100080: Wall_2_X4
+    100082: Wall_Decoration_001
+    100084: Wall_Decoration_002
+    100086: Wall_Decoration_003
+    100088: Wall_Decoration_004
+    100090: Wall_Decoration_005
+    100092: Wall_HalfGlass_001
+    100094: Wall_HalfGlass_Broken_001
+    100096: WindowFrame_001
+    100098: WindowFrame_002
+    100100: WindowGlass_001
+    100102: WindowGlassBroken_001
+    400000: Barrell_001
+    400002: Barrier_Border_001
+    400004: Camera
+    400006: Console_001
+    400008: Crate_001
+    400010: Crate_002
+    400012: Crate_003
+    400014: Crate_004
+    400016: Door_Left_001
+    400018: Door_Right_001
+    400020: Doorway_001
+    400022: Doorway_002
+    400024: Floor_001
+    400026: Floor_002
+    400028: Floor_003
+    400030: Floor_004
+    400032: Floor_005
+    400034: Glass_Barrier_001
+    400036: Glass_Barrier_Broken_001
+    400038: Lamp
+    400040: Locker_001
+    400042: //RootNode
+    400044: Panel_001
+    400046: Pod_001
+    400048: Pod_002
+    400050: Pod_Broken_001
+    400052: Roof_Light_001
+    400054: Roof_Light_002
+    400056: Roof_Light_003
+    400058: Screen_001
+    400060: Wall_2_Column
+    400062: Wall_2_Corner_L
+    400064: Wall_2_Corner_T
+    400066: Wall_2_Corner_X
+    400068: Wall_2_Doorway
+    400070: Wall_2_Window
+    400072: Wall_2_Window_002
+    400074: Wall_2_X05
+    400076: Wall_2_X1
+    400078: Wall_2_X2
+    400080: Wall_2_X4
+    400082: Wall_Decoration_001
+    400084: Wall_Decoration_002
+    400086: Wall_Decoration_003
+    400088: Wall_Decoration_004
+    400090: Wall_Decoration_005
+    400092: Wall_HalfGlass_001
+    400094: Wall_HalfGlass_Broken_001
+    400096: WindowFrame_001
+    400098: WindowFrame_002
+    400100: WindowGlass_001
+    400102: WindowGlassBroken_001
+    2000000: Camera
+    2100000: Glass_Barrier_001
+    2100002: Wall_001
+    2100004: Wall_002
+    2100006: WindowGlass_001
+    2100008: Doorway_001
+    2100010: WindowFrame_001
+    2100012: Wall_Decoration_001
+    2100014: Pod_001
+    2100016: Pod_002
+    2100018: Crate_004
+    2100020: Crate_005
+    2100022: Crate_003
+    2100024: Barrell_001
+    2100026: Barrell_002
+    2100028: Screen_001
+    2100030: Screen_002
+    2100032: Panel_001
+    2100034: Panel_002
+    2100036: Panel_005
+    2100038: Panel_004
+    2100040: Panel_003
+    2100042: Roof_Light_002
+    2100044: Roof_Light_001
+    2100046: Console_001
+    2100048: Console_002
+    2100050: Console_Screen_001
+    2100052: Locker_001
+    2100054: Locker_003
+    2100056: Locker_002
+    2100058: Crate_001
+    2100060: Crate_002
+    2100062: Door_001
+    2100064: Door_002
+    2100066: Floor_001
+    2100068: Floor_002
+    2300000: Barrell_001
+    2300002: Barrier_Border_001
+    2300004: Console_001
+    2300006: Crate_001
+    2300008: Crate_002
+    2300010: Crate_003
+    2300012: Crate_004
+    2300014: Door_Left_001
+    2300016: Door_Right_001
+    2300018: Doorway_001
+    2300020: Doorway_002
+    2300022: Floor_001
+    2300024: Floor_002
+    2300026: Floor_003
+    2300028: Floor_004
+    2300030: Floor_005
+    2300032: Glass_Barrier_001
+    2300034: Glass_Barrier_Broken_001
+    2300036: Locker_001
+    2300038: Panel_001
+    2300040: Pod_001
+    2300042: Pod_002
+    2300044: Pod_Broken_001
+    2300046: Roof_Light_001
+    2300048: Roof_Light_002
+    2300050: Roof_Light_003
+    2300052: Screen_001
+    2300054: Wall_2_Column
+    2300056: Wall_2_Corner_L
+    2300058: Wall_2_Corner_T
+    2300060: Wall_2_Corner_X
+    2300062: Wall_2_Doorway
+    2300064: Wall_2_Window
+    2300066: Wall_2_Window_002
+    2300068: Wall_2_X05
+    2300070: Wall_2_X1
+    2300072: Wall_2_X2
+    2300074: Wall_2_X4
+    2300076: Wall_Decoration_001
+    2300078: Wall_Decoration_002
+    2300080: Wall_Decoration_003
+    2300082: Wall_Decoration_004
+    2300084: Wall_Decoration_005
+    2300086: Wall_HalfGlass_001
+    2300088: Wall_HalfGlass_Broken_001
+    2300090: WindowFrame_001
+    2300092: WindowFrame_002
+    2300094: WindowGlass_001
+    2300096: WindowGlassBroken_001
+    3300000: Barrell_001
+    3300002: Barrier_Border_001
+    3300004: Console_001
+    3300006: Crate_001
+    3300008: Crate_002
+    3300010: Crate_003
+    3300012: Crate_004
+    3300014: Door_Left_001
+    3300016: Door_Right_001
+    3300018: Doorway_001
+    3300020: Doorway_002
+    3300022: Floor_001
+    3300024: Floor_002
+    3300026: Floor_003
+    3300028: Floor_004
+    3300030: Floor_005
+    3300032: Glass_Barrier_001
+    3300034: Glass_Barrier_Broken_001
+    3300036: Locker_001
+    3300038: Panel_001
+    3300040: Pod_001
+    3300042: Pod_002
+    3300044: Pod_Broken_001
+    3300046: Roof_Light_001
+    3300048: Roof_Light_002
+    3300050: Roof_Light_003
+    3300052: Screen_001
+    3300054: Wall_2_Column
+    3300056: Wall_2_Corner_L
+    3300058: Wall_2_Corner_T
+    3300060: Wall_2_Corner_X
+    3300062: Wall_2_Doorway
+    3300064: Wall_2_Window
+    3300066: Wall_2_Window_002
+    3300068: Wall_2_X05
+    3300070: Wall_2_X1
+    3300072: Wall_2_X2
+    3300074: Wall_2_X4
+    3300076: Wall_Decoration_001
+    3300078: Wall_Decoration_002
+    3300080: Wall_Decoration_003
+    3300082: Wall_Decoration_004
+    3300084: Wall_Decoration_005
+    3300086: Wall_HalfGlass_001
+    3300088: Wall_HalfGlass_Broken_001
+    3300090: WindowFrame_001
+    3300092: WindowFrame_002
+    3300094: WindowGlass_001
+    3300096: WindowGlassBroken_001
+    4300000: Glass_Barrier_Broken_001
+    4300002: Wall_HalfGlass_Broken_001
+    4300004: Doorway_002
+    4300006: WindowFrame_002
+    4300008: Wall_Decoration_005
+    4300010: Wall_Decoration_004
+    4300012: Wall_Decoration_003
+    4300014: Pod_Broken_001
+    4300016: WindowGlassBroken_001
+    4300018: Wall_2_Window_002
+    4300020: Wall_2_X05
+    4300022: Wall_2_Corner_X
+    4300024: Wall_2_Corner_T
+    4300026: Wall_2_Corner_L
+    4300028: Wall_Decoration_002
+    4300030: Wall_Decoration_001
+    4300032: Crate_004
+    4300034: Crate_003
+    4300036: Barrell_001
+    4300038: Pod_002
+    4300040: Pod_001
+    4300042: Screen_001
+    4300044: Panel_001
+    4300046: Roof_Light_003
+    4300048: Roof_Light_002
+    4300050: Console_001
+    4300052: Locker_001
+    4300054: Crate_002
+    4300056: Glass_Barrier_001
+    4300058: Barrier_Border_001
+    4300060: Wall_2_Column
+    4300062: Wall_2_Doorway
+    4300064: Wall_2_Window
+    4300066: Wall_2_X4
+    4300068: Wall_2_X2
+    4300070: Wall_2_X1
+    4300072: Roof_Light_001
+    4300074: Wall_HalfGlass_001
+    4300076: Crate_001
+    4300078: WindowGlass_001
+    4300080: WindowFrame_001
+    4300082: Door_Right_001
+    4300084: Door_Left_001
+    4300086: Doorway_001
+    4300088: Floor_005
+    4300090: Floor_004
+    4300092: Floor_003
+    4300094: Floor_002
+    4300096: Floor_001
+    6400000: Barrell_001
+    6400002: Barrier_Border_001
+    6400004: Console_001
+    6400006: Crate_001
+    6400008: Crate_002
+    6400010: Crate_003
+    6400012: Crate_004
+    6400014: Door_Left_001
+    6400016: Door_Right_001
+    6400018: Doorway_001
+    6400020: Doorway_002
+    6400022: Floor_001
+    6400024: Floor_002
+    6400026: Floor_003
+    6400028: Floor_004
+    6400030: Floor_005
+    6400032: Glass_Barrier_001
+    6400034: Glass_Barrier_Broken_001
+    6400036: Locker_001
+    6400038: Panel_001
+    6400040: Pod_001
+    6400042: Pod_002
+    6400044: Pod_Broken_001
+    6400046: Roof_Light_001
+    6400048: Roof_Light_002
+    6400050: Roof_Light_003
+    6400052: Screen_001
+    6400054: Wall_2_Column
+    6400056: Wall_2_Corner_L
+    6400058: Wall_2_Corner_T
+    6400060: Wall_2_Corner_X
+    6400062: Wall_2_Doorway
+    6400064: Wall_2_Window
+    6400066: Wall_2_Window_002
+    6400068: Wall_2_X05
+    6400070: Wall_2_X1
+    6400072: Wall_2_X2
+    6400074: Wall_2_X4
+    6400076: Wall_Decoration_001
+    6400078: Wall_Decoration_002
+    6400080: Wall_Decoration_003
+    6400082: Wall_Decoration_004
+    6400084: Wall_Decoration_005
+    6400086: Wall_HalfGlass_001
+    6400088: Wall_HalfGlass_Broken_001
+    6400090: WindowFrame_001
+    6400092: WindowFrame_002
+    6400094: WindowGlass_001
+    6400096: WindowGlassBroken_001
+    10800000: Lamp
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrell_001
+    second: {fileID: 2100000, guid: 44fc6542ff2f941f991cf03f26d1b896, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrell_002
+    second: {fileID: 2100000, guid: 0f87c90b0267b4b36ba82910ac2afbc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Console_001
+    second: {fileID: 2100000, guid: 15114a59531e74eec926b8f75bc20c76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Console_002
+    second: {fileID: 2100000, guid: eed4db122294549198a899e5f29a91e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Console_Screen_001
+    second: {fileID: 2100000, guid: d4c481171dcf5410fb5f62a996df6344, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crate_001
+    second: {fileID: 2100000, guid: c997ddd06cfd24e24817fda238dfd516, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crate_002
+    second: {fileID: 2100000, guid: 2e7eb72da708946a88f7a7f62be495b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crate_003
+    second: {fileID: 2100000, guid: 9cb3de8a2adf8498db8984d27f58e0be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crate_004
+    second: {fileID: 2100000, guid: c8b8b01a306984adb983e9cf5b6a7183, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crate_005
+    second: {fileID: 2100000, guid: f3ae9a89ece11493aad097a2c8a9ed4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door_001
+    second: {fileID: 2100000, guid: 3ba9b6b8a62fe45e48fafec91d25c96f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door_002
+    second: {fileID: 2100000, guid: b2c65c4c02e494143946ace33d781b0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Doorway_001
+    second: {fileID: 2100000, guid: dbd739d14c57a46b086cc1d996e288ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor_001
+    second: {fileID: 2100000, guid: ba3d61b52909f4c5abeca9cabf35feba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor_002
+    second: {fileID: 2100000, guid: 5dda3b47988f043aca77f5ebb8a39d08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass_Barrier_001
+    second: {fileID: 2100000, guid: 204ca98d11d154ce3981430f33013d82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Locker_001
+    second: {fileID: 2100000, guid: 0fdc880823705462badb4b17596b96c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Locker_002
+    second: {fileID: 2100000, guid: b1426811a8b184b5b98cd9ae7bdb7a39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Locker_003
+    second: {fileID: 2100000, guid: e08fb38dc14df43e1b3a77f123a04305, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Panel_001
+    second: {fileID: 2100000, guid: c20385a97b6c44ab4a7315dcf99eadb7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Panel_002
+    second: {fileID: 2100000, guid: 9ec486b41342941de9677762ab7d144f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Panel_003
+    second: {fileID: 2100000, guid: 087879ec1e51e4291a8e1eb36249ec24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Panel_004
+    second: {fileID: 2100000, guid: 412aeadef086b40ef9bf1e245575482e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Panel_005
+    second: {fileID: 2100000, guid: 0262ab6ef27b6463c959ef079e347a4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pod_001
+    second: {fileID: 2100000, guid: a90e616aeeffb46a482d5e08a9208375, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pod_002
+    second: {fileID: 2100000, guid: c5a325667c5ee4273885aeefee8ca58b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof_Light_001
+    second: {fileID: 2100000, guid: 700992f7db7b74e46ac885ad1918c462, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof_Light_002
+    second: {fileID: 2100000, guid: 92cd2595c36344a7eae48be2bdb8eb63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen_001
+    second: {fileID: 2100000, guid: 85e38379dc40047c296cb4b8f5354c17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen_002
+    second: {fileID: 2100000, guid: 63068a988e40348348053eb057f08c8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_001
+    second: {fileID: 2100000, guid: b266dee3b5e1841969ea11aebc5c66ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_002
+    second: {fileID: 2100000, guid: c9da161e452fa49838e790f751003a46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_Decoration_001
+    second: {fileID: 2100000, guid: 611b8a27b5dac4c3590e855b6c8b050d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WindowFrame_001
+    second: {fileID: 2100000, guid: e17bf3f8090364d0c991fbf0ad430926, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WindowGlass_001
+    second: {fileID: 2100000, guid: a386e303669c747c1bd751dce4bcb12f, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
