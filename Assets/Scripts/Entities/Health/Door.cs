@@ -9,7 +9,8 @@ public class Door : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Button.OnDamage += Activate;
+        if (Button)
+            Button.OnDamage += Activate;
     }
 
     // Update is called once per frame
