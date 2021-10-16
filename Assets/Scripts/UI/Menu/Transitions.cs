@@ -27,6 +27,10 @@ public class Transitions : MonoBehaviour
         animator.Play(transitionName);
     }
 
+    public void SceneOpened()
+    {
+        animator.SetTrigger("Open");
+    }
 
     public void TransitionEnded()
     {

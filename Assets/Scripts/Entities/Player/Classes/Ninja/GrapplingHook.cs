@@ -29,6 +29,7 @@ public class GrapplingHook : Ability
 
         if (hook.gameObject.activeInHierarchy)
         {
+            GetComponent<AudioSource>().Play();
             hook.transform.position = Mouth.position;
             hook.GetComponent<Projectile>().Setup(Mouth.forward, HitLayers, GetComponentInParent<Actor>().gameObject);
             ResetCooldown();

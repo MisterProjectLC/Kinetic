@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4152036251251478481}
   - component: {fileID: 5797971180500838691}
+  - component: {fileID: 6003706536071707197}
+  - component: {fileID: 6498212737203915275}
   m_Layer: 18
   m_Name: Button
   m_TagString: Untagged
@@ -47,6 +49,30 @@ MonoBehaviour:
   CurrentHealth: 5
   CriticalHealth: 0
   MaxHealth: 9999999
+--- !u!114 &6003706536071707197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548612615597814522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9c292a4d384fe4681fda5d05bbac58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6498212737203915275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548612615597814522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310b699e1b4d32849877170525fa6c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5099559570621907661
 GameObject:
   m_ObjectHideFlags: 0

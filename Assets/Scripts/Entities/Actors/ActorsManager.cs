@@ -22,7 +22,10 @@ public class ActorsManager : MonoBehaviour
         {
             AM = this;
             if (PlayerSerialized)
+            {
                 Player = PlayerSerialized;
+                Player.gameObject.SetActive(true);
+            }
             Actors = new Dictionary<int, List<Actor>>();
         }
     }

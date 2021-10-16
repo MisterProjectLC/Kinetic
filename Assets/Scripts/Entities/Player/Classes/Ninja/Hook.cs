@@ -66,6 +66,7 @@ public class Hook : MonoBehaviour
         relativePosition = transform.position - hookedObject.transform.position;
         projectile.KeepAlive = true;
         projectile.Stopped = true;
+        GetComponent<AudioSource>().Play();
         //projectile.Shooter.GetComponent<PlayerCharacterController>().MoveVelocity = (transform.position -
         //        projectile.Shooter.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position).normalized * PullForce/10;
         projectile.Shooter.GetComponent<PlayerCharacterController>().GravityEnabled = false;
