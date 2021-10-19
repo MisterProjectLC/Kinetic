@@ -43,11 +43,12 @@ public class Enemy : MonoBehaviour
     {
         weaponClocks = new float[weapons.Length];
         for (int i = 0; i < weaponClocks.Length; i++)
-            weaponClocks[i] = 0f;
+            weaponClocks[i] -= weapons[i].InitialFireCooldown;
 
         navClock = updateCooldown;
         pathAgent = GetComponent<NavMeshAgent>();
-        if (pathAgent) {
+        if (pathAgent)
+        {
             pathAgent.updateRotation = false;
             pathAgent.updateUpAxis = false;
         }

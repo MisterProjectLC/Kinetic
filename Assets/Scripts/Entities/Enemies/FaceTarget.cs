@@ -15,6 +15,10 @@ public class FaceTarget : MonoBehaviour
     [SerializeField]
     private bool turnVertical = true;
 
+    [SerializeField]
+    [Tooltip("If null, takes the enemy's Model.")]
+    GameObject partThatMoves;
+
     private Quaternion currentPosition;
     private Vector3 newTargetPosition;
     Transform playerPosition;
@@ -29,15 +33,18 @@ public class FaceTarget : MonoBehaviour
         newTargetPosition = playerPosition.position;
         enemy = GetComponent<Enemy>();
         enemy.OnActiveUpdate += OnActiveUpdate;
+
+        if (!partThatMoves)
+            partThatMoves = enemy.Model;
     }
 
     // Update is called once per frame
     void OnActiveUpdate()
     {
         // Constant rotation
-        enemy.Model.transform.rotation = Quaternion.RotateTowards(currentPosition, 
-            Quaternion.LookRotation(newTargetPosition - enemy.Model.transform.position), turnSpeed*Time.deltaTime);
-        currentPosition = enemy.Model.transform.rotation;
+        partThatMoves.transform.rotation = Quaternion.RotateTowards(currentPosition, 
+            Quaternion.LookRotation(newTargetPosition - partThatMoves.transform.position), turnSpeed*Time.deltaTime);
+        currentPosition = partThatMoves.transform.rotation;
 
         // Update targetting
         clock += Time.deltaTime;
@@ -46,7 +53,7 @@ public class FaceTarget : MonoBehaviour
             clock = 0f;
             newTargetPosition = playerPosition.position;
             if (!turnVertical)
-                newTargetPosition = new Vector3(newTargetPosition.x, enemy.Model.transform.position.y, newTargetPosition.z);
+                newTargetPosition = new Vector3(newTargetPosition.x, partThatMoves.transform.position.y, newTargetPosition.z);
         }
     }
 }

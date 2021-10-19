@@ -30,6 +30,22 @@ public class MySceneManager : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        transform.Find(scene).GetComponent<ScenePartLoader>().LoadScene();
+        Transform loader = transform.Find(scene);
+
+        if (loader)
+            loader.GetComponent<ScenePartLoader>().LoadScene();
+        else
+            SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+    }
+
+
+    public void UnLoadScene(string scene)
+    {
+        Transform loader = transform.Find(scene);
+
+        if (loader)
+            loader.GetComponent<ScenePartLoader>().UnLoadScene();
+        else
+            SceneManager.UnloadSceneAsync(scene);
     }
 }

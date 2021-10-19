@@ -79,7 +79,7 @@ public class ScenePartLoader : MonoBehaviour
         }
     }
 
-    void UnLoadScene()
+    public void UnLoadScene()
     {
         if (isLoaded)
         {

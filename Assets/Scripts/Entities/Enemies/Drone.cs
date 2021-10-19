@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyDrone : MonoBehaviour
+public class Drone : MonoBehaviour
 {
     Transform playerTransform;
     Enemy enemy;

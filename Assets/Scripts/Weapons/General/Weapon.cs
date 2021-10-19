@@ -50,6 +50,8 @@ public class Weapon : MonoBehaviour
     public bool Automatic = false;
     public float FireCooldown = 0f;
 
+    public float InitialFireCooldown = 0f;
+
     private void Start()
     {
         ActiveProjectiles = new List<GameObject>(BulletCount);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTurret : MonoBehaviour
+public class Turret : MonoBehaviour
 {
     public Health[] Turrets;
     int turretsRemaining = 0;

@@ -175,7 +175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 5
-  MaxHealth: 6
+  CriticalHealth: 1
+  MaxHealth: 4
 --- !u!114 &8041429361272883083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +673,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 1
+  InitialFireCooldown: 0
 --- !u!114 &9107013806508308891
 MonoBehaviour:
   m_ObjectHideFlags: 0
