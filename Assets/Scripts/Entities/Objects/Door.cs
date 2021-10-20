@@ -18,7 +18,6 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     void Activate()
     {
-        Debug.Log("TriggerActivate");
         GetComponent<Animator>().Play(OpenAnimation);
     }
 }

@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 5835460606851386295}
   - component: {fileID: 6873437428079399595}
   - component: {fileID: 6319508750748539345}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 260070860282569955}
   - component: {fileID: 4667401134277738239}
   - component: {fileID: 7684439068083512808}
+  - component: {fileID: 4618637557585060622}
   - component: {fileID: 3538263600158351026}
   m_Layer: 11
   m_Name: Droid
@@ -348,7 +349,6 @@ MonoBehaviour:
   GravityMultiplier: 1
   AirDesacceleration: 0
   Stunned: 0
-  updateCooldown: 0.25
 --- !u!114 &1989609916023471263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +406,19 @@ MonoBehaviour:
   turnSpeed: 75
   turnVertical: 1
   partThatMoves: {fileID: 7570584722447137862}
+--- !u!114 &4618637557585060622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428469021606675725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7170df1b071de04180fc60153dd3bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateCooldown: 0.25
 --- !u!195 &3538263600158351026
 NavMeshAgent:
   m_ObjectHideFlags: 0

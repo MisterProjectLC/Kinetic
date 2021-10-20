@@ -52,19 +52,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
   DisplayName: Minigun
-  BulletType: 0
+  BulletType: 1
   HitLayers:
     serializedVersion: 2
     m_Bits: 264704
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
-  Projectile: {fileID: 0}
+  Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
+    type: 3}
   ActiveProjectiles: []
   backwardsForce: 1
-  MaxSpreadAngle: 1
+  MaxSpreadAngle: 2
   BulletCount: 1
   Automatic: 1
-  FireCooldown: 0.01
+  FireCooldown: 0.02
+  InitialFireCooldown: 0
 --- !u!114 &3228066949501696013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +104,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
@@ -876,18 +878,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000000037252867
+      value: 0.000000074505806
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.00000029802325
+      value: 0.49999988
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
         type: 3}

@@ -27,17 +27,12 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float Stunned = 0f;
 
-    [Tooltip("How much time it takes to update path")]
-    [SerializeField]
-    private float updateCooldown = 0.25f;
-
     bool airborne = false;
-    //private Vector3 knockbackForce;
-    float navClock = 0f;
     float[] weaponClocks;
     private NavMeshAgent pathAgent;
 
     public UnityAction OnActiveUpdate;
+    public UnityAction<Vector3> OnKnockbackCollision;
 
     void Start()
     {
@@ -45,7 +40,6 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < weaponClocks.Length; i++)
             weaponClocks[i] -= weapons[i].InitialFireCooldown;
 
-        navClock = updateCooldown;
         pathAgent = GetComponent<NavMeshAgent>();
         if (pathAgent)
         {
@@ -63,7 +57,6 @@ public class Enemy : MonoBehaviour
         if (Stunned <= 0f)
         {
             ActivateWeapons();
-            ManageNavigation();
             if (OnActiveUpdate != null)
                 OnActiveUpdate.Invoke();
         }
@@ -85,24 +78,6 @@ public class Enemy : MonoBehaviour
                     weapon.Fire();
                 }
             i++;
-        }
-    }
-
-    private void ManageNavigation()
-    {
-        if (!pathAgent)
-            return;
-
-        navClock += Time.deltaTime;
-        if (navClock > updateCooldown)
-        {
-            navClock = 0f;
-            Transform cameraTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
-            if (pathAgent.isOnNavMesh)
-            {
-                pathAgent.isStopped = false;
-                pathAgent.SetDestination(cameraTransform.position);
-            }
         }
     }
 
@@ -154,7 +129,11 @@ public class Enemy : MonoBehaviour
             Ray ray = new Ray(transform.position, moveVelocity);
             Physics.Raycast(ray, out RaycastHit hitInfo, 1f, GroundLayers, QueryTriggerInteraction.Ignore);
             if (hitInfo.collider)
+            {
+                if (OnKnockbackCollision != null)
+                    OnKnockbackCollision.Invoke(moveVelocity);
                 moveVelocity = Vector3.zero;
+            }
 
             // Movement
             if (moveVelocity == Vector3.zero)

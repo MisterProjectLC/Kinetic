@@ -6,6 +6,9 @@ public class Minigun : MonoBehaviour
     float MaxSlowdown = 0.5f;
     float slowdown = 0f;
 
+    float emergencyResetTimer = 0.5f;
+    float clock = 0f;
+
     WeaponAbility weaponAbility;
     PlayerCharacterController player;
 
@@ -17,10 +20,25 @@ public class Minigun : MonoBehaviour
     }
 
 
+    void Update()
+    {
+        if (slowdown < 1f)
+        {
+            clock += Time.deltaTime;
+            if (clock > emergencyResetTimer)
+            {
+                slowdown = 1f;
+                clock = 0f;
+            }
+        }
+    }
+
+
     public void Execute(Ability.Input input)
     {
         if (input == Ability.Input.ButtonDown)
         {
+            clock = 0f;
             if (slowdown > MaxSlowdown)
                 slowdown -= 0.1f;
         }

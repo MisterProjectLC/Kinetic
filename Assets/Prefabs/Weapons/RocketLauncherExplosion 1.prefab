@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4396919937828005916
+--- !u!1 &7428323586207960768
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,54 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9164259583562955049}
-  - component: {fileID: 5676927516981614957}
-  - component: {fileID: 6797865549011669777}
-  - component: {fileID: 4274277110719107929}
-  - component: {fileID: 4796216369014699922}
-  - component: {fileID: 7171234845455418299}
-  - component: {fileID: 2912308150987345688}
+  - component: {fileID: 2684064132486651893}
+  - component: {fileID: 1502571618760834993}
+  - component: {fileID: 307534647279105485}
+  - component: {fileID: 7008449775376283013}
+  - component: {fileID: 1773818962129064270}
+  - component: {fileID: 4149807066090890599}
+  - component: {fileID: 8248575022387800516}
   m_Layer: 14
-  m_Name: RocketLauncherExplosion
+  m_Name: RocketLauncherExplosion 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9164259583562955049
+--- !u!4 &2684064132486651893
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396919937828005916}
+  m_GameObject: {fileID: 7428323586207960768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7542893089374443156}
+  - {fileID: 3656912863885226056}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5676927516981614957
+--- !u!114 &1502571618760834993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396919937828005916}
+  m_GameObject: {fileID: 7428323586207960768}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e659382fa54c0ff49bad674368ae5837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6797865549011669777
+--- !u!114 &307534647279105485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396919937828005916}
+  m_GameObject: {fileID: 7428323586207960768}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e6fdf4473511d041b1aa747a562b39d, type: 3}
@@ -70,39 +70,39 @@ MonoBehaviour:
   NeuteredHitLayers:
     serializedVersion: 2
     m_Bits: 4096
---- !u!114 &4274277110719107929
+--- !u!114 &7008449775376283013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396919937828005916}
+  m_GameObject: {fileID: 7428323586207960768}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 6
---- !u!114 &4796216369014699922
+--- !u!114 &1773818962129064270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396919937828005916}
+  m_GameObject: {fileID: 7428323586207960768}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd09c72d856c2ee40adee14d1306ef43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 5
---- !u!82 &7171234845455418299
+--- !u!82 &4149807066090890599
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396919937828005916}
+  m_GameObject: {fileID: 7428323586207960768}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -192,13 +192,13 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2912308150987345688
+--- !u!114 &8248575022387800516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396919937828005916}
+  m_GameObject: {fileID: 7428323586207960768}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
@@ -206,12 +206,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Knockback: 100
   Effects: []
---- !u!1001 &7539635462133014586
+--- !u!1001 &3652526033923901158
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 9164259583562955049}
+    m_TransformParent: {fileID: 2684064132486651893}
     m_Modifications:
     - target: {fileID: 1742013225946848, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
       propertyPath: m_Name
@@ -288,9 +288,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f1e1e7ebfcc636341af54385bff96204, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
---- !u!4 &7542893089374443156 stripped
+--- !u!4 &3656912863885226056 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4,
     type: 3}
-  m_PrefabInstance: {fileID: 7539635462133014586}
+  m_PrefabInstance: {fileID: 3652526033923901158}
   m_PrefabAsset: {fileID: 0}
