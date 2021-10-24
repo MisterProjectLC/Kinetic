@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4259178823602688632}
   - component: {fileID: 1653812256855770319}
   - component: {fileID: 3643475396191345307}
+  - component: {fileID: 562521063906820443}
   m_Layer: 12
   m_Name: Rocket Launcher
   m_TagString: Untagged
@@ -64,6 +65,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 1
+  InitialFireCooldown: 0
 --- !u!114 &4105532856906259723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +207,25 @@ MonoBehaviour:
   SoundEffects:
   - {fileID: 8300000, guid: 4105042febbe7df42845f74cc06cb0ce, type: 3}
   WeaponRef: {fileID: 3506049642618499529}
+--- !u!95 &562521063906820443
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744861131574945144}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a44450ec4371d454fb32498e085c9b20, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &6257093970714073769
 PrefabInstance:
   m_ObjectHideFlags: 0

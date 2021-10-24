@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Charge : Ability
 {
+    [Header("Attributes")]
     [SerializeField]
     float MinimumForce = 1;
     [SerializeField]
@@ -15,6 +16,11 @@ public class Charge : Ability
     [SerializeField]
     float MaxAirSlowdown = 0.6f;
 
+    [Header("Sounds")]
+    [SerializeField]
+    AudioClip ChargingSFX;
+    [SerializeField]
+    AudioClip ChargeSFX;
 
     bool charging = false;
     bool charged = false;
@@ -48,7 +54,9 @@ public class Charge : Ability
 
     public override void Execute(Input input)
     {
-        
+        if (!charging && charge == 0)
+            PlaySound(ChargingSFX);
+
         charging = (input == Input.ButtonDown);
         if (charging)
         {
@@ -70,6 +78,8 @@ public class Charge : Ability
             player.ApplyForce(Mathf.Lerp(MinimumForce, MaximumForce, charge / MaxCharge) *
                 Vector3.ProjectOnPlane(player.PlayerCamera.transform.TransformVector(Vector3.forward), Vector3.up));
             charge = 0;
+
+            PlaySound(ChargeSFX);
             charged = true;
         }
     }

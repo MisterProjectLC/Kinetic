@@ -30,9 +30,10 @@ public class LevelUpSystem : MonoBehaviour
             LoadoutOption loadoutOption = GenerateOptionInstance(option).GetComponent<LoadoutOption>();
             DropSlot dropSlot = initialSlots[i].GetComponent<DropSlot>();
             dropSlot.OnDrop(loadoutOption.gameObject);
-            i++;
-            if (option.secondaryAbility.Length > 0)
+            Debug.Log(dropSlot.GetComponent<LoadoutSlot>().AbilityNumber);
+            if (i != 0 && option.secondaryAbility.Length > 0)
                 i++;
+            i++;
         }
 
         foreach (LoadoutManager.Option option in loadout.Options)

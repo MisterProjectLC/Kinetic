@@ -27,7 +27,7 @@ public class Minigun : MonoBehaviour
             clock += Time.deltaTime;
             if (clock > emergencyResetTimer)
             {
-                slowdown = 1f;
+                player.SetSlowdown(1f, "minigun");
                 clock = 0f;
             }
         }

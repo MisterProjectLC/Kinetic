@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,7 +24,7 @@ public class LoadoutManager : MonoBehaviour
     [Header("General")]
     [Tooltip("List of currently equipped loadouts")]
     [HideInInspector]
-    public Loadout[] Loadouts;
+    Loadout[] Loadouts = new Loadout[3];
     public List<Option> InitialOptions;
     public List<Option> Options;
 
@@ -40,10 +41,16 @@ public class LoadoutManager : MonoBehaviour
 
     [Header("Positions")]
     [Tooltip("Down position")]
-    public Transform DownTransform;
+    [SerializeField]
+    Transform DownTransform;
 
     [Tooltip("Up position")]
-    public Transform UpTransform;
+    [SerializeField]
+    Transform UpTransform;
+
+    [SerializeField]
+    Transform DeviceHolder;
+
 
     private int currentLoadout = 0;
     private int lastLoadout = 0;
@@ -67,16 +74,36 @@ public class LoadoutManager : MonoBehaviour
     PlayerInputHandler m_InputHandler;
 
 
+    private void Awake()
+    {
+        for (int i = 0; i < Loadouts.Length; i++)
+            Loadouts[i].abilities = new Ability[4];
+    }
+
+
     void Start()
     {
         m_InputHandler = GetComponent<PlayerInputHandler>();
+        StartCoroutine("StartDelayed");
+    }
+
+
+    IEnumerator StartDelayed()
+    {
+        yield return new WaitForSeconds(Time.deltaTime);
+
         foreach (Ability ab in GetCurrentLoadout())
             if (ab && ab.GetComponent<Device>())
             {
                 currentDevice = ab.GetComponent<Device>();
                 break;
             }
+
+        AnimStage = AnimationStage.DeviceUp;
+        animProgression = UpCooldown;
+        AttachCurrentToDeviceHolder();
     }
+    
 
 
     void Update()
@@ -178,15 +205,22 @@ public class LoadoutManager : MonoBehaviour
                     animProgression = UpCooldown;
                     if (currentDevice != null)
                     {
+                        DeviceHolder.position = DownTransform.position;
+                        DeviceHolder.rotation = DownTransform.rotation;
                         if (currentDevice.GetComponent<WeaponAbility>())
                             currentDevice.GetComponent<WeaponAbility>().ResetCooldown();
                         currentDevice.gameObject.SetActive(false);
+
+                        currentDevice.transform.SetParent(DeviceHolder.parent);
                     }
                     currentDevice = newDevice;
+                    AttachCurrentToDeviceHolder();
                     break;
 
                 case AnimationStage.DeviceUp:
                     AnimStage = AnimationStage.DeviceReady;
+                    DeviceHolder.position = UpTransform.position;
+                    DeviceHolder.rotation = UpTransform.rotation;
                     break;
             }
         }
@@ -198,16 +232,16 @@ public class LoadoutManager : MonoBehaviour
                 switch (AnimStage)
                 {
                     case AnimationStage.DeviceDown:
-                        currentDevice.gameObject.transform.position = Vector3.Lerp(UpTransform.position, DownTransform.position,
+                        DeviceHolder.position = Vector3.Lerp(UpTransform.position, DownTransform.position,
                             (DownCooldown - animProgression) / DownCooldown);
-                        currentDevice.gameObject.transform.rotation = Quaternion.Lerp(UpTransform.rotation, DownTransform.rotation,
+                        DeviceHolder.rotation = Quaternion.Lerp(UpTransform.rotation, DownTransform.rotation,
                             (DownCooldown - animProgression) / DownCooldown);
                         break;
 
                     case AnimationStage.DeviceUp:
-                        currentDevice.gameObject.transform.position = Vector3.Lerp(DownTransform.position, UpTransform.position,
+                        DeviceHolder.position = Vector3.Lerp(DownTransform.position, UpTransform.position,
                             (UpCooldown - animProgression) / UpCooldown);
-                        currentDevice.gameObject.transform.rotation = Quaternion.Lerp(DownTransform.rotation, UpTransform.rotation,
+                        DeviceHolder.rotation = Quaternion.Lerp(DownTransform.rotation, UpTransform.rotation,
                             (UpCooldown - animProgression) / UpCooldown);
                         break;
                 }
@@ -223,6 +257,9 @@ public class LoadoutManager : MonoBehaviour
             Loadouts[loadout].abilities[abilityNumber] = ability.GetComponent<Ability>();
         else
             Loadouts[loadout].abilities[abilityNumber] = null;
+
+        //Debug.Log(loadout + ", " + abilityNumber + ": " + ability.name);
+        //Debug.Log(Loadouts[loadout].abilities[abilityNumber].gameObject.name);
 
         OnLoadoutSwitch.Invoke();
     }
@@ -242,5 +279,16 @@ public class LoadoutManager : MonoBehaviour
     public Device GetCurrentDevice()
     {
         return currentDevice;
+    }
+
+
+    void AttachCurrentToDeviceHolder()
+    {
+        if (currentDevice)
+        {
+            currentDevice.transform.SetParent(DeviceHolder);
+            currentDevice.transform.position = DeviceHolder.position;
+            currentDevice.transform.rotation = DeviceHolder.rotation;
+        }
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5518751910047628625}
   - component: {fileID: 7025239874026515430}
   - component: {fileID: 8089324878251517365}
+  - component: {fileID: 3116785786585940504}
   m_Layer: 12
   m_Name: Akimbo
   m_TagString: Untagged
@@ -33,6 +34,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 9154958011614449926}
+  - {fileID: 8910459257891339912}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -205,6 +207,25 @@ MonoBehaviour:
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   WeaponRef: {fileID: 5128142708060774112}
+--- !u!95 &3116785786585940504
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914768282061949521}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: b15c1361e76c6564abf9567e495af299, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8684708865223702253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220,17 +241,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7650001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.000000074505806
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
         type: 3}
@@ -284,4 +305,84 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
     type: 3}
   m_PrefabInstance: {fileID: 8684708865223702253}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8944982295048706403
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2483760642977702375}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.125
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.74999994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000081460335
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6662e5247c4987d46bf04f11185b1389, type: 2}
+    - target: {fileID: 919132149155446097, guid: 711aafb59146ef343be0cbad6de6efde,
+        type: 3}
+      propertyPath: m_Name
+      value: WP_N_Akimbo (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 711aafb59146ef343be0cbad6de6efde, type: 3}
+--- !u!4 &8910459257891339912 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 711aafb59146ef343be0cbad6de6efde,
+    type: 3}
+  m_PrefabInstance: {fileID: 8944982295048706403}
   m_PrefabAsset: {fileID: 0}

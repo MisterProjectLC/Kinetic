@@ -57,7 +57,7 @@ public class PlayerCharacterController : MonoBehaviour
 
     [Header("Rotation")]
     [Tooltip("Rotation speed for moving the camera")]
-    public float RotationSpeed = 200f;
+    public float RotationSpeed = 400f;
 
 
     public float RotationMultiplier
@@ -118,7 +118,8 @@ public class PlayerCharacterController : MonoBehaviour
         // horizontal character rotation
         {
             // rotate the transform with the input speed around its local Y axis
-            transform.Rotate(new Vector3(0f, (m_InputHandler.GetLookInputsHorizontal() * RotationSpeed * RotationMultiplier), 0f), Space.Self);
+            transform.Rotate(new Vector3(0f, (m_InputHandler.GetLookInputsHorizontal() * RotationSpeed * RotationMultiplier), 0f), 
+                Space.Self);
         }
 
         // vertical camera rotation

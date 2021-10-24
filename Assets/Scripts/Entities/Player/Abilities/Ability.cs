@@ -44,8 +44,7 @@ public abstract class Ability : MonoBehaviour
             Execute(input);
             if (SoundEffects.Length > 0)
             {
-                GetComponent<AudioSource>().clip = SoundEffects[Random.Range(0, SoundEffects.Length)];
-                GetComponent<AudioSource>().Play();
+                PlaySound(SoundEffects[Random.Range(0, SoundEffects.Length)]);
             }
             if (OnExecute != null)
                 OnExecute.Invoke(input);
@@ -64,4 +63,10 @@ public abstract class Ability : MonoBehaviour
     {
         Timer = 0;
     }
+
+    protected void PlaySound(AudioClip sound)
+    {
+        GetComponent<AudioSource>().clip = sound;
+        GetComponent<AudioSource>().Play();
+    } 
 }
