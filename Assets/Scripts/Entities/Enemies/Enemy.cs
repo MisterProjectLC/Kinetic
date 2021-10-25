@@ -22,6 +22,10 @@ public class Enemy : MonoBehaviour
     public float GravityMultiplier = 1f;
     public float AirDesacceleration = 0f;
 
+    [SerializeField]
+    [Tooltip("If true, lets the NavMeshAgent control the rotation of this enemy")]
+    bool TurnToMoveDirection = false;
+
     Vector3 moveVelocity = Vector3.zero;
 
     [HideInInspector]
@@ -43,7 +47,7 @@ public class Enemy : MonoBehaviour
         pathAgent = GetComponent<NavMeshAgent>();
         if (pathAgent)
         {
-            pathAgent.updateRotation = false;
+            pathAgent.updateRotation = TurnToMoveDirection;
             pathAgent.updateUpAxis = false;
         }
     }

@@ -49,7 +49,7 @@ public class Centibomb : MonoBehaviour
     private void FixedUpdate()
     {
         RaycastHit hitInfo;
-        Physics.SphereCast(transform.position, 1.5f, transform.forward, out hitInfo, 1f, sphereCastLayers.value, QueryTriggerInteraction.Collide);
+        Physics.SphereCast(transform.position, 2f, transform.forward, out hitInfo, 3f, sphereCastLayers.value, QueryTriggerInteraction.Collide);
         if (hitInfo.collider && hitInfo.collider.transform.parent && hitInfo.collider.transform.parent.GetComponent<Centibomb>())
         {
             Transform centibomb = hitInfo.collider.transform.parent;
