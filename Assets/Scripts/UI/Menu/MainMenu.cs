@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -5,35 +6,50 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public Animator BackgroundAnimator;
-    public Animator GeneralAnimator;
-    public Transitions transitions;
+    [System.Serializable]
+    struct Submenu
+    {
+        public Animator animator;
+        [HideInInspector]
+        public bool enabled;
+    }
 
-    UnityAction OnTransitionEnded;
+    [SerializeField]
+    Animator BackgroundAnimator;
+
+    [SerializeField]
+    Submenu[] submenus;
+
+    [SerializeField]
+    Transitions transitions;
+
     bool quitting = false;
-    bool optionsEnabled = false;
+
+    public UnityAction OnTransitionEnded;
 
     // Start is called before the first frame update
     void Start()
     {
+	Cursor.lockState = CursorLockMode.Confined;
         BackgroundAnimator.speed = 1f/60f;
         OnTransitionEnded += TransitionEnded;
     }
 
     public void PlayButton()
     {
+        SubmenuButton(0);
+    }
+
+    public void CharacterButton()
+    {
         quitting = false;
         transitions.PlayTransition("ClosingTransition", OnTransitionEnded);
     }
 
+
     public void OptionsButton()
     {
-        optionsEnabled = !optionsEnabled;
-
-        if (optionsEnabled)
-            GeneralAnimator.Play("OptionsOpen");
-        else
-            GeneralAnimator.Play("OptionsClose");
+        SubmenuButton(1);
     }
 
     public void QuitButton()
@@ -42,11 +58,35 @@ public class MainMenu : MonoBehaviour
         transitions.PlayTransition("ClosingTransition", OnTransitionEnded);
     }
 
+
+    void SubmenuButton(int i)
+    {
+        CloseSubmenus(submenus[i].animator);
+        submenus[i].enabled = !submenus[i].enabled;
+
+        if (submenus[i].enabled)
+            submenus[i].animator.Play("Open");
+        else
+            submenus[i].animator.Play("Close");
+
+    }
+
+
     void TransitionEnded()
     {
         if (quitting)
             Application.Quit();
         else
-            SceneManager.LoadScene("Arena", LoadSceneMode.Single);
+            SceneManager.LoadScene("Main", LoadSceneMode.Single);
+    }
+
+    void CloseSubmenus(Animator animator)
+    {
+        for (int i = 0; i < submenus.Length; i++)
+            if (submenus[i].animator != animator && submenus[i].enabled)
+            {
+                submenus[i].enabled = false;
+                submenus[i].animator.Play("Close");
+            }
     }
 }

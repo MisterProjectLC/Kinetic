@@ -11,8 +11,6 @@ public class Weapon : MonoBehaviour
     [Header("General")]
     public string DisplayName = "";
 
-    public ObjectManager.PoolableType BulletType;
-
     [Tooltip("Layer mask")]
     public LayersConfig HitLayers;
 
@@ -30,6 +28,8 @@ public class Weapon : MonoBehaviour
     private GameObject Projectile;
     [HideInInspector]
     public List<GameObject> ActiveProjectiles;
+    [SerializeField]
+    ObjectManager.PoolableType BulletType;
 
     [Header("Attributes")]
     [Tooltip("Pushback force when firing the gun")]
@@ -60,6 +60,9 @@ public class Weapon : MonoBehaviour
         clock = InitialFireCooldown;
         ActiveProjectiles = new List<GameObject>(BulletCount);
         MaxSpreadAngle /= 100f;
+
+        if (Projectile && Projectile.GetComponent<Poolable>())
+            BulletType = Projectile.GetComponent<Poolable>().Type;
     }
 
     private void Update()

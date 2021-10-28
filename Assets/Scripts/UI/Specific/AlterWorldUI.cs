@@ -10,7 +10,7 @@ public class AlterWorldUI : MonoBehaviour
     string newText;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gameTrigger.OnTriggerActivate += AlterUI;
     }

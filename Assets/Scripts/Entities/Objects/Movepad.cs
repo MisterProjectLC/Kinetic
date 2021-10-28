@@ -16,12 +16,16 @@ public class Movepad : MonoBehaviour
     private Transform DespawnPoint;
 
 
-    [Header("Stats")]
+    [Header("Vectors")]
+    [SerializeField]
     private Vector3 detectSize;
     [SerializeField]
     private Vector3 detectPosOffset = Vector3.zero;
-    public float Speed = 5f;
+    [SerializeField]
     Vector3 moveVector;
+
+    [Header("Stats")]
+    public float Speed = 5f;
     [SerializeField]
     private bool isJump = true;
 
@@ -37,8 +41,11 @@ public class Movepad : MonoBehaviour
 
     private void Start()
     {
-        moveVector = (DespawnPoint.position - SpawnPoint.position).normalized * Speed;
-        detectSize = new Vector3((DespawnPoint.position - SpawnPoint.position).magnitude/2, 1f, 1.5f);
+        if (DespawnPoint && SpawnPoint)
+        {
+            moveVector = (DespawnPoint.position - SpawnPoint.position).normalized * Speed;
+            detectSize = new Vector3((DespawnPoint.position - SpawnPoint.position).magnitude / 2, 1f, 1.5f);
+        }
         //Debug.Log(DespawnPoint.position + ", " + SpawnPoint.position + ", " + moveVector);
     }
 

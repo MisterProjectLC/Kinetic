@@ -53,13 +53,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
   DisplayName: Minigun
-  BulletType: 1
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 7750975500520401991, guid: e628c2c6caa94ce46b9a00c7a877f7fc,
     type: 3}
   ActiveProjectiles: []
+  BulletType: 6
   backwardsForce: 1
   MaxSpreadAngle: 2
   BulletCount: 1
@@ -101,7 +101,8 @@ AudioSource:
   m_GameObject: {fileID: 6191481536520945790}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.8
@@ -882,6 +883,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxSlowdown: 0.4
+  SlowdownRate: 0.1
+  emergencyResetTimer: 0.2
 --- !u!1001 &1731498640483782681
 PrefabInstance:
   m_ObjectHideFlags: 0

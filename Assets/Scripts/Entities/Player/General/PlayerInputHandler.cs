@@ -66,12 +66,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     public float GetLookInputsHorizontal()
     {
-        return GetMouseOrStickLookAxis(MouseHorizontal, JoystickHorizontal, InvertXAxis);
+        return inputEnabled ? GetMouseOrStickLookAxis(MouseHorizontal, JoystickHorizontal, InvertXAxis) : 0f;
     }
 
     public float GetLookInputsVertical()
     {
-        return GetMouseOrStickLookAxis(MouseVertical, JoystickVertical, !InvertYAxis);
+        return inputEnabled ? GetMouseOrStickLookAxis(MouseVertical, JoystickVertical, !InvertYAxis) : 0f;
     }
 
 
@@ -93,6 +93,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool GetAbility(int number)
     {
+        if (!inputEnabled)
+            return false;
+
         if (Input.GetButton(Ability + number.ToString()))
             abilityTimer -= Time.deltaTime;
 
@@ -108,13 +111,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool GetAbilityDown(int number)
     {
-        return Input.GetButtonDown(Ability + number.ToString());
+        return inputEnabled && Input.GetButtonDown(Ability + number.ToString());
     }
 
 
     public bool GetAbilityUp(int number)
     {
-        return Input.GetButtonUp(Ability + number.ToString());
+        return inputEnabled && Input.GetButtonUp(Ability + number.ToString());
     }
 
 

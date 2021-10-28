@@ -28,9 +28,9 @@ public class LevelUpSystem : MonoBehaviour
     void Awake()
     {
         if (LUS)
-            Destroy(gameObject);
-        else
-            LUS = this;
+            Destroy(LUS);
+        
+        LUS = this;
 
         LoadoutManager loadout = ActorsManager.Player.GetComponent<LoadoutManager>();
         optionsBank = new List<LoadoutOption>();

@@ -11,7 +11,7 @@ public class TutorialUI : MonoBehaviour
     void Start()
     {
         trigger.OnTriggerActivate += ShowControls;
-        trigger.OnTriggerActivate += HideControls;
+        hideTrigger.OnTriggerActivate += HideControls;
     }
 
     void ShowControls()

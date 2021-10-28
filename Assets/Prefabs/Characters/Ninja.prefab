@@ -222,7 +222,8 @@ AudioSource:
   m_GameObject: {fileID: 758061105512210739}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: e3263b45d6c04864c8f537d49efb3b62, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -384,7 +385,8 @@ AudioSource:
   m_GameObject: {fileID: 1292416793624679719}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -493,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4159440340574040941
 Transform:
   m_ObjectHideFlags: 0
@@ -523,12 +525,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouth: {fileID: 958540071565868630}
   DisplayName: Stun Wave
-  BulletType: 0
-  HitLayers: {fileID: 0}
+  HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   MaxDistance: 20
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 0}
   ActiveProjectiles: []
+  BulletType: 0
   backwardsForce: 0
   MaxSpreadAngle: 10
   BulletCount: 8
@@ -619,7 +621,8 @@ AudioSource:
   m_GameObject: {fileID: 3284626973075478747}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: ad2c426facb2ccd4fac20694288cdea0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -875,7 +878,8 @@ AudioSource:
   m_GameObject: {fileID: 5124889003780498463}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0514f4eaf7a3ee54e9457ff29c18dcd2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1263,7 +1267,8 @@ AudioSource:
   m_GameObject: {fileID: 7349922464857806567}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 634580ed4cc8bdf44a8c8d16bb6bccc9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1410,7 +1415,8 @@ AudioSource:
   m_GameObject: {fileID: 8006630410610024068}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 8a600fb913d4f064fa00f56e894bd470, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1815,19 +1821,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialOptions:
-  - ability: {fileID: 6923643163349663185}
-    isPassive: 0
-    secondaryAbility: 
   - ability: {fileID: 2225249382224139414}
     isPassive: 0
     secondaryAbility: 
-  Options:
-  - ability: {fileID: 3284626973075478747}
+  - ability: {fileID: 6923643163349663185}
     isPassive: 0
     secondaryAbility: 
   - ability: {fileID: 7349922464857806567}
     isPassive: 0
     secondaryAbility: 
+  Options:
   - ability: {fileID: 1292416793624679719}
     isPassive: 0
     secondaryAbility: 
@@ -1898,7 +1901,8 @@ AudioSource:
   m_GameObject: {fileID: 9089919347116189794}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 58a97b32d6da9f0499009dc79cc5abd9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.75
@@ -2010,22 +2014,22 @@ PrefabInstance:
     - target: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.275
+      value: -0.63
       objectReference: {fileID: 0}
     - target: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.555
+      value: 0.247
       objectReference: {fileID: 0}
     - target: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
         type: 3}
@@ -2040,7 +2044,7 @@ PrefabInstance:
     - target: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
         type: 3}

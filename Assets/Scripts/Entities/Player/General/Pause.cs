@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
     public static Pause Ps;
-
 
     public static bool Paused { get; private set; } = false;
     const string PauseB = "Pause";
@@ -22,9 +21,8 @@ public class Pause : MonoBehaviour
     private void Awake()
     {
         if (Ps)
-            Destroy(gameObject);
-        else
-            Ps = this;
+            Destroy(Ps);
+        Ps = this;
     }
 
     private void Start()
@@ -81,6 +79,13 @@ public class Pause : MonoBehaviour
 
     public bool GetPause()
     {
-        return Input.GetButtonDown(PauseB);
+        return Input.GetButtonDown(PauseB) || Input.GetButtonDown("Cancel");
+    }
+
+
+    public void BackToMainMenu()
+    {
+        TogglePause();
+        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
 }

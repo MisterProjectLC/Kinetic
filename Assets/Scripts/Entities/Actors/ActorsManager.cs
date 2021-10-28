@@ -9,9 +9,13 @@ public class ActorsManager : MonoBehaviour
     public static Dictionary<int, List<Actor>> Actors;
 
     [SerializeField]
-    private Actor PlayerSerialized;
+    private string PlayerSerialized;
     public static Actor Player;
 
+    [SerializeField]
+    Actor Ninja;
+    [SerializeField]
+    Actor Vanguard;
 
     // Start is called before the first frame update
     void Awake()
@@ -21,11 +25,22 @@ public class ActorsManager : MonoBehaviour
         else
         {
             AM = this;
-            if (PlayerSerialized)
+
+            if (PlayerSerialized != "" && Hermes.heroName == "")
+                Hermes.heroName = PlayerSerialized;
+
+            switch (Hermes.heroName)
             {
-                Player = PlayerSerialized;
-                Player.gameObject.SetActive(true);
+                default:
+                    Player = Ninja;
+                    break;
+
+                case "Vanguard":
+                    Player = Vanguard;
+                    break;
             }
+
+            Player.gameObject.SetActive(true);
             Actors = new Dictionary<int, List<Actor>>();
         }
     }
@@ -42,9 +57,6 @@ public class ActorsManager : MonoBehaviour
 
     public Actor GetPlayer()
     {
-        if (Player)
-            return Player;
-        else
-            return PlayerSerialized;
+        return Player;
     }
 }
