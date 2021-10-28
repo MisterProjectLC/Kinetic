@@ -26,6 +26,6 @@ public class WeaponAbility : Ability
         player.MoveVelocity -= BackwardsForce * player.PlayerCamera.transform.forward;
         if (GetComponent<Animator>())
             GetComponent<Animator>().SetTrigger("Shoot");
-        WeaponRef.Fire();
+        WeaponRef.Trigger();
     }
 }

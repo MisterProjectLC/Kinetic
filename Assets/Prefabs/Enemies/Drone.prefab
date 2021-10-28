@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 8041429361272883083}
   - component: {fileID: 2793335532290284254}
   - component: {fileID: 260070860282569955}
-  - component: {fileID: 4664983332930980881}
+  - component: {fileID: 604879301173540162}
   - component: {fileID: 4667401134277738239}
   m_Layer: 11
   m_Name: Drone
@@ -208,15 +208,15 @@ MonoBehaviour:
   weapons:
   - {fileID: 3684800402421968898}
   Model: {fileID: 2216102364452169466}
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 512
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
+  ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
   Movable: 1
   HoverHeight: 2
   GravityMultiplier: 0
   AirDesacceleration: 100
+  TurnToMoveDirection: 0
+  OnlyShootIfPlayerInView: 1
   Stunned: 0
-  updateCooldown: 0.25
 --- !u!114 &260070860282569955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Affiliation: 1
---- !u!114 &4664983332930980881
+--- !u!114 &604879301173540162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2428469021606675725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fdfb782be6743046861eb32409794d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b5ae75a82640aa438b519663463c7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MotorSpeed: 10
@@ -259,6 +259,7 @@ MonoBehaviour:
   updateCooldown: 0.1
   turnSpeed: 100
   turnVertical: 1
+  partThatMoves: {fileID: 0}
 --- !u!1 &3801270060314867548
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,9 +661,7 @@ MonoBehaviour:
   Mouth: {fileID: 3100332752659761561}
   DisplayName: 
   BulletType: 1
-  HitLayers:
-    serializedVersion: 2
-    m_Bits: 135680
+  HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,

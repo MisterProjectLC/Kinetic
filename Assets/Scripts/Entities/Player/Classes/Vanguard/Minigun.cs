@@ -6,7 +6,11 @@ public class Minigun : MonoBehaviour
     float MaxSlowdown = 0.5f;
     float slowdown = 0f;
 
-    float emergencyResetTimer = 0.5f;
+    [SerializeField]
+    float SlowdownRate = 0.05f;
+
+    [SerializeField]
+    float emergencyResetTimer = 0.2f;
     float clock = 0f;
 
     WeaponAbility weaponAbility;
@@ -19,6 +23,13 @@ public class Minigun : MonoBehaviour
         weaponAbility.OnExecute += Execute;
     }
 
+    private void OnDisable()
+    {
+        slowdown = 1f;
+        player.SetSlowdown(1f, "minigun");
+        clock = 0f;
+    }
+
 
     void Update()
     {
@@ -27,6 +38,7 @@ public class Minigun : MonoBehaviour
             clock += Time.deltaTime;
             if (clock > emergencyResetTimer)
             {
+                slowdown = 1f;
                 player.SetSlowdown(1f, "minigun");
                 clock = 0f;
             }
@@ -40,11 +52,11 @@ public class Minigun : MonoBehaviour
         {
             clock = 0f;
             if (slowdown > MaxSlowdown)
-                slowdown -= 0.1f;
+                slowdown -= SlowdownRate;
         }
         else
             slowdown = 1f;
+
         player.SetSlowdown(slowdown, "minigun");
-        //weaponAbility.Execute(Ability.Input.ButtonDown);
     }
 }

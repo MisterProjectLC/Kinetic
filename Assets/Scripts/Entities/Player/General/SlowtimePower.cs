@@ -15,6 +15,8 @@ public class SlowtimePower : MonoBehaviour
     [SerializeField]
     float slowedTimeSpeed = 0.25f;
 
+    float previousTimeSpeed = 1f;
+
     private void Start()
     {
         input = GetComponent<PlayerInputHandler>();
@@ -40,8 +42,11 @@ public class SlowtimePower : MonoBehaviour
 
     void setSlowdown(bool slowdown)
     {
+        if (slowdown)
+            previousTimeSpeed = Time.timeScale;
+
         this.slowdown = slowdown;
-        Time.timeScale = slowdown ? slowedTimeSpeed : 1f;
+        Time.timeScale = slowdown ? slowedTimeSpeed : previousTimeSpeed;
     }
 
     void setJuiceLeft(float juiceLeft)

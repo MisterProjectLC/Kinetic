@@ -47,9 +47,6 @@ public class PlayerInputHandler : MonoBehaviour
             keycodes.Add(KeyCode.Alpha4, 4); keycodes.Add(KeyCode.Alpha5, 5); keycodes.Add(KeyCode.Alpha6, 6);
             keycodes.Add(KeyCode.Alpha7, 7); keycodes.Add(KeyCode.Alpha8, 8); keycodes.Add(KeyCode.Alpha9, 9);
         }
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     public Vector3 GetMoveInput()

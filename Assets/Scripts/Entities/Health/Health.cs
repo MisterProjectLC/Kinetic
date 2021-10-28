@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public int CurrentHealth = 5;
     public int CriticalHealth = 1;
     public int MaxHealth = 5;
+    bool critical = false;
     bool died = false;
 
     [HideInInspector]
@@ -37,9 +38,12 @@ public class Health : MonoBehaviour
         if (OnDamage != null)
             OnDamage.Invoke();
 
-        if (CurrentHealth <= CriticalHealth)
+        if (CurrentHealth <= CriticalHealth && !critical)
+        {
+            critical = true;
             if (OnCriticalLevel != null)
                 OnCriticalLevel.Invoke();
+        }
 
         if (CurrentHealth <= 0)
             Kill();
@@ -60,5 +64,8 @@ public class Health : MonoBehaviour
         CurrentHealth = Mathf.Min(MaxHealth, CurrentHealth + heal);
         if (OnHeal != null)
             OnHeal.Invoke();
+
+        if (CurrentHealth > CriticalHealth && critical)    
+            critical = false;
     }
 }

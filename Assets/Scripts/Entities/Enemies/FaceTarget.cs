@@ -24,14 +24,14 @@ public class FaceTarget : MonoBehaviour
     Transform playerPosition;
     private float clock = 0f;
 
-    Enemy enemy;
-
     // Start is called before the first frame update
     void Start()
     {
         playerPosition = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
         newTargetPosition = playerPosition.position;
-        enemy = GetComponent<Enemy>();
+        Enemy enemy = GetComponent<Enemy>();
+        if (!enemy)
+            enemy = GetComponentInParent<Enemy>();
         enemy.OnActiveUpdate += OnActiveUpdate;
 
         if (!partThatMoves)

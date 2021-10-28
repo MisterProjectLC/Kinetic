@@ -3,8 +3,16 @@ using UnityEngine;
 
 public class LevelUpSystem : MonoBehaviour
 {
+    public static LevelUpSystem LUS;
+
     [SerializeField]
     List<RectTransform> initialSlots;
+    [SerializeField]
+    RectTransform initialPassiveSlot;
+    [SerializeField]
+    GameObject NewAbilityText;
+    [SerializeField]
+    GameObject NewAbilitySquare;
 
     [Header("Prefab References")]
     public GameObject optionPrefab;
@@ -19,6 +27,11 @@ public class LevelUpSystem : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if (LUS)
+            Destroy(gameObject);
+        else
+            LUS = this;
+
         LoadoutManager loadout = ActorsManager.Player.GetComponent<LoadoutManager>();
         optionsBank = new List<LoadoutOption>();
         optionsShown = new List<LoadoutOption>();
@@ -28,9 +41,7 @@ public class LevelUpSystem : MonoBehaviour
         foreach (LoadoutManager.Option option in loadout.InitialOptions)
         {
             LoadoutOption loadoutOption = GenerateOptionInstance(option).GetComponent<LoadoutOption>();
-            DropSlot dropSlot = initialSlots[i].GetComponent<DropSlot>();
-            dropSlot.OnDrop(loadoutOption.gameObject);
-            Debug.Log(dropSlot.GetComponent<LoadoutSlot>().AbilityNumber);
+            initialSlots[i].GetComponent<DropSlot>().OnDrop(loadoutOption.gameObject);
             if (i != 0 && option.secondaryAbility.Length > 0)
                 i++;
             i++;
@@ -39,9 +50,14 @@ public class LevelUpSystem : MonoBehaviour
         foreach (LoadoutManager.Option option in loadout.Options)
         {
             GameObject GO = GenerateOptionInstance(option);
-            GO.SetActive(false);
-            LoadoutOption loadoutOption = GO.GetComponent<LoadoutOption>();
-            optionsBank.Add(loadoutOption);
+            if (option.ability.name == "Killheal")
+                initialPassiveSlot.GetComponent<DropSlot>().OnDrop(GO.GetComponent<LoadoutOption>().gameObject);
+            else
+            {
+                GO.SetActive(false);
+                LoadoutOption loadoutOption = GO.GetComponent<LoadoutOption>();
+                optionsBank.Add(loadoutOption);
+            }
         }
     }
 
@@ -71,6 +87,8 @@ public class LevelUpSystem : MonoBehaviour
 
     public void LevelUp()
     {
+        NewAbilityText.SetActive(true);
+        NewAbilitySquare.SetActive(true);
         SetLoweredMenu(false);
 
         for (int i = 0; i < 3; i++) {
@@ -114,5 +132,7 @@ public class LevelUpSystem : MonoBehaviour
             optionsBank.Add(shownOption);
         }
         optionsShown.Clear();
+        NewAbilityText.SetActive(false);
+        NewAbilitySquare.SetActive(false);
     }
 }

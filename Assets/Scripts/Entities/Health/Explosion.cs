@@ -17,7 +17,7 @@ public class Explosion : MonoBehaviour
     public float NeuteredRate = 1f;
 
     [Header("Hit layers")]
-    public LayerMask HitLayers;
+    public LayersConfig HitLayers;
     public LayerMask NeuteredHitLayers;
     //public float KnockbackForce = 5f;
 
@@ -45,7 +45,7 @@ public class Explosion : MonoBehaviour
         if (GetComponent<AudioSource>())
             GetComponent<AudioSource>().Play();
 
-        Physics.OverlapSphereNonAlloc(transform.position, Radius, colliders, HitLayers);
+        Physics.OverlapSphereNonAlloc(transform.position, Radius, colliders, HitLayers.layers);
         foreach (Collider collider in colliders)
         {
             if (!collider)

@@ -897,7 +897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentHealth: 5
   CriticalHealth: 1
-  MaxHealth: 8
+  MaxHealth: 2
 --- !u!114 &420084857831911392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,14 +928,15 @@ MonoBehaviour:
   debug: 0
   weapons: []
   Model: {fileID: 4417699198213755438}
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 512
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
+  ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
   Movable: 1
   HoverHeight: 1
   GravityMultiplier: 1
   AirDesacceleration: 0
   TurnToMoveDirection: 1
+  OnlyShootIfPlayerInView: 1
+  CollisionDistance: 1
   Stunned: 0
 --- !u!114 &5000168887188244545
 MonoBehaviour:

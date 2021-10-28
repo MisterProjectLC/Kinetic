@@ -21,6 +21,8 @@ public class ObjectManager : MonoBehaviour
         RocketLauncherExplosion,
         PlayerLaserProjectile,
         CentibombExplosion,
+        EnemyRocket,
+        RocketeerExplosion,
         Count
     }
 

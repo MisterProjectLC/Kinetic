@@ -38,6 +38,12 @@ public class Destructable : MonoBehaviour
         if (GetComponent<Poolable>())
             ObjectManager.OM.EraseObject(GetComponent<Poolable>());
         else
-            Destroy(gameObject);
+            StartCoroutine("Destruct");
+    }
+
+    IEnumerator Destruct()
+    {
+        yield return new WaitForSeconds(0.01f);
+        Destroy(gameObject);
     }
 }

@@ -14,7 +14,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public GameObject Model;
 
-    public LayerMask GroundLayers;
+    public LayersConfig GroundLayers;
+    public LayersConfig ViewBlockedLayers;
 
     [Header("Attributes")]
     public bool Movable = true;
@@ -22,9 +23,16 @@ public class Enemy : MonoBehaviour
     public float GravityMultiplier = 1f;
     public float AirDesacceleration = 0f;
 
+    [Header("Options")]
     [SerializeField]
     [Tooltip("If true, lets the NavMeshAgent control the rotation of this enemy")]
     bool TurnToMoveDirection = false;
+
+    [SerializeField]
+    bool OnlyShootIfPlayerInView = true;
+
+    [SerializeField]
+    float CollisionDistance = 1f;
 
     Vector3 moveVelocity = Vector3.zero;
 
@@ -32,18 +40,15 @@ public class Enemy : MonoBehaviour
     public float Stunned = 0f;
 
     bool airborne = false;
-    float[] weaponClocks;
     private NavMeshAgent pathAgent;
+    Transform playerTransform;
 
     public UnityAction OnActiveUpdate;
     public UnityAction<Vector3> OnKnockbackCollision;
 
     void Start()
     {
-        weaponClocks = new float[weapons.Length];
-        for (int i = 0; i < weaponClocks.Length; i++)
-            weaponClocks[i] -= weapons[i].InitialFireCooldown;
-
+        playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
         pathAgent = GetComponent<NavMeshAgent>();
         if (pathAgent)
         {
@@ -71,18 +76,29 @@ public class Enemy : MonoBehaviour
 
     private void ActivateWeapons()
     {
-        int i = 0;
+        if (OnlyShootIfPlayerInView && !IsPlayerInView())
+            return;
+
         foreach (Weapon weapon in weapons)
-        {
-            weaponClocks[i] += Time.deltaTime;
             if (weapon)
-                if (weaponClocks[i] > weapon.FireCooldown)
-                {
-                    weaponClocks[i] = 0f;
-                    weapon.Fire();
-                }
-            i++;
-        }
+                weapon.Trigger();
+    }
+
+    public bool IsPlayerInView()
+    {
+        Vector3 playerDistance = playerTransform.position - Model.transform.position;
+
+        // Check if inside field of view
+        if (Vector3.Dot(Model.transform.forward, playerDistance) < 0f)
+            return false;
+
+        // Check if view is obstructed
+        Ray ray = new Ray(Model.transform.position, playerTransform.position - Model.transform.position);
+        Physics.Raycast(ray, out RaycastHit hit, 100f, ViewBlockedLayers.layers, QueryTriggerInteraction.Ignore);
+        if (hit.collider && (hit.distance < playerDistance.magnitude))
+            return false;
+
+        return true;
     }
 
 
@@ -130,8 +146,8 @@ public class Enemy : MonoBehaviour
         if (!pathAgent || !pathAgent.updatePosition)
         {
             // Collision
-            Ray ray = new Ray(transform.position, moveVelocity);
-            Physics.Raycast(ray, out RaycastHit hitInfo, 1f, GroundLayers, QueryTriggerInteraction.Ignore);
+            Ray ray = new Ray(Model.transform.position, moveVelocity.normalized);
+            Physics.Raycast(ray, out RaycastHit hitInfo, CollisionDistance, GroundLayers.layers, QueryTriggerInteraction.Ignore);
             if (hitInfo.collider)
             {
                 if (OnKnockbackCollision != null)
@@ -160,7 +176,7 @@ public class Enemy : MonoBehaviour
             ray = new Ray(transform.position + Vector3.up, Vector3.down);
         else
             ray = new Ray(pathAgent.nextPosition + Vector3.up, Vector3.down);
-        Physics.Raycast(ray, out RaycastHit hitInfo, HoverHeight + 1f, GroundLayers, QueryTriggerInteraction.Ignore);
+        Physics.Raycast(ray, out RaycastHit hitInfo, HoverHeight + 1f, GroundLayers.layers, QueryTriggerInteraction.Ignore);
         return hitInfo;
     }
 

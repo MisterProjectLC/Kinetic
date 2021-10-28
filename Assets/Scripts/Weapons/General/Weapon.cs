@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     public ObjectManager.PoolableType BulletType;
 
     [Tooltip("Layer mask")]
-    public LayerMask HitLayers;
+    public LayersConfig HitLayers;
 
     [Header("Hitscan")]
     [Tooltip("Max distance to which the bullets travel")]
@@ -49,17 +49,39 @@ public class Weapon : MonoBehaviour
     [Tooltip("If enabled, holding the button engages repeated shooting")]
     public bool Automatic = false;
     public float FireCooldown = 0f;
+    float clock = 0f;
 
     public float InitialFireCooldown = 0f;
 
+    public UnityAction OnFire;
+
     private void Start()
     {
+        clock = InitialFireCooldown;
         ActiveProjectiles = new List<GameObject>(BulletCount);
         MaxSpreadAngle /= 100f;
     }
 
+    private void Update()
+    {
+        if (clock > 0f)
+            clock -= Time.deltaTime;
+    }
+
+    public void Trigger()
+    {
+        if (clock <= 0f)
+        {
+            Fire();
+            clock = FireCooldown;
+        }
+    }
+
     public void Fire()
     {
+        if (OnFire != null)
+            OnFire.Invoke();
+
         for (int i = 0; i < BulletCount; i++)
         {
             // Get Direction
@@ -71,7 +93,7 @@ public class Weapon : MonoBehaviour
             {
                 GameObject instance = ObjectManager.OM.SpawnObjectFromPool(BulletType, Projectile).gameObject;
                 instance.transform.position = Mouth.position;
-                instance.GetComponent<Projectile>().Setup(direction, HitLayers, GetComponentInParent<Actor>().gameObject);
+                instance.GetComponent<Projectile>().Setup(direction, HitLayers.layers, GetComponentInParent<Actor>().gameObject);
                 if (instance.GetComponent<Attack>() && GetComponent<Attack>() && GetComponent<Attack>().OnKill != null)
                     instance.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
                 instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;
@@ -80,7 +102,7 @@ public class Weapon : MonoBehaviour
             // Hitscan attack
             } else { 
                 Ray ray = new Ray(Mouth.position, direction);
-                Physics.Raycast(ray, out RaycastHit hit, MaxDistance, HitLayers);
+                Physics.Raycast(ray, out RaycastHit hit, MaxDistance, HitLayers.layers);
                 if (hit.collider)
                 {
                     Vector3 randomVector = Random.insideUnitSphere;

@@ -110,9 +110,7 @@ MonoBehaviour:
   Mouth: {fileID: 5345296704080276421}
   DisplayName: 
   BulletType: 1
-  HitLayers:
-    serializedVersion: 2
-    m_Bits: 135680
+  HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -123,6 +121,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  InitialFireCooldown: 0
 --- !u!1 &3379298300632395941
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 5
+  CriticalHealth: 1
   MaxHealth: 3
 --- !u!114 &1088624069320341115
 MonoBehaviour:
@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 5
+  CriticalHealth: 1
   MaxHealth: 10
 --- !u!114 &1058401267633563095
 MonoBehaviour:
@@ -350,15 +351,15 @@ MonoBehaviour:
   - {fileID: 3898002601432345426}
   - {fileID: 6963166280264872520}
   Model: {fileID: 4655438382437377873}
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 512
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
+  ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
   Movable: 0
   HoverHeight: 1
   GravityMultiplier: 1
   AirDesacceleration: 0
+  TurnToMoveDirection: 0
+  OnlyShootIfPlayerInView: 1
   Stunned: 0
-  updateCooldown: 1e+9
 --- !u!114 &7112065824988104383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +388,7 @@ MonoBehaviour:
   updateCooldown: 0.1
   turnSpeed: 300
   turnVertical: 0
+  partThatMoves: {fileID: 0}
 --- !u!114 &1254519644011659959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 5
+  CriticalHealth: 1
   MaxHealth: 3
 --- !u!114 &604446897212688494
 MonoBehaviour:
@@ -760,9 +763,7 @@ MonoBehaviour:
   Mouth: {fileID: 5032173961085111427}
   DisplayName: 
   BulletType: 1
-  HitLayers:
-    serializedVersion: 2
-    m_Bits: 135680
+  HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -773,6 +774,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  InitialFireCooldown: 0
 --- !u!1 &8797317341745767120
 GameObject:
   m_ObjectHideFlags: 0

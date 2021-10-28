@@ -341,13 +341,14 @@ MonoBehaviour:
   - {fileID: 6549920371188109284}
   - {fileID: 7737879888787067051}
   Model: {fileID: 2216102364452169466}
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 512
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
+  ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
   Movable: 1
   HoverHeight: 1
   GravityMultiplier: 1
   AirDesacceleration: 0
+  TurnToMoveDirection: 0
+  OnlyShootIfPlayerInView: 1
   Stunned: 0
 --- !u!114 &1989609916023471263
 MonoBehaviour:
@@ -541,9 +542,7 @@ MonoBehaviour:
   Mouth: {fileID: 2133786073815729642}
   DisplayName: 
   BulletType: 1
-  HitLayers:
-    serializedVersion: 2
-    m_Bits: 135680
+  HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -794,9 +793,7 @@ MonoBehaviour:
   Mouth: {fileID: 3195455882003618465}
   DisplayName: 
   BulletType: 1
-  HitLayers:
-    serializedVersion: 2
-    m_Bits: 135680
+  HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
