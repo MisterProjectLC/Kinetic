@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Charge : Ability
@@ -40,8 +39,14 @@ public class Charge : Ability
 
     void StopCharging()
     {
-        if (charged && player.MoveVelocity.magnitude < (MinimumForce+MaximumForce)/2)
-            charged = false;
+        if (charged && player.MoveVelocity.magnitude < MinimumForce / 2)
+            StartCoroutine("ChargeFalse");
+    }
+
+    IEnumerator ChargeFalse()
+    {
+        yield return new WaitForSeconds(0.5f);
+        charged = false;
     }
     
 
@@ -62,11 +67,12 @@ public class Charge : Ability
         {
             player.SetSlowdown(Mathf.Lerp(1f, MaxGroundSlowdown, charge/MaxCharge), "charge");
             player.SetSlowdown(Mathf.Lerp(1f, MaxAirSlowdown, charge/MaxCharge), "charge", false);
+            player.MoveVelocity = player.MoveVelocity * (1f - charge / MaxCharge);
             if (charge < MaxCharge)
                 charge += 10*Time.deltaTime;
             else
                 charge = MaxCharge;
-            Debug.Log(charge);
+
             ResetCooldown();
         } else
         {
@@ -76,7 +82,7 @@ public class Charge : Ability
             if (player.IsGrounded)
                 player.Translate(Vector3.up*1.15f);
             player.ApplyForce(Mathf.Lerp(MinimumForce, MaximumForce, charge / MaxCharge) *
-                Vector3.ProjectOnPlane(player.PlayerCamera.transform.TransformVector(Vector3.forward), Vector3.up));
+                player.PlayerCamera.transform.TransformVector(Vector3.forward));
             charge = 0;
 
             PlaySound(ChargeSFX);

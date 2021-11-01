@@ -6,6 +6,9 @@ public class Pause : MonoBehaviour
 {
     public static Pause Ps;
 
+    [SerializeField]
+    bool CinematicMode = false;
+
     public static bool Paused { get; private set; } = false;
     const string PauseB = "Pause";
 
@@ -63,8 +66,9 @@ public class Pause : MonoBehaviour
             Time.timeScale = oldTimeScale;
             foreach (GameObject GO in PausedObjects)
                 GO.SetActive(false);
-            foreach (GameObject GO in PlayObjects)
-                GO.SetActive(true);
+            if (!CinematicMode)
+                foreach (GameObject GO in PlayObjects)
+                    GO.SetActive(true);
         }
     }
 

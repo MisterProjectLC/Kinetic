@@ -52,12 +52,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
   DisplayName: Akimbo
-  BulletType: 0
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 0}
   ActiveProjectiles: []
+  BulletType: 0
   backwardsForce: 1
   MaxSpreadAngle: 2
   BulletCount: 1
@@ -103,7 +103,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -160,9 +160,20 @@ public class PlayerCharacterController : MonoBehaviour
             {
                 // Horizontal air movement
                 Vector3 horizontalVelocity = Vector3.ProjectOnPlane(MoveVelocity, Vector3.up);
-                Vector3 newHorizontalVelocity = horizontalVelocity + (moveInput * AirborneAcceleration * AirMultiplier * Time.deltaTime);
-                if (horizontalVelocity.magnitude < AirborneMaxStrafeSpeed || newHorizontalVelocity.magnitude < horizontalVelocity.magnitude)
-                    MoveVelocity = newHorizontalVelocity + (MoveVelocity.y * Vector3.up);
+
+                // Set when normal velocity
+                if (horizontalVelocity.magnitude <= AirborneMaxStrafeSpeed + 1)
+                {
+                    Vector3 targetVelocity = moveInput * AirborneMaxStrafeSpeed * AirMultiplier + (MoveVelocity.y * Vector3.up);
+                    MoveVelocity = Vector3.Lerp(MoveVelocity, targetVelocity, AirborneAcceleration/10 * Time.deltaTime);
+                }
+                // Adjust when super fast
+                else
+                {
+                    Vector3 newHorizontalVelocity = horizontalVelocity + (moveInput * AirborneAcceleration * AirMultiplier * Time.deltaTime);
+                    if (/*horizontalVelocity.magnitude < AirborneMaxStrafeSpeed || */newHorizontalVelocity.magnitude < horizontalVelocity.magnitude)
+                        MoveVelocity = newHorizontalVelocity + (MoveVelocity.y * Vector3.up);
+                }
 
                 // limit air speed to a maximum, but only horizontally
                 /*
@@ -343,7 +354,8 @@ public class PlayerCharacterController : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        OnCollision.Invoke(hit);
+        if (OnCollision != null)
+            OnCollision.Invoke(hit);
     }
 
     private void OnTriggerEnter(Collider other)

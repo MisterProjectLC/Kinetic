@@ -15,7 +15,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     private void Awake()
     {
-        OnInsert += assignToSlot;
+        OnInsert += AssignToSlot;
     }
 
     private void Start()
@@ -25,7 +25,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    void assignToSlot(DropSlot slot)
+    void AssignToSlot(DropSlot slot)
     {
         AssignedSlot = slot;
     }
@@ -40,6 +40,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         canvasGroup.blocksRaycasts = false;
         if (AssignedSlot)
         {
+            AssignedSlot.OnRemove(gameObject);
             OnRemove.Invoke(AssignedSlot);
             AssignedSlot = null;
         }

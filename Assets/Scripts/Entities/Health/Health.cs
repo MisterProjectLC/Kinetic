@@ -13,11 +13,11 @@ public class Health : MonoBehaviour
     bool died = false;
 
     [HideInInspector]
-    public UnityAction OnDamage;
+    public UnityAction<int> OnDamage;
     [HideInInspector]
     public UnityAction OnCriticalLevel;
     [HideInInspector]
-    public UnityAction OnHeal;
+    public UnityAction<int> OnHeal;
     [HideInInspector]
     public UnityAction OnDie;
 
@@ -36,7 +36,7 @@ public class Health : MonoBehaviour
         CurrentHealth -= damage;
 
         if (OnDamage != null)
-            OnDamage.Invoke();
+            OnDamage.Invoke(damage);
 
         if (CurrentHealth <= CriticalHealth && !critical)
         {
@@ -63,7 +63,7 @@ public class Health : MonoBehaviour
     {
         CurrentHealth = Mathf.Min(MaxHealth, CurrentHealth + heal);
         if (OnHeal != null)
-            OnHeal.Invoke();
+            OnHeal.Invoke(heal);
 
         if (CurrentHealth > CriticalHealth && critical)    
             critical = false;

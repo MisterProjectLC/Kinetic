@@ -25,6 +25,7 @@ public class Explosion : MonoBehaviour
     [SerializeField]
     const int maxColliders = 20;
     Collider[] colliders = new Collider[maxColliders];
+    List<Health> enemies = new List<Health>(maxColliders);
 
     // Start is called before the first frame update
     void Awake()
@@ -35,6 +36,7 @@ public class Explosion : MonoBehaviour
     private void OnEnable()
     {
         colliders = new Collider[maxColliders];
+        enemies.Clear();
         StartCoroutine("Explode");
     }
 
@@ -52,9 +54,13 @@ public class Explosion : MonoBehaviour
                 break;
 
             float rate = ((NeuteredHitLayers.value >> collider.gameObject.layer) == 1) ? NeuteredRate : 1f;
-
             float distanceToTarget = (transform.position - collider.ClosestPoint(transform.position)).magnitude / Radius;
-            attack.AttackTarget(collider.gameObject, rate * (1f - distanceToTarget*(1f - FallOffRate)));
+
+            if (collider.GetComponent<Damageable>() && !enemies.Contains(collider.GetComponent<Damageable>().GetHealth()))
+            {
+                enemies.Add(collider.GetComponent<Damageable>().GetHealth());
+                attack.AttackTarget(collider.gameObject, rate * (1f - distanceToTarget * (1f - FallOffRate)));
+            }
         }
     }
 }

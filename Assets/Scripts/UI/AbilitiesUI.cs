@@ -13,7 +13,7 @@ public class AbilitiesUI : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        AbilitySize = SkillImages[0].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta;
+        AbilitySize = SkillImages[0].transform.GetChild(0).GetComponent<RectTransform>().sizeDelta;
 
         loadoutManager = ActorsManager.Player.GetComponent<LoadoutManager>();
         loadoutManager.OnDeviceSwitch += DeviceUpdate;
@@ -31,8 +31,8 @@ public class AbilitiesUI : MonoBehaviour
         for (int i = 0; i < loadoutManager.GetCurrentLoadout().Length; i++)
         {
             Ability currentAbility = loadoutManager.GetCurrentLoadout()[i];
-            if (currentAbility && !(currentAbility is WeaponAbility))
-                SkillImages[i].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta =
+            if (currentAbility)
+                SkillImages[i].transform.GetChild(0).GetComponent<RectTransform>().sizeDelta =
                     AbilitySize * new Vector2(1f - (currentAbility.Timer/currentAbility.Cooldown), 1f);
         }
     }
@@ -71,10 +71,7 @@ public class AbilitiesUI : MonoBehaviour
 
             SkillImages[i].gameObject.SetActive(true);
             SkillImages[i].GetComponentInChildren<Text>().text = abilities[i].DisplayName;
-            if (!(abilities[i] is WeaponAbility))
-                SkillImages[i].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta = Vector2.zero;
-            else
-                SkillImages[i].GetComponentInChildren<Image>().GetComponent<RectTransform>().sizeDelta = AbilitySize;
+            SkillImages[i].transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = Vector2.zero;
         }
 
         Device currentDevice = loadoutManager.GetCurrentDevice();

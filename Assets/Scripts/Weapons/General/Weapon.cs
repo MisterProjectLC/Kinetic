@@ -98,7 +98,10 @@ public class Weapon : MonoBehaviour
                 instance.transform.position = Mouth.position;
                 instance.GetComponent<Projectile>().Setup(direction, HitLayers.layers, GetComponentInParent<Actor>().gameObject);
                 if (instance.GetComponent<Attack>() && GetComponent<Attack>() && GetComponent<Attack>().OnKill != null)
+                {
+                    instance.GetComponent<Attack>().OnKill = null;
                     instance.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
+                }
                 instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;
                 ActiveProjectiles.Add(instance);
 

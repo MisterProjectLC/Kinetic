@@ -55,7 +55,7 @@ MonoBehaviour:
   MaximumForce: 100
   MaxCharge: 2.25
   MaxGroundSlowdown: 0.25
-  MaxAirSlowdown: 0.25
+  MaxAirSlowdown: 0
   ChargingSFX: {fileID: 8300000, guid: 20bbb4d06e338b444a9eec3348aebadf, type: 3}
   ChargeSFX: {fileID: 8300000, guid: 1c2372771461dcb48ac4fbebb45648b8, type: 3}
 --- !u!114 &6106698216625119604
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 4
+  Damage: 12
 --- !u!114 &5777217409242534307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Knockback: 100
+  Knockback: 200
   Effects: []
 --- !u!82 &5088242222322952281
 AudioSource:
@@ -405,14 +405,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1751639598095803834}
-  - component: {fileID: 5273812271440728085}
+  - component: {fileID: 8520425101159635055}
   m_Layer: 12
-  m_Name: Shell Bombs
+  m_Name: Spatial Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1751639598095803834
 Transform:
   m_ObjectHideFlags: 0
@@ -427,7 +427,7 @@ Transform:
   m_Father: {fileID: 4021532750877547998}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5273812271440728085
+--- !u!114 &8520425101159635055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -436,22 +436,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5307980427766246164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c29faeae5cfbb484792ed4a375549c2e, type: 3}
+  m_Script: {fileID: 11500000, guid: d544779e76c9bfb45917b33fb04581fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Shell Bombs
-  Cooldown: 8
+  DisplayName: Spatial Anchor
+  Cooldown: 3
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
-  ShellBomb: {fileID: 5531395347504132974, guid: 0dfe44ab5c4c87a4ea669bf65a283434,
-    type: 3}
-  HitLayers:
-    serializedVersion: 2
-    m_Bits: 2560
-  ShellCount: 3
-  ShellCooldown: 0.1
-  BackwardsForce: 2
 --- !u!1 &5349026757627506031
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +845,7 @@ MonoBehaviour:
   JumpForce: 10
   GravityMultiplier: 1
   GravityEnabled: 1
-  AirborneMaxStrafeSpeed: 7
+  AirborneMaxStrafeSpeed: 12
   AirborneMaxSpeed: 75
   AirborneAcceleration: 15
   RotationSpeed: 400

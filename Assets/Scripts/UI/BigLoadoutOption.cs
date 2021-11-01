@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class BigLoadoutOption : MonoBehaviour
 {
+    LoadoutSlot primarySlot;
     LoadoutSlot secondarySlot;
 
     // Start is called before the first frame update
@@ -35,14 +36,15 @@ public class BigLoadoutOption : MonoBehaviour
 
     public void OnPrimaryInsert(DropSlot slot)
     {
-        LoadoutSlot primarySlot = slot.GetComponent<LoadoutSlot>();
-        if (primarySlot.AbilityNumber >= Constants.SlotsPerLoadout - 1)
+        primarySlot = slot.GetComponent<LoadoutSlot>();
+        if (primarySlot.NextSlot == null || primarySlot.NextSlot.GetComponent<DropSlot>().InsertedDragDrop != null)
             secondarySlot.gameObject.SetActive(false);
         else
         {
             secondarySlot.gameObject.SetActive(true);
             secondarySlot.LoadoutNumber = primarySlot.LoadoutNumber;
             secondarySlot.AbilityNumber = primarySlot.AbilityNumber + 1;
+            primarySlot.NextSlot.GetComponent<DropSlot>().Label.SetActive(false);
         }
 
         secondarySlot.GetComponent<DropSlot>().Offset = GetComponent<RectTransform>().anchoredPosition;
@@ -54,6 +56,11 @@ public class BigLoadoutOption : MonoBehaviour
 
         if (secondaryDropSlot.InsertedDragDrop && secondaryDropSlot.InsertedDragDrop.OnRemove != null)
             secondaryDropSlot.InsertedDragDrop.OnRemove.Invoke(secondaryDropSlot);
-        secondarySlot.gameObject.SetActive(false);
+
+        if (secondaryDropSlot.gameObject.activeInHierarchy)
+        {
+            primarySlot.NextSlot.GetComponent<DropSlot>().Label.SetActive(true);
+            secondarySlot.gameObject.SetActive(false);
+        }
     }
 }

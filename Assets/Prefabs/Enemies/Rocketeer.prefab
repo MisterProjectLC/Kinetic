@@ -371,13 +371,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouth: {fileID: 8681745296364251846}
   DisplayName: 
-  BulletType: 8
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 1224324934996319193, guid: 1fe0f398bb9b4e54e8bab14ee81d0bc7,
     type: 3}
   ActiveProjectiles: []
+  BulletType: 8
   backwardsForce: 20
   MaxSpreadAngle: 0
   BulletCount: 1
@@ -1180,8 +1180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 5
-  CriticalHealth: 50
-  MaxHealth: 100
+  CriticalHealth: 40
+  MaxHealth: 75
 --- !u!114 &8460232533797037908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,6 +1293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StaggerDuration: 2
+  maxDistance: 30
   weapon: {fileID: 5243596836339068164}
 --- !u!95 &5897277343372701003
 Animator:

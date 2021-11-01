@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,10 +18,26 @@ public class Powerup : MonoBehaviour
     {
         if (other.GetComponent<PlayerCharacterController>())
         {
+            if (GetComponent<AudioSource>())
+            {
+                GetComponent<AudioSource>().Play();
+                Debug.Log("Played sound");
+            }
+
             if (OnPowerup != null)
                 OnPowerup.Invoke(other.gameObject);
 
-            Destroy(gameObject);
+            StartCoroutine("AutoDestruct");
         }
+    }
+
+    IEnumerator AutoDestruct()
+    {
+        if (GetComponent<AudioSource>())
+            yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+        else
+            yield return new WaitForSeconds(0.001f);
+
+        Destroy(gameObject);
     }
 }

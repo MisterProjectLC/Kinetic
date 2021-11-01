@@ -717,7 +717,7 @@ Transform:
   m_GameObject: {fileID: 4723685425368486121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.5}
   m_Children:
   - {fileID: 5612304501003934921}
   - {fileID: 1732504925227908198}
@@ -745,7 +745,9 @@ MonoBehaviour:
     m_Bits: 4096
   SpawnPoint: {fileID: 1732504925227908198}
   DespawnPoint: {fileID: 6513269908428177055}
+  detectSize: {x: 0, y: 0, z: 0}
   detectPosOffset: {x: 0, y: 0.1, z: 0}
+  moveVector: {x: 0, y: 0, z: 0}
   Speed: 5
   isJump: 0
 --- !u!114 &7640681179037643344

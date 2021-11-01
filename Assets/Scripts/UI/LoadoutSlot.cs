@@ -5,6 +5,8 @@ public class LoadoutSlot : MonoBehaviour
     public int AbilityNumber = 0;
     public int LoadoutNumber = 0;
 
+    public LoadoutSlot NextSlot;
+
     public void SetAbility(GameObject ability, LoadoutSlot slot, bool activating)
     {
         if (LoadoutNumber >= 0)

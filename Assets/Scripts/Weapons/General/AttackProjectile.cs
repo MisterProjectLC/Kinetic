@@ -19,7 +19,7 @@ public class AttackProjectile : MonoBehaviour
         newObject.transform.position = transform.position;
         if (newObject.GetComponent<Attack>() && GetComponent<Attack>())
         {
-            newObject.GetComponent<Attack>().OnKill -= GetComponent<Attack>().OnKill;
+            newObject.GetComponent<Attack>().OnKill = null;
             newObject.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
         }
 

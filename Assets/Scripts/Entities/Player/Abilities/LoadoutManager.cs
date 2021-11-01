@@ -161,7 +161,8 @@ public class LoadoutManager : MonoBehaviour
         if (Device)
             Device.gameObject.SetActive(true);
 
-        OnDeviceSwitch.Invoke(Device);
+        if (OnDeviceSwitch != null)
+            OnDeviceSwitch.Invoke(Device);
     }
 
 
@@ -261,7 +262,8 @@ public class LoadoutManager : MonoBehaviour
         //Debug.Log(loadout + ", " + abilityNumber + ": " + ability.name);
         //Debug.Log(Loadouts[loadout].abilities[abilityNumber].gameObject.name);
 
-        OnLoadoutSwitch.Invoke();
+        if (OnLoadoutSwitch != null)
+            OnLoadoutSwitch.Invoke();
     }
 
     public void SetPassive(GameObject passive, bool isActivated)

@@ -15,7 +15,7 @@ public class HealthbarUI : BarUI
         playerHealth.OnHeal += UpdateHealth;
     }
 
-    void UpdateHealth()
+    void UpdateHealth(int change)
     {
         UpdateBar(playerHealth.CurrentHealth, playerHealth.MaxHealth);
     }

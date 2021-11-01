@@ -34,4 +34,9 @@ public class Damageable : MonoBehaviour
         HealthRef.InflictDamage((int)Mathf.Floor(damage * DamageSensitivity));
         HealthRef.OnDie -= attack.OnKill;
     }
+
+    public Health GetHealth()
+    {
+        return HealthRef;
+    }
 }

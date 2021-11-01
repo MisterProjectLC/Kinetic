@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Destructable : MonoBehaviour
@@ -43,7 +42,13 @@ public class Destructable : MonoBehaviour
 
     IEnumerator Destruct()
     {
-        yield return new WaitForSeconds(0.01f);
+        if (GetComponent<AudioSource>())
+        {
+            GetComponent<AudioSource>().Play();
+            yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+        }
+        else
+            yield return new WaitForSeconds(0.01f);
         Destroy(gameObject);
     }
 }
