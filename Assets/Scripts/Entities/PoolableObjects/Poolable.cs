@@ -6,4 +6,7 @@ public class Poolable : MonoBehaviour
 {
     [SerializeField]
     public ObjectManager.PoolableType Type;
+
+    [HideInInspector]
+    public bool alreadyInitialized = false;
 }

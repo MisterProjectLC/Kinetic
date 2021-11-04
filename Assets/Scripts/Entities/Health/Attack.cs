@@ -9,7 +9,7 @@ public class Attack : MonoBehaviour
     public int Damage = 1;
 
     [HideInInspector]
-    public UnityAction<GameObject, float> OnAttack;
+    public UnityAction<GameObject, float, int> OnAttack;
     [HideInInspector]
     public UnityAction OnKill;
 
@@ -34,8 +34,7 @@ public class Attack : MonoBehaviour
         // Damage
         if (target.GetComponent<Damageable>())
         {
-            if (OnAttack != null)
-                OnAttack.Invoke(target, multiplier);
+            OnAttack?.Invoke(target, multiplier, (int)(multiplier * Damage));
             target.GetComponent<Damageable>().InflictDamage((int)(multiplier*Damage), this);
         }
     }

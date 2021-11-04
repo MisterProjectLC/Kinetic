@@ -11,17 +11,13 @@ public class AbilitiesUI : MonoBehaviour
     Vector2 AbilitySize;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         AbilitySize = SkillImages[0].transform.GetChild(0).GetComponent<RectTransform>().sizeDelta;
 
         loadoutManager = ActorsManager.Player.GetComponent<LoadoutManager>();
         loadoutManager.OnDeviceSwitch += DeviceUpdate;
         loadoutManager.OnLoadoutSwitch += LoadoutUpdate;
-    }
-
-    private void Start()
-    {
         LoadoutUpdate();
     }
 

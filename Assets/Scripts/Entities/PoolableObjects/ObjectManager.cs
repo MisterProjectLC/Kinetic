@@ -46,18 +46,20 @@ public class ObjectManager : MonoBehaviour
     {
         if (Poolables[(int)type].Count > 0)
         {
-            GameObject newObject;
-            newObject = Poolables[(int)type].Pop().gameObject;
+            GameObject newObject = Poolables[(int)type].Pop().gameObject;
             newObject.SetActive(true);
             return newObject;
         }
         else
+        {
             return Instantiate(gameObject);
+        }
     }
 
 
     public void EraseObject(Poolable instance)
     {
+        instance.alreadyInitialized = true;
         instance.gameObject.SetActive(false);
         Poolables[(int)instance.Type].Push(instance);
     }

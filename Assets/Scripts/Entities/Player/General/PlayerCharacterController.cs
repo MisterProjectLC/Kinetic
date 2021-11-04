@@ -165,7 +165,8 @@ public class PlayerCharacterController : MonoBehaviour
                 if (horizontalVelocity.magnitude <= AirborneMaxStrafeSpeed + 1)
                 {
                     Vector3 targetVelocity = moveInput * AirborneMaxStrafeSpeed * AirMultiplier + (MoveVelocity.y * Vector3.up);
-                    MoveVelocity = Vector3.Lerp(MoveVelocity, targetVelocity, AirborneAcceleration/10 * Time.deltaTime);
+                    if (targetVelocity.x != 0 || targetVelocity.z != 0)
+                        MoveVelocity = Vector3.Lerp(MoveVelocity, targetVelocity, AirborneAcceleration/10 * Time.deltaTime);
                 }
                 // Adjust when super fast
                 else

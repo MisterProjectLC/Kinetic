@@ -51,9 +51,9 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField]
     Transform DeviceHolder;
 
-
-    private int currentLoadout = 0;
-    private int lastLoadout = 0;
+    [HideInInspector]
+    public int currentLoadout { get; private set; } = 0;
+    int lastLoadout = 0;
     private Device currentDevice;
     private Device newDevice;
 

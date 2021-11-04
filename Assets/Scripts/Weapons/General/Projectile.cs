@@ -84,7 +84,7 @@ public class Projectile : MonoBehaviour
                 displacementSinceLastFrame.normalized, displacementSinceLastFrame.magnitude, hitLayers, QueryTriggerInteraction.Ignore);
             foreach (var hit in hits)
             {
-                if (isHitValid(hit) && hit.distance < closestHit.distance)
+                if (hit.distance < closestHit.distance)
                 {
                     foundHit = true;
                     closestHit = hit;
@@ -101,18 +101,11 @@ public class Projectile : MonoBehaviour
 
     public void Destroy()
     {
-        if (OnDestroy != null)
-            OnDestroy.Invoke(this);
+        OnDestroy?.Invoke(this);
 
         if (GetComponent<Poolable>())
             ObjectManager.OM.EraseObject(GetComponent<Poolable>());
         else
             gameObject.SetActive(false);
-    }
-
-
-    private bool isHitValid(RaycastHit hit)
-    {
-        return true;
     }
 }

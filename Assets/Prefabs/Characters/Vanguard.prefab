@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6106698216625119604}
   - component: {fileID: 5777217409242534307}
   - component: {fileID: 5088242222322952281}
+  - component: {fileID: 4259357430347862639}
   m_Layer: 12
   m_Name: Charge
   m_TagString: Untagged
@@ -182,6 +183,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4259357430347862639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875275233879253910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'CHARGE TIME: 2.5 seconds
+
+    DAMAGE: 12
+
+    Must be charged by
+    holding the ability button. While charging, slows the player''s movement speed
+    and acceleration, making them effectively immobile when fully charged.
+
+    Once
+    released, sends the player flying in the direction they face and causes damage
+    on impact.'
+--- !u!114 &5209750473149924436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2626429706252960998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'DAMAGE: 6 in the center of the radius
+
+    SPREAD: None
+
+    Shoots
+    a powerful rocket that explodes upon impact, inflicting damage and knockback.
+    This may be used on the player itself to propel them forward.
+
+'
 --- !u!1 &2823302919160890876
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7816245253526124877}
   - component: {fileID: 5917140286660060292}
+  - component: {fileID: 5566846527493726951}
   m_Layer: 12
   m_Name: Killheal
   m_TagString: Untagged
@@ -366,6 +412,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6f3897f9da946499b48169106b8c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5566846527493726951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101398689657722995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Heals the player after every kill.
 --- !u!1 &4698384497654706963
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6279062331169241278}
   - component: {fileID: 3645659837728276841}
+  - component: {fileID: 8896383596548286959}
   m_Layer: 0
   m_Name: Frontal Shield
   m_TagString: Untagged
@@ -495,6 +555,24 @@ MonoBehaviour:
   ParentAbility: {fileID: 0}
   shield: {fileID: 6357191845059044570}
   Duration: 4
+--- !u!114 &8896383596548286959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5349026757627506031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'DURATION: 4
+
+    The Minigun''s secondary ability.
+
+    Generates
+    a shield in front of the player which protects them from incoming fire.'
 --- !u!1 &5935564171822933945
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,6 +704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5018184844825464172}
   - component: {fileID: 262964791305891837}
+  - component: {fileID: 3831685550693252153}
   m_Layer: 12
   m_Name: Detonate
   m_TagString: Untagged
@@ -665,6 +744,22 @@ MonoBehaviour:
   ReleaseAbility: 0
   SoundEffects: []
   ParentAbility: {fileID: 0}
+--- !u!114 &3831685550693252153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6554826155812535130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'The Rocket Launcher''s secondary ability.
+
+    Detonates an airborne
+    rocket prematurely and resets the Rocket Launcher''s cooldown.'
 --- !u!1 &7578492789598782553
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,6 +824,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 3804878940635823621}
+--- !u!114 &2092792104660118363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710702315391486102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'DAMAGE: 2 per shot
+
+    SPREAD: Medium
+
+    Shoots a volley of projectile
+    bullets at an incredible speed, but slows the player''s own movement speed in
+    the process.
+
+'
 --- !u!1 &8110950932023223649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,6 +1279,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d82bd914086771c429bf7396d515caa8, type: 3}
+--- !u!1 &6357191845059044570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7409596822161239090, guid: d82bd914086771c429bf7396d515caa8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4534391726659963112}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7710702315391486102 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6191481536520945790, guid: d82bd914086771c429bf7396d515caa8,
@@ -1172,12 +1294,6 @@ GameObject:
 --- !u!4 &9164245528156693280 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4737951187669904328, guid: d82bd914086771c429bf7396d515caa8,
-    type: 3}
-  m_PrefabInstance: {fileID: 4534391726659963112}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6357191845059044570 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7409596822161239090, guid: d82bd914086771c429bf7396d515caa8,
     type: 3}
   m_PrefabInstance: {fileID: 4534391726659963112}
   m_PrefabAsset: {fileID: 0}
@@ -1270,15 +1386,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0923f79b33e6ce04e871c4363a512e72, type: 3}
---- !u!4 &3485480176587976528 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6193918609679044302, guid: 0923f79b33e6ce04e871c4363a512e72,
-    type: 3}
-  m_PrefabInstance: {fileID: 7326180014631215518}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2626429706252960998 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4744861131574945144, guid: 0923f79b33e6ce04e871c4363a512e72,
+    type: 3}
+  m_PrefabInstance: {fileID: 7326180014631215518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3485480176587976528 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6193918609679044302, guid: 0923f79b33e6ce04e871c4363a512e72,
     type: 3}
   m_PrefabInstance: {fileID: 7326180014631215518}
   m_PrefabAsset: {fileID: 0}

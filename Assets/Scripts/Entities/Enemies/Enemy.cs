@@ -150,8 +150,7 @@ public class Enemy : MonoBehaviour
             Physics.Raycast(ray, out RaycastHit hitInfo, CollisionDistance, GroundLayers.layers, QueryTriggerInteraction.Ignore);
             if (hitInfo.collider)
             {
-                if (OnKnockbackCollision != null)
-                    OnKnockbackCollision.Invoke(moveVelocity);
+                OnKnockbackCollision?.Invoke(moveVelocity);
                 moveVelocity = Vector3.zero;
             }
 

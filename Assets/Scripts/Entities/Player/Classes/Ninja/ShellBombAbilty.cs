@@ -40,5 +40,10 @@ public class ShellBombAbilty : Ability
         GameObject newInstance = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.ShellBomb, ShellBomb);
         newInstance.transform.position = player.PlayerCamera.transform.position;
         newInstance.GetComponent<Projectile>().Setup(player.PlayerCamera.transform.forward, HitLayers);
+        if (!newInstance.GetComponent<Poolable>().alreadyInitialized)
+        {
+            newInstance.GetComponent<Attack>().OnAttack += GetComponent<Attack>().OnAttack;
+            newInstance.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
+        }
     }
 }

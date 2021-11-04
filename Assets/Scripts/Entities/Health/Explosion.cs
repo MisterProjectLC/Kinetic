@@ -27,6 +27,8 @@ public class Explosion : MonoBehaviour
     Collider[] colliders = new Collider[maxColliders];
     List<Health> enemies = new List<Health>(maxColliders);
 
+    Vector3? vectorToShield = null;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -58,6 +60,13 @@ public class Explosion : MonoBehaviour
 
             if (collider.GetComponent<Damageable>() && !enemies.Contains(collider.GetComponent<Damageable>().GetHealth()))
             {
+                if (collider.gameObject.layer == LayerMask.NameToLayer("Player Shield"))
+                    vectorToShield = collider.transform.position - transform.position;
+                else if (collider.gameObject.layer == LayerMask.NameToLayer("Player") && vectorToShield != null) {
+                    Vector3 vectorToPlayer = collider.transform.position - transform.position;
+                    if (Vector3.Dot(vectorToShield.Value, vectorToPlayer) > 0 && vectorToShield.Value.magnitude < vectorToPlayer.magnitude)
+                        continue;
+                }
                 enemies.Add(collider.GetComponent<Damageable>().GetHealth());
                 attack.AttackTarget(collider.gameObject, rate * (1f - distanceToTarget * (1f - FallOffRate)));
             }

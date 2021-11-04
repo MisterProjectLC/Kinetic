@@ -6,8 +6,10 @@ public class Detonate : SecondaryAbility
 {
     public override void Execute(Input input)
     {
-        while (((WeaponAbility)ParentAbility).WeaponRef.ActiveProjectiles.Count > 0)
+        int control = 1000;
+        while (((WeaponAbility)ParentAbility).WeaponRef.ActiveProjectiles.Count > 0 && control > 0)
         {
+            control--;
             ((WeaponAbility)ParentAbility).WeaponRef.ActiveProjectiles[0].GetComponent<AttackProjectile>().Detonate();
         }
 

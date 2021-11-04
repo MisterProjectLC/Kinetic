@@ -11,16 +11,26 @@ public class LoadoutOption : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        string abilityName;
+
         if (!isPassive)
         {
-            GetComponentInChildren<Text>().text = Ability.GetComponent<Ability>().DisplayName;
+            abilityName = Ability.GetComponent<Ability>().DisplayName;
+            GetComponent<TooltipTrigger>().Description = "COOLDOWN: " + Ability.GetComponent<Ability>().Cooldown.ToString() + 
+                "\n" + Ability.GetComponent<Description>().description;
             GetComponent<DragDrop>().Type = "Ability";
         }
         else
         {
             GetComponentInChildren<Text>().text = Ability.gameObject.name;
+            abilityName = Ability.gameObject.name;
+            GetComponent<TooltipTrigger>().Description = Ability.GetComponent<Description>().description;
             GetComponent<DragDrop>().Type = "Passive";
         }
+
+        GetComponentInChildren<Text>().text = abilityName;
+        GetComponent<TooltipTrigger>().Title = abilityName;
+
 
         if (Ability.GetComponent<Ability>() is SecondaryAbility)
             GetComponent<DragDrop>().Type = Ability.GetComponent<Ability>().DisplayName;

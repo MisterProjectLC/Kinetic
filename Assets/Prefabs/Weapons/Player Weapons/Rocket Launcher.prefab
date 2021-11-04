@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1653812256855770319}
   - component: {fileID: 3643475396191345307}
   - component: {fileID: 562521063906820443}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Rocket Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,13 +51,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
   DisplayName: Rocket Launcher
-  BulletType: 4
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 0}
   Projectile: {fileID: 5531395347504132974, guid: 560e7ea8b52a75c42a16ba44f7a262e9,
     type: 3}
   ActiveProjectiles: []
+  BulletType: 4
   backwardsForce: 10
   MaxSpreadAngle: 0
   BulletCount: 1
@@ -296,6 +296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WP_V_RocketLauncher
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 226a3cf46f200ee43a131214b77d916e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 226a3cf46f200ee43a131214b77d916e, type: 3}

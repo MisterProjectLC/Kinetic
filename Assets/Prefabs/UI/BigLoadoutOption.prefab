@@ -172,6 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: Sada
   Offset: {x: 0, y: 0}
+  LabelText: 
+  Label: {fileID: 0}
   InsertedDragDrop: {fileID: 0}
 --- !u!114 &2951334679710618756
 MonoBehaviour:
@@ -187,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityNumber: 0
   LoadoutNumber: 0
+  NextSlot: {fileID: 0}
 --- !u!82 &7368044965325029246
 AudioSource:
   m_ObjectHideFlags: 0
@@ -378,6 +381,7 @@ GameObject:
   - component: {fileID: 1018027073914770998}
   - component: {fileID: 4138703145497877412}
   - component: {fileID: 8203318453217548488}
+  - component: {fileID: 7205150191107028999}
   - component: {fileID: 7055743705906331044}
   - component: {fileID: 1974953503471212543}
   m_Layer: 5
@@ -457,6 +461,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ability: {fileID: 0}
   isPassive: 0
+--- !u!114 &7205150191107028999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191001801631402917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1786840a21ca82040b275e139921f58d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: 
+  Description: 
 --- !u!114 &7055743705906331044
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,9 +17,10 @@ public class AttackProjectile : MonoBehaviour
             GetComponent<Attack>().AttackTarget(collider.gameObject);
         GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactType, ImpactObject).gameObject;
         newObject.transform.position = transform.position;
-        if (newObject.GetComponent<Attack>() && GetComponent<Attack>())
+        if (newObject.GetComponent<Attack>() && GetComponent<Attack>() && 
+            (!newObject.GetComponent<Poolable>() || !newObject.GetComponent<Poolable>().alreadyInitialized))
         {
-            newObject.GetComponent<Attack>().OnKill = null;
+            newObject.GetComponent<Attack>().OnAttack += GetComponent<Attack>().OnAttack;
             newObject.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
         }
 
@@ -34,9 +35,6 @@ public class AttackProjectile : MonoBehaviour
         GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactType, ImpactObject).gameObject;
         newObject.transform.position = transform.position;
 
-        if (PenetrateCount > 0)
-            PenetrateCount--;
-        else
-            GetComponent<Projectile>().Destroy();
+        GetComponent<Projectile>().Destroy();
     }
 }

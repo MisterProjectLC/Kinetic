@@ -28,4 +28,11 @@ public class WeaponAbility : Ability
             GetComponent<Animator>().SetTrigger("Shoot");
         WeaponRef.Trigger();
     }
+
+    new public void ResetCooldown()
+    {
+        Debug.Log("Proactive");
+        WeaponRef.ResetClock();
+        ((Ability)this).ResetCooldown();
+    }
 }

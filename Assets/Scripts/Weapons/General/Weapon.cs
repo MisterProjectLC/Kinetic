@@ -82,8 +82,7 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
-        if (OnFire != null)
-            OnFire.Invoke();
+        OnFire?.Invoke();
 
         for (int i = 0; i < BulletCount; i++)
         {
@@ -97,12 +96,13 @@ public class Weapon : MonoBehaviour
                 GameObject instance = ObjectManager.OM.SpawnObjectFromPool(BulletType, Projectile).gameObject;
                 instance.transform.position = Mouth.position;
                 instance.GetComponent<Projectile>().Setup(direction, HitLayers.layers, GetComponentInParent<Actor>().gameObject);
-                if (instance.GetComponent<Attack>() && GetComponent<Attack>() && GetComponent<Attack>().OnKill != null)
+                if (instance.GetComponent<Attack>() && GetComponent<Attack>() && GetComponent<Attack>().OnKill != null &&
+                    (!instance.GetComponent<Poolable>() || !instance.GetComponent<Poolable>().alreadyInitialized))
                 {
-                    instance.GetComponent<Attack>().OnKill = null;
+                    instance.GetComponent<Attack>().OnAttack += GetComponent<Attack>().OnAttack;
                     instance.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
+                    instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;
                 }
-                instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;
                 ActiveProjectiles.Add(instance);
 
             // Hitscan attack
@@ -128,9 +128,13 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public void ResetClock()
+    {
+        clock = 0f;
+    }
+
     private void RemoveProjectileFromList(Projectile proj)
     {
-        proj.gameObject.GetComponent<Projectile>().OnDestroy -= RemoveProjectileFromList;
         ActiveProjectiles.Remove(proj.gameObject);
     }
 }

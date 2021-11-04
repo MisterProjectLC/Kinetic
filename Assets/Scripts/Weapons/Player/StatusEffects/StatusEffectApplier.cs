@@ -14,7 +14,7 @@ public class StatusEffectApplier : MonoBehaviour
     }
 
 
-    public void AffectTarget(GameObject target, float multiplier)
+    public void AffectTarget(GameObject target, float multiplier, int damage)
     {
         // Effects
         if (target.GetComponentInParent<Enemy>())

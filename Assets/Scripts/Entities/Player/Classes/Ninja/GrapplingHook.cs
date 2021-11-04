@@ -33,6 +33,9 @@ public class GrapplingHook : Ability
             hook.transform.position = Mouth.position;
             hook.GetComponent<Projectile>().Setup(Mouth.forward, HitLayers, GetComponentInParent<Actor>().gameObject);
             ResetCooldown();
+        } else
+        {
+            Timer = 0.5f;
         }
     }
 

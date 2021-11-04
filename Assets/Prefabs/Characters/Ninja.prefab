@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 7478956445705428809}
   - component: {fileID: 1056472193603156170}
   - component: {fileID: 1575581529030464004}
+  - component: {fileID: 8000386519330204292}
   m_Layer: 12
   m_Name: Translocate
   m_TagString: Untagged
@@ -209,10 +210,10 @@ MonoBehaviour:
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
-  Range: 100
+  Range: 150
   TargetLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2048
 --- !u!82 &1575581529030464004
 AudioSource:
   m_ObjectHideFlags: 0
@@ -310,6 +311,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8000386519330204292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758061105512210739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: An unusual ability that lets the Ninja swap places with any movable
+    enemy - simply aim at a target and activate. It is primarily useful for mobility
+    and disruption.
 --- !u!1 &1292416793624679719
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +338,7 @@ GameObject:
   - component: {fileID: 3757266375381288519}
   - component: {fileID: 212809543415116824}
   - component: {fileID: 3514579523878951028}
+  - component: {fileID: 7894964721095750766}
   m_Layer: 12
   m_Name: Dash
   m_TagString: Untagged
@@ -473,6 +490,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7894964721095750766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292416793624679719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'DAMAGE: 6
+
+    A reliable mobility option that accelerates the Ninja
+    for a set distance and damages enemies along his path.
+
+
+    This ability resets
+    its cooldown upon any kill.'
+--- !u!114 &4285761528503053854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2225249382224139414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'DAMAGE: 1
+
+    SPREAD: Medium
+
+    A pair of rapid-fire pistols with
+    decent range and damage. While not as powerful as the Shotgun, its higher range
+    is ideal for pruning targets at longer distances.'
 --- !u!1 &3284626973075478747
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7816245253526124877}
   - component: {fileID: 5917140286660060292}
+  - component: {fileID: 425287587543554713}
   m_Layer: 12
   m_Name: Killheal
   m_TagString: Untagged
@@ -752,6 +809,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6f3897f9da946499b48169106b8c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &425287587543554713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101398689657722995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Heals the player after every kill.
 --- !u!1 &4382853588751367982
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,6 +832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2140320780472375125}
   - component: {fileID: 6450270223927221608}
+  - component: {fileID: 2075398117668125390}
   m_Layer: 12
   m_Name: Walljump
   m_TagString: Untagged
@@ -795,6 +866,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40248c05a6d6c844f99cabd97ae290bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2075398117668125390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4382853588751367982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Lets the player bounce off walls, providing a greater vertical range
+    in closed spaces.
 --- !u!1 &4698384497654706963
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,6 +1061,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1751639598095803834}
   - component: {fileID: 5273812271440728085}
+  - component: {fileID: 6084552008915234182}
+  - component: {fileID: 1362572544591890133}
   m_Layer: 12
   m_Name: Shell Bombs
   m_TagString: Untagged
@@ -1022,6 +1109,37 @@ MonoBehaviour:
   ShellCount: 3
   ShellCooldown: 0.1
   BackwardsForce: 2
+--- !u!114 &6084552008915234182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5307980427766246164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 8
+--- !u!114 &1362572544591890133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5307980427766246164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'DAMAGE: 8 per bomb, 3 bombs
+
+    The Shell Bombs are the Ninja''s
+    most damaging ability, lobbing 3 consecutive explosives at an arc. Due to its
+    high burst potential, it is ideal against high-value targets, such as support
+    units or glass cannons.'
 --- !u!1 &5935564171822933945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,6 +1273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1280739795873682838}
   - component: {fileID: 3914573725090297544}
+  - component: {fileID: 2611739486399847875}
   m_Layer: 12
   m_Name: Extra Jump
   m_TagString: Untagged
@@ -1188,6 +1307,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e2ec239f5f234479ab1ea85d4cdc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2611739486399847875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6358242602411863829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Lets the player jump an extra time before having to touch a surface.
+--- !u!114 &8043661788448992379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923643163349663185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'DAMAGE: 1 per pellet; 9 pellets per shot
+
+    SPREAD: High
+
+    A
+    reliable weapon at close range, able to effortlessly shred through enemies. Its
+    self-knockback effect can also prove effective when traversing gaps or climbing
+    to higher ground.'
 --- !u!1 &7349922464857806567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,7 +1352,8 @@ GameObject:
   - component: {fileID: 7951354861340485890}
   - component: {fileID: 4472888667078105858}
   - component: {fileID: 5986198793653576087}
-  m_Layer: 12
+  - component: {fileID: 7300476405894082879}
+  m_Layer: 7
   m_Name: Grappling Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1235,7 +1388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: Grappling Hook
-  Cooldown: 0.5
+  Cooldown: 1.5
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -1355,6 +1508,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7300476405894082879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7349922464857806567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'An extremely useful tool for traversal in the air. To use it, aim
+    at a target and jump: you''ll soon be pulled in the direction of the hook.
+
+
+    Be
+    warned, however: missing with the hook increases its cooldown significantly,
+    so use it wisely!'
 --- !u!1 &8006630410610024068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,6 +1538,7 @@ GameObject:
   - component: {fileID: 3451851543787638553}
   - component: {fileID: 5704373933498883485}
   - component: {fileID: 1060750635180342957}
+  - component: {fileID: 1981184289741628491}
   m_Layer: 12
   m_Name: Rewind
   m_TagString: Untagged
@@ -1503,6 +1676,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1981184289741628491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8006630410610024068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: The Rewind is an useful ability to get out of sticky situations. Once
+    activated, the Ninja shall rewind to the place he was 5 seconds ago.
 --- !u!1 &8110950932023223649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1732,7 @@ GameObject:
   - component: {fileID: 8975999379031597796}
   - component: {fileID: 3106445901064005178}
   - component: {fileID: 7762231179680131760}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1639,6 +1826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2775557084548612624}
   - component: {fileID: 8089954478560255746}
+  - component: {fileID: 17516710838392440}
   m_Layer: 12
   m_Name: Extra Jump
   m_TagString: Untagged
@@ -1672,6 +1860,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e2ec239f5f234479ab1ea85d4cdc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &17516710838392440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8791866288957817034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Lets the player jump an extra time before having to touch a surface.
 --- !u!1 &9089919347116189794
 GameObject:
   m_ObjectHideFlags: 0

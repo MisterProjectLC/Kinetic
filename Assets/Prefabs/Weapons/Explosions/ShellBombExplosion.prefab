@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4274277110719107929}
   - component: {fileID: 4796216369014699922}
   - component: {fileID: 8388739853020057394}
+  - component: {fileID: 1802646913375933808}
   m_Layer: 14
   m_Name: ShellBombExplosion
   m_TagString: Untagged
@@ -61,12 +62,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Radius: 1.5
-  FallOffRate: 1
-  NeuteredRate: 1
+  FallOffRate: 0.8
+  NeuteredRate: 0.4
   HitLayers: {fileID: 11400000, guid: 84cc419c1733af643993c7877c42d8dd, type: 2}
   NeuteredHitLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
 --- !u!114 &4274277110719107929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 3
+  alreadyInitialized: 0
 --- !u!82 &8388739853020057394
 AudioSource:
   m_ObjectHideFlags: 0
@@ -190,6 +192,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1802646913375933808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396919937828005916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Knockback: 25
+  Effects: []
 --- !u!1001 &1954105929213708647
 PrefabInstance:
   m_ObjectHideFlags: 0

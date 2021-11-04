@@ -29,8 +29,11 @@ public class LevelUpSystem : MonoBehaviour
     {
         if (LUS)
             Destroy(LUS);
-        
+
         LUS = this;
+    }
+
+    void Start() {
 
         LoadoutManager loadout = ActorsManager.Player.GetComponent<LoadoutManager>();
         optionsBank = new List<LoadoutOption>();

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
@@ -19,6 +20,8 @@ public class Pause : MonoBehaviour
     public GameObject[] PausedObjects;
 
     float oldTimeScale = 1f;
+
+    public UnityAction<bool> OnTogglePause;
 
 
     private void Awake()
@@ -45,6 +48,7 @@ public class Pause : MonoBehaviour
     public void TogglePause()
     {
         Paused = !Paused;
+        OnTogglePause?.Invoke(Paused);
         playerInput.inputEnabled = !Paused;
         Cursor.lockState = Paused ? CursorLockMode.Confined : CursorLockMode.Locked;
         // Pause

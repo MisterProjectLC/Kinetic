@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3131654478197622757}
   - component: {fileID: 3376284662852059416}
   - component: {fileID: 6745022701988302770}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,12 +51,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
   DisplayName: Shotgun
-  BulletType: 0
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   MaxDistance: 50
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
   Projectile: {fileID: 0}
   ActiveProjectiles: []
+  BulletType: 0
   backwardsForce: 10
   MaxSpreadAngle: 6
   BulletCount: 9
@@ -296,6 +296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WP_N_Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 01722aae168795a47ad1db610a9ce97b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01722aae168795a47ad1db610a9ce97b, type: 3}
