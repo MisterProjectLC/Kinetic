@@ -33,7 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2862948054975451143
 MonoBehaviour:
@@ -59,6 +59,7 @@ MonoBehaviour:
   MaxAirSlowdown: 0
   ChargingSFX: {fileID: 8300000, guid: 20bbb4d06e338b444a9eec3348aebadf, type: 3}
   ChargeSFX: {fileID: 8300000, guid: 1c2372771461dcb48ac4fbebb45648b8, type: 3}
+  CollisionSFX: {fileID: 8300000, guid: 5255485ad6ac82142bc80fab787c698a, type: 3}
 --- !u!114 &6106698216625119604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,9 +225,7 @@ MonoBehaviour:
 
     Shoots
     a powerful rocket that explodes upon impact, inflicting damage and knockback.
-    This may be used on the player itself to propel them forward.
-
-'
+    This may be used on the player itself to propel them forward.'
 --- !u!1 &2823302919160890876
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +367,204 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &3401051246386459786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 821644021522485669}
+  - component: {fileID: 1422791180443009761}
+  - component: {fileID: 4608133470653888600}
+  - component: {fileID: 3492134651301571342}
+  - component: {fileID: 6720960485418298753}
+  - component: {fileID: 5901964684655049309}
+  m_Layer: 12
+  m_Name: Graviton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &821644021522485669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3401051246386459786}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4021532750877547998}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1422791180443009761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3401051246386459786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9912f4374639bba4c8f1bfa5dab206b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayName: Graviton
+  Cooldown: 2
+  HoldAbility: 0
+  ReleaseAbility: 0
+  SoundEffects:
+  - {fileID: 8300000, guid: a7026179b5b99094fa2cbb8f83842a41, type: 3}
+  Graviton: {fileID: 7405091696653690947, guid: 7c90d914a1b64fd4c9013829813b8b86,
+    type: 3}
+  HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
+--- !u!114 &4608133470653888600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3401051246386459786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 0
+--- !u!114 &3492134651301571342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3401051246386459786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9df4b4654513b46961528f0ff3ab65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveProjectiles: []
+--- !u!82 &6720960485418298753
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3401051246386459786}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: a7026179b5b99094fa2cbb8f83842a41, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5901964684655049309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3401051246386459786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'STUN DURATION: 1 second
+
+    Shoots a projectile that attracts nearby
+    enemies to its center upon impact. Affected enemies also receive a short stun.
+
+    Activate
+    the ability while the projectile is in mid-air to detonate it prematurely.'
 --- !u!1 &4101398689657722995
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +595,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5917140286660060292
 MonoBehaviour:
@@ -425,6 +622,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Heals the player after every kill.
+--- !u!1 &4468463590889042821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4404136333278151258}
+  - component: {fileID: 1158625610870190918}
+  m_Layer: 12
+  m_Name: Fall Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4404136333278151258
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4468463590889042821}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4021532750877547998}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1158625610870190918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4468463590889042821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd38a02d64c2314c92723f7e3432393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VerticalLimit: -150
+  FallRespawnPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &4698384497654706963
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +726,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8520425101159635055
 MonoBehaviour:
@@ -533,7 +775,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3645659837728276841
 MonoBehaviour:
@@ -554,7 +796,7 @@ MonoBehaviour:
   SoundEffects: []
   ParentAbility: {fileID: 0}
   shield: {fileID: 6357191845059044570}
-  Duration: 4
+  Duration: 6
 --- !u!114 &8896383596548286959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,7 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 'DURATION: 4
+  description: 'DURATION: 6 seconds
 
     The Minigun''s secondary ability.
 
@@ -724,7 +966,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &262964791305891837
 MonoBehaviour:
@@ -842,9 +1084,7 @@ MonoBehaviour:
 
     Shoots a volley of projectile
     bullets at an incredible speed, but slows the player''s own movement speed in
-    the process.
-
-'
+    the process.'
 --- !u!1 &8110950932023223649
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,7 +1153,9 @@ Transform:
   m_Children:
   - {fileID: 958540071565868630}
   - {fileID: 307492438962099070}
+  - {fileID: 4404136333278151258}
   - {fileID: 4763104984783528517}
+  - {fileID: 821644021522485669}
   - {fileID: 1751639598095803834}
   - {fileID: 5018184844825464172}
   - {fileID: 6279062331169241278}
@@ -933,7 +1175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a82277a2105c847809c53e10900208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookSensitivity: 1
   InvertYAxis: 0
   InvertXAxis: 0
 --- !u!114 &3804878940635823621
@@ -954,14 +1195,14 @@ MonoBehaviour:
   GroundCheckLayers:
     serializedVersion: 2
     m_Bits: 1049088
-  GroundWalkSpeed: 13
-  GroundAcceleration: 13
+  GroundWalkSpeed: 15
+  GroundAcceleration: 15
   MoveControlEnabled: 0
   SpeedMultiplier: 1
   JumpForce: 10
   GravityMultiplier: 1
   GravityEnabled: 1
-  AirborneMaxStrafeSpeed: 12
+  AirborneMaxStrafeSpeed: 15
   AirborneMaxSpeed: 75
   AirborneAcceleration: 15
   RotationSpeed: 400
@@ -1035,6 +1276,9 @@ MonoBehaviour:
     isPassive: 1
     secondaryAbility: 
   - ability: {fileID: 1875275233879253910}
+    isPassive: 0
+    secondaryAbility: 
+  - ability: {fileID: 3401051246386459786}
     isPassive: 0
     secondaryAbility: 
   - ability: {fileID: 4101398689657722995}
@@ -1267,6 +1511,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minigun
       objectReference: {fileID: 0}
+    - target: {fileID: 8060274933420828594, guid: d82bd914086771c429bf7396d515caa8,
+        type: 3}
+      propertyPath: Mouth
+      value: 
+      objectReference: {fileID: 958540071565868630}
     - target: {fileID: 8981192430695281104, guid: d82bd914086771c429bf7396d515caa8,
         type: 3}
       propertyPath: m_Mesh
@@ -1279,9 +1528,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d82bd914086771c429bf7396d515caa8, type: 3}
---- !u!1 &6357191845059044570 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7409596822161239090, guid: d82bd914086771c429bf7396d515caa8,
+--- !u!4 &9164245528156693280 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4737951187669904328, guid: d82bd914086771c429bf7396d515caa8,
     type: 3}
   m_PrefabInstance: {fileID: 4534391726659963112}
   m_PrefabAsset: {fileID: 0}
@@ -1291,9 +1540,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4534391726659963112}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &9164245528156693280 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4737951187669904328, guid: d82bd914086771c429bf7396d515caa8,
+--- !u!1 &6357191845059044570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7409596822161239090, guid: d82bd914086771c429bf7396d515caa8,
     type: 3}
   m_PrefabInstance: {fileID: 4534391726659963112}
   m_PrefabAsset: {fileID: 0}
@@ -1305,6 +1554,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 958540071565868630}
     m_Modifications:
     - target: {fileID: 3506049642618499529, guid: 0923f79b33e6ce04e871c4363a512e72,
+        type: 3}
+      propertyPath: Mouth
+      value: 
+      objectReference: {fileID: 958540071565868630}
+    - target: {fileID: 4232156136934866011, guid: 0923f79b33e6ce04e871c4363a512e72,
         type: 3}
       propertyPath: Mouth
       value: 
@@ -1386,15 +1640,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0923f79b33e6ce04e871c4363a512e72, type: 3}
---- !u!1 &2626429706252960998 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4744861131574945144, guid: 0923f79b33e6ce04e871c4363a512e72,
-    type: 3}
-  m_PrefabInstance: {fileID: 7326180014631215518}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3485480176587976528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6193918609679044302, guid: 0923f79b33e6ce04e871c4363a512e72,
+    type: 3}
+  m_PrefabInstance: {fileID: 7326180014631215518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2626429706252960998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4744861131574945144, guid: 0923f79b33e6ce04e871c4363a512e72,
     type: 3}
   m_PrefabInstance: {fileID: 7326180014631215518}
   m_PrefabAsset: {fileID: 0}

@@ -10,7 +10,6 @@ public class Rocketeer : MonoBehaviour
     [SerializeField]
     float maxDistance = 30f;
 
-    [SerializeField]
     Weapon weapon;
 
     Animator animator;
@@ -21,6 +20,7 @@ public class Rocketeer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        weapon = GetComponent<Enemy>().weapons[0];
         weapon.OnFire += FireAnimation;
         GetComponent<Health>().OnCriticalLevel += Stagger;
         animator = GetComponent<Animator>();

@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
-    Weapon[] weapons;
+    public Weapon[] weapons;
 
     [SerializeField]
     public GameObject Model;
@@ -193,6 +193,7 @@ public class Enemy : MonoBehaviour
             return;
 
         moveVelocity += (knockback / 2);
+        //Debug.Log("MV: " + moveVelocity);
 
         // Parar no chão
         if (moveVelocity.y < 0f)

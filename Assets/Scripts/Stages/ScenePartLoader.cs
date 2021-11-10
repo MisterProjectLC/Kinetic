@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,9 @@ public class ScenePartLoader : MonoBehaviour
     //Scene state
     private bool isLoaded;
     private bool shouldLoad;
+
+    List<string> RegisteredObjects = new List<string>();
+
     void Start()
     {
         player = ActorsManager.AM.GetPlayer().transform;
@@ -66,23 +70,36 @@ public class ScenePartLoader : MonoBehaviour
     }
 
 
+    public void RegisterObject(string id)
+    {
+        RegisteredObjects.Add(id);
+    }
+
+    public bool CheckObject(string id)
+    {
+        return RegisteredObjects.Contains(id);
+    }
 
 
-    public void LoadScene()
+    public AsyncOperation LoadScene()
     {
         if (!isLoaded)
         {
-            //Loading the scene, using the gameobject name as it's the same as the name of the scene to load
-            SceneManager.LoadSceneAsync(gameObject.name, LoadSceneMode.Additive);
-            //We set it to true to avoid loading the scene twice
+            //RegisteredObjects = SaveManager.Load<List<string>>(gameObject.name);
+            if (RegisteredObjects == default(List<string>))
+                RegisteredObjects = new List<string>();
             isLoaded = true;
+            return SceneManager.LoadSceneAsync(gameObject.name, LoadSceneMode.Additive);
         }
+
+        return null;
     }
 
     public void UnLoadScene()
     {
         if (isLoaded)
         {
+            //SaveManager.Save(RegisteredObjects, gameObject.name);
             SceneManager.UnloadSceneAsync(gameObject.name);
             isLoaded = false;
         }

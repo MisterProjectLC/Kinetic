@@ -13,29 +13,31 @@ public class MySceneManager : MonoBehaviour
     private void Awake()
     {
         if (sceneName != "")
-            StartCoroutine(LoadFirst(SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive)));
+            StartCoroutine(LoadFirst(sceneName));
 
         MSM = this;
     }
 
 
-    IEnumerator LoadFirst(AsyncOperation loadingScene)
+    IEnumerator LoadFirst(string scene)
     {
-        while (!loadingScene.isDone) 
-            yield return null;
+        AsyncOperation loadingScene = LoadScene(scene);
+        if (loadingScene != null)
+            while (!loadingScene.isDone) 
+                yield return null;
 
         GetComponentInChildren<Animator>().SetTrigger("Open");
     }
 
 
-    public void LoadScene(string scene)
+    public AsyncOperation LoadScene(string scene)
     {
         Transform loader = transform.Find(scene);
 
         if (loader)
-            loader.GetComponent<ScenePartLoader>().LoadScene();
+            return loader.GetComponent<ScenePartLoader>().LoadScene();
         else
-            SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
     }
 
 
@@ -46,6 +48,31 @@ public class MySceneManager : MonoBehaviour
         if (loader)
             loader.GetComponent<ScenePartLoader>().UnLoadScene();
         else
-            SceneManager.UnloadSceneAsync(scene);
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+                if (SceneManager.GetSceneAt(i).name == scene)
+                {
+                    SceneManager.UnloadSceneAsync(scene);
+                    break;
+                }
+    }
+
+
+    public void RegisterObject(string id, string scene)
+    {
+        Transform loader = transform.Find(scene);
+
+        if (loader)
+            loader.GetComponent<ScenePartLoader>().RegisterObject(id);
+    }
+
+
+    public bool ObjectRegistered(string id, string scene)
+    {
+        Transform loader = transform.Find(scene);
+
+        if (loader)
+            return loader.GetComponent<ScenePartLoader>().CheckObject(id);
+        else
+            return false;
     }
 }

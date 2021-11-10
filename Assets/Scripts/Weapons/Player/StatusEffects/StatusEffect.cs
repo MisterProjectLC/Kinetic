@@ -11,9 +11,11 @@ public abstract class StatusEffect : MonoBehaviour
     }
 
     [SerializeField]
+    [Tooltip("Duration of over-time effect")]
     protected float TickDuration = 8f;
 
     [SerializeField]
+    [Tooltip("Rate of tick of over-time effect")]
     protected float TickTime = 0.1f;
 
     float Clock = 0f;

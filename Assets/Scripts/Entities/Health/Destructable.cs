@@ -11,7 +11,13 @@ public class Destructable : MonoBehaviour
 
     private Health m_Health;
 
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if (GetComponent<UniqueID>())
+            GetComponent<UniqueID>().OnObjectRegistered += Delete;
+    }
+
     void Start()
     {
         if (OriginalModel == null)
@@ -28,6 +34,9 @@ public class Destructable : MonoBehaviour
             GameObject newBroken = Instantiate(BrokenModelPrefab);
             newBroken.transform.position = OriginalModel.transform.position;
             newBroken.transform.rotation = OriginalModel.transform.rotation;
+            if (GetComponent<UniqueID>())
+                GetComponent<UniqueID>().RegisterID();
+
             foreach (Rigidbody rigidbody in newBroken.GetComponentsInChildren<Rigidbody>())
             {
                 rigidbody.AddForce(Random.insideUnitSphere * Random.Range(0.05f, 0.5f), ForceMode.Impulse);
@@ -49,6 +58,12 @@ public class Destructable : MonoBehaviour
         }
         else
             yield return new WaitForSeconds(0.01f);
+        Destroy(gameObject);
+    }
+
+    void Delete()
+    {
+        Debug.Log("Delete");
         Destroy(gameObject);
     }
 }

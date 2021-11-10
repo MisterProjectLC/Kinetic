@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7526467649445924324}
-  - component: {fileID: 946221878891082467}
+  - component: {fileID: 6996223381059162748}
   - component: {fileID: 396196072164154913}
   - component: {fileID: 476817275024576850}
-  - component: {fileID: 3131654478197622757}
   - component: {fileID: 3376284662852059416}
+  - component: {fileID: 3131654478197622757}
   - component: {fileID: 6745022701988302770}
   m_Layer: 7
   m_Name: Shotgun
@@ -37,7 +37,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &946221878891082467
+--- !u!114 &6996223381059162748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,23 +46,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 8962014088670307922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdcfe09036bdacd4a9670462fd94898f, type: 3}
+  m_Script: {fileID: 11500000, guid: e711193a9c1cd2b459bd18dae3de8933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
   DisplayName: Shotgun
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   MaxDistance: 50
-  Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
+  Sparks: {fileID: 0}
   Projectile: {fileID: 0}
   ActiveProjectiles: []
-  BulletType: 0
   backwardsForce: 10
   MaxSpreadAngle: 6
   BulletCount: 9
   Automatic: 0
   FireCooldown: 0.5
   InitialFireCooldown: 0
+  SoundEffects:
+  - {fileID: 8300000, guid: e3cd01ad5804cfd4c8598dd155f6462a, type: 3}
+  - {fileID: 8300000, guid: 23e0748f17919694cae98abbd1b59a8a, type: 3}
+  MaxDistance: 100
+  Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
 --- !u!114 &396196072164154913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +93,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftHand: {fileID: 0}
+--- !u!114 &3376284662852059416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8962014088670307922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayName: 
+  Cooldown: 5
+  HoldAbility: 0
+  ReleaseAbility: 0
+  SoundEffects: []
+  WeaponRef: {fileID: 6996223381059162748}
 --- !u!82 &3131654478197622757
 AudioSource:
   m_ObjectHideFlags: 0
@@ -186,26 +208,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3376284662852059416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8962014088670307922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DisplayName: 
-  Cooldown: 5
-  HoldAbility: 0
-  ReleaseAbility: 0
-  SoundEffects:
-  - {fileID: 8300000, guid: 23e0748f17919694cae98abbd1b59a8a, type: 3}
-  - {fileID: 8300000, guid: e3cd01ad5804cfd4c8598dd155f6462a, type: 3}
-  WeaponRef: {fileID: 946221878891082467}
 --- !u!95 &6745022701988302770
 Animator:
   serializedVersion: 3

@@ -8,11 +8,16 @@ public class UpgradePowerup : Powerup
     void Start()
     {
         OnPowerup += Upgrade;
+        if (GetComponent<UniqueID>())
+            GetComponent<UniqueID>().OnObjectRegistered += () => Destroy(gameObject);
+
     }
 
     void Upgrade(GameObject player)
     {
-        Pause.Ps.TogglePause();
+        Pause.Ps.TogglePause(0);
         LevelUpSystem.LUS.LevelUp();
+        if (GetComponent<UniqueID>())
+            GetComponent<UniqueID>().RegisterID();
     }
 }

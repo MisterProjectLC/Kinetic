@@ -9,15 +9,19 @@ public class Door : MonoBehaviour
     private string OpenAnimation = "DoorOpen";
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         if (Button)
             Button.OnTriggerActivate += Activate;
+
+        if (GetComponent<UniqueID>())
+            GetComponent<UniqueID>().OnObjectRegistered += Activate;
     }
 
     // Update is called once per frame
     void Activate()
     {
         GetComponent<Animator>().Play(OpenAnimation);
+        GetComponent<UniqueID>()?.RegisterID();
     }
 }

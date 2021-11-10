@@ -9,6 +9,10 @@ public class Explosion : MonoBehaviour
     public float Radius = 5f;
 
     [Range(0f, 1f)]
+    [Tooltip("Percentage damage at the radius' center")]
+    public float CenterRate = 1f;
+
+    [Range(0f, 1f)]
     [Tooltip("Percentage damage at the radius' edge")]
     public float FallOffRate = 1f;
 
@@ -26,6 +30,9 @@ public class Explosion : MonoBehaviour
     const int maxColliders = 20;
     Collider[] colliders = new Collider[maxColliders];
     List<Health> enemies = new List<Health>(maxColliders);
+
+    [SerializeField]
+    bool GetClosestPoint = true;
 
     Vector3? vectorToShield = null;
 
@@ -56,7 +63,8 @@ public class Explosion : MonoBehaviour
                 break;
 
             float rate = ((NeuteredHitLayers.value >> collider.gameObject.layer) == 1) ? NeuteredRate : 1f;
-            float distanceToTarget = (transform.position - collider.ClosestPoint(transform.position)).magnitude / Radius;
+            Vector3 colliderPoint = GetClosestPoint ? collider.ClosestPoint(transform.position) : collider.transform.position;
+            float distanceToTarget = (transform.position - colliderPoint).magnitude / Radius;
 
             if (collider.GetComponent<Damageable>() && !enemies.Contains(collider.GetComponent<Damageable>().GetHealth()))
             {
@@ -68,7 +76,8 @@ public class Explosion : MonoBehaviour
                         continue;
                 }
                 enemies.Add(collider.GetComponent<Damageable>().GetHealth());
-                attack.AttackTarget(collider.gameObject, rate * (1f - distanceToTarget * (1f - FallOffRate)));
+                Debug.Log("Vectors: " + transform.position + ", " + colliderPoint);
+                attack.AttackTarget(collider.gameObject, rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget));
             }
         }
     }

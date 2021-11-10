@@ -23,6 +23,8 @@ public class ObjectManager : MonoBehaviour
         CentibombExplosion,
         EnemyRocket,
         RocketeerExplosion,
+        GravitonProjectile,
+        Graviton,
         Count
     }
 

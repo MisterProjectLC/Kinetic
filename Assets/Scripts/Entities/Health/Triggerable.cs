@@ -7,13 +7,20 @@ public class Triggerable : MonoBehaviour
     [SerializeField]
     bool NeedsToDie = false;
 
-    // Start is called before the first frame update
     void Start()
     {
+        if (GetComponent<UniqueID>())
+            GetComponent<UniqueID>().OnObjectRegistered += ActivateTrigger;
+
         if (NeedsToDie)
             GetComponent<Health>().OnDie += GetComponent<GameTrigger>().OnTriggerActivate;
         else
             GetComponent<Health>().OnDamage += ActivateTrigger;
+    }
+
+    void ActivateTrigger()
+    {
+        GetComponent<GameTrigger>().OnTriggerActivate();
     }
 
     void ActivateTrigger(int damage)

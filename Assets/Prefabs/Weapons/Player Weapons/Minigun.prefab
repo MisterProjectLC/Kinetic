@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4737951187669904328}
-  - component: {fileID: 2635256946172925135}
+  - component: {fileID: 8060274933420828594}
+  - component: {fileID: 297512775353511095}
   - component: {fileID: 3228066949501696013}
+  - component: {fileID: 2035550557693848252}
   - component: {fileID: 3399664917418735486}
   - component: {fileID: 199892125515440585}
-  - component: {fileID: 2035550557693848252}
   - component: {fileID: 1322771064071731744}
   m_Layer: 7
   m_Name: Minigun
@@ -39,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &2635256946172925135
+--- !u!114 &8060274933420828594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +49,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6191481536520945790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdcfe09036bdacd4a9670462fd94898f, type: 3}
+  m_Script: {fileID: 11500000, guid: a832b4d4cba299f4f8c02530149760c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
@@ -56,16 +57,31 @@ MonoBehaviour:
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   MaxDistance: 100
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
-  Projectile: {fileID: 7750975500520401991, guid: e628c2c6caa94ce46b9a00c7a877f7fc,
-    type: 3}
+  Projectile: {fileID: 0}
   ActiveProjectiles: []
-  BulletType: 6
   backwardsForce: 1
   MaxSpreadAngle: 2
   BulletCount: 1
   Automatic: 1
   FireCooldown: 0.02
   InitialFireCooldown: 0
+  SoundEffects:
+  - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
+  Projectile: {fileID: 7750975500520401991, guid: e628c2c6caa94ce46b9a00c7a877f7fc,
+    type: 3}
+  ActiveProjectiles: []
+--- !u!114 &297512775353511095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191481536520945790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9df4b4654513b46961528f0ff3ab65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3228066949501696013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +95,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 2
+--- !u!114 &2035550557693848252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191481536520945790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayName: 
+  Cooldown: 5
+  HoldAbility: 0
+  ReleaseAbility: 1
+  SoundEffects: []
+  WeaponRef: {fileID: 8060274933420828594}
 --- !u!114 &3399664917418735486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,25 +223,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2035550557693848252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6191481536520945790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DisplayName: 
-  Cooldown: 5
-  HoldAbility: 0
-  ReleaseAbility: 1
-  SoundEffects:
-  - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
-  WeaponRef: {fileID: 2635256946172925135}
 --- !u!95 &1322771064071731744
 Animator:
   serializedVersion: 3

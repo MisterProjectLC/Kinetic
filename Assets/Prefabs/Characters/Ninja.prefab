@@ -191,7 +191,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1056472193603156170
 MonoBehaviour:
@@ -358,7 +358,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3757266375381288519
 MonoBehaviour:
@@ -522,13 +522,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 'DAMAGE: 1
+  description: 'DAMAGE: 1 per shot
 
     SPREAD: Medium
 
-    A pair of rapid-fire pistols with
-    decent range and damage. While not as powerful as the Shotgun, its higher range
-    is ideal for pruning targets at longer distances.'
+    A pair of rapid-fire
+    pistols with decent range and damage. While not as powerful as the Shotgun, its
+    higher range is ideal for pruning targets at longer distances.'
+--- !u!1 &3100932466145970575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8567209057711964616}
+  - component: {fileID: 3282984165702355063}
+  m_Layer: 12
+  m_Name: Fall Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8567209057711964616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3100932466145970575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4021532750877547998}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3282984165702355063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3100932466145970575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd38a02d64c2314c92723f7e3432393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VerticalLimit: -150
+  FallRespawnPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &3284626973075478747
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4159440340574040941}
-  - component: {fileID: 6695596221482437738}
+  - component: {fileID: 5491500100975483231}
   - component: {fileID: 6103992379173642408}
   - component: {fileID: 3230930240947093706}
   - component: {fileID: 2803051495875174216}
@@ -567,7 +612,7 @@ Transform:
   m_Father: {fileID: 958540071565868630}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &6695596221482437738
+--- !u!114 &5491500100975483231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -576,23 +621,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3284626973075478747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdcfe09036bdacd4a9670462fd94898f, type: 3}
+  m_Script: {fileID: 11500000, guid: e711193a9c1cd2b459bd18dae3de8933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mouth: {fileID: 958540071565868630}
+  Mouth: {fileID: 0}
   DisplayName: Stun Wave
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
-  MaxDistance: 20
-  Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
-  Projectile: {fileID: 0}
-  ActiveProjectiles: []
-  BulletType: 0
   backwardsForce: 0
-  MaxSpreadAngle: 10
-  BulletCount: 8
+  MaxSpreadAngle: 6
+  BulletCount: 9
   Automatic: 0
   FireCooldown: 5
   InitialFireCooldown: 0
+  SoundEffects:
+  - {fileID: 8300000, guid: ad2c426facb2ccd4fac20694288cdea0, type: 3}
+  MaxDistance: 100
+  Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
 --- !u!114 &6103992379173642408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,7 +698,7 @@ MonoBehaviour:
   ReleaseAbility: 0
   SoundEffects:
   - {fileID: 8300000, guid: ad2c426facb2ccd4fac20694288cdea0, type: 3}
-  WeaponRef: {fileID: 6695596221482437738}
+  WeaponRef: {fileID: 5491500100975483231}
 --- !u!114 &1837573154940863638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,7 +839,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5917140286660060292
 MonoBehaviour:
@@ -852,7 +896,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6450270223927221608
 MonoBehaviour:
@@ -1062,6 +1106,7 @@ GameObject:
   - component: {fileID: 1751639598095803834}
   - component: {fileID: 5273812271440728085}
   - component: {fileID: 6084552008915234182}
+  - component: {fileID: 5503651731410994165}
   - component: {fileID: 1362572544591890133}
   m_Layer: 12
   m_Name: Shell Bombs
@@ -1082,7 +1127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5273812271440728085
 MonoBehaviour:
@@ -1122,6 +1167,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 8
+--- !u!114 &5503651731410994165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5307980427766246164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9df4b4654513b46961528f0ff3ab65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveProjectiles: []
 --- !u!114 &1362572544591890133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,7 +1351,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3914573725090297544
 MonoBehaviour:
@@ -1558,7 +1616,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5704373933498883485
 MonoBehaviour:
@@ -1846,7 +1904,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8089954478560255746
 MonoBehaviour:
@@ -1911,6 +1969,7 @@ Transform:
   m_Children:
   - {fileID: 958540071565868630}
   - {fileID: 2341182423810318684}
+  - {fileID: 8567209057711964616}
   - {fileID: 53945362300564579}
   - {fileID: 7478956445705428809}
   - {fileID: 3451851543787638553}
@@ -1934,7 +1993,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a82277a2105c847809c53e10900208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookSensitivity: 1
   InvertYAxis: 0
   InvertXAxis: 0
 --- !u!114 &3804878940635823621
@@ -2202,6 +2260,11 @@ PrefabInstance:
       propertyPath: Mouth
       value: 
       objectReference: {fileID: 958540071565868630}
+    - target: {fileID: 6996223381059162748, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
+        type: 3}
+      propertyPath: Mouth
+      value: 
+      objectReference: {fileID: 958540071565868630}
     - target: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
         type: 3}
       propertyPath: m_RootOrder
@@ -2338,6 +2401,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3440668403394659245, guid: 473ea86f386f05244a77ca280c2129f8,
+        type: 3}
+      propertyPath: Mouth
+      value: 
+      objectReference: {fileID: 958540071565868630}
     - target: {fileID: 3914768282061949521, guid: 473ea86f386f05244a77ca280c2129f8,
         type: 3}
       propertyPath: m_Name

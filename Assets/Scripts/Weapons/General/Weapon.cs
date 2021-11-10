@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
     [Header("References")]
     [Tooltip("Where the bullets exit from")]
@@ -14,23 +14,6 @@ public class Weapon : MonoBehaviour
     [Tooltip("Layer mask")]
     public LayersConfig HitLayers;
 
-    [Header("Hitscan")]
-    [Tooltip("Max distance to which the bullets travel")]
-    [SerializeField]
-    private float MaxDistance = 100f;
-
-    [Tooltip("Prefab containing hit animation")]
-    [SerializeField]
-    private GameObject Sparks;
-
-    [Header("Projectile")]
-    [SerializeField]
-    private GameObject Projectile;
-    [HideInInspector]
-    public List<GameObject> ActiveProjectiles;
-    [SerializeField]
-    ObjectManager.PoolableType BulletType;
-
     [Header("Attributes")]
     [Tooltip("Pushback force when firing the gun")]
     [SerializeField]
@@ -40,11 +23,11 @@ public class Weapon : MonoBehaviour
     [Tooltip("Max angle at which the bullets spread from the center")]
     [Range(0f, 10f)]
     [SerializeField]
-    private float MaxSpreadAngle = 0f;
+    protected float MaxSpreadAngle = 0f;
 
     [Tooltip("Amount of bullets sent")]
     [SerializeField]
-    private int BulletCount = 12;
+    protected int BulletCount = 12;
 
     [Tooltip("If enabled, holding the button engages repeated shooting")]
     public bool Automatic = false;
@@ -53,16 +36,15 @@ public class Weapon : MonoBehaviour
 
     public float InitialFireCooldown = 0f;
 
+    [SerializeField]
+    AudioClip[] SoundEffects;
+
     public UnityAction OnFire;
 
     private void Start()
     {
         clock = InitialFireCooldown;
-        ActiveProjectiles = new List<GameObject>(BulletCount);
         MaxSpreadAngle /= 100f;
-
-        if (Projectile && Projectile.GetComponent<Poolable>())
-            BulletType = Projectile.GetComponent<Poolable>().Type;
     }
 
     private void Update()
@@ -83,48 +65,16 @@ public class Weapon : MonoBehaviour
     public void Fire()
     {
         OnFire?.Invoke();
+        if (SoundEffects.Length > 0)
+            PlaySound(SoundEffects[Random.Range(0, SoundEffects.Length)]);
 
         for (int i = 0; i < BulletCount; i++)
         {
             // Get Direction
             float spread = Random.Range(0f, MaxSpreadAngle);
             Vector3 direction = Vector3.Slerp(Mouth.forward, Random.insideUnitSphere, spread);
-
-            // Projectile attack
-            if (Projectile != null)
-            {
-                GameObject instance = ObjectManager.OM.SpawnObjectFromPool(BulletType, Projectile).gameObject;
-                instance.transform.position = Mouth.position;
-                instance.GetComponent<Projectile>().Setup(direction, HitLayers.layers, GetComponentInParent<Actor>().gameObject);
-                if (instance.GetComponent<Attack>() && GetComponent<Attack>() && GetComponent<Attack>().OnKill != null &&
-                    (!instance.GetComponent<Poolable>() || !instance.GetComponent<Poolable>().alreadyInitialized))
-                {
-                    instance.GetComponent<Attack>().OnAttack += GetComponent<Attack>().OnAttack;
-                    instance.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
-                    instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;
-                }
-                ActiveProjectiles.Add(instance);
-
-            // Hitscan attack
-            } else { 
-                Ray ray = new Ray(Mouth.position, direction);
-                Physics.Raycast(ray, out RaycastHit hit, MaxDistance, HitLayers.layers);
-                if (hit.collider)
-                {
-                    Vector3 randomVector = Random.insideUnitSphere;
-                    while (Vector3.Dot(randomVector, hit.normal) == 0)
-                        randomVector = Random.insideUnitSphere;
-
-                    if (Sparks != null)
-                    {
-                        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ObjectManager.PoolableType.LaserSparks, Sparks);
-                        newObject.transform.position = hit.point;
-                        newObject.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(Random.insideUnitSphere, hit.normal), 
-                            hit.normal);
-                    }
-                    GetComponent<Attack>().AttackTarget(hit.collider.gameObject);
-                }
-            }
+            Shoot(direction);
+            
         }
     }
 
@@ -133,8 +83,11 @@ public class Weapon : MonoBehaviour
         clock = 0f;
     }
 
-    private void RemoveProjectileFromList(Projectile proj)
+    protected void PlaySound(AudioClip sound)
     {
-        ActiveProjectiles.Remove(proj.gameObject);
+        GetComponent<AudioSource>().clip = sound;
+        GetComponent<AudioSource>().Play();
     }
+
+    public abstract void Shoot(Vector3 direction);
 }
