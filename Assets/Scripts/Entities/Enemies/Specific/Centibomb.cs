@@ -18,7 +18,8 @@ public class Centibomb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<NavMeshAgent>().destination = transform.position;
+        if (GetComponent<NavMeshAgent>().isOnNavMesh)
+            GetComponent<NavMeshAgent>().destination = transform.position;
         GetComponent<Enemy>().OnKnockbackCollision += Detonate;
 
         if (leader)
@@ -50,13 +51,16 @@ public class Centibomb : MonoBehaviour
     {
         RaycastHit hitInfo;
         Physics.SphereCast(transform.position, 2f, transform.forward, out hitInfo, 3f, sphereCastLayers.value, QueryTriggerInteraction.Collide);
-        if (hitInfo.collider && hitInfo.collider.transform.parent && hitInfo.collider.transform.parent.GetComponent<Centibomb>())
-        {
+        if (hitInfo.collider) {
             Transform centibomb = hitInfo.collider.transform.parent;
-
-            if (centibomb.name.StartsWith("Centibomb")) 
-                if (!siblings.Contains(centibomb.GetComponent<Centibomb>()))
+            if (hitInfo.collider.transform.parent && hitInfo.collider.transform.parent.GetComponent<Centibomb>() &&
+                centibomb.name.StartsWith("Centibomb") && !siblings.Contains(centibomb.GetComponent<Centibomb>()))
                     GetComponent<Health>().Kill();
+
+            else if (hitInfo.collider.name != "EN_Centobomba" && (!centibomb || centibomb.name != "EN_Centobomba"))
+            {
+                GetComponent<Health>().Kill();
+            }
         }
     }
 

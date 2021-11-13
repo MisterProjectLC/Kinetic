@@ -191,7 +191,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1056472193603156170
 MonoBehaviour:
@@ -358,7 +358,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3757266375381288519
 MonoBehaviour:
@@ -510,6 +510,50 @@ MonoBehaviour:
 
     This ability resets
     its cooldown upon any kill.'
+--- !u!1 &1706919263383711132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6708969961717583279}
+  - component: {fileID: 7369966745964469740}
+  m_Layer: 12
+  m_Name: Slowdown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6708969961717583279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706919263383711132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4021532750877547998}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7369966745964469740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706919263383711132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b63a49e782398e241afe2e7be12151b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowedTimeSpeed: 0.25
 --- !u!114 &4285761528503053854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +602,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3282984165702355063
 MonoBehaviour:
@@ -839,7 +883,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5917140286660060292
 MonoBehaviour:
@@ -896,7 +940,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6450270223927221608
 MonoBehaviour:
@@ -984,7 +1028,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5976186241892072758
 MonoBehaviour:
@@ -1127,7 +1171,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5273812271440728085
 MonoBehaviour:
@@ -1148,9 +1192,7 @@ MonoBehaviour:
   SoundEffects: []
   ShellBomb: {fileID: 5531395347504132974, guid: 0dfe44ab5c4c87a4ea669bf65a283434,
     type: 3}
-  HitLayers:
-    serializedVersion: 2
-    m_Bits: 2560
+  HitLayers: {fileID: 0}
   ShellCount: 3
   ShellCooldown: 0.1
   BackwardsForce: 2
@@ -1351,7 +1393,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3914573725090297544
 MonoBehaviour:
@@ -1616,7 +1658,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5704373933498883485
 MonoBehaviour:
@@ -1904,7 +1946,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8089954478560255746
 MonoBehaviour:
@@ -1946,7 +1988,7 @@ GameObject:
   - component: {fileID: 3807759192281930911}
   - component: {fileID: 2222884685990388292}
   - component: {fileID: 8479089956554939356}
-  - component: {fileID: 4922189993839505155}
+  - component: {fileID: 2741010674107934635}
   - component: {fileID: 3891292215102862298}
   - component: {fileID: 4217198264253967160}
   m_Layer: 12
@@ -1968,6 +2010,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 958540071565868630}
+  - {fileID: 6708969961717583279}
   - {fileID: 2341182423810318684}
   - {fileID: 8567209057711964616}
   - {fileID: 53945362300564579}
@@ -2120,7 +2163,7 @@ MonoBehaviour:
   DownTransform: {fileID: 7885829806726108092}
   UpTransform: {fileID: 5701861848161749029}
   DeviceHolder: {fileID: 6042770964539169377}
---- !u!114 &4922189993839505155
+--- !u!114 &2741010674107934635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2129,10 +2172,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9089919347116189794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63a49e782398e241afe2e7be12151b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3682afd0a9a56fd44b31d01a7b27869f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowedTimeSpeed: 0.25
+  DepleteRate: 0.25
 --- !u!143 &3891292215102862298
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2327,15 +2370,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bc21ac47bb905447b7aabaf21b8f14e, type: 3}
---- !u!4 &8374904072922748519 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2038653517123148675}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6923643163349663185 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8962014088670307922, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2038653517123148675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8374904072922748519 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
     type: 3}
   m_PrefabInstance: {fileID: 2038653517123148675}
   m_PrefabAsset: {fileID: 0}

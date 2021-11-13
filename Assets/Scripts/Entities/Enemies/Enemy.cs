@@ -39,22 +39,30 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float Stunned = 0f;
 
-    bool airborne = false;
+    bool airborne = true;
     private NavMeshAgent pathAgent;
     Transform playerTransform;
 
     public UnityAction OnActiveUpdate;
     public UnityAction<Vector3> OnKnockbackCollision;
 
-    void Start()
+    private void Awake()
     {
-        playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
         pathAgent = GetComponent<NavMeshAgent>();
         if (pathAgent)
         {
+            Physics.Raycast(new Ray(transform.position + Vector3.up, Vector3.down), out RaycastHit hitInfo, HoverHeight + 1f,
+                GroundLayers.layers, QueryTriggerInteraction.Ignore);
+            if (hitInfo.collider == null)
+                pathAgent.updatePosition = false;
             pathAgent.updateRotation = TurnToMoveDirection;
             pathAgent.updateUpAxis = false;
         }
+    }
+
+    void Start()
+    {
+        playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
     }
 
     // Update is called once per frame
@@ -170,6 +178,8 @@ public class Enemy : MonoBehaviour
 
     public RaycastHit RayToGround()
     {
+        //Debug.Log(pathAgent.updatePosition);
+
         Ray ray;
         if (!pathAgent || !pathAgent.updatePosition)
             ray = new Ray(transform.position + Vector3.up, Vector3.down);
@@ -207,6 +217,11 @@ public class Enemy : MonoBehaviour
     {
         airborne = true;
         transform.position = newPosition;
+    }
+
+    public Vector3 GetMoveVelocity()
+    {
+        return moveVelocity;
     }
 
 

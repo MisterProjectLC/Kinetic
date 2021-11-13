@@ -12,6 +12,8 @@ public class Attack : MonoBehaviour
     public UnityAction<GameObject, float, int> OnAttack;
     [HideInInspector]
     public UnityAction OnKill;
+    [HideInInspector]
+    public UnityAction<Attack> OnKillAttack;
 
     private void Start()
     {
@@ -20,7 +22,7 @@ public class Attack : MonoBehaviour
 
     void Kill()
     {
-        //Debug.Log("kill: " + gameObject.name);
+        OnKillAttack?.Invoke(this);
     }
 
 

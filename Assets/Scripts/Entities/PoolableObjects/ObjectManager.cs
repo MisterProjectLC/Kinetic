@@ -25,6 +25,7 @@ public class ObjectManager : MonoBehaviour
         RocketeerExplosion,
         GravitonProjectile,
         Graviton,
+        SuspendedCrate,
         Count
     }
 

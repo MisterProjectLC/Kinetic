@@ -76,7 +76,6 @@ public class Explosion : MonoBehaviour
                         continue;
                 }
                 enemies.Add(collider.GetComponent<Damageable>().GetHealth());
-                Debug.Log("Vectors: " + transform.position + ", " + colliderPoint);
                 attack.AttackTarget(collider.gameObject, rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget));
             }
         }

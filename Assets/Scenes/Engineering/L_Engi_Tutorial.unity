@@ -8343,6 +8343,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9c292a4d384fe4681fda5d05bbac58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OneShot: 0
+  blockers: []
+  resetters: []
 --- !u!65 &504161645
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21708,9 +21711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70da43669333d4c4d93e44c97187e3a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disabledMaterial: {fileID: 0}
-  enabledMaterial: {fileID: 0}
-  blockers: []
   ScenesLoaded:
   - L_Engi_Intro
   ScenesUnloaded: []
@@ -21794,6 +21794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9c292a4d384fe4681fda5d05bbac58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OneShot: 0
+  blockers: []
+  resetters: []
 --- !u!65 &1219112486
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25016,6 +25019,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9c292a4d384fe4681fda5d05bbac58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OneShot: 0
+  blockers: []
+  resetters: []
 --- !u!65 &1406786650
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30526,6 +30532,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655438382437377873, guid: 77cd97be0751ec642aec3b312eb06db7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5784163054519102849, guid: 77cd97be0751ec642aec3b312eb06db7,
         type: 3}

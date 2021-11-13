@@ -86,7 +86,9 @@ public class Movepad : MonoBehaviour
             }
         }
 
-        else if (target.GetComponentInParent<Enemy>())
+        else if (target.GetComponentInParent<Enemy>() && 
+            (Vector3.Dot(moveVector, target.GetComponentInParent<Enemy>().GetMoveVelocity()) < 0f || 
+            moveVector.magnitude > target.GetComponentInParent<Enemy>().GetMoveVelocity().magnitude))
             target.GetComponentInParent<Enemy>().ReceiveKnockback(moveVector);
     }
 
@@ -109,6 +111,6 @@ public class Movepad : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(GetLowerExtremePoint(), GetUpperExtremePoint());
-        //Gizmos.DrawCube(meshRenderer.bounds.center + detectPosOffset, detectSize);
+        Gizmos.DrawCube(meshRenderer.bounds.center + detectPosOffset, detectSize);
     }
 }

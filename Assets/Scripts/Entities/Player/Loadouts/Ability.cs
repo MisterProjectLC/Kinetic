@@ -21,13 +21,18 @@ public abstract class Ability : MonoBehaviour
     AudioClip[] SoundEffects;
 
     public UnityAction<Input> OnExecute;
+    public UnityAction<Ability> OnExecuteAbility;
     protected UnityAction OnUpdate;
+
+    private void Start()
+    {
+        OnExecute += (Input input) => OnExecuteAbility?.Invoke(this);
+    }
 
     private void Update()
     {
         Timer = Timer > 0f ? Timer - Time.deltaTime : 0f;
-        if (OnUpdate != null)
-            OnUpdate.Invoke();
+        OnUpdate?.Invoke();
     }
 
 
@@ -45,8 +50,7 @@ public abstract class Ability : MonoBehaviour
             if (SoundEffects.Length > 0)
                 PlaySound(SoundEffects[Random.Range(0, SoundEffects.Length)]);
 
-            if (OnExecute != null)
-                OnExecute.Invoke(input);
+            OnExecute?.Invoke(input);
         }
     }
 

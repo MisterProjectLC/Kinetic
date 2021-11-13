@@ -25,7 +25,6 @@ public class StatusEffectApplier : MonoBehaviour
         Vector3 knockbackForce = (target.transform.position - transform.position).normalized * (int)(multiplier * Knockback);
         if (target.GetComponentInParent<Enemy>())
         {
-            Debug.Log(multiplier + ", " + Knockback);
             target.GetComponentInParent<Enemy>().ReceiveKnockback(knockbackForce);
         }
 

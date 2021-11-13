@@ -35,8 +35,7 @@ public class Health : MonoBehaviour
 
         CurrentHealth -= damage;
 
-        if (OnDamage != null)
-            OnDamage.Invoke(damage);
+        OnDamage?.Invoke(damage);
 
         if (CurrentHealth <= CriticalHealth && !critical)
         {
@@ -62,8 +61,7 @@ public class Health : MonoBehaviour
     public void Heal(int heal)
     {
         CurrentHealth = Mathf.Min(MaxHealth, CurrentHealth + heal);
-        if (OnHeal != null)
-            OnHeal.Invoke(heal);
+        OnHeal?.Invoke(heal);
 
         if (CurrentHealth > CriticalHealth && critical)    
             critical = false;

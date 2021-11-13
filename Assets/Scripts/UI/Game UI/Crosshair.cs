@@ -45,7 +45,6 @@ public class Crosshair : MonoBehaviour
 
         foreach (Attack attack in ActorsManager.AM.GetPlayer().GetComponentsInChildren<Attack>())
         {
-            Debug.Log(attack.gameObject.name);
             attack.OnAttack += ActivateHitmarker;
         }
 
