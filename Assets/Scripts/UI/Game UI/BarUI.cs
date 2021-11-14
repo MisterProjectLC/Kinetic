@@ -15,7 +15,7 @@ public class BarUI : MonoBehaviour
     }
 
 
-    protected void UpdateBar(float currentValue, float maxValue)
+    public void UpdateBar(float currentValue, float maxValue)
     {
         bar.sizeDelta = barSize * new Vector2(currentValue / maxValue, 1f);
     }

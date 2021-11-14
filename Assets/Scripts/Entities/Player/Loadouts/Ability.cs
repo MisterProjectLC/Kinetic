@@ -24,9 +24,16 @@ public abstract class Ability : MonoBehaviour
     public UnityAction<Ability> OnExecuteAbility;
     protected UnityAction OnUpdate;
 
+    private void Awake()
+    {
+        if (OnExecute == null)
+            OnExecute += (Input input) => OnExecuteAbility?.Invoke(this);
+    }
+
     private void Start()
     {
-        OnExecute += (Input input) => OnExecuteAbility?.Invoke(this);
+        if (OnExecute == null)
+            OnExecute += (Input input) => OnExecuteAbility?.Invoke(this);
     }
 
     private void Update()

@@ -1,46 +1,161 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StyleHUD : MonoBehaviour
 {
-    StyleMeter style;
-    Text text;
-    CanvasGroup canvasGroup;
+    [System.Serializable]
+    class Line
+    {
+        public Text text;
+        public float total = 0;
+        public int category = -1;
+        public CanvasGroup canvasGroup;
+    }
 
-    int lines = 0;
+    [SerializeField]
+    List<Line> lines;
+    [SerializeField]
+    Text AirborneBonus;
+    [SerializeField]
+    Text TierText;
+    [SerializeField]
+    BarUI StyleBar;
+
+    StyleMeter style;
+    CanvasGroup styleCanvasGroup;
+
+    float tierMultiplier = 3;
+    float totalStyle = 0f;
+    int styleTier = 0;
+    string[] tiers = {"D", "C", "B", "A", "S", "SS"};
+    float fadingClock = 0f;
+
+    [SerializeField]
+    float WaitToFade = 5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        text = GetComponent<Text>();
-        canvasGroup = GetComponent<CanvasGroup>();
-
         style = ActorsManager.AM.GetPlayer().GetComponentInChildren<StyleMeter>();
         style.OnEvent += OnEvent;
+        style.OnBonus += OnBonus;
+
+        styleCanvasGroup = GetComponent<CanvasGroup>();
+
+        for (int i = 0; i < lines.Count; i++)
+        {
+            lines[i].canvasGroup = lines[i].text.GetComponent<CanvasGroup>();
+        }
+
+        UpdateStyleTotal(0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canvasGroup.alpha > 0f) { 
-            canvasGroup.alpha -= 0.15f*Time.deltaTime;
-            if (canvasGroup.alpha <= 0f)
+        // Fade
+        if (fadingClock < WaitToFade)
+            fadingClock += Time.deltaTime;
+        else
+            styleCanvasGroup.alpha -= Time.deltaTime;
+
+        // Decay
+        if (totalStyle > 0f)
+            UpdateStyleTotal(totalStyle - (styleCanvasGroup.alpha <= 0f ? 4f : 1f) * styleTier*tierMultiplier * Time.deltaTime);
+
+        // Update lines
+        for (int i = 0; i < lines.Count; i++)
+        {
+            if (lines[i].canvasGroup.alpha > 0f)
             {
-                text.text = "";
-                lines = 0;
+                lines[i].canvasGroup.alpha -= 0.15f * Time.deltaTime;
+                if (lines[i].canvasGroup.alpha <= 0f)
+                {
+                    lines[i].text.text = "";
+                    lines[i].total = 0;
+                    lines[i].category = -1;
+                }
             }
-        } 
+        }
     }
 
-    void OnEvent(float amount, string eventText)
+    void OnEvent(float amount, int category, string eventText)
     {
+        if (amount > 0)
+        {
+            fadingClock = 0f;
+            styleCanvasGroup.alpha = 1f;
+        }
+
         amount *= 10;
 
-        text.text = eventText + (amount > 0 ? " +" : " ") + amount.ToString() + "\n" + text.text;
-        if (lines >= 4)
-            text.text = string.Join("\n", text.text.Split('\n'), 0, 4);
-        else
-            lines++;
-        canvasGroup.alpha = 1f;
+        // Find line
+        int blankest = 0;
+        float lowestAlpha = 1;
+        for (int i = 0; i < lines.Count; i++)
+        {
+            // Get line of the same category
+            if (lines[i].category == category)
+            {
+                blankest = i;
+                break;
+            }
+
+            // Get unused line
+            if (lines[i].canvasGroup.alpha < lowestAlpha)
+            {
+                lowestAlpha = lines[i].canvasGroup.alpha;
+                blankest = i;
+            }
+        }
+
+        // Setup line
+        if (lines[blankest].category != category)
+        {
+            lines[blankest].total = 0;
+            lines[blankest].category = category;
+        }
+        lines[blankest].total += amount;
+        lines[blankest].text.text = eventText + (lines[blankest].total > 0 ? " +" : " ") + (lines[blankest].total + amount).ToString();
+        lines[blankest].canvasGroup.alpha = 1f;
+
+        // Setup bar
+        amount *= tierMultiplier;
+        UpdateStyleTotal(totalStyle + amount);
+    }
+
+    void OnBonus(int category, bool active)
+    {
+        switch(category)
+        {
+            case (int)StyleMeter.Categories.Airborne:
+                AirborneBonus.enabled = active;
+                break;
+        }
+    }
+
+    void UpdateStyleTotal(float value)
+    {
+        totalStyle = value;
+
+        // Downgrade
+        if (totalStyle <= 0f && styleTier > 0)
+        {
+            styleTier--;
+            totalStyle += style.JuiceMax * 10f + 1;
+        }
+
+        // Upgrade
+        else if (totalStyle >= style.JuiceMax * 10f && styleTier < 5)
+        {
+            styleTier++;
+            totalStyle -= style.JuiceMax * 10f + 1;
+        }
+        totalStyle = Mathf.Clamp(totalStyle, 0f, style.JuiceMax * 10f);
+
+        // Apply
+        TierText.text = tiers[styleTier];
+        StyleBar.UpdateBar(totalStyle, style.JuiceMax * 10f);
     }
 }

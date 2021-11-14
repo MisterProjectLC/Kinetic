@@ -1,14 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class StyleMeter : MonoBehaviour
 {
+    public enum Categories
+    {
+        Kill,
+        Multikill,
+        ChainKill,
+        Damage,
+        Movement,
+        Variety,
+        Airborne
+    }
+
+    const int ABILITY_MEMORY = 5;
+    List<Ability> lastAbilities = new List<Ability>(ABILITY_MEMORY);
+
     Health health;
-    Ability lastAbility = null;
+    PlayerCharacterController player;
 
     public UnityAction OnUpdate;
     public UnityAction OnDeplete;
-    public UnityAction<float, string> OnEvent;
+    public UnityAction<float, int, string> OnEvent;
+    public UnityAction<int, bool> OnBonus;
 
     public float JuiceLeft { get; private set; }
 
@@ -19,20 +35,36 @@ public class StyleMeter : MonoBehaviour
     float DepleteRate = 0.25f;
 
     [SerializeField]
+    float MultiMaxTime = 0.25f;
+    [SerializeField]
     float ComboMaxTime = 3f;
+    [SerializeField]
+    float MovementSpeed = 25f;
+
+    [SerializeField]
+    float VarietyGain = 0.5f;
+    [SerializeField]
+    float MovementGain = 0.5f;
+
+    float movementClock = 0f;
     float clock = 0f;
+
+    bool airborne = false;
 
     private void Start()
     {
+        player = GetComponentInParent<PlayerCharacterController>();
+
+        clock = ComboMaxTime;
         SetJuiceLeft(JuiceMax);
         health = GetComponentInParent<Health>();
-        health.OnDamage += OnDamage;
-        foreach (Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
+        health.OnDamageAttack += OnDamage;
+        foreach (Attack attack in player.GetComponentsInChildren<Attack>())
         {
             attack.OnKill += StyleKill;
         }
 
-        foreach (Ability ability in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Ability>())
+        foreach (Ability ability in player.GetComponentsInChildren<Ability>())
         {
             ability.OnExecuteAbility += AbilityUsage;
         }
@@ -40,54 +72,88 @@ public class StyleMeter : MonoBehaviour
 
     private void Update()
     {
+        // Decay
         if (JuiceLeft > 0f)
             SpendJuice(Time.deltaTime * DepleteRate);
 
+        // Combo time
         if (clock < ComboMaxTime)
             clock += Time.deltaTime;
+
+        // Movement gain
+        movementClock += Time.deltaTime;
+        if (movementClock > 1f)
+        {
+            movementClock = 0f;
+            if (player.MoveVelocity.magnitude > MovementSpeed)
+                GainJuice(MovementGain, (int)Categories.Movement, "Movement");
+        }
+
+        // Airborne bonus
+        if (airborne == player.IsGrounded)
+        {
+            airborne = !player.IsGrounded;
+            OnBonus?.Invoke((int)Categories.Airborne, airborne);
+        }
+
+
     }
 
     void AbilityUsage(Ability ability)
     {
-        if (lastAbility != ability)
-        {
-            lastAbility = ability;
-            GainJuice(0.25f);
-            if (clock < ComboMaxTime)
-                GainJuice(0.75f, "Variety");
-        }
+        int index = 0;
+        for (int i = lastAbilities.Count-1; i >= 0; i--)
+            if (lastAbilities[i] == ability)
+            {
+                index = i;
+                lastAbilities.RemoveAt(i);
+                break;
+            }
+        lastAbilities.Add(ability);
+
+        if (clock < ComboMaxTime)
+            GainJuice(VarietyGain * ((lastAbilities.Count - 1) - index), (int)Categories.Variety, "Variety");
+
+        Debug.Log("Ability: " + ability.DisplayName);
     }
 
     void StyleKill()
     {
-        if (clock < ComboMaxTime)
-            GainJuice(2f, "Chain Kill");
-        else
-            GainJuice(1f, "Kill");
+        GainJuice(0.5f, (int)Categories.Kill, "Kill");
+        if (clock < MultiMaxTime)
+            GainJuice(2f, (int)Categories.Multikill, "Multikill");
+        else if (clock < ComboMaxTime)
+            GainJuice(1.5f, (int)Categories.ChainKill, "Chain Kill");
+
         clock = 0f;
     }
 
-    void OnDamage(int damage)
+    void OnDamage(int damage, Attack attack)
     {
-        SpendJuice(damage * 4, "Damage");
-        if (JuiceLeft > 0f)
-            health.Heal(damage);
+        if (attack == null || attack.Agressor != GetComponent<Actor>())
+            SpendJuice(damage * 4, (int)Categories.Damage, "Damage");
     }
 
 
-    public void GainJuice(float gain, string text = "")
+    public void GainJuice(float gain, int category = -1, string text = "")
     {
-        if (text != "")
-            OnEvent?.Invoke(gain, text);
+        if (gain == 0)
+            return;
 
-        SetJuiceLeft(Mathf.Clamp(JuiceLeft + gain, 0f, JuiceMax));
+        if (text != "")
+            OnEvent?.Invoke(gain, category, text);
+
+        SetJuiceLeft(Mathf.Clamp(JuiceLeft + gain * (player.IsGrounded ? 1 : 1.5f), 0f, JuiceMax));
     }
 
 
-    public void SpendJuice(float cost, string text = "")
+    public void SpendJuice(float cost, int category = -1, string text = "")
     {
+        if (cost == 0)
+            return;
+
         if (text != "")
-            OnEvent?.Invoke(-cost, text);
+            OnEvent?.Invoke(-cost, category, text);
 
         if (JuiceLeft - cost > 0f)
             SetJuiceLeft(JuiceLeft - cost);

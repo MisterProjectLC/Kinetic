@@ -31,7 +31,7 @@ public class Damageable : MonoBehaviour
     public void InflictDamage(int damage, Attack attack)
     {
         HealthRef.OnDie += attack.OnKill;
-        HealthRef.InflictDamage((int)Mathf.Floor(damage * DamageSensitivity));
+        HealthRef.InflictDamage((int)Mathf.Floor(damage * DamageSensitivity), attack);
         HealthRef.OnDie -= attack.OnKill;
     }
 

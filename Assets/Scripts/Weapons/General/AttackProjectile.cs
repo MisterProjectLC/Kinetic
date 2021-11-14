@@ -15,13 +15,17 @@ public class AttackProjectile : MonoBehaviour
     {
         if (GetComponent<Attack>())
             GetComponent<Attack>().AttackTarget(collider.gameObject);
+
+        // Spawn Impact Object
         GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactType, ImpactObject).gameObject;
         newObject.transform.position = transform.position;
         if (newObject.GetComponent<Attack>() && GetComponent<Attack>() && 
             (!newObject.GetComponent<Poolable>() || !newObject.GetComponent<Poolable>().alreadyInitialized))
         {
-            newObject.GetComponent<Attack>().OnAttack += GetComponent<Attack>().OnAttack;
-            newObject.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
+            Attack theirAttack = newObject.GetComponent<Attack>();
+            theirAttack.Agressor = GetComponent<Attack>().Agressor;
+            theirAttack.OnAttack += GetComponent<Attack>().OnAttack;
+            theirAttack.OnKill += GetComponent<Attack>().OnKill;
         }
 
         if (PenetrateCount > 0)

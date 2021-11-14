@@ -14,6 +14,13 @@ public class Attack : MonoBehaviour
     public UnityAction OnKill;
     [HideInInspector]
     public UnityAction<Attack> OnKillAttack;
+    [HideInInspector]
+    public Actor Agressor;
+
+    private void Awake()
+    {
+        Agressor = GetComponentInParent<Actor>();
+    }
 
     private void Start()
     {
@@ -26,12 +33,7 @@ public class Attack : MonoBehaviour
     }
 
 
-    public void AttackTarget(GameObject target)
-    {
-        AttackTarget(target, 1f);
-    }
-
-    public void AttackTarget(GameObject target, float multiplier)
+    public void AttackTarget(GameObject target, float multiplier = 1f)
     {
         // Damage
         if (target.GetComponent<Damageable>())

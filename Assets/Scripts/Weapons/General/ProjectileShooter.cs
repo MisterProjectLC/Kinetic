@@ -27,6 +27,7 @@ public class ProjectileShooter : MonoBehaviour
         if (instance.GetComponent<Attack>() && GetComponent<Attack>() && GetComponent<Attack>().OnKill != null &&
             (!instance.GetComponent<Poolable>() || !instance.GetComponent<Poolable>().alreadyInitialized))
         {
+            instance.GetComponent<Attack>().Agressor = GetComponent<Attack>().Agressor;
             instance.GetComponent<Attack>().OnAttack += GetComponent<Attack>().OnAttack;
             instance.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
             instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;

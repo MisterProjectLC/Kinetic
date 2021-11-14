@@ -15,6 +15,8 @@ public class Health : MonoBehaviour
     [HideInInspector]
     public UnityAction<int> OnDamage;
     [HideInInspector]
+    public UnityAction<int, Attack> OnDamageAttack;
+    [HideInInspector]
     public UnityAction OnCriticalLevel;
     [HideInInspector]
     public UnityAction<int> OnHeal;
@@ -30,12 +32,18 @@ public class Health : MonoBehaviour
 
     public void InflictDamage(int damage)
     {
+        InflictDamage(damage, null);
+    }
+
+
+    public void InflictDamage(int damage, Attack source)
+    {
         if (died)
             return;
 
         CurrentHealth -= damage;
-
         OnDamage?.Invoke(damage);
+        OnDamageAttack?.Invoke(damage, source);
 
         if (CurrentHealth <= CriticalHealth && !critical)
         {
@@ -47,6 +55,7 @@ public class Health : MonoBehaviour
         if (CurrentHealth <= 0)
             Kill();
     }
+
 
     public void Kill()
     {

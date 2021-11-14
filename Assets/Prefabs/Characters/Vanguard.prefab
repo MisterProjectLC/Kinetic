@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 12
+  Agressor: {fileID: 0}
 --- !u!114 &5777217409242534307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 0
+  Agressor: {fileID: 0}
 --- !u!114 &3492134651301571342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,6 +1350,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DepleteRate: 0.25
+  MultiMaxTime: 0.25
+  ComboMaxTime: 3
+  MovementSpeed: 25
+  VarietyGain: 0.5
+  MovementGain: 0.5
 --- !u!143 &3891292215102862298
 CharacterController:
   m_ObjectHideFlags: 0

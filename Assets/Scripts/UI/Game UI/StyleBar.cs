@@ -10,11 +10,11 @@ public class StyleBar : BarUI
     void Start()
     {
         styleMeter = ActorsManager.Player.GetComponent<StyleMeter>();
-        styleMeter.OnUpdate += UpdateSlowtimebar;
+        styleMeter.OnUpdate += UpdateStylebar;
     }
 
 
-    void UpdateSlowtimebar()
+    void UpdateStylebar()
     {
         UpdateBar(styleMeter.JuiceLeft, styleMeter.JuiceMax);
     }

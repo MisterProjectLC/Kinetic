@@ -17,5 +17,8 @@ public class FallArea : MonoBehaviour
             other.GetComponentInChildren<PlayerFallHandler>().VerticalLimit = VerticalLimit;
             other.GetComponentInChildren<PlayerFallHandler>().FallRespawnPoint = FallRespawnPoint.position;
         }
+
+        if (other.GetComponentInParent<Enemy>())
+            other.GetComponentInParent<Enemy>().GetComponent<Health>().Kill();
     }
 }
