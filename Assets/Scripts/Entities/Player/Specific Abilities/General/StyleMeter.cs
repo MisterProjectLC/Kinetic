@@ -23,6 +23,7 @@ public class StyleMeter : MonoBehaviour
 
     public UnityAction OnUpdate;
     public UnityAction OnDeplete;
+    public UnityAction<bool> OnCritical;
     public UnityAction<float, int, string> OnEvent;
     public UnityAction<int, bool> OnBonus;
 
@@ -31,6 +32,8 @@ public class StyleMeter : MonoBehaviour
     [SerializeField]
     public float JuiceMax { get; private set; } = 10f;
 
+    [SerializeField]
+    float CriticalPercent = 0.8f;
     [SerializeField]
     float DepleteRate = 0.25f;
 
@@ -50,6 +53,7 @@ public class StyleMeter : MonoBehaviour
     float clock = 0f;
 
     bool airborne = false;
+    public bool Critical { get; private set; }
 
     private void Start()
     {
@@ -95,9 +99,8 @@ public class StyleMeter : MonoBehaviour
             airborne = !player.IsGrounded;
             OnBonus?.Invoke((int)Categories.Airborne, airborne);
         }
-
-
     }
+
 
     void AbilityUsage(Ability ability)
     {
@@ -169,5 +172,10 @@ public class StyleMeter : MonoBehaviour
     {
         JuiceLeft = juiceLeft;
         OnUpdate?.Invoke();
+
+        bool lastCritical = Critical;
+        Critical = juiceLeft > JuiceMax * CriticalPercent;
+        if (lastCritical != Critical)
+            OnCritical?.Invoke(Critical);
     }
 }

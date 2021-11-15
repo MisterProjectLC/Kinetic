@@ -37,7 +37,11 @@ public class MySceneManager : MonoBehaviour
         if (loader)
             return loader.GetComponent<ScenePartLoader>().LoadScene();
         else
-            return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            // Cancel if already loaded
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+                if (SceneManager.GetSceneAt(i).name == scene)
+                    return null;
+        return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
     }
 
 
@@ -51,7 +55,8 @@ public class MySceneManager : MonoBehaviour
             for (int i = 0; i < SceneManager.sceneCount; i++)
                 if (SceneManager.GetSceneAt(i).name == scene)
                 {
-                    SceneManager.UnloadSceneAsync(scene);
+                    Debug.Log(SceneManager.GetSceneAt(i).name);
+                    SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
                     break;
                 }
     }

@@ -8,14 +8,17 @@ public class Door : MonoBehaviour
     [SerializeField]
     private string OpenAnimation = "DoorOpen";
 
+    private void Awake()
+    {
+        if (GetComponent<UniqueID>())
+            GetComponent<UniqueID>().OnObjectRegistered += Activate;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         if (Button)
             Button.OnTriggerActivate += Activate;
-
-        if (GetComponent<UniqueID>())
-            GetComponent<UniqueID>().OnObjectRegistered += Activate;
     }
 
     // Update is called once per frame

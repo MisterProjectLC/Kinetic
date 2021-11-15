@@ -21,13 +21,17 @@ public class GameTrigger : MonoBehaviour
     {
         foreach (GameTrigger gameTrigger in blockers)
         {
-            gameTrigger.OnTriggerDestroy += RemoveBlocker;
-            blockerCount++;
+            if (gameTrigger != null)
+            {
+                gameTrigger.OnTriggerDestroy += RemoveBlocker;
+                blockerCount++;
+            }
         }
 
         foreach (GameTrigger gameTrigger in resetters)
         {
-            gameTrigger.OnTriggerActivate += ResetOneShot;
+            if (gameTrigger != null)
+                gameTrigger.OnTriggerActivate += ResetOneShot;
         }
     }
 
@@ -40,8 +44,11 @@ public class GameTrigger : MonoBehaviour
 
     void ResetOneShot()
     {
-        oneshotted = false;
-        OnResetOneshot?.Invoke();
+        if (blockerCount <= 0)
+        {
+            oneshotted = false;
+            OnResetOneshot?.Invoke();
+        }
     }
 
     private void OnDestroy()

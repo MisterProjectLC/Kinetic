@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public bool Movable = true;
     public float HoverHeight = 1f;
     public float GravityMultiplier = 1f;
+    float lastGravityMultiplier = 1f;
     public float AirDesacceleration = 0f;
 
     [Header("Options")]
@@ -78,7 +79,11 @@ public class Enemy : MonoBehaviour
                 OnActiveUpdate.Invoke();
         }
         else
+        {
             Stunned -= Time.deltaTime;
+            if (Stunned <= 0f)
+                GravityMultiplier = lastGravityMultiplier;
+        }
     }
 
 
@@ -193,6 +198,11 @@ public class Enemy : MonoBehaviour
     public void ReceiveStun(float duration)
     {
         Stunned = duration;
+        if (GravityMultiplier < 1f)
+        {
+            lastGravityMultiplier = GravityMultiplier;
+            GravityMultiplier = 1f;
+        }
         if (pathAgent && pathAgent.isOnNavMesh)
             pathAgent.isStopped = true;
     }

@@ -21,6 +21,8 @@ public class GrapplingHook : Ability
         {
             attack.OnKill += ResetCooldown;
         }
+
+        GetComponentInParent<StyleMeter>().OnCritical += (critical) => { if (critical) ResetCooldown(); };
     }
 
     public override void Execute(Input input)
@@ -35,12 +37,14 @@ public class GrapplingHook : Ability
             ResetCooldown();
         } else
         {
-            Timer = 0.5f;
+            if (GetComponentInParent<StyleMeter>().Critical)
+                ResetCooldown();
         }
     }
 
     public void OnHookDestroy()
     {
-        SetOffCooldown();
+        if (!GetComponentInParent<StyleMeter>().Critical)
+            SetOffCooldown();
     }
 }

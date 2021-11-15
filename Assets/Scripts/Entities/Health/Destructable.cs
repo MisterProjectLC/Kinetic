@@ -5,6 +5,8 @@ public class Destructable : MonoBehaviour
 {
     [SerializeField]
     private GameObject BrokenModelPrefab;
+    [SerializeField]
+    bool MatchModelScale = false;
 
     [SerializeField]
     private GameObject OriginalModel;
@@ -34,6 +36,8 @@ public class Destructable : MonoBehaviour
             GameObject newBroken = Instantiate(BrokenModelPrefab);
             newBroken.transform.position = OriginalModel.transform.position;
             newBroken.transform.rotation = OriginalModel.transform.rotation;
+            if (MatchModelScale)
+                newBroken.transform.localScale = OriginalModel.transform.localScale;
             if (GetComponent<UniqueID>())
                 GetComponent<UniqueID>().RegisterID();
 

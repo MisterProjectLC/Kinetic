@@ -393,6 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 6
+  Agressor: {fileID: 0}
 --- !u!82 &3514579523878951028
 AudioSource:
   m_ObjectHideFlags: 0
@@ -694,6 +695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 0
+  Agressor: {fileID: 0}
 --- !u!114 &3230930240947093706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,7 +1194,7 @@ MonoBehaviour:
   SoundEffects: []
   ShellBomb: {fileID: 5531395347504132974, guid: 0dfe44ab5c4c87a4ea669bf65a283434,
     type: 3}
-  HitLayers: {fileID: 0}
+  HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   ShellCount: 3
   ShellCooldown: 0.1
   BackwardsForce: 2
@@ -1209,6 +1211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 8
+  Agressor: {fileID: 0}
 --- !u!114 &5503651731410994165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1450,7 +1453,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4709950724847480666}
   - component: {fileID: 7951354861340485890}
-  - component: {fileID: 4472888667078105858}
   - component: {fileID: 5986198793653576087}
   - component: {fileID: 7300476405894082879}
   m_Layer: 7
@@ -1488,7 +1490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: Grappling Hook
-  Cooldown: 1.5
+  Cooldown: 4
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -1498,19 +1500,6 @@ MonoBehaviour:
   HitLayers:
     serializedVersion: 2
     m_Bits: 2560
---- !u!114 &4472888667078105858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7349922464857806567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc627d0a5d9b6f345bd4f4febc86ec2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LeftHand: {fileID: 0}
 --- !u!82 &5986198793653576087
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1624,9 +1613,8 @@ MonoBehaviour:
     at a target and jump: you''ll soon be pulled in the direction of the hook.
 
 
-    Be
-    warned, however: missing with the hook increases its cooldown significantly,
-    so use it wisely!'
+    Has
+    no cooldown when the Style meter hits 80% or higher.'
 --- !u!1 &8006630410610024068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,10 +2163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3682afd0a9a56fd44b31d01a7b27869f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CriticalPercent: 0.8
   DepleteRate: 0.25
   MultiMaxTime: 0.25
   ComboMaxTime: 3
   MovementSpeed: 25
+  VarietyGain: 0.5
+  MovementGain: 0.5
 --- !u!143 &3891292215102862298
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2474,15 +2465,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 473ea86f386f05244a77ca280c2129f8, type: 3}
---- !u!4 &778479117601111840 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2483760642977702375, guid: 473ea86f386f05244a77ca280c2129f8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2933428334205624007}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2225249382224139414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3914768282061949521, guid: 473ea86f386f05244a77ca280c2129f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2933428334205624007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &778479117601111840 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2483760642977702375, guid: 473ea86f386f05244a77ca280c2129f8,
     type: 3}
   m_PrefabInstance: {fileID: 2933428334205624007}
   m_PrefabAsset: {fileID: 0}
