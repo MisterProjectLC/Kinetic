@@ -39,7 +39,6 @@ public class Pause : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         playerInput = ActorsManager.AM.GetPlayer().GetComponent<PlayerInputHandler>();
         StartCoroutine(InitialClose());
     }
@@ -62,7 +61,6 @@ public class Pause : MonoBehaviour
         Paused = !Paused;
         OnTogglePause?.Invoke(Paused);
         playerInput.inputEnabled = !Paused;
-        Cursor.lockState = Paused ? CursorLockMode.Confined : CursorLockMode.Locked;
         // Pause
         if (Paused)
         {
@@ -93,6 +91,8 @@ public class Pause : MonoBehaviour
             GO.SetActive(false);
         foreach (GameObject GO in PlayObjects)
             GO.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public bool GetPause()

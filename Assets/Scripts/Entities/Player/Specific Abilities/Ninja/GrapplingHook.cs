@@ -34,6 +34,7 @@ public class GrapplingHook : Ability
             GetComponent<AudioSource>().Play();
             hook.transform.position = Mouth.position;
             hook.GetComponent<Projectile>().Setup(Mouth.forward, HitLayers, GetComponentInParent<Actor>().gameObject);
+            GetComponentInParent<PlayerCharacterController>().GravityEnabled = true;
             ResetCooldown();
         } else
         {

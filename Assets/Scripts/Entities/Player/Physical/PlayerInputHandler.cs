@@ -36,6 +36,7 @@ public class PlayerInputHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         if (keycodes == null)
         {
             keycodes = new Dictionary<KeyCode, int>();

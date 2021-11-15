@@ -44,6 +44,13 @@ public class StyleMeter : MonoBehaviour
     [SerializeField]
     float MovementSpeed = 25f;
 
+    [Tooltip("Gain amounts")]
+    [SerializeField]
+    float KillGain = 0.5f;
+    [SerializeField]
+    float ChainGain = 1.5f;
+    [SerializeField]
+    float MultiGain = 2f;
     [SerializeField]
     float VarietyGain = 0.5f;
     [SerializeField]
@@ -122,11 +129,11 @@ public class StyleMeter : MonoBehaviour
 
     void StyleKill()
     {
-        GainJuice(0.5f, (int)Categories.Kill, "Kill");
+        GainJuice(KillGain, (int)Categories.Kill, "Kill");
         if (clock < MultiMaxTime)
-            GainJuice(2f, (int)Categories.Multikill, "Multikill");
+            GainJuice(MultiGain, (int)Categories.Multikill, "Multikill");
         else if (clock < ComboMaxTime)
-            GainJuice(1.5f, (int)Categories.ChainKill, "Chain Kill");
+            GainJuice(ChainGain, (int)Categories.ChainKill, "Chain Kill");
 
         clock = 0f;
     }
