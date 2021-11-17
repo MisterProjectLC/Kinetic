@@ -28,6 +28,8 @@ public class Movepad : MonoBehaviour
     public float Speed = 5f;
     [SerializeField]
     private bool isJump = true;
+    [SerializeField]
+    private bool overrideAutomaticSize = false;
 
     float clock = 0f;
     float cooldown { get {
@@ -44,7 +46,8 @@ public class Movepad : MonoBehaviour
         if (DespawnPoint && SpawnPoint)
         {
             moveVector = (DespawnPoint.position - SpawnPoint.position).normalized * Speed;
-            detectSize = new Vector3((DespawnPoint.position - SpawnPoint.position).magnitude / 2, 1f, 1.5f);
+            if (!overrideAutomaticSize)
+                detectSize = new Vector3((DespawnPoint.position - SpawnPoint.position).magnitude / 2, 1f, 1.5f);
         }
         //Debug.Log(DespawnPoint.position + ", " + SpawnPoint.position + ", " + moveVector);
     }
@@ -110,7 +113,8 @@ public class Movepad : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(GetLowerExtremePoint(), GetUpperExtremePoint());
+        if (DespawnPoint && SpawnPoint)
+            Gizmos.DrawLine(GetLowerExtremePoint(), GetUpperExtremePoint());
         Gizmos.DrawCube(meshRenderer.bounds.center + detectPosOffset, detectSize);
     }
 }

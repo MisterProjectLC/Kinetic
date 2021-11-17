@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
@@ -11,6 +10,9 @@ public class Damageable : MonoBehaviour
 
     [Range (0, 3f)]
     public float DamageSensitivity = 1f;
+
+    public UnityAction<int> OnRawDamage;
+    public UnityAction<int> OnDamage;
 
 
     private void Start()
@@ -25,15 +27,17 @@ public class Damageable : MonoBehaviour
 
     public void InflictDamage(int damage)
     {
-        HealthRef.InflictDamage((int)Mathf.Floor(damage*DamageSensitivity));
+        InflictDamage(damage, null);
     }
 
     public void InflictDamage(int damage, Attack attack)
     {
-        HealthRef.OnDie += attack.OnKill;
-        HealthRef.InflictDamage((int)Mathf.Floor(damage * DamageSensitivity), attack);
-        HealthRef.OnDie -= attack.OnKill;
+        int damageInflicted = (int)Mathf.Floor(damage * DamageSensitivity);
+        OnRawDamage?.Invoke(damage);
+        OnDamage?.Invoke(damageInflicted);
+        HealthRef.InflictDamage(damageInflicted, attack);
     }
+
 
     public Health GetHealth()
     {

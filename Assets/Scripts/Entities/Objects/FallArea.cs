@@ -19,6 +19,11 @@ public class FallArea : MonoBehaviour
         }
 
         if (other.GetComponentInParent<Enemy>())
-            other.GetComponentInParent<Enemy>().GetComponent<Health>().Kill();
+        {
+            Debug.Log("Enemy fall");
+            Health enemyHealth = other.GetComponentInParent<Enemy>().GetComponent<Health>();
+            if (enemyHealth)
+                enemyHealth.Kill();
+        }
     }
 }

@@ -8,5 +8,5 @@ public class Poolable : MonoBehaviour
     public ObjectManager.PoolableType Type;
 
     [HideInInspector]
-    public bool alreadyInitialized = false;
+    public bool AlreadyInitialized = false;
 }

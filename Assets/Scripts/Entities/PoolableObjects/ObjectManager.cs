@@ -26,6 +26,7 @@ public class ObjectManager : MonoBehaviour
         GravitonProjectile,
         Graviton,
         SuspendedCrate,
+        PaybackExplosion,
         Count
     }
 
@@ -62,7 +63,7 @@ public class ObjectManager : MonoBehaviour
 
     public void EraseObject(Poolable instance)
     {
-        instance.alreadyInitialized = true;
+        instance.AlreadyInitialized = true;
         instance.gameObject.SetActive(false);
         Poolables[(int)instance.Type].Push(instance);
     }

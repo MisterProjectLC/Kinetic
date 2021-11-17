@@ -92,6 +92,8 @@ GameObject:
   - component: {fileID: 1241443773104166737}
   - component: {fileID: 6893605308213607743}
   - component: {fileID: 1288594654508550139}
+  - component: {fileID: 4830460660065374019}
+  - component: {fileID: 5379063601002576798}
   m_Layer: 11
   m_Name: Cube.014
   m_TagString: Untagged
@@ -162,6 +164,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4830460660065374019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121806192886052102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7880baa992eab40a595f041b51874d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthRef: {fileID: 1778385790811195551}
+  DamageSensitivity: 2
+--- !u!65 &5379063601002576798
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121806192886052102}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04804876, y: 0.0403806, z: 0.018819544}
+  m_Center: {x: 0, y: 0.0008455532, z: 0.13232684}
 --- !u!1 &232940421288367912
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,10 +403,6 @@ MonoBehaviour:
   Mouth: {fileID: 8681745296364251846}
   DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
-  MaxDistance: 100
-  Sparks: {fileID: 0}
-  Projectile: {fileID: 0}
-  ActiveProjectiles: []
   backwardsForce: 20
   MaxSpreadAngle: 0
   BulletCount: 1
@@ -388,7 +413,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4105042febbe7df42845f74cc06cb0ce, type: 3}
   Projectile: {fileID: 1224324934996319193, guid: 1fe0f398bb9b4e54e8bab14ee81d0bc7,
     type: 3}
-  ActiveProjectiles: []
 --- !u!114 &4261113948295179234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9df4b4654513b46961528f0ff3ab65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveProjectiles: []
 --- !u!65 &8966422597407325924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -826,7 +851,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!1 &1866567730705047689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,6 +1285,7 @@ GameObject:
   - component: {fileID: 8322315004220507059}
   - component: {fileID: 5897277343372701003}
   - component: {fileID: 2383767711730576304}
+  - component: {fileID: 2832283616870963803}
   m_Layer: 11
   m_Name: Rocketeer
   m_TagString: Untagged
@@ -1297,6 +1323,7 @@ MonoBehaviour:
   CurrentHealth: 5
   CriticalHealth: 40
   MaxHealth: 75
+  lastAttack: {fileID: 0}
 --- !u!114 &8460232533797037908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,6 +1338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BrokenModelPrefab: {fileID: 4464070307709363231, guid: 29b9be437d5f6c742baa24d632101d78,
     type: 3}
+  MatchModelScale: 0
   OriginalModel: {fileID: 1849463394348587288}
 --- !u!114 &4338028645485279745
 MonoBehaviour:
@@ -1409,7 +1437,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StaggerDuration: 2
   maxDistance: 30
-  weapon: {fileID: 0}
 --- !u!95 &5897277343372701003
 Animator:
   serializedVersion: 3
@@ -1441,6 +1468,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75c57e142a6f65408396fca57bfe12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2832283616870963803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270409125044020690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153d1fc240f4fa141b91c44e0af85158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StylePerDamage: 0.5
+  StyleOnKill: 5
 --- !u!1 &4469185147522742433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,6 +2181,7 @@ GameObject:
   - component: {fileID: 7934144666452155211}
   - component: {fileID: 5257904383854322566}
   - component: {fileID: 8886640914269568950}
+  - component: {fileID: 8083795743919759310}
   m_Layer: 11
   m_Name: Cube.006
   m_TagString: Untagged
@@ -2223,6 +2265,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.032454263, y: 0.027256962, z: 0.12294911}
   m_Center: {x: -0.059144706, y: 0.001633938, z: 0.019316137}
+--- !u!114 &8083795743919759310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7848849788939126573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7880baa992eab40a595f041b51874d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthRef: {fileID: 1778385790811195551}
+  DamageSensitivity: 1
 --- !u!1 &7907625502790526041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2413,7 +2469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthRef: {fileID: 1778385790811195551}
-  DamageSensitivity: 1
+  DamageSensitivity: 2
 --- !u!1 &8483369660417671650
 GameObject:
   m_ObjectHideFlags: 0

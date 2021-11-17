@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -6,6 +7,9 @@ public class LoadoutOption : MonoBehaviour
 {
     public GameObject Ability;
     public bool isPassive = false;
+
+    public List<string> PrerequisiteAbilities;
+
     [SerializeField]
     Image passiveOverlay;
     public UnityAction<LoadoutOption> OnInsert;

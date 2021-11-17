@@ -18,8 +18,10 @@ public class LevelUpSystem : MonoBehaviour
     public GameObject optionPrefab;
     public GameObject heavyOptionPrefab;
 
-    List<LoadoutOption> optionsBank;
-    List<LoadoutOption> optionsShown;
+    List<LoadoutOption> optionsLocked = new List<LoadoutOption>();
+    List<LoadoutOption> optionsBank = new List<LoadoutOption>();
+    List<LoadoutOption> optionsShown = new List<LoadoutOption>();
+    List<LoadoutOption> optionsObtained = new List<LoadoutOption>();
 
     bool loweredMenu = false;
     int siblingBaseCount = 0;
@@ -36,8 +38,6 @@ public class LevelUpSystem : MonoBehaviour
     void Start() {
 
         LoadoutManager loadout = ActorsManager.Player.GetComponent<LoadoutManager>();
-        optionsBank = new List<LoadoutOption>();
-        optionsShown = new List<LoadoutOption>();
         siblingBaseCount = transform.GetChildCount();
 
         int i = 0;
@@ -53,19 +53,28 @@ public class LevelUpSystem : MonoBehaviour
         foreach (LoadoutManager.Option option in loadout.Options)
         {
             GameObject GO = GenerateOptionInstance(option);
+
             if (option.ability.name == "Killheal")
+            {
                 initialPassiveSlot.GetComponent<DropSlot>().OnDrop(GO.GetComponent<LoadoutOption>().gameObject);
+                optionsObtained.Add(GO.GetComponent<LoadoutOption>());
+            }
             else
             {
                 GO.SetActive(false);
                 LoadoutOption loadoutOption = GO.GetComponent<LoadoutOption>();
-                optionsBank.Add(loadoutOption);
+
+                if (option.prerequisiteAbilities.Count > 0)
+                    optionsLocked.Add(loadoutOption);
+                else
+                    optionsBank.Add(loadoutOption);
             }
         }
     }
 
     GameObject GenerateOptionInstance(LoadoutManager.Option option)
     {
+        // Instantiate object
         GameObject newInstance = null;
         if (option.secondaryAbility.Length <= 0)
             newInstance = Instantiate(optionPrefab);
@@ -75,13 +84,16 @@ public class LevelUpSystem : MonoBehaviour
             newInstance.GetComponent<BigLoadoutOption>().SetSecondaryAbility(option.secondaryAbility);
         }
 
-        LoadoutOption loadoutOption = newInstance.GetComponent<LoadoutOption>();
+        // Set sibling order
         newInstance.transform.SetParent(transform);
         if (option.secondaryAbility.Length > 0)
             newInstance.transform.SetSiblingIndex(siblingBaseCount);
 
+        // Setup loadout option
+        LoadoutOption loadoutOption = newInstance.GetComponent<LoadoutOption>();
         loadoutOption.Ability = option.ability;
         loadoutOption.isPassive = option.isPassive;
+        loadoutOption.PrerequisiteAbilities = new List<string>(option.prerequisiteAbilities);
         loadoutOption.OnInsert += ChooseOption;
 
         return newInstance;
@@ -99,6 +111,7 @@ public class LevelUpSystem : MonoBehaviour
                 return;
 
             int rnd = Random.Range(0, optionsBank.Count);
+
             optionsBank[rnd].gameObject.SetActive(true);
             optionsShown.Add(optionsBank[rnd]);
             optionsBank[rnd].GetComponent<RectTransform>().anchoredPosition = new Vector2(-40 + i*258, 166);
@@ -122,12 +135,36 @@ public class LevelUpSystem : MonoBehaviour
         }
     }
 
+
     void ChooseOption(LoadoutOption option)
     {
         if (!optionsShown.Contains(option))
             return;
 
+        // Add options
         optionsShown.Remove(option);
+        optionsObtained.Add(option);
+
+        // Unlock locked loadouts
+        List<LoadoutOption> optionsToDelete = new List<LoadoutOption>();
+        foreach (LoadoutOption potentialToUnlock in optionsLocked)
+        {
+            string displayName = option.Ability.GetComponent<Ability>() ? option.Ability.GetComponent<Ability>().DisplayName : option.Ability.name;
+            if (potentialToUnlock.PrerequisiteAbilities.Contains(displayName))
+            {
+                potentialToUnlock.PrerequisiteAbilities.Remove(displayName);
+                if (potentialToUnlock.PrerequisiteAbilities.Count <= 0)
+                {
+                    optionsToDelete.Add(potentialToUnlock);
+                    optionsBank.Add(potentialToUnlock);
+                }
+            }
+        }
+        foreach (LoadoutOption optionToDelete in optionsToDelete)
+            optionsLocked.Remove(optionToDelete);
+
+
+        // Hide shown options
         foreach (LoadoutOption shownOption in optionsShown)
         {
             shownOption.GetComponent<RectTransform>().anchoredPosition = new Vector3(-1000, 1000);

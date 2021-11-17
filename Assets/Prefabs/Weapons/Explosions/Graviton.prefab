@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
+  Agressor: {fileID: 0}
 --- !u!114 &7689309710378173641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,8 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Knockback: -55
-  Effects:
-  - {fileID: 764313433112388447}
+  Effects: []
 --- !u!114 &764313433112388447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530802152247089991}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 428a598b0a8a81a42b6ac1de094f5796, type: 3}
   m_Name: 

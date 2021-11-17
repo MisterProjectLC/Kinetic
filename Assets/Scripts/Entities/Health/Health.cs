@@ -5,12 +5,18 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    static float LastAttackWait = 15f;
+
     [HideInInspector]
     public int CurrentHealth = 5;
     public int CriticalHealth = 1;
     public int MaxHealth = 5;
     bool critical = false;
     bool died = false;
+
+    [HideInInspector]
+    public Attack lastAttack = null;
+    float lastAttackTime = 0f;
 
     [HideInInspector]
     public UnityAction<int> OnDamage;
@@ -44,27 +50,45 @@ public class Health : MonoBehaviour
         CurrentHealth -= damage;
         OnDamage?.Invoke(damage);
         OnDamageAttack?.Invoke(damage, source);
+        lastAttack = source;
+        lastAttackTime = Time.fixedTime;
 
         if (CurrentHealth <= CriticalHealth && !critical)
         {
             critical = true;
-            if (OnCriticalLevel != null)
-                OnCriticalLevel.Invoke();
+            OnCriticalLevel?.Invoke();
         }
 
         if (CurrentHealth <= 0)
-            Kill();
+            Die();
     }
 
 
-    public void Kill()
+    void Die()
     {
         if (died)
             return;
 
         died = true;
-        if (OnDie != null)
-            OnDie.Invoke();
+        if (lastAttack)
+            OnDie += () => lastAttack.OnKillTarget?.Invoke(gameObject);
+        OnDie?.Invoke();
+    }
+
+    public void Kill()
+    {
+        Kill(true);
+    }
+
+    public void Kill(bool environmental)
+    {
+        if (died)
+            return;
+
+        if (environmental && ReceivedRecentPlayerAttack())
+            lastAttack.OnIndirectKill?.Invoke();
+
+        Die();
     }
 
     public void Heal(int heal)
@@ -74,5 +98,10 @@ public class Health : MonoBehaviour
 
         if (CurrentHealth > CriticalHealth && critical)    
             critical = false;
+    }
+
+    public bool ReceivedRecentPlayerAttack()
+    {
+        return lastAttackTime + LastAttackWait > Time.fixedTime ? (lastAttack ? lastAttack.Agressor == ActorsManager.AM.GetPlayer() : false) : false;
     }
 }

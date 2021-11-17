@@ -13,7 +13,11 @@ public class Attack : MonoBehaviour
     [HideInInspector]
     public UnityAction OnKill;
     [HideInInspector]
+    public UnityAction OnIndirectKill;
+    [HideInInspector]
     public UnityAction<Attack> OnKillAttack;
+    [HideInInspector]
+    public UnityAction<GameObject> OnKillTarget;
     [HideInInspector]
     public Actor Agressor;
 
@@ -24,11 +28,13 @@ public class Attack : MonoBehaviour
 
     private void Start()
     {
-        OnKill += Kill;
+        OnKillTarget += Kill;
+        OnIndirectKill += OnKill;
     }
 
-    void Kill()
+    void Kill(GameObject target)
     {
+        OnKill?.Invoke();
         OnKillAttack?.Invoke(this);
     }
 
@@ -41,5 +47,16 @@ public class Attack : MonoBehaviour
             OnAttack?.Invoke(target, multiplier, (int)(multiplier * Damage));
             target.GetComponent<Damageable>().InflictDamage((int)(multiplier*Damage), this);
         }
+    }
+
+    public void SetupClone(Attack clone)
+    {
+        //Debug.Log("Cloning from " + gameObject.name + " to " + clone.gameObject.name);
+
+        clone.OnAttack += OnAttack;
+        clone.OnKill += OnKill;
+        clone.OnKillTarget += OnKillTarget;
+        clone.OnIndirectKill += OnIndirectKill;
+        clone.OnKillAttack += OnKillAttack;
     }
 }

@@ -80,4 +80,9 @@ public class Explosion : MonoBehaviour
             }
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, Radius);
+    }
 }

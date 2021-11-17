@@ -12,6 +12,7 @@ public class Turret : MonoBehaviour
     {
         foreach (Health turret in Turrets)
         {
+            turret.OnDamageAttack += (int damage, Attack source) => GetComponent<Health>().lastAttack = source;
             turret.OnDie += OnTurretDestroyed;
             turretsRemaining++;
         }
@@ -20,8 +21,7 @@ public class Turret : MonoBehaviour
     void OnTurretDestroyed()
     {
         turretsRemaining--;
-
         if (turretsRemaining <= 0)
-            GetComponent<Health>().Kill();
+            GetComponent<Health>().Kill(false);
     }
 }

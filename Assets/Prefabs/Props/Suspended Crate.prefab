@@ -540,12 +540,12 @@ MonoBehaviour:
   detectLayers:
     serializedVersion: 2
     m_Bits: 4096
-  SpawnPoint: {fileID: 893526913495567976}
-  DespawnPoint: {fileID: 5874042347046834614}
-  detectSize: {x: 8, y: 2, z: 14}
+  SpawnPoint: {fileID: 0}
+  DespawnPoint: {fileID: 0}
+  detectSize: {x: 7.5, y: 2, z: 13.5}
   detectPosOffset: {x: 0, y: 2.5, z: 0}
-  moveVector: {x: 0, y: 1, z: 0}
-  Speed: 8
+  moveVector: {x: -7, y: 0, z: 0}
+  Speed: 1
   isJump: 0
 --- !u!1 &6579238260824270759
 GameObject:
@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 12
-  alreadyInitialized: 0
+  AlreadyInitialized: 0
 --- !u!114 &8647494977186886823
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,6 +33,11 @@ public class PlayerInputHandler : MonoBehaviour
     private float abilityTimer = 0f;
 
 
+    bool InputAndUnpaused
+    {
+        get { return inputEnabled && !Pause.Paused; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +53,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public Vector3 GetMoveInput()
     {
-        if (inputEnabled && !Pause.Paused)
+        if (InputAndUnpaused)
         {
             Vector3 move = new Vector3(Input.GetAxisRaw(MoveHorizontal), 0f, Input.GetAxisRaw(MoveVertical));
 
@@ -63,34 +68,34 @@ public class PlayerInputHandler : MonoBehaviour
 
     public float GetLookInputsHorizontal()
     {
-        return inputEnabled ? GetMouseOrStickLookAxis(MouseHorizontal, JoystickHorizontal, InvertXAxis) : 0f;
+        return InputAndUnpaused ? GetMouseOrStickLookAxis(MouseHorizontal, JoystickHorizontal, InvertXAxis) : 0f;
     }
 
     public float GetLookInputsVertical()
     {
-        return inputEnabled ? GetMouseOrStickLookAxis(MouseVertical, JoystickVertical, !InvertYAxis) : 0f;
+        return InputAndUnpaused ? GetMouseOrStickLookAxis(MouseVertical, JoystickVertical, !InvertYAxis) : 0f;
     }
 
 
     public bool GetJump()
     {
-        return inputEnabled && !Pause.Paused && Input.GetButtonDown(Jump);
+        return InputAndUnpaused && Input.GetButtonDown(Jump);
     }
 
     public bool GetSwitch()
     {
-        return inputEnabled && !Pause.Paused && Input.GetButtonDown(Switch);
+        return InputAndUnpaused && Input.GetButtonDown(Switch);
     }
 
     public bool GetSlowtime()
     {
-        return inputEnabled && !Pause.Paused && Input.GetButtonDown(Slowtime);
+        return InputAndUnpaused && Input.GetButtonDown(Slowtime);
     }
 
 
     public bool GetAbility(int number)
     {
-        if (!inputEnabled)
+        if (!InputAndUnpaused)
             return false;
 
         if (Input.GetButton(Ability + number.ToString()))
@@ -108,19 +113,19 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool GetAbilityDown(int number)
     {
-        return inputEnabled && Input.GetButtonDown(Ability + number.ToString());
+        return InputAndUnpaused && Input.GetButtonDown(Ability + number.ToString());
     }
 
 
     public bool GetAbilityUp(int number)
     {
-        return inputEnabled && Input.GetButtonUp(Ability + number.ToString());
+        return InputAndUnpaused && Input.GetButtonUp(Ability + number.ToString());
     }
 
 
     public int GetSelectLoadoutInput()
     {
-        if (inputEnabled && !Pause.Paused)
+        if (InputAndUnpaused)
         {
             foreach (KeyCode key in keycodes.Keys)
             {
@@ -135,7 +140,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     float GetMouseOrStickLookAxis(string mouseInputName, string stickInputName, bool inverter)
     {
-        if (!inputEnabled || Pause.Paused)
+        if (!InputAndUnpaused)
             return 0f;
 
         // Check if this look input is coming from the mouse

@@ -19,6 +19,7 @@ public class LoadoutManager : MonoBehaviour
         public bool isPassive;
         [Tooltip("Leave empty if none")]
         public string secondaryAbility;
+        public List<string> prerequisiteAbilities;
     }
 
     [Header("General")]

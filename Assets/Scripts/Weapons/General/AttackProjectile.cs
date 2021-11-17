@@ -16,17 +16,7 @@ public class AttackProjectile : MonoBehaviour
         if (GetComponent<Attack>())
             GetComponent<Attack>().AttackTarget(collider.gameObject);
 
-        // Spawn Impact Object
-        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactType, ImpactObject).gameObject;
-        newObject.transform.position = transform.position;
-        if (newObject.GetComponent<Attack>() && GetComponent<Attack>() && 
-            (!newObject.GetComponent<Poolable>() || !newObject.GetComponent<Poolable>().alreadyInitialized))
-        {
-            Attack theirAttack = newObject.GetComponent<Attack>();
-            theirAttack.Agressor = GetComponent<Attack>().Agressor;
-            theirAttack.OnAttack += GetComponent<Attack>().OnAttack;
-            theirAttack.OnKill += GetComponent<Attack>().OnKill;
-        }
+        SpawnImpactObject();
 
         if (PenetrateCount > 0)
             PenetrateCount--;
@@ -36,9 +26,19 @@ public class AttackProjectile : MonoBehaviour
 
     public void Detonate()
     {
-        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactType, ImpactObject).gameObject;
-        newObject.transform.position = transform.position;
-
+        SpawnImpactObject();
         GetComponent<Projectile>().Destroy();
+    }
+
+    private void SpawnImpactObject()
+    {
+        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactType, ImpactObject);
+        newObject.transform.position = transform.position;
+        if (newObject.GetComponent<Attack>() && GetComponent<Attack>())
+        {
+            newObject.GetComponent<Attack>().Agressor = GetComponent<Attack>().Agressor;
+            if (!newObject.GetComponent<Poolable>() || !newObject.GetComponent<Poolable>().AlreadyInitialized)
+                GetComponent<Attack>().SetupClone(newObject.GetComponent<Attack>());
+        }
     }
 }

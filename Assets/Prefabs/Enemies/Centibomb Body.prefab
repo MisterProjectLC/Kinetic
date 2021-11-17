@@ -898,6 +898,7 @@ MonoBehaviour:
   CurrentHealth: 5
   CriticalHealth: 1
   MaxHealth: 4
+  lastAttack: {fileID: 0}
 --- !u!114 &420084857831911392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,6 +913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BrokenModelPrefab: {fileID: 4396919937828005916, guid: dc42f1818bb31444dbacf48b9749ee63,
     type: 3}
+  MatchModelScale: 0
   OriginalModel: {fileID: 5558793164472048627}
 --- !u!114 &3375661173834449556
 MonoBehaviour:

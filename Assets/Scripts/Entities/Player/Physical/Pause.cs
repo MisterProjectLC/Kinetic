@@ -32,9 +32,8 @@ public class Pause : MonoBehaviour
 
     private void Awake()
     {
-        if (Ps)
-            Destroy(Ps);
         Ps = this;
+        Paused = false;
     }
 
     private void Start()
@@ -93,6 +92,7 @@ public class Pause : MonoBehaviour
             GO.SetActive(true);
 
         Cursor.lockState = CursorLockMode.Locked;
+        playerInput.inputEnabled = true;
     }
 
     public bool GetPause()

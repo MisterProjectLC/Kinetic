@@ -24,14 +24,17 @@ public class ProjectileShooter : MonoBehaviour
         GameObject instance = ObjectManager.OM.SpawnObjectFromPool(Projectile.GetComponent<Poolable>().Type, Projectile).gameObject;
         instance.transform.position = Mouth.position;
         instance.GetComponent<Projectile>().Setup(direction, HitLayers.layers, GetComponentInParent<Actor>().gameObject);
-        if (instance.GetComponent<Attack>() && GetComponent<Attack>() && GetComponent<Attack>().OnKill != null &&
-            (!instance.GetComponent<Poolable>() || !instance.GetComponent<Poolable>().alreadyInitialized))
+
+        if (instance.GetComponent<Attack>() && GetComponent<Attack>())
         {
             instance.GetComponent<Attack>().Agressor = GetComponent<Attack>().Agressor;
-            instance.GetComponent<Attack>().OnAttack += GetComponent<Attack>().OnAttack;
-            instance.GetComponent<Attack>().OnKill += GetComponent<Attack>().OnKill;
-            instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;
+            if (!instance.GetComponent<Poolable>() || !instance.GetComponent<Poolable>().AlreadyInitialized)
+            {
+                GetComponent<Attack>().SetupClone(instance.GetComponent<Attack>());
+                instance.GetComponent<Projectile>().OnDestroy += RemoveProjectileFromList;
+            }
         }
+
         ActiveProjectiles.Add(instance);
         return instance;
     }

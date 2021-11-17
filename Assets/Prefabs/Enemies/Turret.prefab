@@ -112,10 +112,6 @@ MonoBehaviour:
   Mouth: {fileID: 5345296704080276421}
   DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
-  MaxDistance: 100
-  Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
-  Projectile: {fileID: 0}
-  ActiveProjectiles: []
   backwardsForce: 10
   MaxSpreadAngle: 0.05
   BulletCount: 1
@@ -126,7 +122,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
     type: 3}
-  ActiveProjectiles: []
 --- !u!114 &1907745178948627696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9df4b4654513b46961528f0ff3ab65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveProjectiles: []
 --- !u!82 &1862918598460337032
 AudioSource:
   m_ObjectHideFlags: 0
@@ -351,6 +347,7 @@ MonoBehaviour:
   CurrentHealth: 5
   CriticalHealth: 1
   MaxHealth: 3
+  lastAttack: {fileID: 0}
 --- !u!114 &1088624069320341115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BrokenModelPrefab: {fileID: 2231542979478134141, guid: 712e322d910a4c0428d577fb5e0ad109,
     type: 3}
+  MatchModelScale: 0
   OriginalModel: {fileID: 0}
 --- !u!1 &4655438382437377873
 GameObject:
@@ -396,6 +394,7 @@ GameObject:
   - component: {fileID: 2444653759116024995}
   - component: {fileID: 1254519644011659959}
   - component: {fileID: 342189891600504597}
+  - component: {fileID: 2705710518575300219}
   m_Layer: 11
   m_Name: Turret
   m_TagString: Untagged
@@ -434,6 +433,7 @@ MonoBehaviour:
   CurrentHealth: 5
   CriticalHealth: 1
   MaxHealth: 10
+  lastAttack: {fileID: 0}
 --- !u!114 &1058401267633563095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BrokenModelPrefab: {fileID: 2231542979478134141, guid: 644d9da0f51a7574b889d6b791d699aa,
     type: 3}
+  MatchModelScale: 0
   OriginalModel: {fileID: 7081833998942313528}
 --- !u!114 &5182302744470206594
 MonoBehaviour:
@@ -532,6 +533,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75c57e142a6f65408396fca57bfe12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2705710518575300219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655438382437377873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153d1fc240f4fa141b91c44e0af85158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StylePerDamage: 0
+  StyleOnKill: 0.5
 --- !u!1 &5029517833402345531
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +662,7 @@ MonoBehaviour:
   CurrentHealth: 5
   CriticalHealth: 1
   MaxHealth: 3
+  lastAttack: {fileID: 0}
 --- !u!114 &604446897212688494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,6 +691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BrokenModelPrefab: {fileID: 2231542979478134141, guid: 41de8f354d363e24cb7cee3daf1684c7,
     type: 3}
+  MatchModelScale: 0
   OriginalModel: {fileID: 0}
 --- !u!1 &7081833998942313528
 GameObject:
@@ -893,10 +910,6 @@ MonoBehaviour:
   Mouth: {fileID: 5032173961085111427}
   DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
-  MaxDistance: 100
-  Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
-  Projectile: {fileID: 0}
-  ActiveProjectiles: []
   backwardsForce: 10
   MaxSpreadAngle: 0.05
   BulletCount: 1
@@ -907,7 +920,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
     type: 3}
-  ActiveProjectiles: []
 --- !u!114 &3866228899526452567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,6 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9df4b4654513b46961528f0ff3ab65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveProjectiles: []
 --- !u!82 &9067818088951579197
 AudioSource:
   m_ObjectHideFlags: 0

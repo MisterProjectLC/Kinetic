@@ -9,10 +9,12 @@ public class StyleMeter : MonoBehaviour
         Kill,
         Multikill,
         ChainKill,
-        Damage,
+        Hurt,
         Movement,
         Variety,
-        Airborne
+        Airborne,
+        IndirectKill,
+        Damage
     }
 
     const int ABILITY_MEMORY = 5;
@@ -52,7 +54,9 @@ public class StyleMeter : MonoBehaviour
     [SerializeField]
     float MultiGain = 2f;
     [SerializeField]
-    float VarietyGain = 0.5f;
+    float IndirectGain = 5f;
+    [SerializeField]
+    float VarietyGain = 1f;
     [SerializeField]
     float MovementGain = 0.5f;
 
@@ -72,13 +76,13 @@ public class StyleMeter : MonoBehaviour
         health.OnDamageAttack += OnDamage;
         foreach (Attack attack in player.GetComponentsInChildren<Attack>())
         {
-            attack.OnKill += StyleKill;
+            attack.OnAttack += EnemyHit;
+            attack.OnKillTarget += StyleKill;
+            attack.OnIndirectKill += IndirectKill;
         }
 
         foreach (Ability ability in player.GetComponentsInChildren<Ability>())
-        {
             ability.OnExecuteAbility += AbilityUsage;
-        }
     }
 
     private void Update()
@@ -123,13 +127,26 @@ public class StyleMeter : MonoBehaviour
 
         if (clock < ComboMaxTime)
             GainJuice(VarietyGain * ((lastAbilities.Count - 1) - index), (int)Categories.Variety, "Variety");
-
-        Debug.Log("Ability: " + ability.DisplayName);
     }
 
-    void StyleKill()
+
+    void EnemyHit(GameObject target, float multiplier, int damage)
     {
-        GainJuice(KillGain, (int)Categories.Kill, "Kill");
+        StyleCrate styleCrate = target.GetComponent<Damageable>().GetHealth().GetComponent<StyleCrate>();
+
+        if (styleCrate && styleCrate.StylePerDamage != 0f)
+        {
+            GainJuice(0.5f * Mathf.CeilToInt(styleCrate.StylePerDamage * damage),
+                (int)Categories.Damage, "Damage");
+        }
+    }
+
+    void StyleKill(GameObject target)
+    {
+        if (!target.GetComponent<StyleCrate>())
+            return;
+
+        GainJuice(target.GetComponent<StyleCrate>().StyleOnKill, (int)Categories.Kill, "Kill");
         if (clock < MultiMaxTime)
             GainJuice(MultiGain, (int)Categories.Multikill, "Multikill");
         else if (clock < ComboMaxTime)
@@ -138,10 +155,15 @@ public class StyleMeter : MonoBehaviour
         clock = 0f;
     }
 
+    void IndirectKill()
+    {
+        GainJuice(IndirectGain, (int)Categories.IndirectKill, "Trap Kill");
+    }
+
     void OnDamage(int damage, Attack attack)
     {
         if (attack == null || attack.Agressor != GetComponent<Actor>())
-            SpendJuice(damage * 4, (int)Categories.Damage, "Damage");
+            SpendJuice(damage * 4, (int)Categories.Hurt, "Hurt");
     }
 
 
