@@ -20,6 +20,5 @@ public class RocketLauncherPassive : MonoBehaviour
         float newCooldown = critical ? 0.2f : 1f;
         weapon.FireCooldown = newCooldown;
         ability.Cooldown = newCooldown;
-        Debug.Log("Critical: " + newCooldown);
     }
 }

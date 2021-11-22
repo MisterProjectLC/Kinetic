@@ -59,25 +59,23 @@ public class Explosion : MonoBehaviour
         Physics.OverlapSphereNonAlloc(transform.position, Radius, colliders, HitLayers.layers);
         foreach (Collider collider in colliders)
         {
-            if (!collider)
-                break;
-
+            if (!collider || !collider.GetComponent<Damageable>() || enemies.Contains(collider.GetComponent<Damageable>().GetHealth()))
+                continue;
+            
             float rate = ((NeuteredHitLayers.value >> collider.gameObject.layer) == 1) ? NeuteredRate : 1f;
             Vector3 colliderPoint = GetClosestPoint ? collider.ClosestPoint(transform.position) : collider.transform.position;
             float distanceToTarget = (transform.position - colliderPoint).magnitude / Radius;
 
-            if (collider.GetComponent<Damageable>() && !enemies.Contains(collider.GetComponent<Damageable>().GetHealth()))
-            {
-                if (collider.gameObject.layer == LayerMask.NameToLayer("Player Shield"))
-                    vectorToShield = collider.transform.position - transform.position;
-                else if (collider.gameObject.layer == LayerMask.NameToLayer("Player") && vectorToShield != null) {
-                    Vector3 vectorToPlayer = collider.transform.position - transform.position;
-                    if (Vector3.Dot(vectorToShield.Value, vectorToPlayer) > 0 && vectorToShield.Value.magnitude < vectorToPlayer.magnitude)
-                        continue;
-                }
-                enemies.Add(collider.GetComponent<Damageable>().GetHealth());
-                attack.AttackTarget(collider.gameObject, rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget));
+            if (collider.gameObject.layer == LayerMask.NameToLayer("Player Shield"))
+                vectorToShield = collider.transform.position - transform.position;
+            else if (collider.gameObject.layer == LayerMask.NameToLayer("Player") && vectorToShield != null) {
+                Vector3 vectorToPlayer = collider.transform.position - transform.position;
+                if (Vector3.Dot(vectorToShield.Value, vectorToPlayer) > 0 && vectorToShield.Value.magnitude < vectorToPlayer.magnitude)
+                    continue;
             }
+            enemies.Add(collider.GetComponent<Damageable>().GetHealth());
+            Debug.Log(attack.Damage + ", " + (rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget)));
+            attack.AttackTarget(collider.gameObject, rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget));
         }
     }
 

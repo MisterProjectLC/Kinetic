@@ -61,9 +61,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6fdf4473511d041b1aa747a562b39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 15
+  Radius: 20
   CenterRate: 1
-  FallOffRate: 0.1
+  FallOffRate: 1
   NeuteredRate: 0
   HitLayers: {fileID: 11400000, guid: 84cc419c1733af643993c7877c42d8dd, type: 2}
   NeuteredHitLayers:
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 13
-  alreadyInitialized: 0
+  AlreadyInitialized: 0
 --- !u!82 &8388739853020057394
 AudioSource:
   m_ObjectHideFlags: 0
@@ -222,15 +222,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 21
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 21
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 21
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
       propertyPath: m_LocalRotation.y

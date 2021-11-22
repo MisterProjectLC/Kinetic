@@ -120,7 +120,7 @@ public class ScenePartLoader : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (checkMethod != CheckMethod.Trigger)
+        if (checkMethod == CheckMethod.Distance)
         Gizmos.DrawSphere(transform.position, loadRange);
     }
 

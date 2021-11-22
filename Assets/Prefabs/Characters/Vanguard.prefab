@@ -197,9 +197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 'CHARGE TIME: 2.5 seconds
+  description: 'DAMAGE: 12
 
-    DAMAGE: 12
+    CHARGE TIME: 2.5 seconds
 
     Must be charged by
     holding the ability button. While charging, slows the player''s movement speed
@@ -1309,7 +1309,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 958540071565868630}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -5, z: 0}
 --- !u!1 &5307980427766246164
 GameObject:
@@ -1463,6 +1463,7 @@ Transform:
   - {fileID: 6212540214247160696}
   - {fileID: 3485480176587976528}
   - {fileID: 9164245528156693280}
+  - {fileID: 5848571593649446009}
   - {fileID: 5701861848161749029}
   - {fileID: 7885829806726108092}
   m_Father: {fileID: 4021532750877547998}
@@ -1728,7 +1729,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 958540071565868630}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &8675959487470734100
 GameObject:
@@ -1780,14 +1781,15 @@ MonoBehaviour:
   Cooldown: 14
   HoldAbility: 0
   ReleaseAbility: 0
-  SoundEffects:
-  - {fileID: 8300000, guid: 36113e87c526b3f43b510cd1eb635905, type: 3}
+  SoundEffects: []
   RedShield: {fileID: 4316573000432154568}
   Explosion: {fileID: 4396919937828005916, guid: ce09dc5bff82c61409f88c37d9b4990f,
     type: 3}
-  Knockback: 400
+  Knockback: 250
   Duration: 4
-  MaxDamageAbsorbed: 12
+  MaxDamageAbsorbed: 15
+  ActivateSound: {fileID: 8300000, guid: 802fd526f16a4db4e91fb08d59ccfc50, type: 3}
+  DetonateSound: {fileID: 8300000, guid: 8fea9446534264749a7d0a0e6cb03dd8, type: 3}
 --- !u!114 &2985498354579453711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1913,7 +1915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 'MAX DURATION: 4 seconds
 
-    MAX ABSORPTION: 12
+    MAX ABSORPTION: 15
 
     MAX DAMAGE:
     15
@@ -2082,6 +2084,10 @@ MonoBehaviour:
     isPassive: 0
     secondaryAbility: Detonate
     prerequisiteAbilities: []
+  - ability: {fileID: 1875275233879253910}
+    isPassive: 0
+    secondaryAbility: 
+    prerequisiteAbilities: []
   Options:
   - ability: {fileID: 6554826155812535130}
     isPassive: 0
@@ -2091,20 +2097,18 @@ MonoBehaviour:
     isPassive: 0
     secondaryAbility: 
     prerequisiteAbilities: []
-  - ability: {fileID: 1875275233879253910}
+  - ability: {fileID: 4973758252977665999}
     isPassive: 0
     secondaryAbility: 
     prerequisiteAbilities: []
   - ability: {fileID: 3401051246386459786}
     isPassive: 0
     secondaryAbility: 
-    prerequisiteAbilities:
-    - Charge
+    prerequisiteAbilities: []
   - ability: {fileID: 8675959487470734100}
     isPassive: 0
     secondaryAbility: 
-    prerequisiteAbilities:
-    - Charge
+    prerequisiteAbilities: []
   - ability: {fileID: 4101398689657722995}
     isPassive: 1
     secondaryAbility: 
@@ -2253,6 +2257,112 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &2835016363911021218
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 958540071565868630}
+    m_Modifications:
+    - target: {fileID: 5374135149329504673, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5409179199196677315, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370623578378900129, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: Mouth
+      value: 
+      objectReference: {fileID: 958540071565868630}
+    - target: {fileID: 7088198090136532333, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_Name
+      value: Laser Cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974985875732045502, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: Mouth
+      value: 
+      objectReference: {fileID: 958540071565868630}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.325
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.70000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.099999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995242296920585453, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 245d7c791efffd74b806e11960ed1bf8, type: 3}
+--- !u!4 &5848571593649446009 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2835016363911021218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4973758252977665999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7088198090136532333, guid: 245d7c791efffd74b806e11960ed1bf8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2835016363911021218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4534391726659963112
 PrefabInstance:
   m_ObjectHideFlags: 0

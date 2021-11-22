@@ -681,6 +681,7 @@ MonoBehaviour:
   SoundEffects:
   - {fileID: 8300000, guid: ad2c426facb2ccd4fac20694288cdea0, type: 3}
   MaxDistance: 100
+  StopAtFirstHit: 1
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
 --- !u!114 &6103992379173642408
 MonoBehaviour:
@@ -2084,6 +2085,7 @@ MonoBehaviour:
   CurrentHealth: 5
   CriticalHealth: 2
   MaxHealth: 5
+  lastAttack: {fileID: 0}
 --- !u!114 &2222884685990388292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2185,6 +2187,7 @@ MonoBehaviour:
   KillGain: 0.5
   ChainGain: 1.5
   MultiGain: 2
+  IndirectGain: 5
   VarietyGain: 0.5
   MovementGain: 0.5
 --- !u!143 &3891292215102862298

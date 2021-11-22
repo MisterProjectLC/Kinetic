@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Minigun : MonoBehaviour
+public class WeaponSlowdown : MonoBehaviour
 {
     [SerializeField]
     float MaxSlowdown = 0.5f;
@@ -26,7 +26,7 @@ public class Minigun : MonoBehaviour
     private void OnDisable()
     {
         slowdown = 1f;
-        player.SetSlowdown(1f, "minigun");
+        player.SetSlowdown(1f, "weapon");
         clock = 0f;
     }
 
@@ -39,7 +39,7 @@ public class Minigun : MonoBehaviour
             if (clock > emergencyResetTimer)
             {
                 slowdown = 1f;
-                player.SetSlowdown(1f, "minigun");
+                player.SetSlowdown(1f, "weapon");
                 clock = 0f;
             }
         }
@@ -57,6 +57,6 @@ public class Minigun : MonoBehaviour
         else
             slowdown = 1f;
 
-        player.SetSlowdown(slowdown, "minigun");
+        player.SetSlowdown(slowdown, "weapon");
     }
 }

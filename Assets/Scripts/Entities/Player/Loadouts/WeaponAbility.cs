@@ -7,8 +7,8 @@ public class WeaponAbility : Ability
     [Header("References")]
     public Weapon WeaponRef;
 
-    PlayerCharacterController player;
-    private float BackwardsForce = 10f;
+    protected PlayerCharacterController player;
+    protected float BackwardsForce = 10f;
 
 
     public void Awake()

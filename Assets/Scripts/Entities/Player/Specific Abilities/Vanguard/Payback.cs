@@ -23,6 +23,13 @@ public class Payback : Ability
     bool absorbing = false;
     float clock = 0f;
 
+    [Tooltip("Sounds")]
+    [SerializeField]
+    AudioClip ActivateSound;
+    [SerializeField]
+    AudioClip DetonateSound;
+
+
     private void Start()
     {
         attack = GetComponent<Attack>();
@@ -47,6 +54,7 @@ public class Payback : Ability
             absorbing = true;
             damagedSummation = 0;
             clock = 0f;
+            PlaySound(ActivateSound);
             StartCoroutine("ActivatePayback");
         }
        
@@ -78,15 +86,17 @@ public class Payback : Ability
         }
         GetComponentInParent<Damageable>().DamageSensitivity = 1f;
         RedShield.SetActive(false);
+        if (damagedSummation > attack.Damage/2)
+            PlaySound(DetonateSound);
 
-        //GameObject newInstance = ObjectManager.OM.SpawnObjectFromPool(Explosion.GetComponent<Poolable>().Type, Explosion);
         GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(Explosion.GetComponent<Poolable>().Type, Explosion);
         newObject.transform.position = transform.position;
-        attack.SetupClone(newObject.GetComponent<Attack>());
 
+        attack.SetupClone(newObject.GetComponent<Attack>());
         newObject.GetComponent<Attack>().Damage = Mathf.Clamp(damagedSummation, 0, attack.Damage);
         newObject.GetComponent<StatusEffectApplier>().Knockback = Knockback * Mathf.Clamp01(damagedSummation / (float)MaxDamageAbsorbed);
         Debug.Log("Summation: " + damagedSummation);
+
         SetOffCooldown();
     }
 }

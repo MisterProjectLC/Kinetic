@@ -61,7 +61,8 @@ MonoBehaviour:
   SoundEffects:
   - {fileID: 8300000, guid: e3cd01ad5804cfd4c8598dd155f6462a, type: 3}
   - {fileID: 8300000, guid: 23e0748f17919694cae98abbd1b59a8a, type: 3}
-  MaxDistance: 100
+  MaxDistance: 50
+  StopAtFirstHit: 1
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}
 --- !u!114 &396196072164154913
 MonoBehaviour:
@@ -76,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
+  Agressor: {fileID: 0}
 --- !u!114 &476817275024576850
 MonoBehaviour:
   m_ObjectHideFlags: 0

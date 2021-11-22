@@ -27,7 +27,7 @@ public abstract class Weapon : MonoBehaviour
 
     [Tooltip("Amount of bullets sent")]
     [SerializeField]
-    protected int BulletCount = 12;
+    protected int BulletCount = 1;
 
     [Tooltip("If enabled, holding the button engages repeated shooting")]
     public bool Automatic = false;
