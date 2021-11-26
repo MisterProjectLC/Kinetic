@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4439653929532057142}
   - component: {fileID: 255443524484936560}
   - component: {fileID: 3420071748457353638}
-  - component: {fileID: 1605076781114752349}
+  - component: {fileID: 2491414881264015135}
   m_Layer: 14
   m_Name: PlayerLaserBullet
   m_TagString: Untagged
@@ -195,7 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
---- !u!114 &1605076781114752349
+  Agressor: {fileID: 0}
+--- !u!114 &2491414881264015135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 6
+  AlreadyInitialized: 0
 --- !u!1 &8638973107004610931
 GameObject:
   m_ObjectHideFlags: 0

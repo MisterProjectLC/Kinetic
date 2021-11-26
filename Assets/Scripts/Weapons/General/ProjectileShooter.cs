@@ -21,7 +21,7 @@ public class ProjectileShooter : MonoBehaviour
     public GameObject ShootProjectile(Vector3 direction)
     {
         // Projectile attack
-        GameObject instance = ObjectManager.OM.SpawnObjectFromPool(Projectile.GetComponent<Poolable>().Type, Projectile).gameObject;
+        GameObject instance = ObjectManager.OM.SpawnObjectFromPool(Projectile.GetComponent<Poolable>().Type, Projectile);
         instance.transform.position = Mouth.position;
         instance.GetComponent<Projectile>().Setup(direction, HitLayers.layers, GetComponentInParent<Actor>().gameObject);
 

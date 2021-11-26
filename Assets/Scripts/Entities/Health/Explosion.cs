@@ -27,9 +27,9 @@ public class Explosion : MonoBehaviour
 
     Attack attack;
     [SerializeField]
-    const int maxColliders = 20;
+    const int maxColliders = 150;
     Collider[] colliders = new Collider[maxColliders];
-    List<Health> enemies = new List<Health>(maxColliders);
+    List<Health> enemies = new List<Health>(30);
 
     [SerializeField]
     bool GetClosestPoint = true;
@@ -61,20 +61,21 @@ public class Explosion : MonoBehaviour
         {
             if (!collider || !collider.GetComponent<Damageable>() || enemies.Contains(collider.GetComponent<Damageable>().GetHealth()))
                 continue;
-            
+
             float rate = ((NeuteredHitLayers.value >> collider.gameObject.layer) == 1) ? NeuteredRate : 1f;
             Vector3 colliderPoint = GetClosestPoint ? collider.ClosestPoint(transform.position) : collider.transform.position;
             float distanceToTarget = (transform.position - colliderPoint).magnitude / Radius;
 
             if (collider.gameObject.layer == LayerMask.NameToLayer("Player Shield"))
                 vectorToShield = collider.transform.position - transform.position;
+
             else if (collider.gameObject.layer == LayerMask.NameToLayer("Player") && vectorToShield != null) {
                 Vector3 vectorToPlayer = collider.transform.position - transform.position;
                 if (Vector3.Dot(vectorToShield.Value, vectorToPlayer) > 0 && vectorToShield.Value.magnitude < vectorToPlayer.magnitude)
                     continue;
             }
+
             enemies.Add(collider.GetComponent<Damageable>().GetHealth());
-            Debug.Log(attack.Damage + ", " + (rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget)));
             attack.AttackTarget(collider.gameObject, rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget));
         }
     }

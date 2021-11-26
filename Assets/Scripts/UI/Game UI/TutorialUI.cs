@@ -12,6 +12,8 @@ public class TutorialUI : MonoBehaviour
     {
         trigger.OnTriggerActivate += ShowControls;
         hideTrigger.OnTriggerActivate += HideControls;
+
+        ActorsManager.AM.GetPlayer().GetComponent<StyleMeter>().DrainActive = false;
     }
 
     void ShowControls()

@@ -779,6 +779,7 @@ GameObject:
   - component: {fileID: 3242980672300510518}
   - component: {fileID: 6833671398185246089}
   - component: {fileID: 6743730889137551145}
+  - component: {fileID: 8794417285599776994}
   m_Layer: 11
   m_Name: Centibomb
   m_TagString: Untagged
@@ -944,6 +945,103 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &8794417285599776994
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6673934041642640765}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 2327824990363e34195a34ff3ba6f5d9, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 20
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8240028139306625353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,6 +1181,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Centibomb Body (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9150950615278533983, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150950615278533983, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe95355c56d8474ba0e8d8e573a1aef, type: 3}
 --- !u!4 &7464197942676804865 stripped
@@ -1162,6 +1270,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Centibomb Body (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150950615278533983, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150950615278533983, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe95355c56d8474ba0e8d8e573a1aef, type: 3}
@@ -1243,6 +1361,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Centibomb Body
       objectReference: {fileID: 0}
+    - target: {fileID: 9150950615278533983, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150950615278533983, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe95355c56d8474ba0e8d8e573a1aef, type: 3}
 --- !u!4 &9202207175825673234 stripped
@@ -1322,6 +1450,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Centibomb Body (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150950615278533983, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150950615278533983, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe95355c56d8474ba0e8d8e573a1aef, type: 3}

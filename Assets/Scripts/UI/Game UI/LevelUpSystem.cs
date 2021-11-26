@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class LevelUpSystem : MonoBehaviour
     GameObject NewAbilityText;
     [SerializeField]
     GameObject NewAbilitySquare;
+    [SerializeField]
+    CanvasGroup DragInstructions;
 
     [Header("Prefab References")]
     public GameObject optionPrefab;
@@ -95,6 +98,7 @@ public class LevelUpSystem : MonoBehaviour
         loadoutOption.isPassive = option.isPassive;
         loadoutOption.PrerequisiteAbilities = new List<string>(option.prerequisiteAbilities);
         loadoutOption.OnInsert += ChooseOption;
+        loadoutOption.GetComponent<DragDrop>().OnClick += () => StartCoroutine("InstructionsAnimation");
 
         return newInstance;
     }
@@ -174,5 +178,16 @@ public class LevelUpSystem : MonoBehaviour
         optionsShown.Clear();
         NewAbilityText.SetActive(false);
         NewAbilitySquare.SetActive(false);
+    }
+
+
+    IEnumerator InstructionsAnimation()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            Debug.Log(DragInstructions.alpha);
+            yield return new WaitForSecondsRealtime(0.1f);
+            DragInstructions.alpha = DragInstructions.alpha == 0 ? 1 : 0;
+        }
     }
 }

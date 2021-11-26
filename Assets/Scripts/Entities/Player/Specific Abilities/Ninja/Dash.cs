@@ -21,7 +21,7 @@ public class Dash : Ability
         player.OnTrigger += OnTrigger;
         inputHandler = GetComponentInParent<PlayerInputHandler>();
         attack = GetComponent<Attack>();
-        attack.OnKill += ResetCooldown;
+        attack.OnKill += (Attack a, GameObject g, bool b) => ResetCooldown();
     }
 
     public override void Execute(Input input)

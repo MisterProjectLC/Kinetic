@@ -58,6 +58,7 @@ public class Pause : MonoBehaviour
                 return;
 
         Paused = !Paused;
+        AudioListener.pause = Paused;
         OnTogglePause?.Invoke(Paused);
         playerInput.inputEnabled = !Paused;
         // Pause

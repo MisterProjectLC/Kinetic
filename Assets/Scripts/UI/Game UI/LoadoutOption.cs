@@ -51,8 +51,7 @@ public class LoadoutOption : MonoBehaviour
     {
         LoadoutSlot slot = dropSlot.GetComponent<LoadoutSlot>();
         slot.SetAbility(Ability, slot, true);
-        if (OnInsert != null)
-            OnInsert.Invoke(this);
+        OnInsert?.Invoke(this);
     }
 
     void RemoveFromSlot(DropSlot dropSlot)

@@ -55,13 +55,14 @@ public class Destructable : MonoBehaviour
 
     IEnumerator Destruct()
     {
+        /*
         if (GetComponent<AudioSource>())
         {
             GetComponent<AudioSource>().Play();
             yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         }
-        else
-            yield return new WaitForSeconds(0.01f);
+        else*/
+        yield return new WaitForSeconds(0.01f);
         Destroy(gameObject);
     }
 

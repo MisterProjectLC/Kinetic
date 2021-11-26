@@ -19,7 +19,7 @@ public class GrapplingHook : Ability
 
         foreach (Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
         {
-            attack.OnKill += ResetCooldown;
+            attack.OnKill += (Attack a, GameObject g, bool b) => ResetCooldown();
         }
 
         GetComponentInParent<StyleMeter>().OnCritical += (critical) => { if (critical) ResetCooldown(); };

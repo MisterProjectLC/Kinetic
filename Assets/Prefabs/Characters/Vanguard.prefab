@@ -48,13 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: Charge
-  Cooldown: 5
+  Cooldown: 6
   HoldAbility: 1
   ReleaseAbility: 1
   SoundEffects: []
   MinimumForce: 10
   MaximumForce: 100
-  MaxCharge: 2.25
+  MaxCharge: 2
   MaxGroundSlowdown: 0.25
   MaxAirSlowdown: 0
   ChargingSFX: {fileID: 8300000, guid: 20bbb4d06e338b444a9eec3348aebadf, type: 3}
@@ -199,15 +199,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 'DAMAGE: 12
 
-    CHARGE TIME: 2.5 seconds
+    CHARGE TIME: 2 seconds
 
-    Must be charged by
-    holding the ability button. While charging, slows the player''s movement speed
-    and acceleration, making them effectively immobile when fully charged.
+    Must be charged by holding
+    the ability button. While charging, slows the player''s movement speed and acceleration,
+    making them effectively immobile when fully charged.
 
-    Once
-    released, sends the player flying in the direction they face and causes damage
-    on impact.'
+    Once released, sends
+    the player flying in the direction they face and causes damage on impact.
+
+
+    When
+    the Style meter hits 80% or higher, resets its cooldown every time a kill is
+    achieved.'
 --- !u!114 &5209750473149924436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: Graviton
-  Cooldown: 2
+  Cooldown: 1
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -1785,9 +1789,9 @@ MonoBehaviour:
   RedShield: {fileID: 4316573000432154568}
   Explosion: {fileID: 4396919937828005916, guid: ce09dc5bff82c61409f88c37d9b4990f,
     type: 3}
-  Knockback: 250
+  Knockback: 200
   Duration: 4
-  MaxDamageAbsorbed: 15
+  MaxDamageAbsorbed: 20
   ActivateSound: {fileID: 8300000, guid: 802fd526f16a4db4e91fb08d59ccfc50, type: 3}
   DetonateSound: {fileID: 8300000, guid: 8fea9446534264749a7d0a0e6cb03dd8, type: 3}
 --- !u!114 &2985498354579453711
@@ -1915,17 +1919,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 'MAX DURATION: 4 seconds
 
-    MAX ABSORPTION: 15
+    MAX DAMAGE: 15
 
-    MAX DAMAGE:
-    15
+    Negates all damage
+    taken for a short period. When the protection effect wears off, emits a shockwave
+    centered on the user that causes damage and heavy knockback relative to the damage
+    negated and dealt during this period.
 
-    Negates all damage taken for a short period. When the protection effect
-    wears off, emits a shockwave centered on the user that causes damage and heavy
-    knockback relative to the damage negated and dealt during this period.
 
-    Activate
-    the ability while the protection is active to emit the shockwave prematurely.'
+    Activate the ability while the protection
+    is active to emit the shockwave prematurely.'
 --- !u!1 &9089919347116189794
 GameObject:
   m_ObjectHideFlags: 0

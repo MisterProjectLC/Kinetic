@@ -11,13 +11,7 @@ public class Attack : MonoBehaviour
     [HideInInspector]
     public UnityAction<GameObject, float, int> OnAttack;
     [HideInInspector]
-    public UnityAction OnKill;
-    [HideInInspector]
-    public UnityAction OnIndirectKill;
-    [HideInInspector]
-    public UnityAction<Attack> OnKillAttack;
-    [HideInInspector]
-    public UnityAction<GameObject> OnKillTarget;
+    public UnityAction<Attack, GameObject, bool> OnKill;
     [HideInInspector]
     public Actor Agressor;
 
@@ -25,19 +19,6 @@ public class Attack : MonoBehaviour
     {
         Agressor = GetComponentInParent<Actor>();
     }
-
-    private void Start()
-    {
-        OnKillTarget += Kill;
-        OnIndirectKill += OnKill;
-    }
-
-    void Kill(GameObject target)
-    {
-        OnKill?.Invoke();
-        OnKillAttack?.Invoke(this);
-    }
-
 
     public void AttackTarget(GameObject target, float multiplier = 1f)
     {
@@ -55,8 +36,5 @@ public class Attack : MonoBehaviour
 
         clone.OnAttack += OnAttack;
         clone.OnKill += OnKill;
-        clone.OnKillTarget += OnKillTarget;
-        clone.OnIndirectKill += OnIndirectKill;
-        clone.OnKillAttack += OnKillAttack;
     }
 }

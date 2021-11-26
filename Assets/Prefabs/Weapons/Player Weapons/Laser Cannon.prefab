@@ -81,7 +81,6 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2000001, z: 0.2000001}
   m_Children:
   - {fileID: 834011475822139966}
-  - {fileID: 2900288024123196129}
   - {fileID: 1435503960031924306}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -301,13 +300,17 @@ MonoBehaviour:
   description: 'DAMAGE: 3 at minimum charge, 15 at maximum charge
 
     CHARGE TIME:
-    2 seconds
+    2.25 seconds
 
     SPREAD: None
 
     Hold to charge the laser cannon. Once released,
     emits a powerful laser in front of the user, causing damage relative to the charge
-    and pushing the user backwards.'
+    and pushing the user backwards.
+
+
+    Scoring a multikill with this weapon resets
+    its cooldown.'
 --- !u!1001 &1468549801508599737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -318,7 +321,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 756b7d8b41fd9414db3b8d35c84b5289,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 756b7d8b41fd9414db3b8d35c84b5289,
         type: 3}
@@ -328,12 +331,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 756b7d8b41fd9414db3b8d35c84b5289,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.43
+      value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 756b7d8b41fd9414db3b8d35c84b5289,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.96
+      value: 2.49
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 756b7d8b41fd9414db3b8d35c84b5289,
         type: 3}
@@ -379,7 +382,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9e2be8a8d81e0f6479409c073ec86080, type: 2}
+      objectReference: {fileID: 2100000, guid: 2bc4a810c92591f40aae12463591d042, type: 2}
     - target: {fileID: -7640558969779515294, guid: 756b7d8b41fd9414db3b8d35c84b5289,
         type: 3}
       propertyPath: m_Layer
@@ -477,109 +480,4 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 756b7d8b41fd9414db3b8d35c84b5289,
     type: 3}
   m_PrefabInstance: {fileID: 1468549801508599737}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3437757150415529226
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 8534968615730699995}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -7.105424e-14
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.0000005960462
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 08e116c8a52958948a2c46af05247ad4, type: 2}
-    - target: {fileID: 919132149155446097, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_Name
-      value: WP_V_Minigun
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: ac8d5caa677ee02409199fcd9387c18f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ac8d5caa677ee02409199fcd9387c18f, type: 3}
---- !u!4 &2900288024123196129 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac8d5caa677ee02409199fcd9387c18f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3437757150415529226}
   m_PrefabAsset: {fileID: 0}

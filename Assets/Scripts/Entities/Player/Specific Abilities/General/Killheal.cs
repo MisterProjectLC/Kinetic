@@ -11,13 +11,14 @@ public class Killheal : MonoBehaviour
 
         foreach(Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
         {
-            attack.OnKill += Heal;
+            attack.OnKill += (Attack a, GameObject g, bool b) => Heal();
         }
     }
 
 
     void Heal()
     {
+        Debug.Log("Killheal");
         health.Heal(1);
     }
 

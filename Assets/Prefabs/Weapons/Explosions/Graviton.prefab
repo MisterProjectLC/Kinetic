@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6fdf4473511d041b1aa747a562b39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 17
+  Radius: 25
   CenterRate: 0
   FallOffRate: 1
   NeuteredRate: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 11
-  alreadyInitialized: 0
+  AlreadyInitialized: 0
 --- !u!82 &5458124195391303904
 AudioSource:
   m_ObjectHideFlags: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Knockback: -55
+  Knockback: -60
   Effects: []
 --- !u!114 &764313433112388447
 MonoBehaviour:

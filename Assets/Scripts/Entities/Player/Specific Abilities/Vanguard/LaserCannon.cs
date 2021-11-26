@@ -35,6 +35,7 @@ public class LaserCannon : WeaponAbility
     bool charging = false;
     float charge = 0;
     float alpha = 0f;
+    int killsSince = 0;
 
     Attack attack;
 
@@ -44,6 +45,7 @@ public class LaserCannon : WeaponAbility
         Laser = newInstance.GetComponent<LineRenderer>();
 
         attack = GetComponent<Attack>();
+        attack.OnKill += (Attack a, GameObject g, bool b) => OnKill();
         base.Awake();
     }
 
@@ -53,14 +55,30 @@ public class LaserCannon : WeaponAbility
         OnUpdate += UpdateAlpha;
     }
 
+    void OnDisable()
+    {
+        alpha = 0.01f;
+        UpdateAlpha();
+    }
+
+    void OnKill()
+    {
+        killsSince++;
+        if (killsSince > 1)
+            ResetCooldown();
+    }
+
     void UpdateAlpha()
     {
         if (alpha > 0)
         {
             alpha -= Time.deltaTime;
             laserColor.a = alpha;
-            Laser.startColor = laserColor;
-            Laser.endColor = laserColor;
+            if (Laser)
+            {
+                Laser.startColor = laserColor;
+                Laser.endColor = laserColor;
+            }
         }
     }
 
@@ -101,6 +119,8 @@ public class LaserCannon : WeaponAbility
                 Laser.SetPosition(0, transform.position);
                 Laser.SetPosition(1, hit.point);
             }
+
+            killsSince = 0;
             base.Execute(input);
         }
     }

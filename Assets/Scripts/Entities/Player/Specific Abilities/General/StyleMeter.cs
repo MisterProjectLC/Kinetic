@@ -38,6 +38,8 @@ public class StyleMeter : MonoBehaviour
     float CriticalPercent = 0.8f;
     [SerializeField]
     float DepleteRate = 0.25f;
+    [HideInInspector]
+    public bool DrainActive = false;
 
     [SerializeField]
     float MultiMaxTime = 0.25f;
@@ -77,8 +79,7 @@ public class StyleMeter : MonoBehaviour
         foreach (Attack attack in player.GetComponentsInChildren<Attack>())
         {
             attack.OnAttack += EnemyHit;
-            attack.OnKillTarget += StyleKill;
-            attack.OnIndirectKill += IndirectKill;
+            attack.OnKill += (Attack a, GameObject g, bool b) => StyleKill(g, b);
         }
 
         foreach (Ability ability in player.GetComponentsInChildren<Ability>())
@@ -88,7 +89,7 @@ public class StyleMeter : MonoBehaviour
     private void Update()
     {
         // Decay
-        if (JuiceLeft > 0f)
+        if (JuiceLeft > 0f && DrainActive)
             SpendJuice(Time.deltaTime * DepleteRate);
 
         // Combo time
@@ -141,8 +142,16 @@ public class StyleMeter : MonoBehaviour
         }
     }
 
-    void StyleKill(GameObject target)
+    void StyleKill(GameObject target, bool indirect)
     {
+        DrainActive = true;
+
+        if (indirect)
+        {
+            GainJuice(IndirectGain, (int)Categories.IndirectKill, "Trap Kill");
+            return;
+        }
+
         if (!target.GetComponent<StyleCrate>())
             return;
 
@@ -153,11 +162,6 @@ public class StyleMeter : MonoBehaviour
             GainJuice(ChainGain, (int)Categories.ChainKill, "Chain Kill");
 
         clock = 0f;
-    }
-
-    void IndirectKill()
-    {
-        GainJuice(IndirectGain, (int)Categories.IndirectKill, "Trap Kill");
     }
 
     void OnDamage(int damage, Attack attack)

@@ -52,7 +52,7 @@ public class HitscanWeapon : Weapon
 
     void AttackHit(RaycastHit hit)
     {
-        if (!hit.collider || !hit.collider.GetComponent<Damageable>() || enemies.Contains(hit.collider.GetComponent<Damageable>().GetHealth()))
+        if (!hit.collider)
             return;
 
         if (Sparks != null)
@@ -62,6 +62,9 @@ public class HitscanWeapon : Weapon
             newObject.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(Random.insideUnitSphere, hit.normal),
                 hit.normal);
         }
+
+        if (!hit.collider.GetComponent<Damageable>() || (!StopAtFirstHit && enemies.Contains(hit.collider.GetComponent<Damageable>().GetHealth())))
+            return;
 
         OnHit?.Invoke(hit);
         enemies.Add(hit.collider.GetComponent<Damageable>().GetHealth());

@@ -27,6 +27,8 @@ public class Charge : Ability
     bool charged = false;
     float charge = 0;
 
+    bool critical = true;
+
     PlayerCharacterController player;
     Attack attack;
 
@@ -37,7 +39,23 @@ public class Charge : Ability
         player.OnCollision += Colliding;
         OnUpdate += StopCharging;
         attack = GetComponent<Attack>();
+        GetComponentInParent<StyleMeter>().OnCritical += OnCritical;
+
+        foreach (Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
+            attack.OnKill += (Attack a, GameObject g, bool b) => OnKill();
     }
+
+    void OnCritical(bool critical)
+    {
+        this.critical = critical;
+    }
+
+    void OnKill()
+    {
+        if (critical)
+            ResetCooldown();
+    }
+
 
     void StopCharging()
     {

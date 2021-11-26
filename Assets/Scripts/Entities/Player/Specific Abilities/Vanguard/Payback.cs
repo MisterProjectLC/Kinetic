@@ -66,8 +66,6 @@ public class Payback : Ability
             return;
 
         damagedSummation += damage;
-        if (damagedSummation > MaxDamageAbsorbed)
-            absorbing = false;
     }
 
     void OnAttack(GameObject attack, float multiplier, int damage)
@@ -84,7 +82,6 @@ public class Payback : Ability
             if (clock > Duration)
                 absorbing = false;
         }
-        GetComponentInParent<Damageable>().DamageSensitivity = 1f;
         RedShield.SetActive(false);
         if (damagedSummation > attack.Damage/2)
             PlaySound(DetonateSound);
@@ -98,5 +95,8 @@ public class Payback : Ability
         Debug.Log("Summation: " + damagedSummation);
 
         SetOffCooldown();
+
+        yield return new WaitForSeconds(1f);
+        GetComponentInParent<Damageable>().DamageSensitivity = 1f;
     }
 }

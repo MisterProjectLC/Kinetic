@@ -71,7 +71,7 @@ public class Health : MonoBehaviour
 
         died = true;
         if (lastAttack)
-            OnDie += () => lastAttack.OnKillTarget?.Invoke(gameObject);
+            OnDie += () => lastAttack.OnKill?.Invoke(lastAttack, gameObject, false);
         OnDie?.Invoke();
     }
 
@@ -86,7 +86,7 @@ public class Health : MonoBehaviour
             return;
 
         if (environmental && ReceivedRecentPlayerAttack())
-            lastAttack.OnIndirectKill?.Invoke();
+            lastAttack.OnKill?.Invoke(lastAttack, gameObject, true);
 
         Die();
     }

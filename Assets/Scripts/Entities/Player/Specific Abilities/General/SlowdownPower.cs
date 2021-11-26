@@ -38,5 +38,6 @@ public class SlowdownPower : MonoBehaviour
 
         this.slowdown = slowdown;
         Time.timeScale = slowdown ? slowedTimeSpeed : previousTimeSpeed;
+        styleMeter.DrainActive = true;
     }
 }
