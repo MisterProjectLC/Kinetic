@@ -2181,6 +2181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CriticalPercent: 0.8
   DepleteRate: 0.25
+  DrainActive: 0
   MultiMaxTime: 0.25
   ComboMaxTime: 3
   MovementSpeed: 25
@@ -2217,11 +2218,11 @@ AudioSource:
   m_GameObject: {fileID: 9089919347116189794}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 9b68496a114988c40a3efe2b336cb9ee,
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 58a97b32d6da9f0499009dc79cc5abd9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 0.6
   m_Pitch: 1.5
   Loop: 0
   Mute: 0
