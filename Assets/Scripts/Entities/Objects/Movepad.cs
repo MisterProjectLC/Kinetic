@@ -28,15 +28,19 @@ public class Movepad : MonoBehaviour
     public float Speed = 5f;
     [SerializeField]
     private bool isJump = true;
+    public bool Sticky = false;
     [SerializeField]
     private bool overrideAutomaticSize = false;
+
+    [SerializeField]
+    private float cooldownOverride = -1f;
 
     float clock = 0f;
     float cooldown { get {
             if (isJump)
                 return 0.5f;
             else
-                return 0.05f;
+                return cooldownOverride == -1f ? 0.05f : cooldownOverride;
         } 
     }
 
@@ -57,11 +61,18 @@ public class Movepad : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapBox(meshRenderer.bounds.center + detectPosOffset, detectSize,
             meshRenderer.transform.rotation, detectLayers);
-        if (colliders.Length > 0 && clock <= 0f)
+        if (colliders.Length > 0)
         {
-            clock = cooldown;
             foreach (Collider collider in colliders)
-                ApplyMove(collider.gameObject);
+                if (Sticky && collider.GetComponent<PlayerCharacterController>())
+                    collider.GetComponent<PlayerCharacterController>().IsGrounded = true;
+
+            if (clock <= 0f)
+            {
+                clock = cooldown;
+                foreach (Collider collider in colliders)
+                    ApplyMove(collider.gameObject);
+            }
         }
 
         if (clock > 0f)
@@ -98,6 +109,11 @@ public class Movepad : MonoBehaviour
     public Vector3 GetMoveDirection()
     {
         return moveVector;
+    }
+
+    public void SetMoveDirection(Vector3 value)
+    {
+        moveVector = value;
     }
 
     public Vector3 GetLowerExtremePoint()

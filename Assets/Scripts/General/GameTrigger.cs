@@ -1,9 +1,12 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GameTrigger : MonoBehaviour
 {
+    [SerializeField]
+    bool AutoStart = false;
     [SerializeField]
     bool OneShot = false;
     bool oneshotted = false;
@@ -33,6 +36,18 @@ public class GameTrigger : MonoBehaviour
             if (gameTrigger != null)
                 gameTrigger.OnTriggerActivate += ResetOneShot;
         }
+    }
+
+    private void Start()
+    {
+        StartCoroutine("StartAuto");
+    }
+
+    IEnumerator StartAuto()
+    {
+        yield return new WaitForSeconds(0.01f);
+        if (AutoStart)
+            OnTriggerActivate?.Invoke();
     }
 
     void RemoveBlocker()
@@ -73,5 +88,10 @@ public class GameTrigger : MonoBehaviour
         if (GetComponent<AudioSource>())
             GetComponent<AudioSource>().Play();
         OnTriggerActivate?.Invoke();
+    }
+
+    public bool IsOneshot()
+    {
+        return OneShot;
     }
 }

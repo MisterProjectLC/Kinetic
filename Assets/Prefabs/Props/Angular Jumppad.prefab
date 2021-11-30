@@ -48,10 +48,14 @@ MonoBehaviour:
   detectLayers:
     serializedVersion: 2
     m_Bits: 4096
+  SpawnPoint: {fileID: 0}
+  DespawnPoint: {fileID: 0}
   detectSize: {x: 1, y: 1, z: 2}
   detectPosOffset: {x: 0, y: 0, z: 0}
-  moveDirection: {x: 0, y: 30, z: -30}
+  moveVector: {x: 0, y: 0, z: 0}
+  Speed: 5
   isJump: 1
+  overrideAutomaticSize: 0
 --- !u!1 &2517669965050839375
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +640,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1e7c3fbc694d95e4e89b573d3a8dd5d8, type: 2}
+  - {fileID: 2100000, guid: aa0c193b8a62fab47ba2a1d697c77786, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

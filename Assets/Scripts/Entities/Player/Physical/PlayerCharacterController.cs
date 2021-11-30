@@ -143,8 +143,6 @@ public class PlayerCharacterController : MonoBehaviour
 
                 if (m_InputHandler.GetJump())
                     Jump();
-
-                
             }
             // Air Movement
             else
@@ -176,8 +174,8 @@ public class PlayerCharacterController : MonoBehaviour
                 */
 
                 // Wall checks
-                if (m_InputHandler.GetJump() && OnJumpAir != null)
-                    OnJumpAir.Invoke();
+                if (m_InputHandler.GetJump())
+                    OnJumpAir?.Invoke();
 
                 // Gravity
                 if (GravityEnabled)

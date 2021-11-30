@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
+    struct CollisionData
+    {
+        public Health health;
+        public Collider closestCollider;
+
+        public CollisionData(Health health, Collider collider)
+        {
+            this.health = health;
+            this.closestCollider = collider;
+        }
+    }
+
     [Header("Attributes")]
     [Tooltip("Explosion range")]
     public float Radius = 5f;
@@ -29,7 +41,7 @@ public class Explosion : MonoBehaviour
     [SerializeField]
     const int maxColliders = 150;
     Collider[] colliders = new Collider[maxColliders];
-    List<Health> enemies = new List<Health>(30);
+    List<CollisionData> enemies = new List<CollisionData>(30);
 
     [SerializeField]
     bool GetClosestPoint = true;
@@ -57,10 +69,27 @@ public class Explosion : MonoBehaviour
             GetComponent<AudioSource>().Play();
 
         Physics.OverlapSphereNonAlloc(transform.position, Radius, colliders, HitLayers.layers);
+        // Get the closest collider of each health entity
         foreach (Collider collider in colliders)
         {
-            if (!collider || !collider.GetComponent<Damageable>() || enemies.Contains(collider.GetComponent<Damageable>().GetHealth()))
+            if (!collider || !collider.GetComponent<Damageable>())
                 continue;
+
+            if (enemies.Exists(e => e.health == collider.GetComponent<Damageable>().GetHealth()))
+            {
+                CollisionData cd = enemies.Find(e => e.health == collider.GetComponent<Damageable>().GetHealth());
+                if ((cd.closestCollider.ClosestPoint(transform.position) - transform.position).magnitude >
+                    (collider.ClosestPoint(transform.position) - transform.position).magnitude)
+                    cd.closestCollider = collider;
+            }
+            else
+                enemies.Add(new CollisionData(collider.GetComponent<Damageable>().GetHealth(), collider));
+        }
+
+        // Calculate and apply the damage
+        foreach (CollisionData collision in enemies)
+        {
+            Collider collider = collision.closestCollider;
 
             float rate = ((NeuteredHitLayers.value >> collider.gameObject.layer) == 1) ? NeuteredRate : 1f;
             Vector3 colliderPoint = GetClosestPoint ? collider.ClosestPoint(transform.position) : collider.transform.position;
@@ -75,7 +104,6 @@ public class Explosion : MonoBehaviour
                     continue;
             }
 
-            enemies.Add(collider.GetComponent<Damageable>().GetHealth());
             attack.AttackTarget(collider.gameObject, rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget));
         }
     }
