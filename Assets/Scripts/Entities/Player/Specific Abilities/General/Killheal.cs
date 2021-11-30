@@ -18,9 +18,7 @@ public class Killheal : MonoBehaviour
 
     void Heal()
     {
-        Debug.Log("Killheal");
         health.Heal(1);
     }
-
 
 }

@@ -23,6 +23,8 @@ public class MainMenu : Menu
     public void CharacterButton()
     {
         quitting = false;
+        Hermes.SpawnPosition = Vector3.zero;
+        Hermes.SpawnAreas = new List<string>() { "L_Engi_Tutorial" };
         transitions.PlayTransition("ClosingTransition", OnTransitionEnded);
     }
 

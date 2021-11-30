@@ -20,15 +20,9 @@ public class ButtonLoader : MonoBehaviour
     void LoadScenes()
     {
         foreach (string s in ScenesLoaded)
-        {
             MySceneManager.MSM.LoadScene(s);
-            MySceneManager.MSM.UnLoadScene('P' + s.Substring(1));
-        }
 
         foreach (string s in ScenesUnloaded)
-        {
-            MySceneManager.MSM.LoadScene('P' + s.Substring(1));
             MySceneManager.MSM.UnLoadScene(s);
-        }
     }
 }

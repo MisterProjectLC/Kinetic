@@ -17,6 +17,14 @@ public class ScenePartLoader : MonoBehaviour
     private bool isLoaded;
     private bool shouldLoad;
 
+    [SerializeField]
+    bool Checkpoint;
+    [SerializeField]
+    Transform CheckpointPosition;
+
+    [SerializeField]
+    List<string> RequiredScenes;
+
     List<string> RegisteredObjects = new List<string>();
 
     void Start()
@@ -81,7 +89,7 @@ public class ScenePartLoader : MonoBehaviour
     }
 
 
-    public AsyncOperation LoadScene()
+    public void LoadScene()
     {
         if (!isLoaded)
         {
@@ -89,10 +97,17 @@ public class ScenePartLoader : MonoBehaviour
             if (RegisteredObjects == default(List<string>))
                 RegisteredObjects = new List<string>();
             isLoaded = true;
-            return SceneManager.LoadSceneAsync(gameObject.name, LoadSceneMode.Additive);
-        }
 
-        return null;
+            if (Checkpoint)
+            {
+                Hermes.SpawnPosition = CheckpointPosition.position;
+                List<string> s = new List<string>(RequiredScenes);
+                s.Insert(0, gameObject.name);
+                Hermes.SpawnAreas = s;
+            }
+
+            SceneManager.LoadScene(gameObject.name, LoadSceneMode.Additive);
+        }
     }
 
     public void UnLoadScene()
@@ -122,6 +137,11 @@ public class ScenePartLoader : MonoBehaviour
     {
         if (checkMethod == CheckMethod.Distance)
         Gizmos.DrawSphere(transform.position, loadRange);
+    }
+
+    public List<string> GetRequiredScenes()
+    {
+        return RequiredScenes;
     }
 
 }

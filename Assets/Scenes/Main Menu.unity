@@ -651,6 +651,16 @@ PrefabInstance:
       propertyPath: m_MinValue
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6645868062201655216, guid: 841f9ba1308a29148b1bb12ad7586fcd,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645868062201655216, guid: 841f9ba1308a29148b1bb12ad7586fcd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 841f9ba1308a29148b1bb12ad7586fcd, type: 3}
 --- !u!1001 &8964910510121682543
@@ -714,6 +724,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964910510480524182, guid: 7e8f28550717c214694c7297ad4ba81f,
+        type: 3}
+      propertyPath: firstScene
+      value: Menu_Background
       objectReference: {fileID: 0}
     - target: {fileID: 8964910510480524183, guid: 7e8f28550717c214694c7297ad4ba81f,
         type: 3}

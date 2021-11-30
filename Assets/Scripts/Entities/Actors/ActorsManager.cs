@@ -41,6 +41,8 @@ public class ActorsManager : MonoBehaviour
             }
 
             Player.gameObject.SetActive(true);
+            if (Hermes.SpawnPosition != Vector3.zero)
+                Player.gameObject.transform.position = Hermes.SpawnPosition;
             Actors = new Dictionary<int, List<Actor>>();
         }
     }

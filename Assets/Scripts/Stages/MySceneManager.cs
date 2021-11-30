@@ -5,43 +5,55 @@ using System.Collections.Generic;
 
 public class MySceneManager : MonoBehaviour
 {
-    [SerializeField]
-    string sceneName = "";
-
     public static MySceneManager MSM;
+    [SerializeField]
+    string firstScene = "";
 
     private void Awake()
     {
-        if (sceneName != "")
-            StartCoroutine(LoadFirst(sceneName));
-
         MSM = this;
     }
 
-
-    IEnumerator LoadFirst(string scene)
+    private void Start()
     {
-        AsyncOperation loadingScene = LoadScene(scene);
-        if (loadingScene != null)
-            while (!loadingScene.isDone) 
-                yield return null;
+        if (firstScene != "")
+            LoadFirst(firstScene);
+        else
+            LoadFirst(Hermes.SpawnAreas[0]);
+    }
 
+
+    void LoadFirst(string scene)
+    {
+        LoadScene(scene);
         GetComponentInChildren<Animator>().SetTrigger("Open");
     }
 
 
-    public AsyncOperation LoadScene(string scene)
+    public void LoadScene(string scene)
     {
         Transform loader = transform.Find(scene);
 
         if (loader)
-            return loader.GetComponent<ScenePartLoader>().LoadScene();
+        {
+            foreach (string sceneName in loader.GetComponent<ScenePartLoader>().GetRequiredScenes())
+                LoadScene(sceneName);
+
+            UnLoadScene('P' + scene.Substring(1));
+            loader.GetComponent<ScenePartLoader>().LoadScene();
+        }
         else
+        {
             // Cancel if already loaded
             for (int i = 0; i < SceneManager.sceneCount; i++)
-                if (SceneManager.GetSceneAt(i).name == scene)
-                    return null;
-        return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+                if (SceneManager.GetSceneAt(i).name.Substring(1) == scene.Substring(1))
+                {
+                    Debug.Log("Already loaded, " + scene);
+                    return;
+                }
+
+            SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+        }
     }
 
 
@@ -50,7 +62,12 @@ public class MySceneManager : MonoBehaviour
         Transform loader = transform.Find(scene);
 
         if (loader)
+        {
             loader.GetComponent<ScenePartLoader>().UnLoadScene();
+            Debug.Log("Unloading " + scene);
+            StartCoroutine(LoadPrototypeLevel(scene));
+        }
+
         else
             for (int i = 0; i < SceneManager.sceneCount; i++)
                 if (SceneManager.GetSceneAt(i).name == scene)
@@ -59,6 +76,12 @@ public class MySceneManager : MonoBehaviour
                     SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
                     break;
                 }
+    }
+
+    IEnumerator LoadPrototypeLevel(string scene)
+    {
+        yield return new WaitForSecondsRealtime(0.05f);
+        LoadScene('P' + scene.Substring(1));
     }
 
 
