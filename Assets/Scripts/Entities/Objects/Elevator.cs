@@ -15,6 +15,9 @@ public class Elevator : MonoBehaviour
     List<GameTrigger> Buttons;
 
     [SerializeField]
+    List<GameTrigger> LowerButtons;
+
+    [SerializeField]
     Transform UpperPosition;
     [SerializeField]
     Transform LowerPosition;
@@ -29,17 +32,29 @@ public class Elevator : MonoBehaviour
         direction.y = Speed* goingUp;
 
         foreach (GameTrigger button in Buttons)
-        {
             button.OnTriggerActivate += ToggleDirection;
-        }
+
+        foreach (GameTrigger button in LowerButtons)
+            button.OnTriggerActivate += () => SetDirection(-1);
     }
 
     void ToggleDirection()
     {
+        SetDirection(-goingUp);
+    }
+
+    void SetDirection(float direction)
+    {
+        goingUp = direction;
+
+        if (Vector3.Dot(transform.position - UpperPosition.position, transform.position - LowerPosition.position) > 0f &&
+            (goingUp < 0f && Vector3.Dot(Vector3.down, transform.position - LowerPosition.position) > 1f ||
+            goingUp > 0f && Vector3.Dot(Vector3.up, transform.position - UpperPosition.position) > 1f))
+            return;
+
         movepad.enabled = true;
-        goingUp = -goingUp;
-        movepad.Sticky = (goingUp > 0f);
-        UpdateDirection(Speed * goingUp);
+        movepad.Sticky = (direction > 0f);
+        UpdateDirection(Speed * direction);
     }
 
 

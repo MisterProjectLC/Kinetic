@@ -13,6 +13,7 @@ public class AlterWorldUI : MonoBehaviour
     void Awake()
     {
         gameTrigger.OnTriggerActivate += AlterUI;
+        gameTrigger.OnTriggerDestroy += AlterUI;
 
         if (GetComponent<UniqueID>())
             GetComponent<UniqueID>().OnObjectRegistered += AlterUI;

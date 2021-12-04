@@ -10,21 +10,11 @@ public class Triggerable : MonoBehaviour
     void Start()
     {
         if (GetComponent<UniqueID>())
-            GetComponent<UniqueID>().OnObjectRegistered += ActivateTrigger;
+            GetComponent<UniqueID>().OnObjectRegistered += GetComponent<GameTrigger>().Activate;
 
         if (NeedsToDie)
-            GetComponent<Health>().OnDie += GetComponent<GameTrigger>().OnTriggerActivate;
+            GetComponent<Health>().OnDie += GetComponent<GameTrigger>().Destroy;
         else
-            GetComponent<Health>().OnDamage += ActivateTrigger;
-    }
-
-    void ActivateTrigger()
-    {
-        GetComponent<GameTrigger>().OnTriggerActivate();
-    }
-
-    void ActivateTrigger(int damage)
-    {
-        GetComponent<GameTrigger>().OnTriggerActivate();
+            GetComponent<Health>().OnDamage += (damage) => GetComponent<GameTrigger>().Activate();
     }
 }

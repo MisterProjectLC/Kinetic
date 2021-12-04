@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public GameTrigger Button;
+    public GameTrigger[] Buttons = new GameTrigger[] { };
     [SerializeField]
     private string OpenAnimation = "DoorOpen";
+    [SerializeField]
+    bool ActivableByID = true;
 
     private void Awake()
     {
-        if (GetComponent<UniqueID>())
+        if (GetComponent<UniqueID>() && ActivableByID)
             GetComponent<UniqueID>().OnObjectRegistered += Activate;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (Button)
+        foreach (GameTrigger Button in Buttons)
             Button.OnTriggerActivate += Activate;
     }
 
@@ -25,6 +27,7 @@ public class Door : MonoBehaviour
     void Activate()
     {
         GetComponent<Animator>().Play(OpenAnimation);
-        GetComponent<UniqueID>()?.RegisterID();
+        if (GetComponent<UniqueID>() && ActivableByID)
+            GetComponent<UniqueID>().RegisterID();
     }
 }

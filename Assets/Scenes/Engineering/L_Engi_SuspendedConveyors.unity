@@ -1564,8 +1564,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b2cef55a38b6a4783cf45e7b2d0d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 1620081449}
+  Buttons:
+  - {fileID: 1620081449}
   OpenAnimation: DoorOpen
+  ActivableByID: 1
 --- !u!114 &26825855
 MonoBehaviour:
   m_ObjectHideFlags: 0

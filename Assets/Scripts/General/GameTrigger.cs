@@ -68,13 +68,15 @@ public class GameTrigger : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (blockerCount > 0)
-            return;
-
-        OnTriggerDestroy?.Invoke();
+        Destroy();
     }
 
     private void OnTriggerEnter(Collider other)
+    {
+        Activate();
+    }
+
+    public void Activate()
     {
         if (blockerCount > 0)
             return;
@@ -88,6 +90,14 @@ public class GameTrigger : MonoBehaviour
         if (GetComponent<AudioSource>())
             GetComponent<AudioSource>().Play();
         OnTriggerActivate?.Invoke();
+    }
+
+    public void Destroy()
+    {
+        if (blockerCount > 0)
+            return;
+
+        OnTriggerDestroy?.Invoke();
     }
 
     public bool IsOneshot()
