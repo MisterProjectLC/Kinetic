@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 public class HealthbarUI : BarUI
 {
-    Health playerHealth;
+    [SerializeField]
+    [Tooltip("If null, takes the player health")]
+    Health health;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerHealth = ActorsManager.Player.GetComponent<Health>();
-        playerHealth.OnDamage += UpdateHealth;
-        playerHealth.OnHeal += UpdateHealth;
+        if (health == null)
+            health = ActorsManager.Player.GetComponent<Health>();
+        health.OnDamage += UpdateHealth;
+        health.OnHeal += UpdateHealth;
     }
 
     void UpdateHealth(int change)
     {
-        UpdateBar(playerHealth.CurrentHealth, playerHealth.MaxHealth);
+        UpdateBar(health.CurrentHealth, health.MaxHealth);
     }
 }

@@ -11,9 +11,7 @@ public class Rocketeer : MonoBehaviour
     float maxDistance = 30f;
 
     Weapon weapon;
-
     Animator animator;
-    FlyingEnemy flyingEnemy;
     Enemy enemy;
     Transform playerTransform;
 
@@ -24,9 +22,8 @@ public class Rocketeer : MonoBehaviour
         weapon.OnFire += FireAnimation;
         GetComponent<Health>().OnCriticalLevel += Stagger;
         animator = GetComponent<Animator>();
-
-        flyingEnemy = GetComponent<FlyingEnemy>();
         enemy = GetComponent<Enemy>();
+
         playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
     }
 

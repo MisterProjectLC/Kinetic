@@ -17,12 +17,16 @@ public class UniqueID : MonoBehaviour
     private void Start()
     {
         if (MySceneManager.MSM.ObjectRegistered(ID, gameObject.scene.name))
+        {
+            //Debug.Log("Already " + ID);
             OnObjectRegistered?.Invoke();
+        }
     }
 
 
     public void RegisterID()
     {
+        //Debug.Log("Registered " + ID);
         MySceneManager.MSM.RegisterObject(ID, gameObject.scene.name);
     }
 }

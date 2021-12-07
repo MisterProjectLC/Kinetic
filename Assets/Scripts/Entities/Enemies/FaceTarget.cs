@@ -21,14 +21,16 @@ public class FaceTarget : MonoBehaviour
 
     private Quaternion currentPosition;
     private Vector3 newTargetPosition;
-    Transform playerPosition;
+
+    [HideInInspector]
+    public Transform TargetPosition;
     private float clock = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerPosition = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
-        newTargetPosition = playerPosition.position;
+        TargetPosition = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
+        newTargetPosition = TargetPosition.position;
         Enemy enemy = GetComponent<Enemy>();
         if (!enemy)
             enemy = GetComponentInParent<Enemy>();
@@ -51,7 +53,7 @@ public class FaceTarget : MonoBehaviour
         if (clock > updateCooldown)
         {
             clock = 0f;
-            newTargetPosition = playerPosition.position;
+            newTargetPosition = TargetPosition.position;
             if (!turnVertical)
                 newTargetPosition = new Vector3(newTargetPosition.x, partThatMoves.transform.position.y, newTargetPosition.z);
         }

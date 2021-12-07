@@ -56,6 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8534968615730699995}
   - component: {fileID: 8116017064017062831}
+  - component: {fileID: 8177327212027461904}
   - component: {fileID: 7974985875732045502}
   - component: {fileID: 5985085885755048812}
   - component: {fileID: 1773521077793833581}
@@ -108,14 +109,32 @@ MonoBehaviour:
   MinimumForce: 10
   MaximumForce: 50
   MaxCharge: 2.25
-  MaxDistance: 400
   ChargingSFX: {fileID: 8300000, guid: 1c2372771461dcb48ac4fbebb45648b8, type: 3}
   layersConfig:
     serializedVersion: 2
     m_Bits: 1049088
+  laserColor: {r: 0.5921569, g: 0.85882354, b: 0.8235294, a: 0}
+--- !u!114 &8177327212027461904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7088198090136532333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a395259d89ffe48488952155b6be18f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserMaterial: {fileID: 2100000, guid: 9d51ea59fb9c33a40b9f92a269604aab, type: 2}
+  MaxDistance: 400
   LaserObject: {fileID: 3282370381854024567, guid: faa5928a66758c54e87ff01e309062a6,
     type: 3}
-  laserColor: {r: 0.5921569, g: 0.85882354, b: 0.8235294, a: 0}
+  layersConfig:
+    serializedVersion: 2
+    m_Bits: 1049088
+  DefaultAlpha: -1
+  Alpha: 0
 --- !u!114 &7974985875732045502
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,27 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialUI : MonoBehaviour
+public class TutorialUI : CustomUI
 {
-    public GameTrigger trigger;
-    public GameTrigger hideTrigger;
-
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
-        trigger.OnTriggerActivate += ShowControls;
-        hideTrigger.OnTriggerActivate += HideControls;
-
         ActorsManager.AM.GetPlayer().GetComponent<StyleMeter>().DrainActive = false;
+        base.Start();
     }
 
-    void ShowControls()
+    void OnEnable()
     {
         GetComponent<Animator>().Play("TutorialControls");
-    }
-
-    void HideControls()
-    {
-        gameObject.SetActive(false);
     }
 }

@@ -893,6 +893,8 @@ GameObject:
   - component: {fileID: 4508045823689246182}
   - component: {fileID: 6348019847863000368}
   - component: {fileID: 7085931297983018094}
+  - component: {fileID: 1749300239121324055}
+  - component: {fileID: 1467936326017138533}
   m_Layer: 11
   m_Name: MegaDrone
   m_TagString: Untagged
@@ -1147,6 +1149,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1749300239121324055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793289203346061809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9c292a4d384fe4681fda5d05bbac58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoStart: 0
+  OneShot: 0
+  blockers: []
+  resetters: []
+--- !u!114 &1467936326017138533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793289203346061809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310b699e1b4d32849877170525fa6c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NeedsToDie: 1
 --- !u!1 &5338219848459165016
 GameObject:
   m_ObjectHideFlags: 0

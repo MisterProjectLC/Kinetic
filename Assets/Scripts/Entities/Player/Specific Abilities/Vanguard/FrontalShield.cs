@@ -6,6 +6,7 @@ public class FrontalShield : SecondaryAbility
     [SerializeField]
     GameObject shield;
     Color shieldColor;
+    float originalAlpha = 1f;
 
     [SerializeField]
     float Duration;
@@ -15,6 +16,7 @@ public class FrontalShield : SecondaryAbility
     {
         shield.GetComponent<Health>().OnDie += OnShieldDeplete;
         shieldColor = shield.GetComponent<MeshRenderer>().material.color;
+        originalAlpha = shieldColor.a;
     }
 
 
@@ -27,9 +29,10 @@ public class FrontalShield : SecondaryAbility
     {
         shield.SetActive(true);
         shield.GetComponent<Health>().Heal(10000);
+        shieldColor.a = originalAlpha;
         for (int i = 0; i < 5; i++)
         {
-            shieldColor.a -= 0.1f;
+            shieldColor.a -= originalAlpha/5;
             shield.GetComponent<MeshRenderer>().material.SetColor("_Color", shieldColor);
             yield return new WaitForSeconds(Duration/5);
         }

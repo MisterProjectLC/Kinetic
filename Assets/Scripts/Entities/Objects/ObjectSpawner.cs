@@ -19,6 +19,8 @@ public class ObjectSpawner : MonoBehaviour
     int ChildLimit = 100;
     [SerializeField]
     float SpawnTimer = 5f;
+    [SerializeField]
+    float SpawnStartDelay = 0f;
     float clock = 0f;
 
     [SerializeField]
@@ -29,6 +31,8 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Start()
     {
+        clock = SpawnStartDelay;
+
         playerTransform = ActorsManager.AM.GetPlayer().transform;
 
         if (Spawnee.GetComponent<Poolable>())
@@ -104,5 +108,11 @@ public class ObjectSpawner : MonoBehaviour
             return false;
 
         return true;
+    }
+
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, SpawnRadius + 0.05f);
     }
 }

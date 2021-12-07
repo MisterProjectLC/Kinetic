@@ -15,8 +15,6 @@ public class LaserCannon : WeaponAbility
     float MaximumForce = 30;
     [SerializeField]
     float MaxCharge = 3f;
-    [SerializeField]
-    float MaxDistance = 400f;
 
     [Header("Sounds")]
     [SerializeField]
@@ -26,9 +24,7 @@ public class LaserCannon : WeaponAbility
     [SerializeField]
     LayerMask layersConfig;
 
-    [SerializeField]
-    GameObject LaserObject;
-    LineRenderer Laser;
+    LaserEffect LaserEffect;
     [SerializeField]
     Color laserColor;
 
@@ -41,9 +37,7 @@ public class LaserCannon : WeaponAbility
 
     new void Awake()
     {
-        GameObject newInstance = Instantiate(LaserObject);
-        Laser = newInstance.GetComponent<LineRenderer>();
-
+        LaserEffect = GetComponent<LaserEffect>();
         attack = GetComponent<Attack>();
         attack.OnKill += (Attack a, GameObject g, bool b) => OnKill();
         base.Awake();
@@ -52,13 +46,11 @@ public class LaserCannon : WeaponAbility
     private void Start()
     {
         ReleaseAbility = true;
-        OnUpdate += UpdateAlpha;
     }
 
     void OnDisable()
     {
         alpha = 0.01f;
-        UpdateAlpha();
     }
 
     void OnKill()
@@ -66,20 +58,6 @@ public class LaserCannon : WeaponAbility
         killsSince++;
         if (killsSince > 1)
             ResetCooldown();
-    }
-
-    void UpdateAlpha()
-    {
-        if (alpha > 0)
-        {
-            alpha -= Time.deltaTime;
-            laserColor.a = alpha;
-            if (Laser)
-            {
-                Laser.startColor = laserColor;
-                Laser.endColor = laserColor;
-            }
-        }
     }
 
 
@@ -101,24 +79,10 @@ public class LaserCannon : WeaponAbility
         else
         {
             float percentage = charge / MaxCharge;
+            LaserEffect.Alpha = percentage;
             charge = 0f;
             BackwardsForce = Mathf.CeilToInt(Mathf.Lerp(MinimumForce, MaximumForce, percentage));
             attack.Damage = Mathf.CeilToInt(Mathf.Lerp(MinimumDamage, MaximumDamage, percentage));
-
-            Physics.Raycast(WeaponRef.Mouth.position, WeaponRef.Mouth.forward, out RaycastHit hit, MaxDistance, layersConfig);
-            alpha = percentage;
-            if (!hit.collider)
-            {
-                ((HitscanWeapon)WeaponRef).MaxDistance = MaxDistance;
-                Laser.SetPosition(0, transform.position);
-                Laser.SetPosition(1, transform.position + WeaponRef.Mouth.forward*400f);
-            }
-            else
-            {
-                ((HitscanWeapon)WeaponRef).MaxDistance = hit.distance;
-                Laser.SetPosition(0, transform.position);
-                Laser.SetPosition(1, hit.point);
-            }
 
             killsSince = 0;
             base.Execute(input);

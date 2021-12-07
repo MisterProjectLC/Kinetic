@@ -83,6 +83,11 @@ public abstract class Weapon : MonoBehaviour
         clock = 0f;
     }
 
+    public float GetClock()
+    {
+        return clock;
+    }
+
     protected void PlaySound(AudioClip sound)
     {
         GetComponent<AudioSource>().clip = sound;

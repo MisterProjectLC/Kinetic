@@ -81,7 +81,7 @@ public class OptionsMenu : MonoBehaviour
         Material m = outlineFeature.settings.outlineMaterial;
 
         //Setting
-        m.SetFloat("Vector1_e96a4ec09abd4fab8bb36e836b4e1a9d", value);
+        m.SetFloat("_OutlineThickness", value);
         outlineFeature.settings.outlineMaterial = m;
         rendererData[0].rendererFeatures[4] = outlineFeature;
         rendererData[0].SetDirty();
