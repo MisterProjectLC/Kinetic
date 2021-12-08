@@ -83,6 +83,11 @@ public abstract class Weapon : MonoBehaviour
         clock = 0f;
     }
 
+    public void SetOffCooldown()
+    {
+        clock = FireCooldown;
+    }
+
     public float GetClock()
     {
         return clock;

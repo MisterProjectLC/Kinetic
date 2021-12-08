@@ -6221,6 +6221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawnee: {fileID: 6579238260824270759, guid: 0a4e62e753f0d2e448d3ea09650b68e8, type: 3}
+  SpawnPoint: {fileID: 0}
   DespawnPoint: {fileID: 314725403}
   SpawnRadius: 0
   ChildLimit: 100
@@ -8102,7 +8103,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-34342
+  m_Name: pb_Mesh-988334
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27618,6 +27619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawnee: {fileID: 6579238260824270759, guid: 0a4e62e753f0d2e448d3ea09650b68e8, type: 3}
+  SpawnPoint: {fileID: 0}
   DespawnPoint: {fileID: 1863884352}
   SpawnRadius: 0
   ChildLimit: 100
@@ -35792,6 +35794,22 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 487933591}
+    - target: {fileID: 3750297349485511956, guid: 431bd9700af016b4e931d8f1ecbf6d3d,
+        type: 3}
+      propertyPath: Spawnee
+      value: 
+      objectReference: {fileID: 2428469021606675725, guid: 11552b0bdeb3aa24599c4b3620ca792c,
+        type: 3}
+    - target: {fileID: 3750297349485511956, guid: 431bd9700af016b4e931d8f1ecbf6d3d,
+        type: 3}
+      propertyPath: SpawnTimer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3750297349485511956, guid: 431bd9700af016b4e931d8f1ecbf6d3d,
+        type: 3}
+      propertyPath: SpawnRadius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4274620178539885268, guid: 431bd9700af016b4e931d8f1ecbf6d3d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -39629,6 +39647,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 237177594}
+    - target: {fileID: 3750297349485511956, guid: 431bd9700af016b4e931d8f1ecbf6d3d,
+        type: 3}
+      propertyPath: SpawnTimer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3750297349485511956, guid: 431bd9700af016b4e931d8f1ecbf6d3d,
+        type: 3}
+      propertyPath: SpawnRadius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4274620178539885268, guid: 431bd9700af016b4e931d8f1ecbf6d3d,
         type: 3}
       propertyPath: m_LocalPosition.x

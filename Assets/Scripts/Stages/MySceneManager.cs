@@ -32,7 +32,9 @@ public class MySceneManager : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        Transform loader = transform.Find(scene);
+        Transform loader = null;
+        if (this)
+            loader = transform.Find(scene);
 
         if (loader)
         {
@@ -59,7 +61,9 @@ public class MySceneManager : MonoBehaviour
 
     public void UnLoadScene(string scene)
     {
-        Transform loader = transform.Find(scene);
+        Transform loader = null;
+        if (this)
+            loader = transform.Find(scene);
 
         if (loader)
         {

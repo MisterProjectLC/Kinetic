@@ -37,7 +37,7 @@ public class Destructable : MonoBehaviour
             newBroken.transform.position = OriginalModel.transform.position;
             newBroken.transform.rotation = OriginalModel.transform.rotation;
             if (MatchModelScale)
-                newBroken.transform.localScale = OriginalModel.transform.localScale;
+                newBroken.transform.localScale = OriginalModel.transform.lossyScale;
             if (GetComponent<UniqueID>())
                 GetComponent<UniqueID>().RegisterID();
 

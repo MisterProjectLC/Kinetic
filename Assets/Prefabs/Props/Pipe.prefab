@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3850779030624918860}
   - component: {fileID: 3257645479350376642}
   - component: {fileID: 8119847532730043563}
+  - component: {fileID: 3750297349485511956}
   m_Layer: 0
   m_Name: Pipe
   m_TagString: Untagged
@@ -1822,6 +1823,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &3750297349485511956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871006075449058829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f3910ebaf5378448bb537ca5c01c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawnee: {fileID: 4192547971254117285, guid: 59aa51057b9c6ca4cb39e9f91ede21ee, type: 3}
+  SpawnPoint: {fileID: 8080268423076067530}
+  DespawnPoint: {fileID: 4274620178539885268}
+  SpawnRadius: 0
+  ChildLimit: 100
+  SpawnTimer: 15
+  SpawnStartDelay: 0
+  AvoidPlayerLoS: 0
+  ViewBlockedLayers: {fileID: 0}
 --- !u!1 &4988665158729199433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,7 +1853,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8080268423076067530}
-  - component: {fileID: 528402753840608907}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -1853,24 +1874,6 @@ Transform:
   m_Father: {fileID: 7074919245403432516}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &528402753840608907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4988665158729199433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f3910ebaf5378448bb537ca5c01c7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Spawnee: {fileID: 4192547971254117285, guid: 59aa51057b9c6ca4cb39e9f91ede21ee, type: 3}
-  DespawnPoint: {fileID: 4274620178539885268}
-  ChildLimit: 100
-  SpawnTimer: 15
-  AvoidPlayerLoS: 0
-  ViewBlockedLayers: {fileID: 0}
 --- !u!1 &8658480441339723797
 GameObject:
   m_ObjectHideFlags: 0

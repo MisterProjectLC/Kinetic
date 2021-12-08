@@ -9,6 +9,8 @@ public class ObjectSpawner : MonoBehaviour
     ObjectManager.PoolableType? objectType = null;
 
     [SerializeField]
+    Transform SpawnPoint;
+    [SerializeField]
     Transform DespawnPoint;
 
     List<GameObject> children = new List<GameObject>(10);
@@ -37,6 +39,9 @@ public class ObjectSpawner : MonoBehaviour
 
         if (Spawnee.GetComponent<Poolable>())
             objectType = Spawnee.GetComponent<Poolable>().Type;
+
+        if (!SpawnPoint)
+            SpawnPoint = transform;
     }
 
     // Update is called once per frame
@@ -79,15 +84,15 @@ public class ObjectSpawner : MonoBehaviour
             {
                 newInstance = ObjectManager.OM.SpawnObjectFromPool((ObjectManager.PoolableType)objectType, Spawnee);
                 newInstance.transform.SetParent(transform);
-                newInstance.transform.position = transform.position + randomOffset;
+                newInstance.transform.position = SpawnPoint.position + randomOffset;
                 newInstance.transform.rotation = transform.rotation;
             }
             else
-                newInstance = Instantiate(Spawnee, transform.position + randomOffset, transform.rotation);
+                newInstance = Instantiate(Spawnee, SpawnPoint.position + randomOffset, transform.rotation);
 
             newInstance.transform.SetParent(transform);
             if (newInstance.GetComponent<NavMeshAgent>())
-                newInstance.GetComponent<NavMeshAgent>().Warp(transform.position + randomOffset);
+                newInstance.GetComponent<NavMeshAgent>().Warp(SpawnPoint.position + randomOffset);
 
             children.Add(newInstance);
         }
@@ -95,14 +100,14 @@ public class ObjectSpawner : MonoBehaviour
 
     bool IsPlayerInView()
     {
-        Vector3 playerDistance = playerTransform.position - transform.position;
+        Vector3 playerDistance = playerTransform.position - SpawnPoint.position;
 
         // Check if inside field of view
         if (Vector3.Dot(transform.forward, playerDistance) < 0f)
             return false;
 
         // Check if view is obstructed
-        Ray ray = new Ray(transform.position, playerTransform.position - transform.position);
+        Ray ray = new Ray(SpawnPoint.position, playerTransform.position - SpawnPoint.position);
         Physics.Raycast(ray, out RaycastHit hit, 100f, ViewBlockedLayers.layers, QueryTriggerInteraction.Ignore);
         if (hit.collider && (hit.distance < playerDistance.magnitude))
             return false;
@@ -113,6 +118,9 @@ public class ObjectSpawner : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, SpawnRadius + 0.05f);
+        if (SpawnPoint)
+            Gizmos.DrawWireSphere(SpawnPoint.position, SpawnRadius + 0.05f);
+        else
+            Gizmos.DrawWireSphere(transform.position, SpawnRadius + 0.05f);
     }
 }

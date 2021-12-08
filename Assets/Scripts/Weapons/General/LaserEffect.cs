@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(HitscanWeapon))]
 public class LaserEffect : MonoBehaviour
 {
     [SerializeField]
@@ -16,11 +17,13 @@ public class LaserEffect : MonoBehaviour
     [SerializeField]
     LayerMask layersConfig;
     LineRenderer Laser;
-    Weapon WeaponRef;
+    HitscanWeapon WeaponRef;
 
     [SerializeField]
     [Tooltip("Set to negative to disable")]
     float DefaultAlpha = -1f;
+    [SerializeField]
+    float AlphaDecayRate = 1f;
     [HideInInspector]
     public float Alpha = 0f;
 
@@ -29,7 +32,7 @@ public class LaserEffect : MonoBehaviour
         GameObject newInstance = Instantiate(LaserObject);
         Laser = newInstance.GetComponent<LineRenderer>();
         Laser.material = laserMaterial;
-        WeaponRef = GetComponent<Weapon>();
+        WeaponRef = GetComponent<HitscanWeapon>();
         WeaponRef.OnFire += OnFire;
     }
 
@@ -47,15 +50,18 @@ public class LaserEffect : MonoBehaviour
 
     void UpdateAlpha()
     {
-        if (Alpha > 0)
+        if (Alpha < 0 || Alpha > 1f)
         {
-            Alpha -= Time.deltaTime;
-            laserColor.a = Alpha;
-            if (Laser)
-            {
-                Laser.startColor = laserColor;
-                Laser.endColor = laserColor;
-            }
+            Alpha = 0f;
+            return;
+        }
+        
+        Alpha -= Time.deltaTime* AlphaDecayRate;
+        laserColor.a = Alpha;
+        if (Laser)
+        {
+            Laser.startColor = laserColor;
+            Laser.endColor = laserColor;
         }
     }
 
@@ -67,13 +73,13 @@ public class LaserEffect : MonoBehaviour
             Alpha = DefaultAlpha;
         if (!hit.collider)
         {
-            ((HitscanWeapon)WeaponRef).MaxDistance = MaxDistance;
+            WeaponRef.MaxDistance = MaxDistance;
             Laser.SetPosition(0, WeaponRef.Mouth.position + (WeaponRef.Mouth.forward + WeaponRef.Mouth.right)*0.5f);
             Laser.SetPosition(1, WeaponRef.Mouth.position + WeaponRef.Mouth.forward * 400f);
         }
         else
         {
-            ((HitscanWeapon)WeaponRef).MaxDistance = hit.distance;
+            WeaponRef.MaxDistance = hit.distance;
             Laser.SetPosition(0, WeaponRef.Mouth.position + (WeaponRef.Mouth.forward + WeaponRef.Mouth.right) * 0.5f);
             Laser.SetPosition(1, hit.point);
         }

@@ -29,8 +29,7 @@ public class Enemy : MonoBehaviour
     [Tooltip("If true, lets the NavMeshAgent control the rotation of this enemy")]
     bool TurnToMoveDirection = false;
 
-    [SerializeField]
-    bool OnlyShootIfPlayerInView = true;
+    public bool OnlyShootIfPlayerInView = true;
 
     [SerializeField]
     float CollisionDistance = 1f;

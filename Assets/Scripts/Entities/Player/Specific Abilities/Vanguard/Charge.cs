@@ -59,7 +59,7 @@ public class Charge : Ability
 
     void StopCharging()
     {
-        if (charged && player.MoveVelocity.magnitude < MinimumForce / 2)
+        if (charged && player.MoveVelocity.magnitude < MinimumForce / 4)
             StartCoroutine("ChargeFalse");
     }
 

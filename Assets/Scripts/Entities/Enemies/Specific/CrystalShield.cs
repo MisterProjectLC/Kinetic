@@ -1,19 +1,33 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CrystalShield : MonoBehaviour
 {
     [SerializeField]
+    List<Crystal> generators;
+    int generatorCount = 0;
+
+    [SerializeField]
     GameObject shieldedObject;
     List<GameObject> Holograms = new List<GameObject>();
 
-    int generatorCount = 0;
+    public UnityAction OnDeactivate;
+
+
+    private void Start()
+    {
+        foreach (Crystal generator in generators)
+        {
+            generator.Setup(this);
+            RegisterGenerator();
+        }
+    }
 
     private void OnEnable()
     {
         foreach (MeshRenderer MR in shieldedObject.transform.GetComponentsInChildren<MeshRenderer>())
-            if (MR.gameObject.name == "Shield Hologram" || MR.gameObject.name == "Cannon")
+            if (MR.gameObject.name == "Shield Hologram")
                 Holograms.Add(MR.gameObject);
 
 
@@ -28,8 +42,19 @@ public class CrystalShield : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    public void RegisterGenerator()
+    public void ReactivateEverything()
+    {
+        generatorCount = generators.Count;
+        foreach (Crystal generator in generators)
+            generator.Activate();
+
+
+        foreach (GameObject GO in Holograms)
+            GO.SetActive(true);
+        gameObject.SetActive(true);
+    }
+
+    void RegisterGenerator()
     {
         generatorCount++;
         if (generatorCount > 0)
@@ -45,9 +70,11 @@ public class CrystalShield : MonoBehaviour
         generatorCount--;
         if (generatorCount <= 0)
         {
+            OnDeactivate?.Invoke();
             foreach (GameObject GO in Holograms)
                 GO.SetActive(false);
             gameObject.SetActive(false);
         }
+
     }
 }

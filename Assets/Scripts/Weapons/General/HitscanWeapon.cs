@@ -18,9 +18,13 @@ public class HitscanWeapon : Weapon
     List<Health> enemies = new List<Health>(25);
     public UnityAction<RaycastHit> OnHit;
 
+    Attack attack;
+
 
     void Awake()
     {
+        attack = GetComponent<Attack>();
+
         if (Sparks != null)
             SparksType = Sparks.GetComponent<Poolable>().Type;
     }
@@ -42,8 +46,8 @@ public class HitscanWeapon : Weapon
                 extremePoint = Mouth.position + direction * MaxDistance;
 
             enemies.Clear();
-            RaycastHit[] hits = Physics.BoxCastAll((Mouth.position + extremePoint) / 2, new Vector3(0.75f, 0.75f, 0.75f), direction, 
-                Quaternion.identity, MaxDistance, HitLayers.layers);
+            RaycastHit[] hits = Physics.BoxCastAll(Mouth.position, new Vector3(0.4f, 0.4f, 0.4f), direction, 
+                Quaternion.identity, (Mouth.position - extremePoint).magnitude, HitLayers.layers);
             foreach (RaycastHit hit in hits)
                 AttackHit(hit);
         }
@@ -52,7 +56,7 @@ public class HitscanWeapon : Weapon
 
     void AttackHit(RaycastHit hit)
     {
-        if (!hit.collider)
+        if (!hit.collider || !attack)
             return;
 
         if (Sparks != null)
@@ -68,7 +72,7 @@ public class HitscanWeapon : Weapon
 
         OnHit?.Invoke(hit);
         enemies.Add(hit.collider.GetComponent<Damageable>().GetHealth());
-        GetComponent<Attack>().AttackTarget(hit.collider.gameObject);
+        attack.AttackTarget(hit.collider.gameObject);
     }
 
 
