@@ -14,7 +14,6 @@ public class ButtonLoader : MonoBehaviour
     void Start()
     {
         GetComponent<GameTrigger>().OnTriggerActivate += LoadScenes;
-        GetComponent<GameTrigger>().OnTriggerDestroy += LoadScenes;
     }
 
 

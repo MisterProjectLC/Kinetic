@@ -103,7 +103,7 @@ public class ObjectSpawner : MonoBehaviour
         Vector3 playerDistance = playerTransform.position - SpawnPoint.position;
 
         // Check if inside field of view
-        if (Vector3.Dot(transform.forward, playerDistance) < 0f)
+        if (Vector3.Dot(playerTransform.GetComponent<PlayerCharacterController>().PlayerCamera.transform.forward, playerDistance) < 0f)
             return false;
 
         // Check if view is obstructed

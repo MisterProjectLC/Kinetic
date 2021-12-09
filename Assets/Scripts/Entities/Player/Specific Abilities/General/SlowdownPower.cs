@@ -27,7 +27,7 @@ public class SlowdownPower : MonoBehaviour
             setSlowdown(!slowdown);
 
         if (slowdown)
-            styleMeter.SpendJuice(Time.deltaTime/slowedTimeSpeed);
+            styleMeter.SpendJuice(0.5f*Time.deltaTime/slowedTimeSpeed);
     }
 
 

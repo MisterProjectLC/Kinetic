@@ -68,7 +68,7 @@ public class Destructable : MonoBehaviour
 
     void Delete()
     {
-        Debug.Log("Delete");
+        //Debug.Log("Delete");
         Destroy(gameObject);
     }
 }

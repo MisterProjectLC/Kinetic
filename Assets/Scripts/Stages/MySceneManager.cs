@@ -32,9 +32,10 @@ public class MySceneManager : MonoBehaviour
 
     public void LoadScene(string scene)
     {
+        Debug.Log("Loading scene: " + scene);
+
         Transform loader = null;
-        if (this)
-            loader = transform.Find(scene);
+        loader = transform.Find(scene);
 
         if (loader)
         {
@@ -61,14 +62,14 @@ public class MySceneManager : MonoBehaviour
 
     public void UnLoadScene(string scene)
     {
+        Debug.Log("Unloading " + scene);
+
         Transform loader = null;
-        if (this)
-            loader = transform.Find(scene);
+        loader = transform.Find(scene);
 
         if (loader)
         {
             loader.GetComponent<ScenePartLoader>().UnLoadScene();
-            Debug.Log("Unloading " + scene);
             StartCoroutine(LoadPrototypeLevel(scene));
         }
 
@@ -76,7 +77,6 @@ public class MySceneManager : MonoBehaviour
             for (int i = 0; i < SceneManager.sceneCount; i++)
                 if (SceneManager.GetSceneAt(i).name == scene)
                 {
-                    Debug.Log(SceneManager.GetSceneAt(i).name);
                     SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
                     break;
                 }

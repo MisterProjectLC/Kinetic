@@ -39,6 +39,7 @@ public class Crystal : MonoBehaviour
 
     public void Setup(CrystalShield newShield)
     {
+        Debug.Log("Setup");
         health.OnCriticalLevel += newShield.DisableGenerator;
 
         GameObject newLaser = Instantiate(LaserObject);

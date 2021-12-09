@@ -1210,8 +1210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 5
-  CriticalHealth: 40
-  MaxHealth: 75
+  CriticalHealth: 80
+  MaxHealth: 160
   lastAttack: {fileID: 0}
 --- !u!114 &6585358452944689878
 MonoBehaviour:
@@ -8954,7 +8954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateCooldown: 0.01
-  turnSpeed: 45
+  turnSpeed: 20
   turnVertical: 1
   partThatMoves: {fileID: 4522044083277517914}
   TargetPosition: {fileID: 0}

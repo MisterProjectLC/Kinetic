@@ -27,7 +27,6 @@ public class GameTrigger : MonoBehaviour
             if (gameTrigger != null)
             {
                 gameTrigger.OnTriggerActivate += RemoveBlocker;
-                gameTrigger.OnTriggerDestroy += RemoveBlocker;
                 blockerCount++;
             }
         }

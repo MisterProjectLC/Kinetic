@@ -211,4 +211,10 @@ public class StyleMeter : MonoBehaviour
         if (lastCritical != Critical)
             OnCritical?.Invoke(Critical);
     }
+
+
+    public float GetCriticalLevel()
+    {
+        return CriticalPercent * JuiceMax;
+    }
 }
