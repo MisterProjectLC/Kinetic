@@ -39,7 +39,7 @@ public class ShellBombAbilty : Ability
 
     void ShootShellBombs()
     {
-        player.ApplyForce(-BackwardsForce * player.PlayerCamera.transform.forward);
+        player.MoveVelocity -= BackwardsForce * player.PlayerCamera.transform.forward;
         shooter.ShootProjectile(player.PlayerCamera.transform.forward);
     }
 }

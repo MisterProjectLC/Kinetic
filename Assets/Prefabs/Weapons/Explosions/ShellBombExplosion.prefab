@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2503708963167366664}
   - component: {fileID: 5751226101885776970}
   m_Layer: 14
-  m_Name: ShellBombExplosion 1
+  m_Name: ShellBombExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6fdf4473511d041b1aa747a562b39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 1.5
+  Radius: 5
   CenterRate: 1
   FallOffRate: 0.8
   NeuteredRate: 0.4
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 3
-  alreadyInitialized: 0
+  AlreadyInitialized: 0
 --- !u!82 &2503708963167366664
 AudioSource:
   m_ObjectHideFlags: 0
@@ -223,6 +223,18 @@ PrefabInstance:
     - target: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4389029538297518, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
       propertyPath: m_LocalPosition.x

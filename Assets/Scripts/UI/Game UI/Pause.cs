@@ -34,6 +34,7 @@ public class Pause : MonoBehaviour
     {
         Ps = this;
         Paused = false;
+        AudioListener.pause = false;
     }
 
     private void Start()

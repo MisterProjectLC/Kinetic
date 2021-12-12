@@ -199,8 +199,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 198c87a5afcdaba41809515782df2a2f, type: 3}
-    m_FontSize: 18
+    m_Font: {fileID: 12800000, guid: f118812a565fe674fbecf41854c9d2ba, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -542,9 +542,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5596464150950530156}
-        m_TargetAssemblyTypeName: PauseMenu, Scripts.UI
-        m_MethodName: OptionsButton
-        m_Mode: 1
+        m_TargetAssemblyTypeName: Menu, Scripts.UI.Menu
+        m_MethodName: SubmenuButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -619,12 +619,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 198c87a5afcdaba41809515782df2a2f, type: 3}
-    m_FontSize: 100
+    m_Font: {fileID: 12800000, guid: f118812a565fe674fbecf41854c9d2ba, type: 3}
+    m_FontSize: 135
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 100
+    m_MaxSize: 135
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -700,8 +700,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 198c87a5afcdaba41809515782df2a2f, type: 3}
-    m_FontSize: 18
+    m_Font: {fileID: 12800000, guid: f118812a565fe674fbecf41854c9d2ba, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -774,11 +774,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d159cdcb88eeb0e4cb3e64620e2fc7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundAnimator: {fileID: 0}
   submenus:
   - animator: {fileID: 1468567494280501719}
     enabled: 0
-  transitions: {fileID: 0}
+  transitions: {fileID: 4301069829396782417, guid: faf0b785c323af844bcc4215f1517629,
+    type: 3}
 --- !u!1 &1468567494128176026
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,8 +883,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 198c87a5afcdaba41809515782df2a2f, type: 3}
-    m_FontSize: 18
+    m_Font: {fileID: 12800000, guid: f118812a565fe674fbecf41854c9d2ba, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1050,18 +1050,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4030530451757981958, guid: 187f602257aed034494dfdf997af52e2,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030530451757981958, guid: 187f602257aed034494dfdf997af52e2,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5596464150950530156}
     - target: {fileID: 4030530451757981958, guid: 187f602257aed034494dfdf997af52e2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OptionsButton
+      value: SubmenuButton
       objectReference: {fileID: 0}
     - target: {fileID: 4030530451757981958, guid: 187f602257aed034494dfdf997af52e2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenu, Scripts.UI
+      value: Menu, Scripts.UI.Menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 187f602257aed034494dfdf997af52e2, type: 3}

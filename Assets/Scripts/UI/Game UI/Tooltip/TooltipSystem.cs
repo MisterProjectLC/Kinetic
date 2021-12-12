@@ -30,6 +30,9 @@ public class TooltipSystem : MonoBehaviour
 
     public void Show(string title, string description)
     {
+        if (!Pause.Paused)
+            return;
+
         tooltip.Setup(title, description);
         tooltip.gameObject.SetActive(true);
     }

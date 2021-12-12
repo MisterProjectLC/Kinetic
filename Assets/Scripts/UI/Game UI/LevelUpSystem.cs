@@ -6,10 +6,17 @@ public class LevelUpSystem : MonoBehaviour
 {
     public static LevelUpSystem LUS;
 
+    // Loadouts
+    [System.Serializable]
+    public struct Loadout
+    {
+        public List<RectTransform> slots;
+    }
+
+    [SerializeField]
+    List<Loadout> totalSlots;
     [SerializeField]
     List<RectTransform> initialSlots;
-    [SerializeField]
-    RectTransform initialPassiveSlot;
     [SerializeField]
     GameObject NewAbilityText;
     [SerializeField]
@@ -44,6 +51,7 @@ public class LevelUpSystem : MonoBehaviour
         siblingBaseCount = transform.GetChildCount();
 
         int i = 0;
+        // Populate initial options
         foreach (LoadoutManager.Option option in loadout.InitialOptions)
         {
             LoadoutOption loadoutOption = GenerateOptionInstance(option).GetComponent<LoadoutOption>();
@@ -53,20 +61,41 @@ public class LevelUpSystem : MonoBehaviour
             i++;
         }
 
+        // Prepare saved options
+        for (int j = 0; j < Hermes.SpawnAbilities.Count; j++)
+            Hermes.SpawnAbilities[i].SetInGame(false);
+                       
+
+        // Populate options
         foreach (LoadoutManager.Option option in loadout.Options)
         {
             GameObject GO = GenerateOptionInstance(option);
 
+            // Makeshift code for initial Killheal passive
             if (option.ability.name == "Killheal")
             {
-                initialPassiveSlot.GetComponent<DropSlot>().OnDrop(GO.GetComponent<LoadoutOption>().gameObject);
+                totalSlots[3].slots[0].GetComponent<DropSlot>().OnDrop(GO.GetComponent<LoadoutOption>().gameObject);
                 optionsObtained.Add(GO.GetComponent<LoadoutOption>());
             }
+            // Setup option
             else
             {
-                GO.SetActive(false);
                 LoadoutOption loadoutOption = GO.GetComponent<LoadoutOption>();
 
+                // Check if already saved
+                if (Hermes.SpawnAbilities.Exists(x => x.name == option.ability.name))
+                {
+                    Hermes.SavedAbility ability = Hermes.SpawnAbilities.Find(x => x.name == option.ability.name);
+                    Hermes.SpawnAbilities[Hermes.SpawnAbilities.IndexOf(ability)].SetInGame(true);
+
+                    totalSlots[ability.loadout != -1 ? ability.loadout : 3].slots[ability.slot].GetComponent<DropSlot>().
+                        OnDrop(loadoutOption.gameObject);
+                    optionsObtained.Add(loadoutOption);
+                    continue;
+                }
+
+
+                GO.SetActive(false);
                 if (option.prerequisiteAbilities.Count > 0)
                     optionsLocked.Add(loadoutOption);
                 else

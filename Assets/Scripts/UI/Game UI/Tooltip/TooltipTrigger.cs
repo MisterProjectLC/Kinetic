@@ -13,6 +13,8 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+
+        Debug.Log("Entering " + gameObject.name);
         TooltipSystem.TS.Show(Title, Description);
     }
 

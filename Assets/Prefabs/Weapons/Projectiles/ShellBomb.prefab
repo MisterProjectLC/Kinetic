@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ImpactType: 3
-  ImpactObject: {fileID: 4396919937828005916, guid: ce09dc5bff82c61409f88c37d9b4990f,
+  ImpactObject: {fileID: 7768923870411819302, guid: d5393dd06099f024a8b6c3b38623c7d7,
     type: 3}
   PenetrateCount: 0
 --- !u!114 &3536989481799197300
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
-  alreadyInitialized: 0
+  AlreadyInitialized: 0
 --- !u!114 &4047515629669841277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
+  Agressor: {fileID: 0}
 --- !u!1 &5814223675256522330
 GameObject:
   m_ObjectHideFlags: 0

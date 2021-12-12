@@ -18,10 +18,6 @@ public class PlayerInputHandler : MonoBehaviour
     const string Slowtime = "Slowtime";
 
     [Header("Inverting Axis (and Allies lol)")]
-    [Tooltip("Used to flip the vertical input axis")]
-    [SerializeField]
-    private bool InvertYAxis = false;
-
     [Tooltip("Used to flip the horizontal input axis")]
     [SerializeField]
     private bool InvertXAxis = false;
@@ -35,7 +31,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     bool InputAndUnpaused
     {
-        get { return inputEnabled && !Pause.Paused; }
+        get { return inputEnabled; }
     }
 
     // Start is called before the first frame update
@@ -73,7 +69,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public float GetLookInputsVertical()
     {
-        return InputAndUnpaused ? GetMouseOrStickLookAxis(MouseVertical, JoystickVertical, !InvertYAxis) : 0f;
+        return InputAndUnpaused ? GetMouseOrStickLookAxis(MouseVertical, JoystickVertical, !Hermes.MouseInvert) : 0f;
     }
 
 
@@ -154,7 +150,7 @@ public class PlayerInputHandler : MonoBehaviour
             i *= -1f;
 
         // apply sensitivity multiplier
-        i *= Hermes.mouseSensibility;
+        i *= Hermes.MouseSensibility;
 
         if (isGamepad)
             // since mouse input is already deltaTime-dependant, only scale input with frame time if it's coming from sticks

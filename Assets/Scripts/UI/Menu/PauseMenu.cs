@@ -5,6 +5,9 @@ public class PauseMenu : Menu
 {
     Pause pause;
 
+    [SerializeField]
+    protected Transitions transitions;
+
     new void Start()
     {
         pause = GetComponentInParent<Pause>();
@@ -17,19 +20,13 @@ public class PauseMenu : Menu
         pause.TogglePause(1);
     }
 
-    public void OptionsButton()
-    {
-        SubmenuButton(0);
-    }
-
     public void MenuButton()
     {
-        transitions.PlayTransition("ClosingTransition", OnTransitionEnded);
+        transitions.PlayTransition("ClosingTransition", TransitionEnded);
     }
 
-    protected override void TransitionEnded()
+    protected void TransitionEnded()
     {
-        Debug.Log("AAAA");
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
 }

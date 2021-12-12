@@ -616,6 +616,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1062692028787162023, guid: 841f9ba1308a29148b1bb12ad7586fcd,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1062692028961584553, guid: 841f9ba1308a29148b1bb12ad7586fcd,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -624,6 +629,11 @@ PrefabInstance:
     - target: {fileID: 1062692028961584553, guid: 841f9ba1308a29148b1bb12ad7586fcd,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1062692029067917639, guid: 841f9ba1308a29148b1bb12ad7586fcd,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1062692029330528889, guid: 841f9ba1308a29148b1bb12ad7586fcd,
@@ -640,6 +650,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1062692029979632179, guid: 841f9ba1308a29148b1bb12ad7586fcd,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1062692030082822753, guid: 841f9ba1308a29148b1bb12ad7586fcd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1062692030082822753, guid: 841f9ba1308a29148b1bb12ad7586fcd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SubmenuButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1062692030082822753, guid: 841f9ba1308a29148b1bb12ad7586fcd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Menu, Scripts.UI.Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1062692030082822753, guid: 841f9ba1308a29148b1bb12ad7586fcd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1062692030165330555, guid: 841f9ba1308a29148b1bb12ad7586fcd,
         type: 3}
