@@ -48,12 +48,12 @@ jobs:
       - name: Generate windows project
         uses: actions/upload-artifact@v2
         with:
-          name: Kinetic - Windows Build
+          name: Build
           path: build
 
       - name: Zip build
         run: |
-          pushd 'build/Kinetic - Windows Build'
+          pushd 'build/StandaloneWindows64'
           zip -r '../../Kinetic - Windows Build.zip' .
           popd
 
@@ -72,15 +72,16 @@ jobs:
           allowDirtyBuild: true
           versioning: Semantic
 
-      # Output 
-      - uses: actions/upload-artifact@v2
+      # Output
+      - name: Generate linux project
+        uses: actions/upload-artifact@v2
         with:
-          name: Kinetic - Linux Build
+          name: Build
           path: build
 
       - name: Zip build
         run: |
-          pushd 'build/Kinetic - Linux Build'
+          pushd 'build/StandaloneLinux64
           zip -r '../../Kinetic - Linux Build.zip' .
           popd
 
