@@ -53,8 +53,8 @@ jobs:
 
       - name: Zip build
         run: |
-          pushd build/Kinetic - Windows Build
-          zip -r ../../Kinetic - Windows Build.zip .
+          pushd 'build/Kinetic - Windows Build'
+          zip -r '../../Kinetic - Windows Build.zip' .
           popd
 
       - name: Release
@@ -80,8 +80,8 @@ jobs:
 
       - name: Zip build
         run: |
-          pushd build/Kinetic - Linux Build
-          zip -r ../../Kinetic - Linux Build.zip .
+          pushd 'build/Kinetic - Linux Build'
+          zip -r '../../Kinetic - Linux Build.zip' .
           popd
 
       - name: Release
