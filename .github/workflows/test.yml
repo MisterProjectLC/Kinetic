@@ -2,7 +2,7 @@ name: Test
 
 on:
   pull_request: {}
-  push: { branches: [main] }
+  push: { branches: [main, test] }
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
