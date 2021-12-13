@@ -1,0 +1,85 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+jobs:
+  build:
+    name: Build my project
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+    
+      # Cache Library
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library
+
+      # Test
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v2
+        with:
+          unityVersion: 2020.3.13f1
+
+      # Build Windows
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        with:
+          unityVersion: 2020.3.13f1
+          targetPlatform: StandaloneWindows64 
+          allowDirtyBuild: true
+
+      # Output 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: WindowsBuild
+          path: build
+
+      - name: Zip build
+        run: |
+          pushd build/Kinetic_Windows
+          zip -r ../../Kinetic_Windows.zip .
+          popd
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: Kinetic_Windows.zip
+          name: Release ${{ github.ref }}
+
+      # Build Linux
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        with:
+          unityVersion: 2020.3.13f1
+          targetPlatform: StandaloneLinux64
+          allowDirtyBuild: true
+
+      # Output 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: LinuxBuild
+          path: build
+
+      - name: Zip build
+        run: |
+          pushd build/Kinetic_Linux
+          zip -r ../../Kinetic_Linux.zip .
+          popd
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: Kinetic_Linux.zip
+          name: Release ${{ github.ref }}
