@@ -36,7 +36,7 @@ jobs:
           unityVersion: 2020.3.13f1
 
       # Build Windows
-      - name: Build project
+      - name: Build windows project
         uses: game-ci/unity-builder@v2
         with:
           unityVersion: 2020.3.13f1
@@ -44,26 +44,27 @@ jobs:
           allowDirtyBuild: true
           versioning: Semantic
 
-      # Output 
-      - uses: actions/upload-artifact@v2
+      # Output
+      - name: Generate windows project
+        uses: actions/upload-artifact@v2
         with:
-          name: WindowsBuild
+          name: Kinetic - Windows Build
           path: build
 
       - name: Zip build
         run: |
-          pushd build/Kinetic_Windows
-          zip -r ../../Kinetic_Windows.zip .
+          pushd build/Kinetic - Windows Build
+          zip -r ../../Kinetic - Windows Build.zip .
           popd
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: Kinetic_Windows.zip
-          name: Windows Release ${{ github.ref }}
+          files: Kinetic - Windows Build.zip
+          name: Windows Release ${{ steps.tag.outputs.tag }}
 
       # Build Linux
-      - name: Build project
+      - name: Build linux project
         uses: game-ci/unity-builder@v2
         with:
           unityVersion: 2020.3.13f1
@@ -74,17 +75,17 @@ jobs:
       # Output 
       - uses: actions/upload-artifact@v2
         with:
-          name: LinuxBuild
+          name: Kinetic - Linux Build
           path: build
 
       - name: Zip build
         run: |
-          pushd build/Kinetic_Linux
-          zip -r ../../Kinetic_Linux.zip .
+          pushd build/Kinetic - Linux Build
+          zip -r ../../Kinetic - Linux Build.zip .
           popd
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: Kinetic_Linux.zip
-          name: Linux Release ${{ github.ref }}
+          files: Kinetic - Linux Build.zip
+          name: Linux Release ${{ steps.tag.outputs.tag }}
