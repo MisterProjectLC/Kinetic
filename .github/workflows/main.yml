@@ -80,7 +80,7 @@ jobs:
 
       - name: Zip build
         run: |
-          pushd 'build/StandaloneLinux64
+          pushd 'build/StandaloneLinux64'
           zip -r '../../Kinetic - Linux Build.zip' .
           popd
 

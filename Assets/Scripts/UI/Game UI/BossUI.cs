@@ -18,6 +18,7 @@ public class BossUI : CustomUI
         SubtitleText.material.SetFloat("_PercentageVisible", 1f);
         oldPercentage = Percentage;
         GetComponent<Animator>().Play("BossIntroduction");
+        GetComponent<AudioSource>().Play();
     }
 
     private void Update()

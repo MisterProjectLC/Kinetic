@@ -30,6 +30,12 @@ public class MusicManager : MonoBehaviour
 
     private void Update()
     {
+        if (BaseMusic.time >= 118)
+        {
+            BaseMusic.time = 7;
+            StyleMusic.time = 7;
+        }
+
         StyleMusic.volume = Mathf.Lerp(StyleMusic.volume, targetVolume, Time.deltaTime);
     }
 
