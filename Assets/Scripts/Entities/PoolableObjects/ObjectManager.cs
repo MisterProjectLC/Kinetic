@@ -27,6 +27,7 @@ public class ObjectManager : MonoBehaviour
         Graviton,
         SuspendedCrate,
         PaybackExplosion,
+        ConveyorBeltDetail,
         Count
     }
 

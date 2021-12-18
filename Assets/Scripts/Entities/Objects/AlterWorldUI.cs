@@ -7,7 +7,7 @@ public class AlterWorldUI : MonoBehaviour
     GameTrigger gameTrigger;
 
     [SerializeField]
-    string newText;
+    LocalizedString newText;
 
     // Start is called before the first frame update
     void Awake()
@@ -21,6 +21,6 @@ public class AlterWorldUI : MonoBehaviour
 
     void AlterUI()
     {
-        GetComponentInChildren<Text>().text = newText;
+        GetComponentInChildren<Text>().text = newText.value;
     }
 }

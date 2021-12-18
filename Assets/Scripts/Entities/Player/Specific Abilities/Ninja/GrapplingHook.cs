@@ -45,6 +45,7 @@ public class GrapplingHook : Ability
 
     public void OnHookDestroy()
     {
+        GetComponentInParent<PlayerCharacterController>().GravityEnabled = true;
         if (!GetComponentInParent<StyleMeter>().Critical)
             SetOffCooldown();
     }

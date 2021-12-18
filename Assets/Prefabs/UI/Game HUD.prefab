@@ -2521,11 +2521,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CinematicMode: 0
+  TrailerMode: 0
   PlayObjects:
   - {fileID: 813385108184222268}
   - {fileID: 813385107326286287}
   - {fileID: 813385107483658637}
   - {fileID: 813385107057541781}
+  - {fileID: 1803332712031775348}
+  TrailerObjects:
+  - {fileID: 813385107483658637}
   - {fileID: 1803332712031775348}
   PausedObjects:
   - {fileID: 813385108314336403}
@@ -5367,7 +5371,7 @@ PrefabInstance:
     - target: {fileID: 3344931789231061486, guid: a1087d33028771b43aaf4e21033c78c7,
         type: 3}
       propertyPath: LabelText
-      value: E
+      value: Left Ctrl
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1087d33028771b43aaf4e21033c78c7, type: 3}
@@ -5439,7 +5443,7 @@ PrefabInstance:
     - target: {fileID: 3344931789231061486, guid: a1087d33028771b43aaf4e21033c78c7,
         type: 3}
       propertyPath: LabelText
-      value: E
+      value: Left Ctrl
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1087d33028771b43aaf4e21033c78c7, type: 3}
@@ -6032,7 +6036,7 @@ PrefabInstance:
     - target: {fileID: 3344931789231061486, guid: a1087d33028771b43aaf4e21033c78c7,
         type: 3}
       propertyPath: LabelText
-      value: E
+      value: Left Ctrl
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1087d33028771b43aaf4e21033c78c7, type: 3}

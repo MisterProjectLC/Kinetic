@@ -11,6 +11,12 @@ public class Button : MonoBehaviour
 
     GameTrigger trigger;
 
+    private void Awake()
+    {
+        if (GetComponent<UniqueID>())
+            GetComponent<UniqueID>().OnObjectRegistered += trigger.Activate;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

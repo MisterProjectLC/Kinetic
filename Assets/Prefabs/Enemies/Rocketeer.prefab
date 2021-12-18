@@ -1411,6 +1411,7 @@ MonoBehaviour:
   turnSpeed: 75
   turnVertical: 0
   partThatMoves: {fileID: 1849463394348587288}
+  TargetPosition: {fileID: 0}
 --- !u!114 &6550661232198632401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1469,6 +1470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75c57e142a6f65408396fca57bfe12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 1
 --- !u!114 &2832283616870963803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1642,6 +1644,7 @@ MonoBehaviour:
   turnSpeed: 100
   turnVertical: 1
   partThatMoves: {fileID: 4469185147522742433}
+  TargetPosition: {fileID: 0}
 --- !u!1 &5051976967370552328
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,16 +5,18 @@ public class UniqueID : MonoBehaviour
 {
     public string ID { get; private set; }
 
+    [SerializeField]
+    MySceneManager.Lifetime lifetime = MySceneManager.Lifetime.ReturnOnGameover; 
+
     public UnityAction OnObjectRegistered;
 
     // Start is called before the first frame update
     void Awake()
     {
         ID = transform.position.sqrMagnitude + "-" + name + "-" + transform.GetSiblingIndex();
-
     }
 
-    private void Start()
+    void Start()
     {
         if (MySceneManager.MSM.ObjectRegistered(ID, gameObject.scene.name))
         {
@@ -23,10 +25,9 @@ public class UniqueID : MonoBehaviour
         }
     }
 
-
     public void RegisterID()
     {
         //Debug.Log("Registered " + ID);
-        MySceneManager.MSM.RegisterObject(ID, gameObject.scene.name);
+        MySceneManager.MSM.RegisterObject(ID, gameObject.scene.name, lifetime);
     }
 }

@@ -15,14 +15,17 @@ public class SaveManager : MonoBehaviour
         {
             formatter.Serialize(fileStream, objectToSave);
         }
-        Debug.Log("saved!");
+        Debug.Log("Saved file!");
     }
 
     public static T Load<T>(string key)
     {
         T returnValue = default(T);
         if (!SaveExists(key))
+        {
+            Debug.Log("Return value doesn't exists");
             return returnValue;
+        }
 
         string path = Application.persistentDataPath + extraDirectory;
         BinaryFormatter formatter = new BinaryFormatter();

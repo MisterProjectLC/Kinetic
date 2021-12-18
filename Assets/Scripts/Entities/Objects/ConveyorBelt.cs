@@ -46,6 +46,7 @@ public class ConveyorBelt : MonoBehaviour
             if ((SpawnPosition - DespawnPosition).magnitude < (SpawnPosition - Details[i].transform.position).magnitude)
             {
                 Destroy(Details[i]);
+                //ObjectManager.OM.EraseObject(Details[i].GetComponent<Poolable>());
                 Details.RemoveAt(i);
                 i--;
             }
@@ -56,6 +57,10 @@ public class ConveyorBelt : MonoBehaviour
         if (clock > SpawnTime) {
             clock = 0f;
 
+            //GameObject instance = ObjectManager.OM.SpawnObjectFromPool(Detail.GetComponent<Poolable>().Type, Detail);
+            //instance.transform.position = SpawnPosition;
+            //instance.transform.rotation = transform.rotation * Quaternion.Euler(0f, 90f, 0f);
+            //instance.transform.parent = transform;
             GameObject instance = Instantiate(Detail, SpawnPosition, transform.rotation * Quaternion.Euler(0f, 90f, 0f), transform);
             Details.Add(instance);
         }

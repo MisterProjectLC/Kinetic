@@ -26,6 +26,7 @@ public class MainMenu : Menu
         quitting = false;
         Hermes.SpawnPosition = Vector3.zero;
         Hermes.SpawnAreas = new List<string>() { "L_Engi_Tutorial" };
+        Hermes.newGame = true;
         Hermes.SpawnAbilities.Clear();
         transitions.PlayTransition("ClosingTransition", TransitionEnded);
     }

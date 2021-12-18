@@ -13,9 +13,6 @@ public class MusicManager : MonoBehaviour
     AudioSource StyleMusic;
     float targetVolume = 1f;
 
-    StyleMeter styleMeter;
-
-
     private void Awake()
     {
         MM = this;
@@ -24,9 +21,9 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        styleMeter = ActorsManager.AM.GetPlayer().GetComponent<StyleMeter>();
         ActorsManager.AM.GetPlayer().GetComponent<StyleMeter>().OnCritical += OnCritical;
     }
+
 
     private void Update()
     {

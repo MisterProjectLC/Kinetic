@@ -51,8 +51,6 @@ public class Hook : MonoBehaviour
                 gameObject.SetActive(false);
             else
                 transform.position = hookedObject.transform.position + relativePosition;
-            
-
         }
     }
 
@@ -69,6 +67,8 @@ public class Hook : MonoBehaviour
         GetComponent<AudioSource>().Play();
         //projectile.Shooter.GetComponent<PlayerCharacterController>().MoveVelocity = (transform.position -
         //        projectile.Shooter.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position).normalized * PullForce/10;
-        projectile.Shooter.GetComponent<PlayerCharacterController>().GravityEnabled = false;
+
+        if (gameObject.activeInHierarchy)
+            projectile.Shooter.GetComponent<PlayerCharacterController>().GravityEnabled = false;
     }
 }

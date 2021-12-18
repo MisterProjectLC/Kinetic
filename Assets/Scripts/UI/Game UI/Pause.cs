@@ -15,6 +15,9 @@ public class Pause : MonoBehaviour
     [SerializeField]
     bool CinematicMode = false;
 
+    [SerializeField]
+    bool TrailerMode = false;
+
     public static bool Paused { get; private set; } = false;
     const string PauseB = "Pause";
 
@@ -22,7 +25,10 @@ public class Pause : MonoBehaviour
     [Tooltip("Shown when playing")]
     public GameObject[] PlayObjects;
 
-    [Header("Shown when paused")]
+    [Tooltip("Shown when playing in trailer")]
+    public GameObject[] TrailerObjects;
+
+    [Tooltip("Shown when paused")]
     public GameObject[] PausedObjects;
 
     float oldTimeScale = 1f;
@@ -79,7 +85,10 @@ public class Pause : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = oldTimeScale;
             PausedObjects[menuShown].SetActive(false);
-            if (!CinematicMode)
+            if (TrailerMode)
+                foreach (GameObject GO in TrailerObjects)
+                    GO.SetActive(true);
+            else if (!CinematicMode)
                 foreach (GameObject GO in PlayObjects)
                     GO.SetActive(true);
         }

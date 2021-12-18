@@ -9,9 +9,24 @@ public class MySceneManager : MonoBehaviour
     [SerializeField]
     string firstScene = "";
 
+    public enum Lifetime
+    {
+        ReturnOnGameover,
+        ReturnOnQuit,
+        Permanent
+    }
+
+
     private void Awake()
     {
         MSM = this;
+
+        if (Hermes.newGame)
+        {
+            Hermes.newGame = false;
+            foreach (ScenePartLoader loader in transform.GetComponentsInChildren<ScenePartLoader>())
+                SaveManager.Save(new List<string>(), loader.gameObject.name);
+        }
     }
 
     private void Start()
@@ -89,12 +104,12 @@ public class MySceneManager : MonoBehaviour
     }
 
 
-    public void RegisterObject(string id, string scene)
+    public void RegisterObject(string id, string scene, Lifetime lifetime)
     {
         Transform loader = transform.Find(scene);
 
         if (loader)
-            loader.GetComponent<ScenePartLoader>().RegisterObject(id);
+            loader.GetComponent<ScenePartLoader>().RegisterObject(id, lifetime);
     }
 
 

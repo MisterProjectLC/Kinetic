@@ -26,6 +26,7 @@ public class ScenePartLoader : MonoBehaviour
     List<string> RequiredScenes;
 
     List<string> RegisteredObjects = new List<string>();
+    List<string> PerpetualObjects = new List<string>();
 
     void Start()
     {
@@ -56,8 +57,18 @@ public class ScenePartLoader : MonoBehaviour
                 TriggerCheck();
                 break;
         }
-
     }
+
+    private void OnDisable()
+    {
+        SaveManager.Save(PerpetualObjects, gameObject.name);
+    }
+
+    private void OnDestroy()
+    {
+        SaveManager.Save(PerpetualObjects, gameObject.name);
+    }
+
 
     void DistanceCheck()
     {
@@ -78,9 +89,15 @@ public class ScenePartLoader : MonoBehaviour
     }
 
 
-    public void RegisterObject(string id)
+    public void RegisterObject(string id, MySceneManager.Lifetime lifetime)
     {
         RegisteredObjects.Add(id);
+
+        if (lifetime >= MySceneManager.Lifetime.ReturnOnQuit)
+        {
+            Debug.Log("Added to Perpetual: " + id);
+            PerpetualObjects.Add(id);
+        }
     }
 
     public bool CheckObject(string id)
@@ -91,33 +108,42 @@ public class ScenePartLoader : MonoBehaviour
 
     public void LoadScene()
     {
-        if (!isLoaded)
+        if (isLoaded)
+            return;
+        isLoaded = true;
+
+        // Load saved objects
+        Debug.Log("LoadScene");
+        if (RegisteredObjects.Count <= 0)
         {
-            //RegisteredObjects = SaveManager.Load<List<string>>(gameObject.name);
-            if (RegisteredObjects == default(List<string>))
-                RegisteredObjects = new List<string>();
-            isLoaded = true;
-
-            if (Checkpoint)
-            {
-                Hermes.SpawnPosition = CheckpointPosition.position;
-                List<string> s = new List<string>(RequiredScenes);
-                s.Insert(0, gameObject.name);
-                Hermes.SpawnAreas = s;
-            }
-
-            SceneManager.LoadScene(gameObject.name, LoadSceneMode.Additive);
+            Debug.Log("Loading objects");
+            RegisteredObjects = SaveManager.Load<List<string>>(gameObject.name);
+            foreach (string ob in RegisteredObjects)
+                Debug.Log("Loading objects: " + ob);
         }
+
+        // Save checkpoint
+        if (Checkpoint)
+        {
+            Hermes.SpawnPosition = CheckpointPosition.position;
+            List<string> s = new List<string>(RequiredScenes);
+            s.Insert(0, gameObject.name);
+            Hermes.SpawnAreas = s;
+        }
+
+        SceneManager.LoadScene(gameObject.name, LoadSceneMode.Additive);
     }
 
     public void UnLoadScene()
     {
-        if (isLoaded)
-        {
-            //SaveManager.Save(RegisteredObjects, gameObject.name);
-            SceneManager.UnloadSceneAsync(gameObject.name);
-            isLoaded = false;
-        }
+        if (!isLoaded)
+            return;
+        isLoaded = false;
+
+        foreach (string ob in PerpetualObjects)
+            Debug.Log("Saving objects: " + ob);
+        SaveManager.Save(PerpetualObjects, gameObject.name);
+        SceneManager.UnloadSceneAsync(gameObject.name);
     }
 
     private void OnTriggerEnter(Collider other)

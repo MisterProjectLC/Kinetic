@@ -56,7 +56,6 @@ public class Hermes : MonoBehaviour
         }
     }
 
-
     // This will just run on a dummy instance whose only job is literally just to load stuff from the PlayerPrefs
     private void Awake()
     {
@@ -82,4 +81,5 @@ public class Hermes : MonoBehaviour
     }
     public static List<SavedAbility> SpawnAbilities = new List<SavedAbility>();
 
+    public static bool newGame = false;
 }
