@@ -27,7 +27,7 @@ public class MusicManager : MonoBehaviour
 
     private void Update()
     {
-        if (BaseMusic.time >= 118)
+        if (BaseMusic.time >= 120 && targetVolume == 0f)
         {
             BaseMusic.time = 7;
             StyleMusic.time = 7;
