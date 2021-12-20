@@ -17,66 +17,8 @@ public class LocalizationSystem
     static Dictionary<Language, Dictionary<string, string>> masterDict;
     public static UnityAction OnLanguageUpdate;
     static CSVLoader csvLoader = null;
-
-
     static bool IsInit = false;
-    static void Init()
-    {
-        IsInit = true;
-        csvLoader = new CSVLoader("localization");
-        UpdateDicts();
-    }
 
-    static void UpdateDicts()
-    {
-        masterDict = new Dictionary<Language, Dictionary<string, string>>();
-        for (Language i = Language._First+1; i < Language._Last; i++)
-            masterDict.Add(i, csvLoader.GetDictionaryColumn((int)i));
-    }
-
-
-    public static void Add(string key, int lang, string value)
-    {
-        if (value.Contains("\""))
-            value.Replace('"', '\"');
-
-        if (!IsInit)
-            Init();
-
-        // Add brand new line
-        if (!csvLoader.LineExists(key))
-        {
-            string[] values = new string[lang];
-            for (int i = 0; i < lang - 1; i++)
-                values[i] = "";
-            values[lang - 1] = value;
-
-            csvLoader.AddLine(key, values);
-        }
-        
-        // Insert into existing line
-        else
-            csvLoader.SetCell(key, lang, value);
-
-        csvLoader.Load();
-        UpdateDicts();
-    }
-
-    public static void Replace(string key, int lang, string value)
-    {
-        if (value.Contains("\n"))
-            value.Replace("\n", "\\n");
-        if (value.Contains("\""))
-            value.Replace('"', '\"');
-
-        if (!IsInit)
-            Init();
-
-        csvLoader.SetCell(key, lang, value);
-        csvLoader.Load();
-        UpdateDicts();
-
-    }
 
     public static string GetLocalizedText(string key)
     {
@@ -109,4 +51,63 @@ public class LocalizationSystem
         CurrentLanguage = newLanguage;
         OnLanguageUpdate?.Invoke();
     }
+
+    static void Init()
+    {
+        IsInit = true;
+        csvLoader = new CSVLoader("localization");
+        UpdateDicts();
+    }
+
+    static void UpdateDicts()
+    {
+        masterDict = new Dictionary<Language, Dictionary<string, string>>();
+        for (Language i = Language._First+1; i < Language._Last; i++)
+            masterDict.Add(i, csvLoader.GetDictionaryColumn((int)i));
+    }
+
+#if UNITY_EDITOR
+    public static void Add(string key, int lang, string value)
+    {
+        if (value.Contains("\""))
+            value.Replace('"', '\"');
+
+        if (!IsInit)
+            Init();
+
+        // Add brand new line
+        if (!csvLoader.LineExists(key))
+        {
+            string[] values = new string[lang];
+            for (int i = 0; i < lang - 1; i++)
+                values[i] = "";
+            values[lang - 1] = value;
+
+            csvLoader.AddLine(key, values);
+        }
+
+        // Insert into existing line
+        else
+            csvLoader.SetCell(key, lang, value);
+
+        csvLoader.Load();
+        UpdateDicts();
+    }
+
+    public static void Replace(string key, int lang, string value)
+    {
+        if (value.Contains("\n"))
+            value.Replace("\n", "\\n");
+        if (value.Contains("\""))
+            value.Replace('"', '\"');
+
+        if (!IsInit)
+            Init();
+
+        csvLoader.SetCell(key, lang, value);
+        csvLoader.Load();
+        UpdateDicts();
+
+    }
+#endif
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
+#if UNITY_EDITOR
 public class TextLocalizerSearchWindow : EditorWindow
 {
     public string search;
@@ -102,3 +103,4 @@ public class TextLocalizerEditWindow : EditorWindow
         maxSize = minSize;
     }
 }
+#endif

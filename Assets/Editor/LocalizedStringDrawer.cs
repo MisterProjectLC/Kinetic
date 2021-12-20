@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 // IngredientDrawerUIE
 [CustomPropertyDrawer(typeof(LocalizedString))]
 public class LocalizedStringDrawer : PropertyDrawer
@@ -69,3 +70,4 @@ public class LocalizedStringDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 }
+#endif

@@ -29,7 +29,7 @@ public class AbilitiesUI : MonoBehaviour
             Ability currentAbility = loadoutManager.GetCurrentLoadout()[i];
             if (currentAbility)
                 SkillImages[i].transform.GetChild(0).GetComponent<RectTransform>().sizeDelta =
-                    AbilitySize * new Vector2(1f - (currentAbility.Timer/currentAbility.Cooldown), 1f);
+                    AbilitySize * new Vector2(Mathf.Clamp01(1f - (currentAbility.Timer/currentAbility.Cooldown)), 1f);
         }
     }
 
@@ -46,7 +46,6 @@ public class AbilitiesUI : MonoBehaviour
                 image.color = new Color(color.r, color.g, color.b, 1);
             else
                 image.color = new Color(color.r, color.g, color.b, 0.4f);
-
         }   
     }
 

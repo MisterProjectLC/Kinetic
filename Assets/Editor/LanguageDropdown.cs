@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class LanguageDropdown
 {
     public LocalizationSystem.Language lang;
@@ -35,3 +36,4 @@ public class LanguageDropdown
         menu.AddItem(new GUIContent(menuPath), this.lang.Equals(lang), OnLanguageSelected, lang);
     }
 }
+#endif
