@@ -4815,7 +4815,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00f487b67257359499b13afbc09fc8d1, type: 2}
+  - {fileID: 2100000, guid: 74ac3b09cd76a2c4a88764e405ba129c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4921,7 +4921,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00f487b67257359499b13afbc09fc8d1, type: 2}
+  - {fileID: 2100000, guid: 74ac3b09cd76a2c4a88764e405ba129c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5041,7 +5041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 10
-  alreadyInitialized: 0
+  AlreadyInitialized: 0
 --- !u!114 &1309693636451525200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5055,6 +5055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
+  Agressor: {fileID: 0}
 --- !u!1 &8842563647958113655
 GameObject:
   m_ObjectHideFlags: 0

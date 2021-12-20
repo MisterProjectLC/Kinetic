@@ -59,7 +59,7 @@ MonoBehaviour:
   MaxSpreadAngle: 2
   BulletCount: 1
   Automatic: 1
-  FireCooldown: 0.02
+  FireCooldown: 0.015
   InitialFireCooldown: 0
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 2
+  Damage: 1
   Agressor: {fileID: 0}
 --- !u!114 &2035550557693848252
 MonoBehaviour:

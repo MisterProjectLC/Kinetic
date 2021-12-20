@@ -7,6 +7,12 @@ public class RocketLauncherPassive : MonoBehaviour
     ProjectileWeapon weapon;
     Ability ability;
 
+    [SerializeField]
+    float quickCooldown = 0.2f;
+
+    [SerializeField]
+    float slowCooldown = 1.2f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +23,7 @@ public class RocketLauncherPassive : MonoBehaviour
 
     void OnCritical(bool critical)
     {
-        float newCooldown = critical ? 0.2f : 1f;
+        float newCooldown = critical ? quickCooldown : slowCooldown;
         weapon.FireCooldown = newCooldown;
         ability.Cooldown = newCooldown;
     }

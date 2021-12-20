@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6fdf4473511d041b1aa747a562b39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 25
+  Radius: 13
   CenterRate: 0
   FallOffRate: 1
   NeuteredRate: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Knockback: -60
+  Knockback: -30
   Effects: []
 --- !u!114 &764313433112388447
 MonoBehaviour:
@@ -4954,7 +4954,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00f487b67257359499b13afbc09fc8d1, type: 2}
+  - {fileID: 2100000, guid: 74ac3b09cd76a2c4a88764e405ba129c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
