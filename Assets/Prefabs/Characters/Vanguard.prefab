@@ -1991,7 +1991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a82277a2105c847809c53e10900208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InvertYAxis: 0
   InvertXAxis: 0
 --- !u!114 &3804878940635823621
 MonoBehaviour:
@@ -2006,7 +2005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 8953040495514145204}
-  GroundCheckDistance: 1
+  GroundCheckDistance: 2
+  GroundCheckDistanceInAir: 0.5
   SideGroundCheckDistance: 0.15
   GroundCheckLayers:
     serializedVersion: 2
@@ -2134,18 +2134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3682afd0a9a56fd44b31d01a7b27869f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CriticalPercent: 0.8
-  DepleteRate: 0.25
   DrainActive: 0
-  MultiMaxTime: 0.25
-  ComboMaxTime: 3
-  MovementSpeed: 25
-  KillGain: 0.5
-  ChainGain: 1.5
-  MultiGain: 2
-  IndirectGain: 5
-  VarietyGain: 0.5
-  MovementGain: 0.5
+  config: {fileID: 11400000, guid: 757d2325b58a0f14488c7c8b4c0dc1e9, type: 2}
 --- !u!143 &3891292215102862298
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2158,7 +2148,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.8
-  m_Radius: 0.5
+  m_Radius: 1
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.001

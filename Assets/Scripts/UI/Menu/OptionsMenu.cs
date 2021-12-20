@@ -28,6 +28,8 @@ public class OptionsMenu : Menu
     [SerializeField]
     Slider mouseSlider;
     [SerializeField]
+    Slider FOVSlider;
+    [SerializeField]
     Toggle outlineToggle;
     [SerializeField]
     Toggle mouseToggle;
@@ -44,6 +46,9 @@ public class OptionsMenu : Menu
 
         mouseSlider.onValueChanged.AddListener(OnMouseUpdate);
         mouseSlider.value = Hermes.MouseSensibility;
+
+        FOVSlider.onValueChanged.AddListener(OnFOVUpdate);
+        FOVSlider.value = Hermes.FOV;
 
         outlineToggle.onValueChanged.AddListener(OnOutlineToggle);
         outlineToggle.isOn = Hermes.OutlineEnabled;
@@ -70,6 +75,11 @@ public class OptionsMenu : Menu
     void OnMouseUpdate(float value)
     {
         Hermes.MouseSensibility = value;
+    }
+
+    void OnFOVUpdate(float value)
+    {
+        Hermes.FOV = value;
     }
 
     void OnOutlineToggle(bool val)

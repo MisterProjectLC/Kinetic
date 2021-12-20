@@ -1273,6 +1273,7 @@ MonoBehaviour:
   VerticalSpeed: 0.8
   MotorSpeed: 18
   MinimumDistance: 50
+  myTrigger: {fileID: 0}
 --- !u!114 &3990458549617686974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1344,6 +1345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75c57e142a6f65408396fca57bfe12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 0
 --- !u!114 &668053113924364249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1356,7 +1358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153d1fc240f4fa141b91c44e0af85158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StylePerDamage: 0.25
+  StylePerDamage: 0
+  StyleOnCritical: 3
   StyleOnKill: 15
 --- !u!114 &510608392103380544
 MonoBehaviour:
@@ -9285,7 +9288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5470395695732672787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 11.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 658395701032597669}

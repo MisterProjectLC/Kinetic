@@ -26,7 +26,6 @@ public class TextLocalizerSearchWindow : EditorWindow
         dict = LocalizationSystem.GetLanguageDict(langDrop.lang);
     }
 
-
     public void OnGUI()
     {
         EditorGUILayout.BeginHorizontal();

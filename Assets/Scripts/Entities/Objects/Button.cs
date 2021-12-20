@@ -13,14 +13,10 @@ public class Button : MonoBehaviour
 
     private void Awake()
     {
+        trigger = GetComponent<GameTrigger>();
         if (GetComponent<UniqueID>())
             GetComponent<UniqueID>().OnObjectRegistered += trigger.Activate;
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        trigger = GetComponent<GameTrigger>();
         if (trigger.blockers.Count > 0)
             gameObject.GetComponentInChildren<Renderer>().material = disabledMaterial;
 
@@ -29,6 +25,7 @@ public class Button : MonoBehaviour
         trigger.OnFreeOfBlockers += Enable;
         trigger.OnResetOneshot += Enable;
     }
+
 
     private void Disable()
     {

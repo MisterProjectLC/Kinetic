@@ -11753,6 +11753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75c57e142a6f65408396fca57bfe12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 0
 --- !u!43 &355614522
 Mesh:
   m_ObjectHideFlags: 0
@@ -12864,6 +12865,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MinDistance
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890670821586932367, guid: 44a08eec159b02745bc0e4703be1434c,
+        type: 3}
+      propertyPath: Key.key
+      value: weldchamber_past
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a08eec159b02745bc0e4703be1434c, type: 3}
@@ -21540,6 +21546,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MinDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890670821586932367, guid: 44a08eec159b02745bc0e4703be1434c,
+        type: 3}
+      propertyPath: Key.key
+      value: weldchamber_thing
       objectReference: {fileID: 0}
     - target: {fileID: 7486300429757069430, guid: 44a08eec159b02745bc0e4703be1434c,
         type: 3}
@@ -55791,6 +55802,11 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4890670821586932367, guid: 44a08eec159b02745bc0e4703be1434c,
+        type: 3}
+      propertyPath: Key.key
+      value: weldchamber_just
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a08eec159b02745bc0e4703be1434c, type: 3}
 --- !u!224 &1855253061 stripped
@@ -60001,6 +60017,11 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 4890670821586932367, guid: 44a08eec159b02745bc0e4703be1434c,
+        type: 3}
+      propertyPath: Key.key
+      value: thanks_for_playing
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a08eec159b02745bc0e4703be1434c, type: 3}
 --- !u!224 &2015700932 stripped
@@ -60448,6 +60469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MinDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890670821586932367, guid: 44a08eec159b02745bc0e4703be1434c,
+        type: 3}
+      propertyPath: Key.key
+      value: weldchamber_kilroy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a08eec159b02745bc0e4703be1434c, type: 3}

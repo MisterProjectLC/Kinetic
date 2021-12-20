@@ -11,6 +11,8 @@ public class Attack : MonoBehaviour
     [HideInInspector]
     public UnityAction<GameObject, float, int> OnAttack;
     [HideInInspector]
+    public UnityAction<Health> OnCritical;
+    [HideInInspector]
     public UnityAction<Attack, GameObject, bool> OnKill;
     [HideInInspector]
     public Actor Agressor;
@@ -35,6 +37,7 @@ public class Attack : MonoBehaviour
         //Debug.Log("Cloning from " + gameObject.name + " to " + clone.gameObject.name);
 
         clone.OnAttack += OnAttack;
+        clone.OnCritical += OnCritical;
         clone.OnKill += OnKill;
     }
 }

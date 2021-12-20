@@ -34,33 +34,11 @@ public class StyleMeter : MonoBehaviour
     [SerializeField]
     public float JuiceMax { get; private set; } = 10f;
 
-    [SerializeField]
-    float CriticalPercent = 0.8f;
-    [SerializeField]
-    float DepleteRate = 0.25f;
     [HideInInspector]
     public bool DrainActive = false;
 
     [SerializeField]
-    float MultiMaxTime = 0.25f;
-    [SerializeField]
-    float ComboMaxTime = 3f;
-    [SerializeField]
-    float MovementSpeed = 25f;
-
-    [Tooltip("Gain amounts")]
-    [SerializeField]
-    float KillGain = 0.5f;
-    [SerializeField]
-    float ChainGain = 1.5f;
-    [SerializeField]
-    float MultiGain = 2f;
-    [SerializeField]
-    float IndirectGain = 5f;
-    [SerializeField]
-    float VarietyGain = 1f;
-    [SerializeField]
-    float MovementGain = 0.5f;
+    SlowdownConfig config;
 
     float movementClock = 0f;
     float clock = 0f;
@@ -72,13 +50,13 @@ public class StyleMeter : MonoBehaviour
     {
         player = GetComponentInParent<PlayerCharacterController>();
 
-        clock = ComboMaxTime;
+        clock = config.ComboMaxTime;
         SetJuiceLeft(JuiceMax);
         health = GetComponentInParent<Health>();
         health.OnDamageAttack += OnDamage;
         foreach (Attack attack in player.GetComponentsInChildren<Attack>())
         {
-            attack.OnAttack += EnemyHit;
+            attack.OnCritical += EnemyCritical;
             attack.OnKill += (Attack a, GameObject g, bool b) => StyleKill(g, b);
         }
 
@@ -90,10 +68,10 @@ public class StyleMeter : MonoBehaviour
     {
         // Decay
         if (JuiceLeft > 0f && DrainActive)
-            SpendJuice(Time.deltaTime * DepleteRate);
+            SpendJuice(Time.deltaTime * config.DepleteRate);
 
         // Combo time
-        if (clock < ComboMaxTime)
+        if (clock < config.CombatMaxTime)
             clock += Time.deltaTime;
 
         // Movement gain
@@ -101,8 +79,8 @@ public class StyleMeter : MonoBehaviour
         if (movementClock > 1f)
         {
             movementClock = 0f;
-            if (player.MoveVelocity.magnitude > MovementSpeed)
-                GainJuice(MovementGain, (int)Categories.Movement, "Movement");
+            if (player.MoveVelocity.magnitude > config.MovementSpeed)
+                GainJuice(config.MovementGain, (int)Categories.Movement, "Movement");
         }
 
         // Airborne bonus
@@ -126,11 +104,12 @@ public class StyleMeter : MonoBehaviour
             }
         lastAbilities.Add(ability);
 
-        if (clock < ComboMaxTime)
-            GainJuice(VarietyGain * ((lastAbilities.Count - 1) - index), (int)Categories.Variety, "Variety");
+        if (clock < config.CombatMaxTime)
+            GainJuice(config.VarietyGain * ((lastAbilities.Count - 1) - index), (int)Categories.Variety, "Variety");
     }
 
 
+    /*
     void EnemyHit(GameObject target, float multiplier, int damage)
     {
         StyleCrate styleCrate = target.GetComponent<Damageable>().GetHealth().GetComponent<StyleCrate>();
@@ -141,6 +120,15 @@ public class StyleMeter : MonoBehaviour
                 (int)Categories.Damage, "Damage");
         }
     }
+    */
+
+    void EnemyCritical(Health target)
+    {
+        StyleCrate styleCrate = target.GetComponent<StyleCrate>();
+
+        if (styleCrate && styleCrate.StyleOnCritical != 0f)
+            GainJuice(styleCrate.StyleOnCritical, (int)Categories.Damage, "Damage");
+    }
 
     void StyleKill(GameObject target, bool indirect)
     {
@@ -148,7 +136,7 @@ public class StyleMeter : MonoBehaviour
 
         if (indirect)
         {
-            GainJuice(IndirectGain, (int)Categories.IndirectKill, "Trap Kill");
+            GainJuice(config.IndirectGain, (int)Categories.IndirectKill, "Trap Kill");
             return;
         }
 
@@ -156,10 +144,10 @@ public class StyleMeter : MonoBehaviour
             return;
 
         GainJuice(target.GetComponent<StyleCrate>().StyleOnKill, (int)Categories.Kill, "Kill");
-        if (clock < MultiMaxTime)
-            GainJuice(MultiGain, (int)Categories.Multikill, "Multikill");
-        else if (clock < ComboMaxTime)
-            GainJuice(ChainGain, (int)Categories.ChainKill, "Chain Kill");
+        if (clock < config.MultiMaxTime)
+            GainJuice(config.MultiGain, (int)Categories.Multikill, "Multikill");
+        else if (clock < config.ComboMaxTime)
+            GainJuice(config.ChainGain, (int)Categories.ChainKill, "Chain Kill");
 
         clock = 0f;
     }
@@ -167,7 +155,7 @@ public class StyleMeter : MonoBehaviour
     void OnDamage(int damage, Attack attack)
     {
         if (attack == null || attack.Agressor != GetComponent<Actor>())
-            SpendJuice(damage * 4, (int)Categories.Hurt, "Hurt");
+            SpendJuice(damage * config.DamageLoss, (int)Categories.Hurt, "Hurt");
     }
 
 
@@ -207,7 +195,7 @@ public class StyleMeter : MonoBehaviour
         OnUpdate?.Invoke();
 
         bool lastCritical = Critical;
-        Critical = juiceLeft > JuiceMax * CriticalPercent;
+        Critical = juiceLeft > JuiceMax * config.CriticalPercent;
         if (lastCritical != Critical)
             OnCritical?.Invoke(Critical);
     }
@@ -215,6 +203,6 @@ public class StyleMeter : MonoBehaviour
 
     public float GetCriticalLevel()
     {
-        return CriticalPercent * JuiceMax;
+        return config.CriticalPercent * JuiceMax;
     }
 }

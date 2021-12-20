@@ -1010,6 +1010,7 @@ MonoBehaviour:
   VerticalSpeed: 0.4
   MotorSpeed: 13
   MinimumDistance: 12
+  myTrigger: {fileID: 0}
 --- !u!114 &2590546209024311811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,6 +1027,7 @@ MonoBehaviour:
   turnSpeed: 200
   turnVertical: 1
   partThatMoves: {fileID: 0}
+  TargetPosition: {fileID: 0}
 --- !u!114 &4508045823689246182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,6 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75c57e142a6f65408396fca57bfe12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 1
 --- !u!114 &6348019847863000368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,7 +1053,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153d1fc240f4fa141b91c44e0af85158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StylePerDamage: 0.5
+  StylePerDamage: 0
+  StyleOnCritical: 3
   StyleOnKill: 5
 --- !u!82 &7085931297983018094
 AudioSource:

@@ -35,6 +35,17 @@ public class Hermes : MonoBehaviour
         }
     }
 
+    static float fov = 75f;
+    public static float FOV
+    {
+        get { return fov; }
+        set
+        {
+            PlayerPrefs.SetFloat("FOV", value);
+            fov = value;
+        }
+    }
+
     static bool mouseInvert = false;
     public static bool MouseInvert { 
         get { return mouseInvert; }

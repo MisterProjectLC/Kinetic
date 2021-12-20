@@ -91,17 +91,36 @@ public class LevelUpSystem : MonoBehaviour
                     totalSlots[ability.loadout != -1 ? ability.loadout : 3].slots[ability.slot].GetComponent<DropSlot>().
                         OnDrop(loadoutOption.gameObject);
                     optionsObtained.Add(loadoutOption);
-                    continue;
                 }
-
-
-                GO.SetActive(false);
-                if (option.prerequisiteAbilities.Count > 0)
-                    optionsLocked.Add(loadoutOption);
                 else
-                    optionsBank.Add(loadoutOption);
+                {
+                    GO.SetActive(false);
+                    if (option.prerequisiteAbilities.Count > 0)
+                        optionsLocked.Add(loadoutOption);
+                    else
+                        optionsBank.Add(loadoutOption);
+                }
             }
         }
+
+        // Fix for secondary abilities
+        foreach (Loadout thisLoadout in totalSlots)
+            foreach (RectTransform slot in thisLoadout.slots)
+            {
+                DragDrop dragDrop = slot.GetComponent<DropSlot>().InsertedDragDrop;
+                if (!dragDrop)
+                    continue;
+                BigLoadoutOption bigOption = dragDrop.GetComponent<BigLoadoutOption>();
+                if (!bigOption)
+                    continue;
+
+                int nextSlotIndex = slot.GetComponent<LoadoutSlot>().AbilityNumber + 1;
+                if (nextSlotIndex >= thisLoadout.slots.Count || !thisLoadout.slots[nextSlotIndex].GetComponent<DropSlot>().InsertedDragDrop)
+                    continue;
+
+                bigOption.OnSecondaryInsert(thisLoadout.slots[nextSlotIndex].GetComponent<DropSlot>().InsertedDragDrop.GetComponent<DragDrop>());
+            }
+        
     }
 
     GameObject GenerateOptionInstance(LoadoutManager.Option option)

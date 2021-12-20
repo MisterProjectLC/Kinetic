@@ -10762,6 +10762,11 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4890670821586932367, guid: 44a08eec159b02745bc0e4703be1434c,
+        type: 3}
+      propertyPath: Key.key
+      value: storage_heal
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a08eec159b02745bc0e4703be1434c, type: 3}
 --- !u!224 &511413645 stripped
@@ -11833,6 +11838,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MinDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890670821586932367, guid: 44a08eec159b02745bc0e4703be1434c,
+        type: 3}
+      propertyPath: Key.key
+      value: storage_move
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a08eec159b02745bc0e4703be1434c, type: 3}
@@ -26030,7 +26040,7 @@ PrefabInstance:
     - target: {fileID: 3725885643550760467, guid: 44a08eec159b02745bc0e4703be1434c,
         type: 3}
       propertyPath: m_Name
-      value: Gate locked
+      value: Find button open gate
       objectReference: {fileID: 0}
     - target: {fileID: 3725885643550760467, guid: 44a08eec159b02745bc0e4703be1434c,
         type: 3}
@@ -26218,6 +26228,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MinDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890670821586932367, guid: 44a08eec159b02745bc0e4703be1434c,
+        type: 3}
+      propertyPath: Key.key
+      value: storage_gate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a08eec159b02745bc0e4703be1434c, type: 3}
@@ -32674,6 +32689,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MinDistance
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890670821586932367, guid: 44a08eec159b02745bc0e4703be1434c,
+        type: 3}
+      propertyPath: Key.key
+      value: storage_sesame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a08eec159b02745bc0e4703be1434c, type: 3}

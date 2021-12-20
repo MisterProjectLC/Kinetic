@@ -56,6 +56,8 @@ public class Health : MonoBehaviour
         if (CurrentHealth <= CriticalHealth && !critical)
         {
             critical = true;
+            if (lastAttack)
+                lastAttack.OnCritical?.Invoke(this);
             OnCriticalLevel?.Invoke();
         }
 

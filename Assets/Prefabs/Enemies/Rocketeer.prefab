@@ -1382,6 +1382,7 @@ MonoBehaviour:
   VerticalSpeed: 0.8
   MotorSpeed: 18
   MinimumDistance: 7
+  myTrigger: {fileID: 0}
 --- !u!114 &1831796119583015996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1483,7 +1484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153d1fc240f4fa141b91c44e0af85158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StylePerDamage: 0.5
+  StylePerDamage: 0
+  StyleOnCritical: 3
   StyleOnKill: 5
 --- !u!82 &5253974198761427355
 AudioSource:

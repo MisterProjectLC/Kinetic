@@ -44,7 +44,6 @@ public class Damageable : MonoBehaviour
             damageInflicted = (int)Mathf.Floor(damageInflicted * multiplier);
         }
 
-
         OnRawDamage?.Invoke(damage);
         OnDamage?.Invoke(damageInflicted);
         HealthRef.InflictDamage(damageInflicted, attack);

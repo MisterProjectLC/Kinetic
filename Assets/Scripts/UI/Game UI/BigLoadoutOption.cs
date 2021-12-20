@@ -28,7 +28,7 @@ public class BigLoadoutOption : MonoBehaviour
         secondarySlot.GetComponentInChildren<Text>().text = secondaryAbility;
     }
 
-    void OnSecondaryInsert(DragDrop option)
+    public void OnSecondaryInsert(DragDrop option)
     {
         option.GetComponent<LoadoutOption>().Ability.GetComponent<SecondaryAbility>().ParentAbility = 
             GetComponent<LoadoutOption>().Ability.GetComponent<Ability>();

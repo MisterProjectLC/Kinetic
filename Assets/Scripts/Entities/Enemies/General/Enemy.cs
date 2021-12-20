@@ -233,6 +233,10 @@ public class Enemy : MonoBehaviour
         return moveVelocity;
     }
 
+    public float GetCollisionDistance()
+    {
+        return CollisionDistance;
+    }
 
     private void OnDrawGizmos()
     {

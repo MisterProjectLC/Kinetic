@@ -18,6 +18,13 @@ public class FlyingEnemy : MonoBehaviour
     [SerializeField]
     float MinimumDistance = 3f;
 
+    [SerializeField]
+    Collider myTrigger;
+
+    float enemyCollisionCooldown = 1f;
+    float clock = 0f;
+    bool stopped = false;
+
     private void Start()
     {
         playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
@@ -28,6 +35,27 @@ public class FlyingEnemy : MonoBehaviour
     void OnActiveUpdate()
     {
         if (!enemy.IsPlayerInView())
+            return;
+
+        clock += Time.deltaTime;
+        if (myTrigger && clock > enemyCollisionCooldown)
+        {
+            clock = 0f;
+            RaycastHit[] hitInfos = Physics.SphereCastAll(transform.position + transform.forward*1.5f, 0.23f, transform.forward, enemy.GetCollisionDistance(), 
+                LayerMask.GetMask("EnemyTrigger"));
+
+            foreach (RaycastHit hit in hitInfos)
+                if (hit.collider != myTrigger)
+                {
+                    stopped = true;
+                    Debug.Log("Stopped");
+                    return;
+                }
+
+            stopped = false;
+        }
+
+        if (stopped)
             return;
 
         Vector3 playerDistance = playerTransform.position - enemy.Model.transform.position;

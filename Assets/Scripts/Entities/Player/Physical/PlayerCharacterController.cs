@@ -12,6 +12,9 @@ public class PlayerCharacterController : MonoBehaviour
     [Header("Ground")]
     [Tooltip("distance from the bottom of the character controller capsule to test for grounded")]
     public float GroundCheckDistance = 0.1f;
+    [Tooltip("distance from the bottom of the character controller capsule to test for grounded, airborne")]
+    [SerializeField]
+    float GroundCheckDistanceInAir = 0.07f;
 
     [Tooltip("distance from the bottom of the character controller capsule to test for grounded")]
     public float SideGroundCheckDistance = 0.1f;
@@ -70,7 +73,6 @@ public class PlayerCharacterController : MonoBehaviour
     float m_CameraVerticalAngle = 0f;
 
     const float k_JumpGroundingPreventionTime = 0.2f;
-    const float k_GroundCheckDistanceInAir = 0.07f;
 
     // Events
     [HideInInspector]
@@ -103,6 +105,8 @@ public class PlayerCharacterController : MonoBehaviour
 
     void CameraMovement()
     {
+        PlayerCamera.fieldOfView = Hermes.FOV;
+
         if (!MoveControlEnabled)
             return;
 
@@ -220,7 +224,7 @@ public class PlayerCharacterController : MonoBehaviour
     public void GroundCheck()
     {
         // Make sure that the ground check distance while already in air is very small, to prevent suddenly snapping to ground
-        float chosenGroundCheckDistance = IsGrounded ? (m_Controller.skinWidth + GroundCheckDistance) : k_GroundCheckDistanceInAir;
+        float chosenGroundCheckDistance = IsGrounded ? (m_Controller.skinWidth + GroundCheckDistance) : GroundCheckDistanceInAir;
 
         // reset values before the ground check
         IsGrounded = false;
@@ -255,7 +259,7 @@ public class PlayerCharacterController : MonoBehaviour
     public RaycastHit? WallCheck()
     {
         if (Physics.CapsuleCast(GetCapsuleTopHemisphere(), GetCapsuleBottomHemisphere(), m_Controller.radius - Physics.defaultContactOffset,
-            MoveVelocity, out RaycastHit hit, k_GroundCheckDistanceInAir, GroundCheckLayers))
+            MoveVelocity, out RaycastHit hit, GroundCheckDistanceInAir, GroundCheckLayers))
             return hit;
 
         return null;
