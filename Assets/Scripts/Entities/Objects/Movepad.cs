@@ -52,7 +52,8 @@ public class Movepad : MonoBehaviour
             moveVector = (DespawnPoint.position - SpawnPoint.position).normalized * Speed;
             if (!overrideAutomaticSize)
                 detectSize = new Vector3((DespawnPoint.position - SpawnPoint.position).magnitude / 2, 1f, 1.5f);
-        }
+        } else
+            detectSize /= 2;
         //Debug.Log(DespawnPoint.position + ", " + SpawnPoint.position + ", " + moveVector);
     }
 

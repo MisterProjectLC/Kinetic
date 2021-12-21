@@ -30,6 +30,8 @@ public class OptionsMenu : Menu
     [SerializeField]
     Slider FOVSlider;
     [SerializeField]
+    Toggle fullscreenToggle;
+    [SerializeField]
     Toggle outlineToggle;
     [SerializeField]
     Toggle mouseToggle;
@@ -49,6 +51,9 @@ public class OptionsMenu : Menu
 
         FOVSlider.onValueChanged.AddListener(OnFOVUpdate);
         FOVSlider.value = Hermes.FOV;
+
+        fullscreenToggle.onValueChanged.AddListener(OnFullscreenToggle);
+        fullscreenToggle.isOn = Hermes.Fullscreen;
 
         outlineToggle.onValueChanged.AddListener(OnOutlineToggle);
         outlineToggle.isOn = Hermes.OutlineEnabled;
@@ -80,6 +85,12 @@ public class OptionsMenu : Menu
     void OnFOVUpdate(float value)
     {
         Hermes.FOV = value;
+    }
+
+    void OnFullscreenToggle(bool value)
+    {
+        Hermes.Fullscreen = value;
+        Screen.fullScreen = value;
     }
 
     void OnOutlineToggle(bool val)

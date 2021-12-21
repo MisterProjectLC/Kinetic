@@ -15,6 +15,7 @@ public class MainMenu : Menu
     new void Start()
     {
         Time.timeScale = 1f;
+        AudioListener.pause = true;
         if (BackgroundAnimator)
             BackgroundAnimator.speed = 1f / 60f;
         base.Start();

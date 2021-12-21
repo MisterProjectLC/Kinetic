@@ -4,6 +4,7 @@ using UnityEditor;
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(ScenePartLoader))]
+[CanEditMultipleObjects]
 public class ScenePartLoaderEditor : Editor
 {
     public override void OnInspectorGUI()

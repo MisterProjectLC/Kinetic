@@ -46,6 +46,17 @@ public class Hermes : MonoBehaviour
         }
     }
 
+    static bool fullscreen = false;
+    public static bool Fullscreen
+    {
+        get { return fullscreen; }
+        set
+        {
+            PlayerPrefs.SetInt("Fullscreen", value ? 1 : 0);
+            fullscreen = value;
+        }
+    }
+
     static bool mouseInvert = false;
     public static bool MouseInvert { 
         get { return mouseInvert; }
@@ -72,7 +83,9 @@ public class Hermes : MonoBehaviour
     {
         soundVolume = PlayerPrefs.GetFloat("SoundVolume");
         musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        fov = PlayerPrefs.GetFloat("FOV");
         mouseSensibility = PlayerPrefs.GetFloat("MouseSensibility");
+        fullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
         mouseInvert = PlayerPrefs.GetInt("MouseInvert") == 1;
         outlineEnabled = PlayerPrefs.GetFloat("OutlineEnabled");
     }
