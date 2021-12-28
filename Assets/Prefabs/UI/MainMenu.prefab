@@ -259,6 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1062692029330528889}
   - component: {fileID: 1062692029330528891}
+  - component: {fileID: 8149194152095222615}
   - component: {fileID: 1062692029330528888}
   m_Layer: 5
   m_Name: Choose
@@ -294,6 +295,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062692029330528894}
   m_CullTransparentMesh: 1
+--- !u!114 &8149194152095222615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062692029330528894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3352b6d9f4c86fc4e817dec7f9de97c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key:
+    key: menu_chooseclass
 --- !u!114 &1062692029330528888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1000,6 +1015,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1062692029415744134}
     m_Modifications:
+    - target: {fileID: 4659229980972764865, guid: 8807fc27fb50eb3468e6615735cf1676,
+        type: 3}
+      propertyPath: Key.key
+      value: menu_play
+      objectReference: {fileID: 0}
     - target: {fileID: 6549890968305835010, guid: 8807fc27fb50eb3468e6615735cf1676,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1160,6 +1180,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1062692030485724250}
     m_Modifications:
+    - target: {fileID: 4659229980972764865, guid: 8807fc27fb50eb3468e6615735cf1676,
+        type: 3}
+      propertyPath: Key.key
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6549890968305835010, guid: 8807fc27fb50eb3468e6615735cf1676,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1490,6 +1515,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1062692029415744134}
     m_Modifications:
+    - target: {fileID: 4659229980972764865, guid: 8807fc27fb50eb3468e6615735cf1676,
+        type: 3}
+      propertyPath: Key.key
+      value: menu_quit
+      objectReference: {fileID: 0}
     - target: {fileID: 6549890968305835010, guid: 8807fc27fb50eb3468e6615735cf1676,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1660,6 +1690,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1062692029415744134}
     m_Modifications:
+    - target: {fileID: 4659229980972764865, guid: 8807fc27fb50eb3468e6615735cf1676,
+        type: 3}
+      propertyPath: Key.key
+      value: menu_options
+      objectReference: {fileID: 0}
     - target: {fileID: 6549890968305835010, guid: 8807fc27fb50eb3468e6615735cf1676,
         type: 3}
       propertyPath: m_Pivot.x

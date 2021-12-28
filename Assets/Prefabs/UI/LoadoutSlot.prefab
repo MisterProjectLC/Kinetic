@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1961359280970812944}
   - component: {fileID: 1961359280970812946}
   - component: {fileID: 1961359280970812945}
-  - component: {fileID: 3344931789231061486}
+  - component: {fileID: 4929332021024705010}
   - component: {fileID: 3085514987049677036}
   - component: {fileID: 196032490553090160}
   m_Layer: 5
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3344931789231061486
+--- !u!114 &4929332021024705010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,9 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6051bb75e7b9b04d99d07d37c1af042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: Ability
   Offset: {x: 0, y: 0}
-  LabelText: 
+  LabelText:
+    key: 
   Label: {fileID: 0}
   InsertedDragDrop: {fileID: 0}
 --- !u!114 &3085514987049677036

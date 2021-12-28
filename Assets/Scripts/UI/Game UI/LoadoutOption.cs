@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,14 +23,11 @@ public class LoadoutOption : MonoBehaviour
         if (!isPassive)
         {
             abilityName = Ability.GetComponent<Ability>().DisplayName;
-            GetComponent<TooltipTrigger>().Description = "COOLDOWN: " + Ability.GetComponent<Ability>().Cooldown.ToString() + 
-                " seconds\n" + Ability.GetComponent<Description>().description;
             GetComponent<DragDrop>().Type = "Ability";
         } else 
         {
             GetComponentInChildren<Text>().text = Ability.gameObject.name;
             abilityName = Ability.gameObject.name;
-            GetComponent<TooltipTrigger>().Description = Ability.GetComponent<Description>().description;
             GetComponent<DragDrop>().Type = "Passive";
             passiveOverlay.enabled = true;
         }
@@ -47,6 +45,12 @@ public class LoadoutOption : MonoBehaviour
             OnInsertFunc(GetComponent<DragDrop>().AssignedSlot);
     }
 
+
+    private void OnEnable()
+    {
+        UpdateText();
+    }
+
     void OnInsertFunc(DropSlot dropSlot)
     {
         LoadoutSlot slot = dropSlot.GetComponent<LoadoutSlot>();
@@ -58,5 +62,18 @@ public class LoadoutOption : MonoBehaviour
     {
         LoadoutSlot slot = dropSlot.GetComponent<LoadoutSlot>();
         slot.SetAbility(Ability, false);
+    }
+
+
+    void UpdateText()
+    {
+        if (!Ability)
+            return;
+
+        if (!isPassive)
+            GetComponent<TooltipTrigger>().Description = "COOLDOWN: " + Ability.GetComponent<Ability>().Cooldown.ToString() +
+                " " + LocalizationSystem.GetLocalizedText("seconds") + "\n" + Ability.GetComponent<Description>().Value;
+        else
+            GetComponent<TooltipTrigger>().Description = Ability.GetComponent<Description>().Value;
     }
 }

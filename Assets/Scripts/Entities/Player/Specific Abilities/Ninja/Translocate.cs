@@ -73,15 +73,19 @@ public class Translocate : Ability
         yield return new WaitForSecondsRealtime(0.001f);
         target.GetComponent<Enemy>().WarpPosition(myCoords);
 
-
+        // Restore movement
         abilities.AbilitiesEnabled = true;
         player.MoveControlEnabled = true;
         player.GetComponent<CharacterController>().enabled = true;
         if (target.GetComponent<NavMeshAgent>())
         {
-            target.GetComponent<NavMeshAgent>().enabled = true;
             if (target.GetComponent<Enemy>().RayToGround().collider == null)
                 target.GetComponent<NavMeshAgent>().enabled = false;
+            else
+                target.GetComponent<NavMeshAgent>().enabled = true;
+
+            target.GetComponent<NavMeshAgent>().enabled = false;
+            Debug.Log("Translocate: " + target.GetComponent<NavMeshAgent>().enabled);
         }
     }
 }

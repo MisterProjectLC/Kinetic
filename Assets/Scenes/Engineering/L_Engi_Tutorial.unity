@@ -8,8 +8,9 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 8fdf0f45198b96a4588b8425fcb2f155
+  m_OcclusionCullingData: {fileID: 36300000, guid: 967642acc38a1614c87e5fa139dc2a00,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -23167,6 +23168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1326883236}
   - component: {fileID: 1326883238}
+  - component: {fileID: 1326883239}
   - component: {fileID: 1326883237}
   m_Layer: 5
   m_Name: Ctrl
@@ -23236,6 +23238,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326883235}
   m_CullTransparentMesh: 1
+--- !u!114 &1326883239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326883235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3352b6d9f4c86fc4e817dec7f9de97c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key:
+    key: controls_leftctrl
 --- !u!1001 &1327873150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27520,6 +27536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1648117933}
   - component: {fileID: 1648117935}
+  - component: {fileID: 1648117936}
   - component: {fileID: 1648117934}
   m_Layer: 5
   m_Name: Left Mouse
@@ -27589,6 +27606,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648117932}
   m_CullTransparentMesh: 1
+--- !u!114 &1648117936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648117932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3352b6d9f4c86fc4e817dec7f9de97c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key:
+    key: controls_leftmouse
 --- !u!1001 &1649646947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29716,6 +29747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1753763665}
   - component: {fileID: 1753763667}
+  - component: {fileID: 1753763668}
   - component: {fileID: 1753763666}
   m_Layer: 5
   m_Name: Shift
@@ -29785,6 +29817,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753763664}
   m_CullTransparentMesh: 1
+--- !u!114 &1753763668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753763664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3352b6d9f4c86fc4e817dec7f9de97c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key:
+    key: controls_leftshift
 --- !u!1 &1756055421
 GameObject:
   m_ObjectHideFlags: 0
@@ -30686,6 +30732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1810748328}
   - component: {fileID: 1810748330}
+  - component: {fileID: 1810748331}
   - component: {fileID: 1810748329}
   m_Layer: 5
   m_Name: Right Mouse
@@ -30755,6 +30802,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810748327}
   m_CullTransparentMesh: 1
+--- !u!114 &1810748331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810748327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3352b6d9f4c86fc4e817dec7f9de97c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key:
+    key: controls_rightmouse
 --- !u!43 &1839527946
 Mesh:
   m_ObjectHideFlags: 0

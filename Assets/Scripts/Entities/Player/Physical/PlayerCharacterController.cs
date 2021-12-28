@@ -105,7 +105,7 @@ public class PlayerCharacterController : MonoBehaviour
 
     void CameraMovement()
     {
-        PlayerCamera.fieldOfView = Hermes.FOV;
+        PlayerCamera.fieldOfView = Hermes.GetFloat(Hermes.Properties.FOV);
 
         if (!MoveControlEnabled)
             return;

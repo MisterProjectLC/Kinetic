@@ -326,6 +326,8 @@ MonoBehaviour:
   description: An unusual ability that lets the Ninja swap places with any movable
     enemy - simply aim at a target and activate. It is primarily useful for mobility
     and disruption.
+  Localized:
+    key: ninja_translocate
 --- !u!1 &1292416793624679719
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +513,8 @@ MonoBehaviour:
 
     This ability resets
     its cooldown upon any kill.'
+  Localized:
+    key: ninja_dash
 --- !u!1 &1706919263383711132
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,6 +578,8 @@ MonoBehaviour:
     A pair of rapid-fire
     pistols with decent range and damage. While not as powerful as the Shotgun, its
     higher range is ideal for pruning targets at longer distances.'
+  Localized:
+    key: ninja_akimbo
 --- !u!1 &3100932466145970575
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,6 +919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Heals the player after every kill.
+  Localized:
+    key: killheal
 --- !u!1 &4382853588751367982
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +979,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Lets the player bounce off walls, providing a greater vertical range
     in closed spaces.
+  Localized:
+    key: ninja_walljump
 --- !u!1 &4698384497654706963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1254,8 @@ MonoBehaviour:
     most damaging ability, lobbing 3 consecutive explosives at an arc. Due to its
     high burst potential, it is ideal against high-value targets, such as support
     units or glass cannons.'
+  Localized:
+    key: ninja_shellbombs
 --- !u!1 &5935564171822933945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,6 +1436,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Lets the player jump an extra time before having to touch a surface.
+  Localized:
+    key: ninja_extrajump
 --- !u!114 &8043661788448992379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,6 +1458,8 @@ MonoBehaviour:
     reliable weapon at close range, able to effortlessly shred through enemies. Its
     self-knockback effect can also prove effective when traversing gaps or climbing
     to higher ground.'
+  Localized:
+    key: ninja_shotgun
 --- !u!1 &7349922464857806567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,6 +1632,8 @@ MonoBehaviour:
 
     Has
     no cooldown when the Style meter hits 80% or higher.'
+  Localized:
+    key: ninja_grapplinghook
 --- !u!1 &8006630410610024068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,6 +1797,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: The Rewind is an useful ability to get out of sticky situations. Once
     activated, the Ninja shall rewind to the place he was 5 seconds ago.
+  Localized:
+    key: ninja_rewind
 --- !u!1 &8110950932023223649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,6 +1982,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Lets the player jump an extra time before having to touch a surface.
+  Localized:
+    key: ninja_extrajump
 --- !u!1 &9089919347116189794
 GameObject:
   m_ObjectHideFlags: 0

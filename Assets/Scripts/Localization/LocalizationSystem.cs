@@ -19,12 +19,10 @@ public class LocalizationSystem
     static CSVLoader csvLoader = null;
     static bool IsInit = false;
 
-
     public static string GetLocalizedText(string key)
     {
         return GetLocalizedText(key, CurrentLanguage);
     }
-
 
     public static string GetLocalizedText(string key, Language lang)
     {
@@ -69,8 +67,7 @@ public class LocalizationSystem
 #if UNITY_EDITOR
     public static void Add(string key, int lang, string value)
     {
-        if (value.Contains("\""))
-            value.Replace('"', '\"');
+        value = value.Replace("\n", "\\n").Replace('"', '\"');
 
         if (!IsInit)
             Init();
@@ -96,10 +93,7 @@ public class LocalizationSystem
 
     public static void Replace(string key, int lang, string value)
     {
-        if (value.Contains("\n"))
-            value.Replace("\n", "\\n");
-        if (value.Contains("\""))
-            value.Replace('"', '\"');
+        value = value.Replace("\n", "\\n").Replace('"', '\"');
 
         if (!IsInit)
             Init();

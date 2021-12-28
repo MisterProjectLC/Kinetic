@@ -9,91 +9,64 @@ using UnityEngine.Rendering.Universal;
 
 public class OptionsMenu : Menu
 {
-    [System.Serializable]
-    public struct SliderData
-    {
-        public string name;
-        public Slider slider;
-        public UnityEvent<float> listener;
-        public UnityEvent init;
-    }
-
     [SerializeField]
     AudioMixer Mixer;
 
     [SerializeField]
-    Slider soundSlider;
-    [SerializeField]
-    Slider musicSlider;
-    [SerializeField]
-    Slider mouseSlider;
-    [SerializeField]
-    Slider FOVSlider;
-    [SerializeField]
-    Toggle fullscreenToggle;
-    [SerializeField]
-    Toggle outlineToggle;
-    [SerializeField]
-    Toggle mouseToggle;
+    Dropdown languageDropdown;
 
-    List<ScriptableRendererFeature> features;
+    [SerializeField]
+    List<OptionData> optionData;
 
     new void Start()
     {
-        soundSlider.onValueChanged.AddListener(OnSoundUpdate);
-        soundSlider.value = Hermes.SoundVolume;
+        for (LocalizationSystem.Language l = LocalizationSystem.Language._First + 1; l < LocalizationSystem.Language._Last; l++)
+            languageDropdown.options.Add(new Dropdown.OptionData(l.ToString().ToUpper()));
 
-        musicSlider.onValueChanged.AddListener(OnMusicUpdate);
-        musicSlider.value = Hermes.MusicVolume;
+        foreach (OptionData option in optionData)
+        {
+            if (option.slider)
+            {
+                option.slider.onValueChanged.AddListener((v) => Hermes.SetProperty(option.property, option.slider.value));
+                option.slider.value = Hermes.GetFloat(option.property);
+            }
+            else if (option.toggle)
+            {
+                option.toggle.onValueChanged.AddListener((v) => Hermes.SetProperty(option.property, option.toggle.isOn));
+                option.toggle.isOn = Hermes.GetBool(option.property);
+            }
+            else if (option.dropdown)
+            {
+                option.dropdown.onValueChanged.AddListener((v) => Hermes.SetProperty(option.property, option.dropdown.value));
+                option.dropdown.value = Hermes.GetInt(option.property);
+            }
+        }
 
-        mouseSlider.onValueChanged.AddListener(OnMouseUpdate);
-        mouseSlider.value = Hermes.MouseSensibility;
-
-        FOVSlider.onValueChanged.AddListener(OnFOVUpdate);
-        FOVSlider.value = Hermes.FOV;
-
-        fullscreenToggle.onValueChanged.AddListener(OnFullscreenToggle);
-        fullscreenToggle.isOn = Hermes.Fullscreen;
-
-        outlineToggle.onValueChanged.AddListener(OnOutlineToggle);
-        outlineToggle.isOn = Hermes.OutlineEnabled;
-
-        mouseToggle.onValueChanged.AddListener(OnMouseInvertToggle);
-        mouseToggle.isOn = Hermes.MouseInvert;
-
+        AddSliderListener(Hermes.Properties.SoundVolume, OnSoundUpdate);
+        AddSliderListener(Hermes.Properties.MusicVolume, OnMusicUpdate);
+        AddToggleListener(Hermes.Properties.Fullscreen, OnFullscreenToggle);
+        AddToggleListener(Hermes.Properties.OutlineEnabled, OnOutlineToggle);
+        AddDropdownListener(Hermes.Properties.Language, OnLanguageUpdate);
         base.Start();
     }
 
 
-    void OnSoundUpdate(float value)
+    public void OnSoundUpdate(float value)
     {
-        Hermes.SoundVolume = soundSlider.value;
         Mixer.SetFloat("SoundVolume", Mathf.Log10(value) * 20);
     }
 
-    void OnMusicUpdate(float value)
+    public void OnMusicUpdate(float value)
     {
-        Hermes.MusicVolume = musicSlider.value;
         Mixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20);
     }
 
-    void OnMouseUpdate(float value)
+    public void OnFullscreenToggle(bool value)
     {
-        Hermes.MouseSensibility = value;
-    }
-
-    void OnFOVUpdate(float value)
-    {
-        Hermes.FOV = value;
-    }
-
-    void OnFullscreenToggle(bool value)
-    {
-        Hermes.Fullscreen = value;
         Screen.fullScreen = value;
     }
 
-    void OnOutlineToggle(bool val)
+    public void OnOutlineToggle(bool val)
     {
         float value = val ? 0.5f : 0f;
 
@@ -111,11 +84,26 @@ public class OptionsMenu : Menu
         rendererData[0].SetDirty();
         propertyInfo.SetValue(pipeline, rendererData);
         GraphicsSettings.renderPipelineAsset = pipeline;
-        Hermes.OutlineEnabled = val;
     }
 
-    void OnMouseInvertToggle(bool value)
+    public void OnLanguageUpdate(int value)
     {
-        Hermes.MouseInvert = value;
+        LocalizationSystem.UpdateLanguage(LocalizationSystem.Language._First + 1 + value);
+    }
+
+
+    void AddSliderListener(Hermes.Properties property, UnityAction<float> call)
+    {
+        optionData.Find(v => v.property == property).slider.onValueChanged.AddListener(call);
+    }
+
+    void AddToggleListener(Hermes.Properties property, UnityAction<bool> call)
+    {
+        optionData.Find(v => v.property == property).toggle.onValueChanged.AddListener(call);
+    }
+
+    void AddDropdownListener(Hermes.Properties property, UnityAction<int> call)
+    {
+        optionData.Find(v => v.property == property).dropdown.onValueChanged.AddListener(call);
     }
 }

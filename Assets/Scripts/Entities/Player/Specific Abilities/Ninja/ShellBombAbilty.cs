@@ -10,7 +10,6 @@ public class ShellBombAbilty : Ability
     [Header("Attributes")]
     public int ShellCount = 3;
     public float ShellCooldown = 0.1f;
-    public float BackwardsForce = 2f;
 
     PlayerCharacterController player;
     ProjectileShooter shooter;
@@ -39,7 +38,6 @@ public class ShellBombAbilty : Ability
 
     void ShootShellBombs()
     {
-        player.MoveVelocity -= BackwardsForce * player.PlayerCamera.transform.forward;
         shooter.ShootProjectile(player.PlayerCamera.transform.forward);
     }
 }

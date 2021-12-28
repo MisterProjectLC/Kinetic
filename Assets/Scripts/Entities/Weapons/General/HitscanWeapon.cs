@@ -59,6 +59,7 @@ public class HitscanWeapon : Weapon
         if (!hit.collider || !attack)
             return;
 
+        Debug.Log("AttackHitLaser: " + hit.collider);
         if (Sparks != null)
         {
             GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(SparksType, Sparks);
@@ -67,7 +68,8 @@ public class HitscanWeapon : Weapon
                 hit.normal);
         }
 
-        if (!hit.collider.GetComponent<Damageable>() || (!StopAtFirstHit && enemies.Contains(hit.collider.GetComponent<Damageable>().GetHealth())))
+        if (!hit.collider.GetComponent<Damageable>() || 
+            (!StopAtFirstHit && enemies.Contains(hit.collider.GetComponent<Damageable>().GetHealth())))
             return;
 
         OnHit?.Invoke(hit);

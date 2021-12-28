@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public float GravityMultiplier = 1f;
     float lastGravityMultiplier = 1f;
     public float AirDesacceleration = 0f;
+    public float Weight = 1f;
 
     [Header("Options")]
     [SerializeField]
@@ -124,7 +125,6 @@ public class Enemy : MonoBehaviour
         // Air
         if (airborne)
             moveVelocity += Vector3.down * GravityMultiplier * Constants.Gravity * Time.deltaTime;
-
         // Ground
         else
         {
@@ -135,7 +135,10 @@ public class Enemy : MonoBehaviour
             if (pathAgent)
             {
                 if (!pathAgent.enabled)
+                {
                     pathAgent.enabled = true;
+                    pathAgent.Warp(transform.position);
+                }
 
                 // Slowdown
                 if (!pathAgent.updatePosition)
@@ -155,7 +158,7 @@ public class Enemy : MonoBehaviour
                 moveVelocity = Vector3.zero;
         }
 
-        if (!pathAgent || !pathAgent.updatePosition)
+        if (!pathAgent || !pathAgent.enabled || !pathAgent.updatePosition)
         {
             // Collision
             Ray ray = new Ray(Model.transform.position, moveVelocity.normalized);
@@ -174,8 +177,11 @@ public class Enemy : MonoBehaviour
                     pathAgent.updatePosition = true;
                     pathAgent.Warp(transform.position);
                 }
-            } else
+            }
+            else
+            {
                 transform.position += moveVelocity * Time.deltaTime;
+            }
         }
     }
 
@@ -211,7 +217,7 @@ public class Enemy : MonoBehaviour
         if (!Movable)
             return;
 
-        moveVelocity += (knockback / 2);
+        moveVelocity += (knockback / (2 * Weight));
         //Debug.Log("MV: " + moveVelocity);
 
         // Parar no chão

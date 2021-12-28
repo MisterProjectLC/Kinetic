@@ -27,12 +27,7 @@ public class Projectile : MonoBehaviour
     [HideInInspector]
     public GameObject Shooter;
 
-    public void Setup(Vector3 moveDirection, LayerMask layerMask)
-    {
-        Setup(moveDirection, layerMask, null);
-    }
-
-    public void Setup(Vector3 moveDirection, LayerMask layerMask, GameObject shooter)
+    public void Setup(Vector3 moveDirection, LayerMask layerMask, GameObject shooter = null)
     {
         clock = 0f;
         KeepAlive = false;
@@ -92,7 +87,7 @@ public class Projectile : MonoBehaviour
             }
 
             if (foundHit)              
-                OnHit.Invoke(closestHit.collider);
+                OnHit?.Invoke(closestHit.collider);
         }
 
         m_LastRootPosition = Root.position;

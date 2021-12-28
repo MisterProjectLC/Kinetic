@@ -69,7 +69,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public float GetLookInputsVertical()
     {
-        return InputAndUnpaused ? GetMouseOrStickLookAxis(MouseVertical, JoystickVertical, !Hermes.MouseInvert) : 0f;
+        return InputAndUnpaused ? GetMouseOrStickLookAxis(MouseVertical, JoystickVertical, !Hermes.GetBool(Hermes.Properties.MouseInvert)) : 0f;
     }
 
 
@@ -150,7 +150,7 @@ public class PlayerInputHandler : MonoBehaviour
             i *= -1f;
 
         // apply sensitivity multiplier
-        i *= Hermes.MouseSensibility;
+        i *= Hermes.GetFloat(Hermes.Properties.MouseSensibility);
 
         if (isGamepad)
             // since mouse input is already deltaTime-dependant, only scale input with frame time if it's coming from sticks

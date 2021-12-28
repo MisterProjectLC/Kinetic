@@ -212,6 +212,8 @@ MonoBehaviour:
     When
     the Style meter hits 80% or higher, resets its cooldown every time a kill is
     achieved.'
+  Localized:
+    key: vanguard_charge
 --- !u!114 &5209750473149924436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +237,8 @@ MonoBehaviour:
 
     Its cooldown
     gets dramatically reduced when the Style meter hits 80% or higher.'
+  Localized:
+    key: vanguard_rocketlauncher
 --- !u!1 &2823302919160890876
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +577,8 @@ MonoBehaviour:
 
     Activate the ability while the projectile is in mid-air to detonate
     it prematurely.'
+  Localized:
+    key: vanguard_graviton
 --- !u!1 &4101398689657722995
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +636,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Heals the player after every kill.
+  Localized:
+    key: killheal
 --- !u!1 &4316573000432154568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,6 +1441,8 @@ MonoBehaviour:
 
     Generates
     a shield in front of the player which protects them from incoming fire.'
+  Localized:
+    key: vanguard_frontalshield
 --- !u!1 &5935564171822933945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,6 +1632,8 @@ MonoBehaviour:
 
     Detonates an airborne
     rocket prematurely and resets the Rocket Launcher''s cooldown.'
+  Localized:
+    key: vanguard_detonate
 --- !u!1 &7578492789598782553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,6 +1717,8 @@ MonoBehaviour:
     Shoots a volley of projectile
     bullets at an incredible speed, but slows the player''s own movement speed in
     the process.'
+  Localized:
+    key: vanguard_minigun
 --- !u!1 &8110950932023223649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1929,6 +1943,8 @@ MonoBehaviour:
 
     Activate the ability while the protection
     is active to emit the shockwave prematurely.'
+  Localized:
+    key: vanguard_payback
 --- !u!1 &9089919347116189794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,6 +2274,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 958540071565868630}
     m_Modifications:
+    - target: {fileID: 3517749281625663250, guid: 245d7c791efffd74b806e11960ed1bf8,
+        type: 3}
+      propertyPath: Localized.key
+      value: vanguard_lasercannon
+      objectReference: {fileID: 0}
     - target: {fileID: 5374135149329504673, guid: 245d7c791efffd74b806e11960ed1bf8,
         type: 3}
       propertyPath: m_Mesh

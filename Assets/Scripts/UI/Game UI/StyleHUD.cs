@@ -25,7 +25,9 @@ public class StyleHUD : MonoBehaviour
     StyleMeter style;
     CanvasGroup styleCanvasGroup;
 
-    float tierMultiplier = 3;
+    [SerializeField]
+    float TierMultiplier = 3;
+
     float totalStyle = 0f;
     int styleTier = 0;
     string[] tiers = {"D", "C", "B", "A", "S", "SS"};
@@ -62,7 +64,7 @@ public class StyleHUD : MonoBehaviour
 
         // Decay
         if (totalStyle > 0f)
-            UpdateStyleTotal(totalStyle - (styleCanvasGroup.alpha <= 0f ? 4f : 1f) * styleTier*tierMultiplier * Time.deltaTime);
+            UpdateStyleTotal(totalStyle - (styleCanvasGroup.alpha <= 0f ? 4f : 1f) * (styleTier+1) * TierMultiplier * Time.deltaTime);
 
         // Update lines
         for (int i = 0; i < lines.Count; i++)
@@ -121,7 +123,7 @@ public class StyleHUD : MonoBehaviour
         lines[blankest].canvasGroup.alpha = 1f;
 
         // Setup bar
-        amount *= tierMultiplier;
+        amount *= (1 + tiers.Length - styleTier)/2;
         UpdateStyleTotal(totalStyle + amount);
     }
 

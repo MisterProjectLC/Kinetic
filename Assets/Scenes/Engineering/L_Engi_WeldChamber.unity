@@ -8,8 +8,9 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: e37bbf39972bdbb4ba610e6f757fb8ac
+  m_OcclusionCullingData: {fileID: 36300000, guid: cf95ab585e2e4e14e857662ed6f34ae7,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -38,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2505,7 +2506,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 701911379}
-  m_RootOrder: 10
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &100213019
 MonoBehaviour:
@@ -14251,6 +14252,58 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &467481433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 467481434}
+  - component: {fileID: 467481435}
+  m_Layer: 0
+  m_Name: Drill Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &467481434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467481433}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -698.7, y: 176.5, z: -293.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 701911379}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &467481435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467481433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f3910ebaf5378448bb537ca5c01c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawnee: {fileID: 7969327006521631947, guid: 4660add4a8830f947b1603c4d75f0954, type: 3}
+  SpawnPoint: {fileID: 0}
+  DespawnPoint: {fileID: 0}
+  SpawnRadius: 0
+  ChildLimit: 1
+  SpawnTimer: 15
+  SpawnStartDelay: 5
+  AvoidPlayerLoS: 1
+  ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
 --- !u!1001 &487933591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19735,6 +19788,9 @@ Transform:
   - {fileID: 123916801}
   - {fileID: 600393354}
   - {fileID: 968782863}
+  - {fileID: 467481434}
+  - {fileID: 944897612}
+  - {fileID: 781304976}
   - {fileID: 1037830913}
   - {fileID: 100213018}
   - {fileID: 1815782143}
@@ -20830,6 +20886,58 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &781304975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 781304976}
+  - component: {fileID: 781304977}
+  m_Layer: 0
+  m_Name: Drill Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &781304976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781304975}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -833.9, y: 176.5, z: -523.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 701911379}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &781304977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781304975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f3910ebaf5378448bb537ca5c01c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawnee: {fileID: 7969327006521631947, guid: 4660add4a8830f947b1603c4d75f0954, type: 3}
+  SpawnPoint: {fileID: 0}
+  DespawnPoint: {fileID: 0}
+  SpawnRadius: 0
+  ChildLimit: 1
+  SpawnTimer: 15
+  SpawnStartDelay: 0
+  AvoidPlayerLoS: 1
+  ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
 --- !u!43 &790065681
 Mesh:
   m_ObjectHideFlags: 0
@@ -27378,6 +27486,58 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &944897611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 944897612}
+  - component: {fileID: 944897613}
+  m_Layer: 0
+  m_Name: Drill Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &944897612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944897611}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -562.4, y: 176.5, z: -512.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 701911379}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &944897613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944897611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f3910ebaf5378448bb537ca5c01c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawnee: {fileID: 7969327006521631947, guid: 4660add4a8830f947b1603c4d75f0954, type: 3}
+  SpawnPoint: {fileID: 0}
+  DespawnPoint: {fileID: 0}
+  SpawnRadius: 0
+  ChildLimit: 1
+  SpawnTimer: 15
+  SpawnStartDelay: 10
+  AvoidPlayerLoS: 1
+  ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
 --- !u!1 &947620634
 GameObject:
   m_ObjectHideFlags: 0
@@ -30431,7 +30591,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 701911379}
-  m_RootOrder: 9
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1037830914
 MonoBehaviour:
@@ -52377,11 +52537,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815782142}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -713.7, y: 115.2, z: -603}
+  m_LocalPosition: {x: -833.9, y: 115.2, z: -523.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 701911379}
-  m_RootOrder: 11
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1815782144
 MonoBehaviour:
@@ -61539,7 +61699,7 @@ PrefabInstance:
     - target: {fileID: 402702051381990016, guid: 1204fad80afa86a48b7761778927d752,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 402702051381990016, guid: 1204fad80afa86a48b7761778927d752,
         type: 3}

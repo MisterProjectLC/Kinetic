@@ -1168,10 +1168,10 @@ GameObject:
   - component: {fileID: 8376397764855227298}
   - component: {fileID: 8422773202275663443}
   - component: {fileID: 2755383025469367199}
-  - component: {fileID: 1089858120247776818}
-  - component: {fileID: 668053113924364249}
   - component: {fileID: 510608392103380544}
   - component: {fileID: 3345044088467311516}
+  - component: {fileID: 1089858120247776818}
+  - component: {fileID: 668053113924364249}
   - component: {fileID: 7413753500681677849}
   - component: {fileID: 799600623237078522}
   m_Layer: 11
@@ -1254,6 +1254,7 @@ MonoBehaviour:
   HoverHeight: 1
   GravityMultiplier: 0
   AirDesacceleration: 5
+  Weight: 1
   TurnToMoveDirection: 0
   OnlyShootIfPlayerInView: 1
   CollisionDistance: 80
@@ -1333,34 +1334,6 @@ MonoBehaviour:
   RocketLauncherDownTarget: {fileID: 7291235227796684092}
   LaserCannonDownTarget: {fileID: 9104536494106381477}
   crystalShield: {fileID: 1731948443136489743}
---- !u!114 &1089858120247776818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533658519467415632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b75c57e142a6f65408396fca57bfe12b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 0
---- !u!114 &668053113924364249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533658519467415632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 153d1fc240f4fa141b91c44e0af85158, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StylePerDamage: 0
-  StyleOnCritical: 3
-  StyleOnKill: 15
 --- !u!114 &510608392103380544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1390,6 +1363,34 @@ MonoBehaviour:
   OneShot: 0
   blockers: []
   resetters: []
+--- !u!114 &1089858120247776818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533658519467415632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75c57e142a6f65408396fca57bfe12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 0
+--- !u!114 &668053113924364249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533658519467415632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153d1fc240f4fa141b91c44e0af85158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StylePerDamage: 0
+  StyleOnCritical: 3
+  StyleOnKill: 15
 --- !u!82 &7413753500681677849
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12142,8 +12143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bbf852d144d744d80cb750a06e291f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generators: []
   shieldedObject: {fileID: 1533658519467415632}
+  generators: []
 --- !u!1 &8578986398735576567
 GameObject:
   m_ObjectHideFlags: 0

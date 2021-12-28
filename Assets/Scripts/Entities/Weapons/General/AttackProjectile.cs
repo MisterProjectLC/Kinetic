@@ -32,7 +32,10 @@ public class AttackProjectile : MonoBehaviour
 
     private void SpawnImpactObject()
     {
-        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactType, ImpactObject);
+        if (!ImpactObject)
+            return;
+
+        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactObject.GetComponent<Poolable>().Type, ImpactObject);
         newObject.transform.position = transform.position;
         if (newObject.GetComponent<Attack>() && GetComponent<Attack>())
         {

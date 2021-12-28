@@ -11,7 +11,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
     public Vector2 Offset = Vector2.zero;
 
     [SerializeField]
-    string LabelText = "";
+    LocalizedString LabelText = "";
 
     [HideInInspector]
     public GameObject Label;
@@ -24,7 +24,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
     private void Awake()
     {
         Label = GetComponentInChildren<Text>().gameObject;
-        Label.GetComponent<Text>().text = LabelText;
+        Label.GetComponent<Text>().text = LabelText.value;
         StartCoroutine("EnableSound");
         GetComponent<AudioSource>().ignoreListenerPause = true;
     }

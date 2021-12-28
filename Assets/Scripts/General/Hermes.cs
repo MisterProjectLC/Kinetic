@@ -3,91 +3,90 @@ using UnityEngine;
 
 public class Hermes : MonoBehaviour
 {
+    static bool init = false;
+
+    public enum Properties
+    {
+        _First,
+        SoundVolume,
+        MusicVolume,
+        FOV,
+        MouseSensibility,
+        Fullscreen,
+        MouseInvert,
+        OutlineEnabled,
+        Language,
+        _Last
+    }
+
     public static string heroName = "";
 
-    static float soundVolume = 0.5f;
-    public static float SoundVolume
+    static Dictionary<Properties, object> properties = new Dictionary<Properties, object>();
+
+    public static void SetProperty(Properties key, object value)
     {
-        get { return soundVolume; }
-        set {
-            PlayerPrefs.SetFloat("SoundVolume", value);
-            soundVolume = value; 
-        }
+        if (value is float)
+            PlayerPrefs.SetFloat(key.ToString(), (float)value);
+        else if (value is int)
+            PlayerPrefs.SetInt(key.ToString(), (int)value);
+        else if (value is bool)
+            PlayerPrefs.SetInt(key.ToString(), (bool)value ? 1 : 0);
+
+        if (properties.ContainsKey(key))
+            properties[key] = value;
+        else
+            properties.Add(key, value);
     }
 
-    static float musicVolume = 0.5f;
-    public static float MusicVolume
+    public static float GetFloat(Properties key)
     {
-        get { return musicVolume; }
-        set {
-            PlayerPrefs.SetFloat("MusicVolume", value);
-            musicVolume = value; 
-        }
+        Debug.Assert(properties.ContainsKey(key) && properties[key] is float);
+        return (float)properties[key];
+    }
+    public static int GetInt(Properties key)
+    {
+        Debug.Assert(properties.ContainsKey(key) && properties[key] is int);
+        return (int)properties[key];
     }
 
-    static float mouseSensibility = 1f;
-    public static float MouseSensibility
+    public static bool GetBool(Properties key)
     {
-        get { return mouseSensibility; }
-        set {
-            PlayerPrefs.SetFloat("MouseSensibility", value);
-            mouseSensibility = value; 
-        }
+        Debug.Assert(properties.ContainsKey(key) && properties[key] is bool);
+        return (bool)properties[key];
     }
 
-    static float fov = 75f;
-    public static float FOV
+
+    static void GenerateFloat(Properties key)
     {
-        get { return fov; }
-        set
-        {
-            PlayerPrefs.SetFloat("FOV", value);
-            fov = value;
-        }
+        SetProperty(key, PlayerPrefs.GetFloat(key.ToString()));
     }
 
-    static bool fullscreen = false;
-    public static bool Fullscreen
+    static void GenerateInt(Properties key)
     {
-        get { return fullscreen; }
-        set
-        {
-            PlayerPrefs.SetInt("Fullscreen", value ? 1 : 0);
-            fullscreen = value;
-        }
+        SetProperty(key, PlayerPrefs.GetInt(key.ToString()));
     }
 
-    static bool mouseInvert = false;
-    public static bool MouseInvert { 
-        get { return mouseInvert; }
-        set
-        {
-            PlayerPrefs.SetInt("MouseInvert", value ? 1 : 0);
-            mouseInvert = value;
-        }
+    static void GenerateBool(Properties key)
+    {
+        SetProperty(key, PlayerPrefs.GetInt(key.ToString()) == 1);
     }
 
-    static float outlineEnabled = 0.5f;
-    public static bool OutlineEnabled
-    {
-        get { return outlineEnabled > 0f; }
-        set
-        {
-            PlayerPrefs.SetFloat("OutlineEnabled", value ? 0.5f : 0f);
-            outlineEnabled = value ? 0.5f : 0f;
-        }
-    }
 
     // This will just run on a dummy instance whose only job is literally just to load stuff from the PlayerPrefs
     private void Awake()
     {
-        soundVolume = PlayerPrefs.GetFloat("SoundVolume");
-        musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-        fov = PlayerPrefs.GetFloat("FOV");
-        mouseSensibility = PlayerPrefs.GetFloat("MouseSensibility");
-        fullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
-        mouseInvert = PlayerPrefs.GetInt("MouseInvert") == 1;
-        outlineEnabled = PlayerPrefs.GetFloat("OutlineEnabled");
+        if (init)
+            return;
+
+        init = true;
+        GenerateFloat(Properties.SoundVolume);
+        GenerateFloat(Properties.MusicVolume);
+        GenerateFloat(Properties.FOV);
+        GenerateFloat(Properties.MouseSensibility);
+        GenerateBool(Properties.Fullscreen);
+        GenerateBool(Properties.MouseInvert);
+        GenerateBool(Properties.OutlineEnabled);
+        GenerateInt(Properties.Language);
     }
 
 
