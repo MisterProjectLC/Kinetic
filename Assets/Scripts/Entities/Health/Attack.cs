@@ -8,11 +8,8 @@ public class Attack : MonoBehaviour
     [Header("Attributes")]
     public int Damage = 1;
 
-    [HideInInspector]
     public UnityAction<GameObject, float, int> OnAttack;
-    [HideInInspector]
     public UnityAction<Health> OnCritical;
-    [HideInInspector]
     public UnityAction<Attack, GameObject, bool> OnKill;
     [HideInInspector]
     public Actor Agressor;
@@ -24,13 +21,22 @@ public class Attack : MonoBehaviour
 
     public void AttackTarget(GameObject target, float multiplier = 1f)
     {
-        // Damage
-        if (target.GetComponent<Damageable>())
+        Damageable targetHit = target.GetComponent<Damageable>();
+
+        void OnDamageInvoke(int damage)
         {
-            OnAttack?.Invoke(target, multiplier, (int)(multiplier * Damage));
-            target.GetComponent<Damageable>().InflictDamage((int)(multiplier*Damage), this);
+            OnAttack?.Invoke(target, multiplier* targetHit.DamageSensitivity, damage);
+        }
+
+        // Damage
+        if (targetHit)
+        {
+            targetHit.OnDamage += OnDamageInvoke;
+            targetHit.InflictDamage((int)(multiplier*Damage), this);
+            targetHit.OnDamage -= OnDamageInvoke;
         }
     }
+
 
     public void SetupClone(Attack clone)
     {

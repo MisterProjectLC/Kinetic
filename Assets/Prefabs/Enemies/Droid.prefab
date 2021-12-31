@@ -154,7 +154,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6319508750748539345
 MonoBehaviour:
@@ -464,6 +464,7 @@ MonoBehaviour:
   HoverHeight: 0.5
   GravityMultiplier: 1
   AirDesacceleration: 0
+  Weight: 1
   TurnToMoveDirection: 0
   OnlyShootIfPlayerInView: 1
   CollisionDistance: 1

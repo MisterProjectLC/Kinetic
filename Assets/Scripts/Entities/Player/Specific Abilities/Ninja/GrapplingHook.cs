@@ -18,9 +18,7 @@ public class GrapplingHook : Ability
         hook.gameObject.SetActive(false);
 
         foreach (Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
-        {
             attack.OnKill += (Attack a, GameObject g, bool b) => ResetCooldown();
-        }
 
         GetComponentInParent<StyleMeter>().OnCritical += (critical) => { if (critical) ResetCooldown(); };
     }

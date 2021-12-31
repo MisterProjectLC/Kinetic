@@ -59,7 +59,6 @@ public class HitscanWeapon : Weapon
         if (!hit.collider || !attack)
             return;
 
-        Debug.Log("AttackHitLaser: " + hit.collider);
         if (Sparks != null)
         {
             GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(SparksType, Sparks);

@@ -474,6 +474,7 @@ MonoBehaviour:
   HoverHeight: 1
   GravityMultiplier: 1
   AirDesacceleration: 0
+  Weight: 1
   TurnToMoveDirection: 0
   OnlyShootIfPlayerInView: 1
   CollisionDistance: 1
@@ -507,6 +508,7 @@ MonoBehaviour:
   turnSpeed: 300
   turnVertical: 0
   partThatMoves: {fileID: 0}
+  TargetPosition: {fileID: 0}
 --- !u!114 &1254519644011659959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,6 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75c57e142a6f65408396fca57bfe12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 0
 --- !u!114 &2705710518575300219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,6 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StylePerDamage: 0
+  StyleOnCritical: 0
   StyleOnKill: 0.5
 --- !u!82 &149366801859357853
 AudioSource:
@@ -944,7 +948,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.868358
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3934932782389197709
 MonoBehaviour:

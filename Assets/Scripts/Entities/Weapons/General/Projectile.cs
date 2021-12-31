@@ -3,6 +3,8 @@ using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
+    static float AUTOHIT_WAITTIME = 3f;
+
     [Header("References")]
     public Transform Root;
     public Transform Tip;
@@ -68,6 +70,7 @@ public class Projectile : MonoBehaviour
         }
 
         // Hit detection
+        if (clock > AUTOHIT_WAITTIME/Attributes.MoveSpeed || KeepAlive)
         {
             RaycastHit closestHit = new RaycastHit();
             closestHit.distance = Mathf.Infinity;

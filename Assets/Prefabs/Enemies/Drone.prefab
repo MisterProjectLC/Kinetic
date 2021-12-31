@@ -43,7 +43,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.6
+  m_Radius: 3.5
   m_Center: {x: 0.017462969, y: 0, z: 0.39492226}
 --- !u!114 &6319508750748539345
 MonoBehaviour:
@@ -83,7 +83,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980188568300184120}
   m_LocalRotation: {x: -0.000000081460335, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0045399973, z: 0.016}
+  m_LocalPosition: {x: 0, y: -0.00454, z: 0.0208}
   m_LocalScale: {x: 0.0025, y: 0.0025, z: 0.0025}
   m_Children: []
   m_Father: {fileID: 8407171793985673350}
@@ -220,6 +220,7 @@ MonoBehaviour:
   HoverHeight: 2
   GravityMultiplier: 0
   AirDesacceleration: 5
+  Weight: 1
   TurnToMoveDirection: 0
   OnlyShootIfPlayerInView: 1
   CollisionDistance: 1
@@ -296,6 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StylePerDamage: 0
+  StyleOnCritical: 0
   StyleOnKill: 0.5
 --- !u!54 &7973732459355282863
 Rigidbody:

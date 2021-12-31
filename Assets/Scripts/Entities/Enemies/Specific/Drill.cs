@@ -14,7 +14,7 @@ public class Drill : MonoBehaviour
     [SerializeField]
     LayersConfig layers;
     [SerializeField]
-    float RotationSpeed = 5f;
+    float RotationSpeed = 150f;
     [SerializeField]
     float ChargeSpeed = 200f;
     [SerializeField]
@@ -27,7 +27,6 @@ public class Drill : MonoBehaviour
         enemy = GetComponent<Enemy>();
         enemy.OnActiveUpdate += ChargeUpdate;
         playerTransform = ActorsManager.AM.GetPlayer().transform;
-        StartCoroutine(Attack());
     }
 
     // Update is called once per frame
@@ -40,22 +39,22 @@ public class Drill : MonoBehaviour
         if (clock > ChargeCooldown)
         {
             clock = Random.Range(0f, 1f);
-            enemy.ReceiveKnockback((playerTransform.position - transform.position).normalized * ChargeSpeed);
+            enemy.ReceiveKnockback(enemy.Model.transform.forward.normalized * ChargeSpeed);
+            StartCoroutine(Attack());
         }
 
-        spinningObject.transform.Rotate(rotation * RotationSpeed * Time.deltaTime, Space.Self);
+        spinningObject.transform.Rotate(rotation * RotationSpeed * (clock/ChargeCooldown) * Time.deltaTime, Space.Self);
     }
 
     IEnumerator Attack()
     {
-        Debug.Log("Attack " + Time.time);
-
-        Physics.SphereCast(enemy.Model.transform.position, 2f, enemy.Model.transform.forward, out RaycastHit hitInfo,
-            1f, layers.layers, QueryTriggerInteraction.Collide);
-        if (hitInfo.collider)
+        yield return new WaitForSeconds(0.1f);
+        Physics.SphereCast(enemy.Model.transform.position, 1f, enemy.Model.transform.forward, out RaycastHit hitInfo,
+            5f, layers.layers, QueryTriggerInteraction.Collide);
+        if (hitInfo.collider && hitInfo.collider.GetComponentInParent<Drill>() != this)
             GetComponent<Attack>().AttackTarget(hitInfo.collider.gameObject);
 
-        yield return new WaitForSeconds(0.05f);
-        StartCoroutine(Attack());
+        if (enemy.GetMoveVelocity().magnitude >= 0.5f)
+                StartCoroutine(Attack());
     }
 }

@@ -821,7 +821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentHealth: 5
   CriticalHealth: 1
-  MaxHealth: 4
+  MaxHealth: 5
   lastAttack: {fileID: 0}
 --- !u!114 &2511817439516124872
 MonoBehaviour:
@@ -860,6 +860,7 @@ MonoBehaviour:
   HoverHeight: 1
   GravityMultiplier: 1
   AirDesacceleration: 0
+  Weight: 1
   TurnToMoveDirection: 1
   OnlyShootIfPlayerInView: 1
   CollisionDistance: 1

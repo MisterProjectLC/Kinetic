@@ -25,6 +25,7 @@ public class Crosshair : MonoBehaviour
     Image hitmarker;
     [SerializeField]
     List<Sprite> hitmarkers;
+    Color hitmarkerColor = Color.white;
 
     [SerializeField]
     float hitmarkerAnimationTime = 0.1f;
@@ -44,9 +45,7 @@ public class Crosshair : MonoBehaviour
             weapon.OnFire += ExpandCrosshair;
 
         foreach (Attack attack in ActorsManager.AM.GetPlayer().GetComponentsInChildren<Attack>())
-        {
             attack.OnAttack += ActivateHitmarker;
-        }
 
         audioSource = GetComponent<AudioSource>();
 
@@ -58,6 +57,7 @@ public class Crosshair : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Crosshair animation
         crosshairClock += Time.deltaTime;
         if (crosshairClock > crosshairAnimationTime)
         {
@@ -66,6 +66,7 @@ public class Crosshair : MonoBehaviour
             crosshair.sprite = crosshairs[crosshairFrame];
         }
 
+        // Hitmarker animation
         if (!hitmarker.enabled)
             return;
 
@@ -73,26 +74,27 @@ public class Crosshair : MonoBehaviour
         if (hitmarkerClock > hitmarkerAnimationTime)
         {
             hitmarkerClock = 0f;
+
+            if (hitmarkerColor.g < 1f)
+            {
+                hitmarkerColor.g += 0.25f;
+                hitmarkerColor.b += 0.25f;
+            }
+
             hitmarkerFrame++;
             if (hitmarkerFrame < hitmarkers.Count)
             {
-                hitmarker.color = new Color(hitmarker.color.r, hitmarker.color.g, hitmarker.color.b, hitmarker.color.a - 0.15f);
+                hitmarkerColor.a -= 0.15f;
+                hitmarker.color = hitmarkerColor;
                 hitmarker.sprite = hitmarkers[hitmarkerFrame];
             }
             else
             {
-                hitmarker.color = new Color(hitmarker.color.r, hitmarker.color.g, hitmarker.color.b, 0f);
+                hitmarkerColor.a = 0f;
+                hitmarker.color = hitmarkerColor;
                 hitmarker.enabled = false;
             }
         }
-    }
-
-
-    void ExpandCrosshair()
-    {
-        crosshairFrame = crosshairExpandedFrame;
-        crosshair.sprite = expandedCrosshair;
-        crosshairClock = -0.1f;
     }
 
 
@@ -103,12 +105,28 @@ public class Crosshair : MonoBehaviour
 
         hitmarker.enabled = true;
         hitmarkerFrame = 0;
-        hitmarker.color = new Color(hitmarker.color.r, hitmarker.color.g, hitmarker.color.b, Mathf.Clamp(hitmarker.color.a + damage * 0.3f, 0f, 1f));
         hitmarker.sprite = hitmarkers[0];
+
+        if (multiplier > 1)
+        {
+            hitmarkerColor.g = 0f;
+            hitmarkerColor.b = 0f;
+        }
+        hitmarkerColor.a = Mathf.Clamp(hitmarkerColor.a + damage * 0.3f, 0f, 1f);
+        hitmarker.color = hitmarkerColor;
 
         audioSource.volume = 0.5f + hitmarker.color.a/2;
         audioSource.Play();
     }
+
+
+    void ExpandCrosshair()
+    {
+        crosshairFrame = crosshairExpandedFrame;
+        crosshair.sprite = expandedCrosshair;
+        crosshairClock = -0.1f;
+    }
+
 
     void RotateCrosshair()
     {

@@ -1150,7 +1150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3913255256380044474}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.06116699, y: 0.000000009536743, z: -0.07199999}
+  m_LocalPosition: {x: 0.06116699, y: 0, z: -0.0916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8933107269020671913}
@@ -1363,6 +1363,7 @@ MonoBehaviour:
   HoverHeight: 1
   GravityMultiplier: 0
   AirDesacceleration: 5
+  Weight: 1
   TurnToMoveDirection: 0
   OnlyShootIfPlayerInView: 1
   CollisionDistance: 10
