@@ -35,7 +35,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         clock = SpawnStartDelay;
 
-        playerTransform = ActorsManager.AM.GetPlayer().transform;
+        playerTransform = ActorsManager.AM.GetPlayer().GetComponent<PlayerCharacterController>().PlayerCamera.transform;
 
         if (Spawnee.GetComponent<Poolable>())
             objectType = Spawnee.GetComponent<Poolable>().Type;
@@ -100,14 +100,14 @@ public class ObjectSpawner : MonoBehaviour
 
     bool IsPlayerInView()
     {
-        Vector3 playerDistance = playerTransform.position - SpawnPoint.position;
+        Vector3 playerDistance = SpawnPoint.position - playerTransform.position;
 
         // Check if inside field of view
-        if (Vector3.Dot(playerTransform.GetComponent<PlayerCharacterController>().PlayerCamera.transform.forward, playerDistance) < 0f)
+        if (Vector3.Dot(playerTransform.forward, playerDistance) <= 0f)
             return false;
 
         // Check if view is obstructed
-        Ray ray = new Ray(SpawnPoint.position, playerTransform.position - SpawnPoint.position);
+        Ray ray = new Ray(playerTransform.position, playerDistance);
         Physics.Raycast(ray, out RaycastHit hit, 100f, ViewBlockedLayers.layers, QueryTriggerInteraction.Ignore);
         if (hit.collider && (hit.distance < playerDistance.magnitude))
             return false;

@@ -101,13 +101,9 @@ public class Enemy : MonoBehaviour
     {
         Vector3 playerDistance = playerTransform.position - Model.transform.position;
 
-        // Check if inside field of view
-        if (Vector3.Dot(Model.transform.forward, playerDistance) < 0f)
-            return false;
-
         // Check if view is obstructed
-        Ray ray = new Ray(Model.transform.position, playerTransform.position - Model.transform.position);
-        Physics.Raycast(ray, out RaycastHit hit, 100f, ViewBlockedLayers.layers, QueryTriggerInteraction.Ignore);
+        Ray ray = new Ray(Model.transform.position, playerDistance.normalized);
+        Physics.Raycast(ray, out RaycastHit hit, 500f, ViewBlockedLayers.layers, QueryTriggerInteraction.Ignore);
         if (hit.collider && (hit.distance < playerDistance.magnitude))
             return false;
 

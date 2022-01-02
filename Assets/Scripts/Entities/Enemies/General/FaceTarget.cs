@@ -10,7 +10,7 @@ public class FaceTarget : MonoBehaviour
 
     [Tooltip("How fast does the object rotate to face the target")]
     [SerializeField]
-    private float turnSpeed = 10f;
+    public float turnSpeed = 10f;
 
     [SerializeField]
     private bool turnVertical = true;

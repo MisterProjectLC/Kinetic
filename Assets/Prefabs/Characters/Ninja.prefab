@@ -210,6 +210,7 @@ MonoBehaviour:
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
+  ParentAbility: {fileID: 0}
   Range: 150
   TargetLayers:
     serializedVersion: 2
@@ -1584,6 +1585,7 @@ MonoBehaviour:
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
+  ParentAbility: {fileID: 0}
   hookPrefab: {fileID: 5282472407548579809, guid: f4f3e33d5a1d13d4ba3e63e00c50e24f,
     type: 3}
   Mouth: {fileID: 958540071565868630}
@@ -2209,51 +2211,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialOptions:
-  - ability: {fileID: 2225249382224139414}
-    isPassive: 0
-    secondaryAbility: 
+  - option: {fileID: 2225249382224139414}
+    secondaryAbility: Translocate
     prerequisiteAbilities: []
-  - ability: {fileID: 6923643163349663185}
-    isPassive: 0
-    secondaryAbility: 
+  - option: {fileID: 6923643163349663185}
+    secondaryAbility: Grappling Hook
     prerequisiteAbilities: []
-  - ability: {fileID: 7349922464857806567}
-    isPassive: 0
+  - option: {fileID: 7349922464857806567}
     secondaryAbility: 
     prerequisiteAbilities: []
   Options:
-  - ability: {fileID: 1292416793624679719}
-    isPassive: 0
+  - option: {fileID: 1292416793624679719}
     secondaryAbility: 
     prerequisiteAbilities: []
-  - ability: {fileID: 758061105512210739}
-    isPassive: 0
+  - option: {fileID: 758061105512210739}
     secondaryAbility: 
     prerequisiteAbilities: []
-  - ability: {fileID: 8006630410610024068}
-    isPassive: 0
+  - option: {fileID: 8006630410610024068}
     secondaryAbility: 
     prerequisiteAbilities:
     - Shell Bombs
-  - ability: {fileID: 5307980427766246164}
-    isPassive: 0
+  - option: {fileID: 5307980427766246164}
     secondaryAbility: 
     prerequisiteAbilities: []
-  - ability: {fileID: 4382853588751367982}
-    isPassive: 1
+  - option: {fileID: 4382853588751367982}
     secondaryAbility: 
     prerequisiteAbilities: []
-  - ability: {fileID: 4101398689657722995}
-    isPassive: 1
+  - option: {fileID: 4101398689657722995}
     secondaryAbility: 
     prerequisiteAbilities:
     - Extra Jump
-  - ability: {fileID: 8791866288957817034}
-    isPassive: 1
+  - option: {fileID: 8791866288957817034}
     secondaryAbility: 
     prerequisiteAbilities: []
-  - ability: {fileID: 6358242602411863829}
-    isPassive: 1
+  - option: {fileID: 6358242602411863829}
     secondaryAbility: 
     prerequisiteAbilities:
     - Extra Jump

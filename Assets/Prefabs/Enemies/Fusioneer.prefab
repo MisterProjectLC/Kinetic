@@ -1272,7 +1272,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VerticalSpeed: 0.8
+  MaximumProximityToGround: 15
   MotorSpeed: 18
+  MaximumProximityToWall: 10
   MinimumDistance: 50
   myTrigger: {fileID: 0}
 --- !u!114 &3990458549617686974
@@ -2779,7 +2781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 3
+  Damage: 1
   Agressor: {fileID: 0}
 --- !u!82 &7914942596287862566
 AudioSource:
@@ -8957,8 +8959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ffe88cb2f353543abb0ed0ea821611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateCooldown: 0.01
-  turnSpeed: 20
+  updateCooldown: 0.1
+  turnSpeed: 15
   turnVertical: 1
   partThatMoves: {fileID: 4522044083277517914}
   TargetPosition: {fileID: 0}
@@ -9258,7 +9260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5105881270902281926}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -0.1219, z: 0.1953}
+  m_LocalPosition: {x: -0, y: -0.1568, z: 0.1953}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1866656948603867525}
@@ -9542,7 +9544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 4
+  Damage: 3
   Agressor: {fileID: 0}
 --- !u!82 &7939051727722374980
 AudioSource:
@@ -12524,7 +12526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8820566334070949951}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.0518, y: 0.0031, z: -0.0709}
+  m_LocalPosition: {x: -0.0625, y: 0.0031, z: -0.1012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8417449635080407244}

@@ -30,15 +30,23 @@ public class BigLoadoutOption : MonoBehaviour
 
     public void OnSecondaryInsert(DragDrop option)
     {
-        option.GetComponent<LoadoutOption>().Ability.GetComponent<SecondaryAbility>().ParentAbility = 
-            GetComponent<LoadoutOption>().Ability.GetComponent<Ability>();
+        OnSecondaryInsert(option.GetComponent<LoadoutOption>());
+    }
+
+    public void OnSecondaryInsert(LoadoutOption option)
+    {
+        ((SecondaryAbility)option.Ability).ParentAbility = GetComponent<LoadoutOption>().Ability.GetComponent<Ability>();
     }
 
     public void OnPrimaryInsert(DropSlot slot)
     {
         primarySlot = slot.GetComponent<LoadoutSlot>();
+
+        // Inserting into the last slot
         if (primarySlot.NextSlot == null || primarySlot.NextSlot.GetComponent<DropSlot>().InsertedDragDrop != null)
             secondarySlot.gameObject.SetActive(false);
+
+        // Inserting into an actually rational slot
         else
         {
             secondarySlot.gameObject.SetActive(true);

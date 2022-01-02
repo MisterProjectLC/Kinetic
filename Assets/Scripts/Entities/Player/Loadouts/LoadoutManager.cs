@@ -15,8 +15,23 @@ public class LoadoutManager : MonoBehaviour
     [System.Serializable]
     public struct Option
     {
-        public GameObject ability;
-        public bool isPassive;
+        public GameObject option;
+        public Ability ability
+        {
+            get
+            {
+                return option.GetComponent<Ability>();
+            }
+        }
+
+        public bool isPassive
+        {
+            get
+            {
+                return !option.GetComponent<Ability>();
+            }
+        }
+
         [Tooltip("Leave empty if none")]
         public string secondaryAbility;
         public List<string> prerequisiteAbilities;
@@ -253,10 +268,10 @@ public class LoadoutManager : MonoBehaviour
     }
 
 
-    public void SetAbility(GameObject ability, int loadout, int abilityNumber)
+    public void SetAbility(Ability ability, int loadout, int abilityNumber)
     {
         if (ability != null)
-            Loadouts[loadout].abilities[abilityNumber] = ability.GetComponent<Ability>();
+            Loadouts[loadout].abilities[abilityNumber] = ability;
         else
             Loadouts[loadout].abilities[abilityNumber] = null;
 

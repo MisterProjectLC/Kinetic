@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Translocate : Ability
+public class Translocate : SecondaryAbility
 {
     [Header("Attributes")]
     public float Range = 100f;

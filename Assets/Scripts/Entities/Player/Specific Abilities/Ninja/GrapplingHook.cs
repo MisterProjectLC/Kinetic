@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrapplingHook : Ability
+public class GrapplingHook : SecondaryAbility
 {
     [SerializeField]
     private GameObject hookPrefab;

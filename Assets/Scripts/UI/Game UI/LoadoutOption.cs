@@ -6,28 +6,37 @@ using UnityEngine.Events;
 
 public class LoadoutOption : MonoBehaviour
 {
-    public GameObject Ability;
-    public bool isPassive = false;
-
+    GameObject option;
+    public GameObject Option
+    {
+        get { return option; }
+        set
+        {
+            option = value;
+            Ability = option.GetComponent<Ability>();
+        }
+    }
+    public Ability Ability { get; private set; }
     public List<string> PrerequisiteAbilities;
 
     [SerializeField]
     Image passiveOverlay;
     public UnityAction<LoadoutOption> OnInsert;
 
+
     // Start is called before the first frame update
     void Start()
     {
         string abilityName;
 
-        if (!isPassive)
+        if (Ability)
         {
-            abilityName = Ability.GetComponent<Ability>().DisplayName;
+            abilityName = Ability.DisplayName;
             GetComponent<DragDrop>().Type = "Ability";
         } else 
         {
-            GetComponentInChildren<Text>().text = Ability.gameObject.name;
-            abilityName = Ability.gameObject.name;
+            GetComponentInChildren<Text>().text = Option.name;
+            abilityName = Option.name;
             GetComponent<DragDrop>().Type = "Passive";
             passiveOverlay.enabled = true;
         }
@@ -36,8 +45,8 @@ public class LoadoutOption : MonoBehaviour
         GetComponent<TooltipTrigger>().Title = abilityName;
 
 
-        if (Ability.GetComponent<Ability>() is SecondaryAbility)
-            GetComponent<DragDrop>().Type = Ability.GetComponent<Ability>().DisplayName;
+        if (Ability && Ability is SecondaryAbility)
+            GetComponent<DragDrop>().Type = Ability.DisplayName;
 
         GetComponent<DragDrop>().OnInsert += OnInsertFunc;
         GetComponent<DragDrop>().OnRemove += RemoveFromSlot;
@@ -54,26 +63,26 @@ public class LoadoutOption : MonoBehaviour
     void OnInsertFunc(DropSlot dropSlot)
     {
         LoadoutSlot slot = dropSlot.GetComponent<LoadoutSlot>();
-        slot.SetAbility(Ability, true);
+        slot.SetOption(Option, true);
         OnInsert?.Invoke(this);
     }
 
     void RemoveFromSlot(DropSlot dropSlot)
     {
         LoadoutSlot slot = dropSlot.GetComponent<LoadoutSlot>();
-        slot.SetAbility(Ability, false);
+        slot.SetOption(Option, false);
     }
 
 
     void UpdateText()
     {
-        if (!Ability)
+        if (!Option)
             return;
 
-        if (!isPassive)
-            GetComponent<TooltipTrigger>().Description = "COOLDOWN: " + Ability.GetComponent<Ability>().Cooldown.ToString() +
+        if (Ability)
+            GetComponent<TooltipTrigger>().Description = "COOLDOWN: " + Ability.Cooldown.ToString() +
                 " " + LocalizationSystem.GetLocalizedText("seconds") + "\n" + Ability.GetComponent<Description>().Value;
         else
-            GetComponent<TooltipTrigger>().Description = Ability.GetComponent<Description>().Value;
+            GetComponent<TooltipTrigger>().Description = Option.GetComponent<Description>().Value;
     }
 }

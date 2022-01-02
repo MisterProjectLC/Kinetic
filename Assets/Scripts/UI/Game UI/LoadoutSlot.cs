@@ -7,16 +7,17 @@ public class LoadoutSlot : MonoBehaviour
 
     public LoadoutSlot NextSlot;
 
-    public void SetAbility(GameObject ability, bool activating)
+    public void SetOption(GameObject option, bool activating)
     {
         if (activating)
-            Hermes.SpawnAbilities.Add(new Hermes.SavedAbility(ability.name, LoadoutNumber, AbilityNumber));
+            Hermes.SpawnAbilities.Add(new Hermes.SavedAbility(option.name, LoadoutNumber, AbilityNumber));
         else
             Hermes.SpawnAbilities.RemoveAll(x => x.loadout == LoadoutNumber && x.slot == AbilityNumber);
 
         if (LoadoutNumber >= 0)
-            ActorsManager.Player.GetComponent<LoadoutManager>().SetAbility(activating ? ability : null, LoadoutNumber, AbilityNumber);
+            ActorsManager.Player.GetComponent<LoadoutManager>().SetAbility(activating ? option.GetComponent<Ability>() : null, 
+                LoadoutNumber, AbilityNumber);
         else
-            ActorsManager.Player.GetComponent<LoadoutManager>().SetPassive(ability, activating);
+            ActorsManager.Player.GetComponent<LoadoutManager>().SetPassive(option, activating);
     }
 }
