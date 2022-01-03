@@ -23,6 +23,7 @@ public class Movepad : MonoBehaviour
     private Vector3 detectPosOffset = Vector3.zero;
     [SerializeField]
     Vector3 moveVector;
+    Vector3 detectorCenter;
 
     [Header("Stats")]
     public float Speed = 5f;
@@ -51,17 +52,21 @@ public class Movepad : MonoBehaviour
         {
             moveVector = (DespawnPoint.position - SpawnPoint.position).normalized * Speed;
             if (!overrideAutomaticSize)
-                detectSize = new Vector3((DespawnPoint.position - SpawnPoint.position).magnitude / 2, 1f, 1.5f);
-        } else
+                detectSize = new Vector3(Mathf.Abs(DespawnPoint.localPosition.x - SpawnPoint.localPosition.x) / 2, 
+                    1f, transform.localScale.z*1.5f);
+        }
+        else
+        {
             detectSize /= 2;
+        }
         //Debug.Log(DespawnPoint.position + ", " + SpawnPoint.position + ", " + moveVector);
     }
 
 
     private void Update()
     {
-        Collider[] colliders = Physics.OverlapBox(meshRenderer.bounds.center + detectPosOffset, detectSize,
-            meshRenderer.transform.rotation, detectLayers);
+        detectorCenter = DespawnPoint ? (DespawnPoint.position + SpawnPoint.position)/2 : meshRenderer.bounds.center + detectPosOffset;
+        Collider[] colliders = Physics.OverlapBox(detectorCenter, detectSize, meshRenderer.transform.rotation, detectLayers);
         if (colliders.Length > 0)
         {
             foreach (Collider collider in colliders)

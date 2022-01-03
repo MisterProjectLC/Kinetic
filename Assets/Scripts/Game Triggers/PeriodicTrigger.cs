@@ -18,7 +18,6 @@ public class PeriodicTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         clock += Time.deltaTime;
         if (clock > Cooldown)
         {

@@ -251,7 +251,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VerticalSpeed: 0.4
+  MaximumProximityToGround: 1
   MotorSpeed: 10
+  MaximumProximityToWall: 1
   MinimumDistance: 12
   myTrigger: {fileID: 6873437428079399595}
 --- !u!114 &4667401134277738239
@@ -521,7 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthRef: {fileID: 170632900509345856}
-  DamageSensitivity: 2
+  DamageSensitivity: 1
 --- !u!1 &6715617966263242105
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthRef: {fileID: 170632900509345856}
-  DamageSensitivity: 2
+  DamageSensitivity: 1
 --- !u!1 &8094585806336981559
 GameObject:
   m_ObjectHideFlags: 0

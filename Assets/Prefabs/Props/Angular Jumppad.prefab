@@ -55,7 +55,9 @@ MonoBehaviour:
   moveVector: {x: 0, y: 0, z: 0}
   Speed: 5
   isJump: 1
+  Sticky: 0
   overrideAutomaticSize: 0
+  cooldownOverride: -1
 --- !u!1 &2517669965050839375
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +642,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aa0c193b8a62fab47ba2a1d697c77786, type: 2}
+  - {fileID: 2100000, guid: 2cddc94018c70844b8fdc553e41c3bc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

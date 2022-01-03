@@ -142,7 +142,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1e7c3fbc694d95e4e89b573d3a8dd5d8, type: 2}
+  - {fileID: 2100000, guid: aa0c193b8a62fab47ba2a1d697c77786, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1381,7 +1381,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VerticalSpeed: 0.8
+  MaximumProximityToGround: 1
   MotorSpeed: 18
+  MaximumProximityToWall: 1
   MinimumDistance: 7
   myTrigger: {fileID: 0}
 --- !u!114 &1831796119583015996
@@ -2573,7 +2575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthRef: {fileID: 1778385790811195551}
-  DamageSensitivity: 2
+  DamageSensitivity: 1
 --- !u!1 &8483369660417671650
 GameObject:
   m_ObjectHideFlags: 0

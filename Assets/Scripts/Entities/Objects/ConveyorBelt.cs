@@ -10,9 +10,10 @@ public class ConveyorBelt : MonoBehaviour
 
     Vector3 SpawnPosition;
     Vector3 DespawnPosition;
+    Vector3 BeltSize;
 
     Movepad movepad;
-    Vector3 BeltDirection;
+    //Vector3 BeltDirection;
 
     float SpawnTime = 5f;
     float clock = 0f;
@@ -23,7 +24,8 @@ public class ConveyorBelt : MonoBehaviour
         movepad = GetComponent<Movepad>();
         SpawnPosition = movepad.GetUpperExtremePoint();
         DespawnPosition = movepad.GetLowerExtremePoint();
-        BeltDirection = movepad.GetMoveDirection().normalized;
+        //BeltDirection = movepad.GetMoveDirection().normalized;
+        BeltSize = new Vector3(transform.localScale.z, 1f, 1f);
 
         SpawnTime = 5f/movepad.Speed;
         /*
@@ -57,11 +59,12 @@ public class ConveyorBelt : MonoBehaviour
         if (clock > SpawnTime) {
             clock = 0f;
 
-            //GameObject instance = ObjectManager.OM.SpawnObjectFromPool(Detail.GetComponent<Poolable>().Type, Detail);
-            //instance.transform.position = SpawnPosition;
-            //instance.transform.rotation = transform.rotation * Quaternion.Euler(0f, 90f, 0f);
-            //instance.transform.parent = transform;
-            GameObject instance = Instantiate(Detail, SpawnPosition, transform.rotation * Quaternion.Euler(0f, 90f, 0f), transform);
+            GameObject instance = ObjectManager.OM.SpawnObjectFromPool(Detail.GetComponent<Poolable>().Type, Detail);
+            instance.transform.position = SpawnPosition;
+            instance.transform.rotation = transform.rotation * Quaternion.Euler(0f, 90f, 0f);
+            instance.transform.localScale = BeltSize;
+            instance.transform.parent = transform;
+            //GameObject instance = Instantiate(Detail, SpawnPosition, transform.rotation * Quaternion.Euler(0f, 90f, 0f), transform);
             Details.Add(instance);
         }
     }

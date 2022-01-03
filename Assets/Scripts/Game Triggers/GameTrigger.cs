@@ -28,6 +28,7 @@ public class GameTrigger : MonoBehaviour
             {
                 gameTrigger.OnTriggerActivate += RemoveBlocker;
                 blockerCount++;
+                Debug.Log("Good, " + blockerCount);
             }
         }
 
@@ -47,12 +48,13 @@ public class GameTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(0.01f);
         if (AutoStart)
-            OnTriggerActivate?.Invoke();
+            Activate();
     }
 
     void RemoveBlocker()
     {
         blockerCount--;
+        Debug.Log("Bad, " + blockerCount);
         if (blockerCount == 0)
             OnFreeOfBlockers?.Invoke();
     }
@@ -69,11 +71,6 @@ public class GameTrigger : MonoBehaviour
     private void OnDestroy()
     {
         Destroy();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Activate();
     }
 
     public void Activate()
