@@ -13,7 +13,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     public UnityAction<DropSlot> OnRemove;
     public UnityAction OnClick;
     public DropSlot AssignedSlot;
-
+    
     private void Awake()
     {
         OnInsert += AssignToSlot;
@@ -42,7 +42,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         if (AssignedSlot)
         {
             AssignedSlot.OnRemove(gameObject);
-            OnRemove.Invoke(AssignedSlot);
+            OnRemove?.Invoke(AssignedSlot);
             AssignedSlot = null;
         }
     }

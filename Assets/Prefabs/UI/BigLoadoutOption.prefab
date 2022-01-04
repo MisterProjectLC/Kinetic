@@ -117,7 +117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 54}
+  m_AnchoredPosition: {x: -0, y: 60}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7176151791261132246
@@ -172,8 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: Sada
   Offset: {x: 0, y: 0}
-  LabelText: 
-  Label: {fileID: 0}
+  LabelText:
+    key: 
   InsertedDragDrop: {fileID: 0}
 --- !u!114 &2951334679710618756
 MonoBehaviour:
@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityNumber: 0
   LoadoutNumber: 0
+  GlobalSlot: 0
   NextSlot: {fileID: 0}
 --- !u!82 &7368044965325029246
 AudioSource:
@@ -410,7 +411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -279, y: -144.29999}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &8191001801631402918
@@ -459,8 +460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5e884eca54f664baa06960e213c970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ability: {fileID: 0}
-  isPassive: 0
+  PrerequisiteAbilities: []
+  passiveOverlay: {fileID: 0}
 --- !u!114 &7205150191107028999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,8 +553,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 27}
-  m_SizeDelta: {x: 250, y: 5}
+  m_AnchoredPosition: {x: 0, y: 30.1}
+  m_SizeDelta: {x: 250, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5977153133506729966
 CanvasRenderer:

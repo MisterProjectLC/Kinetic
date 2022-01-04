@@ -2,7 +2,7 @@ using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class Menu : MonoBehaviour
+public class Menu : MonoBehaviour
 {
     [System.Serializable]
     protected struct Submenu
@@ -12,15 +12,26 @@ public abstract class Menu : MonoBehaviour
         public bool enabled;
     }
 
-
     [SerializeField]
     protected Submenu[] submenus;
+
+    [SerializeField]
+    int StartSubmenu = -1;
 
 
     // Start is called before the first frame update
     protected void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
+
+        for (int i = 0; i < submenus.Length; i++)
+            submenus[i].enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        if (StartSubmenu != -1 && !submenus[StartSubmenu].enabled)
+            SubmenuButton(StartSubmenu);
     }
 
     public void SubmenuButton(int i)

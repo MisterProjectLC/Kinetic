@@ -14,15 +14,17 @@ public class DropSlot : MonoBehaviour, IDropHandler
     LocalizedString LabelText = "";
 
     [HideInInspector]
-    public GameObject Label;
+    GameObject Label;
 
     public DragDrop InsertedDragDrop;
+    Transform InsertedDragDropOldParent;
     public UnityAction<DragDrop> OnInserted;
 
     bool soundEnabled = false;
 
     private void Awake()
     {
+        Offset = Vector2.zero;
         Label = GetComponentInChildren<Text>().gameObject;
         Label.GetComponent<Text>().text = LabelText.value;
         StartCoroutine("EnableSound");
@@ -51,15 +53,22 @@ public class DropSlot : MonoBehaviour, IDropHandler
         if (GetComponent<AudioSource>() && soundEnabled)
             GetComponent<AudioSource>().Play();
 
+        InsertedDragDropOldParent = dragDrop.transform.parent;
+        Debug.Log("Dropped: " + dragDrop.GetComponent<LoadoutOption>().Option.name + ", " + InsertedDragDropOldParent.gameObject.name + 
+            ". Offset: " + Offset);
+
         InsertedDragDrop = dragDrop.GetComponent<DragDrop>();
         dragDrop.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + Offset;
-        InsertedDragDrop.OnInsert.Invoke(this);
+        InsertedDragDrop.OnInsert?.Invoke(this);
+        InsertedDragDrop.transform.SetParent(transform);
         OnInserted?.Invoke(InsertedDragDrop);
     }
 
 
     public void OnRemove(GameObject dragDrop)
     {
+        InsertedDragDrop.transform.SetParent(InsertedDragDropOldParent);
+        Debug.Log("Removed: " + InsertedDragDrop.GetComponent<LoadoutOption>().Option.name + ", " + InsertedDragDropOldParent.gameObject.name);
         InsertedDragDrop = null;
         Label.SetActive(true);
     }

@@ -28,7 +28,6 @@ public class GameTrigger : MonoBehaviour
             {
                 gameTrigger.OnTriggerActivate += RemoveBlocker;
                 blockerCount++;
-                Debug.Log("Good, " + blockerCount);
             }
         }
 
@@ -54,7 +53,6 @@ public class GameTrigger : MonoBehaviour
     void RemoveBlocker()
     {
         blockerCount--;
-        Debug.Log("Bad, " + blockerCount);
         if (blockerCount == 0)
             OnFreeOfBlockers?.Invoke();
     }

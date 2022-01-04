@@ -23,30 +23,34 @@ public class OptionsMenu : Menu
         for (LocalizationSystem.Language l = LocalizationSystem.Language._First + 1; l < LocalizationSystem.Language._Last; l++)
             languageDropdown.options.Add(new Dropdown.OptionData(l.ToString().ToUpper()));
 
+        AddSliderListener(Hermes.Properties.SoundVolume, OnSoundUpdate);
+        AddSliderListener(Hermes.Properties.MusicVolume, OnMusicUpdate);
+        AddToggleListener(Hermes.Properties.Fullscreen, OnFullscreenToggle);
+        AddToggleListener(Hermes.Properties.OutlineEnabled, OnOutlineToggle);
+        AddDropdownListener(Hermes.Properties.Language, OnLanguageUpdate);
+
         foreach (OptionData option in optionData)
         {
             if (option.slider)
             {
                 option.slider.onValueChanged.AddListener((v) => Hermes.SetProperty(option.property, option.slider.value));
                 option.slider.value = Hermes.GetFloat(option.property);
+                option.slider.onValueChanged?.Invoke(Hermes.GetFloat(option.property));
             }
             else if (option.toggle)
             {
                 option.toggle.onValueChanged.AddListener((v) => Hermes.SetProperty(option.property, option.toggle.isOn));
                 option.toggle.isOn = Hermes.GetBool(option.property);
+                option.toggle.onValueChanged?.Invoke(Hermes.GetBool(option.property));
             }
             else if (option.dropdown)
             {
                 option.dropdown.onValueChanged.AddListener((v) => Hermes.SetProperty(option.property, option.dropdown.value));
                 option.dropdown.value = Hermes.GetInt(option.property);
+                option.dropdown.onValueChanged?.Invoke(Hermes.GetInt(option.property));
             }
         }
 
-        AddSliderListener(Hermes.Properties.SoundVolume, OnSoundUpdate);
-        AddSliderListener(Hermes.Properties.MusicVolume, OnMusicUpdate);
-        AddToggleListener(Hermes.Properties.Fullscreen, OnFullscreenToggle);
-        AddToggleListener(Hermes.Properties.OutlineEnabled, OnOutlineToggle);
-        AddDropdownListener(Hermes.Properties.Language, OnLanguageUpdate);
         base.Start();
     }
 

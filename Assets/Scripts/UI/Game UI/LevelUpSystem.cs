@@ -6,6 +6,15 @@ public class LevelUpSystem : MonoBehaviour
 {
     public static LevelUpSystem LUS;
 
+    public enum Type
+    {
+        _First,
+        Passive,
+        Skill,
+        Weapon,
+        _Last
+    }
+
     // Loadouts
     [System.Serializable]
     public struct Loadout
@@ -14,7 +23,11 @@ public class LevelUpSystem : MonoBehaviour
     }
 
     [SerializeField]
+    DropSlot globalSlot;
+    [SerializeField]
     List<Loadout> totalSlots;
+    [SerializeField]
+    List<DropSlot> passiveSlots;
     [SerializeField]
     List<DropSlot> initialSlots;
     [SerializeField]
@@ -29,7 +42,7 @@ public class LevelUpSystem : MonoBehaviour
     public GameObject heavyOptionPrefab;
 
     List<LoadoutOption> optionsLocked = new List<LoadoutOption>();
-    List<LoadoutOption> optionsBank = new List<LoadoutOption>();
+    Dictionary<Type, List<LoadoutOption>> optionsBank =  new Dictionary<Type, List<LoadoutOption>>();
     List<LoadoutOption> optionsShown = new List<LoadoutOption>();
     List<LoadoutOption> optionsObtained = new List<LoadoutOption>();
 
@@ -43,7 +56,25 @@ public class LevelUpSystem : MonoBehaviour
             Destroy(LUS);
 
         LUS = this;
+
+        for (Type i = Type._First+1; i < Type._Last; i++)
+            optionsBank.Add(i, new List<LoadoutOption>());
+
+        for (int i = 0; i < totalSlots.Count; i++)
+            totalSlots[i].slots.Add(globalSlot);
     }
+
+
+    void AddToOptionsBank(LoadoutOption loadoutOption)
+    {
+        if (!loadoutOption.Ability)
+            optionsBank[Type.Passive].Add(loadoutOption);
+        else if (loadoutOption.Ability is WeaponAbility)
+            optionsBank[Type.Weapon].Add(loadoutOption);
+        else
+            optionsBank[Type.Skill].Add(loadoutOption);
+    }
+
 
     void Start() {
 
@@ -59,8 +90,8 @@ public class LevelUpSystem : MonoBehaviour
             if (option.ability is SecondaryAbility)
             {
                 i--;
-                initialSlots[i].OnDrop(loadoutOption.gameObject);
-                initialSlots[i-1].InsertedDragDrop.GetComponent<BigLoadoutOption>().OnSecondaryInsert(loadoutOption);
+                //initialSlots[i].OnDrop(loadoutOption.gameObject);
+                initialSlots[i-1].InsertedDragDrop.GetComponent<BigLoadoutOption>().InsertOnSecondary(loadoutOption);
             }
             else
             {
@@ -85,7 +116,7 @@ public class LevelUpSystem : MonoBehaviour
             // Makeshift code for initial Killheal passive
             if (option.option.name == "Killheal")
             {
-                totalSlots[3].slots[0].OnDrop(GO);
+                passiveSlots[0].OnDrop(GO);
                 optionsObtained.Add(loadoutOption);
             }
             // Setup option
@@ -97,7 +128,10 @@ public class LevelUpSystem : MonoBehaviour
                     Hermes.SavedAbility ability = Hermes.SpawnAbilities.Find(x => x.name == option.option.name);
                     Hermes.SpawnAbilities[Hermes.SpawnAbilities.IndexOf(ability)].SetInGame(true);
 
-                    totalSlots[ability.loadout != -1 ? ability.loadout : 3].slots[ability.slot].OnDrop(GO);
+                    if (ability.loadout != -1)
+                        totalSlots[ability.loadout].slots[ability.slot].OnDrop(GO);
+                    else
+                        passiveSlots[ability.slot].OnDrop(GO);
                     optionsObtained.Add(loadoutOption);
                 }
                 else
@@ -106,7 +140,7 @@ public class LevelUpSystem : MonoBehaviour
                     if (option.prerequisiteAbilities.Count > 0)
                         optionsLocked.Add(loadoutOption);
                     else
-                        optionsBank.Add(loadoutOption);
+                        AddToOptionsBank(loadoutOption);
                 }
             }
         }
@@ -128,7 +162,7 @@ public class LevelUpSystem : MonoBehaviour
                 if (nextSlotIndex >= thisLoadout.slots.Count || !thisLoadout.slots[nextSlotIndex].InsertedDragDrop)
                     continue;
 
-                bigOption.OnSecondaryInsert(thisLoadout.slots[nextSlotIndex].InsertedDragDrop.GetComponent<LoadoutOption>());
+                //bigOption.InsertOnSecondary(thisLoadout.slots[nextSlotIndex].InsertedDragDrop.GetComponent<LoadoutOption>());
             }
         
     }
@@ -161,25 +195,23 @@ public class LevelUpSystem : MonoBehaviour
     }
 
 
-    public void LevelUp()
+    public void LevelUp(Type type)
     {
+        List<LoadoutOption> thisOptionsBank = optionsBank[type];
         NewAbilityText.SetActive(true);
         NewAbilitySquare.SetActive(true);
         SetLoweredMenu(false);
 
-        for (int i = 0; i < 3; i++) {
-            if (optionsBank.Count <= 0)
-                return;
+        for (int i = 0; i < 3 && thisOptionsBank.Count > 0; i++) {
+            int rnd = Random.Range(0, thisOptionsBank.Count);
 
-            int rnd = Random.Range(0, optionsBank.Count);
-
-            optionsBank[rnd].gameObject.SetActive(true);
-            optionsShown.Add(optionsBank[rnd]);
-            optionsBank[rnd].GetComponent<RectTransform>().anchoredPosition = new Vector2(-40 + i*258, 166);
-            if (optionsBank[rnd].GetComponent<BigLoadoutOption>())
+            thisOptionsBank[rnd].gameObject.SetActive(true);
+            optionsShown.Add(optionsBank[type][rnd]);
+            thisOptionsBank[rnd].GetComponent<RectTransform>().anchoredPosition = new Vector2(-40 + i*258, 166);
+            if (thisOptionsBank[rnd].GetComponent<BigLoadoutOption>())
                 SetLoweredMenu(true);
 
-            optionsBank.RemoveAt(rnd);
+            thisOptionsBank.RemoveAt(rnd);
         }
     }
 
@@ -217,7 +249,7 @@ public class LevelUpSystem : MonoBehaviour
                 if (potentialToUnlock.PrerequisiteAbilities.Count <= 0)
                 {
                     optionsToDelete.Add(potentialToUnlock);
-                    optionsBank.Add(potentialToUnlock);
+                    AddToOptionsBank(potentialToUnlock);
                 }
             }
         }
@@ -230,7 +262,7 @@ public class LevelUpSystem : MonoBehaviour
         {
             shownOption.GetComponent<RectTransform>().anchoredPosition = new Vector3(-1000, 1000);
             shownOption.gameObject.SetActive(false);
-            optionsBank.Add(shownOption);
+            AddToOptionsBank(shownOption);
         }
         optionsShown.Clear();
         NewAbilityText.SetActive(false);
@@ -246,5 +278,10 @@ public class LevelUpSystem : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.1f);
             DragInstructions.alpha = DragInstructions.alpha == 0 ? 1 : 0;
         }
+    }
+
+    public int GetLoadoutCount()
+    {
+        return totalSlots.Count;
     }
 }

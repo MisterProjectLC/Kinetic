@@ -92,10 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: Ability
-  Offset: {x: 0, y: 0}
+  Offset: {x: 0, y: 10}
   LabelText:
     key: 
-  Label: {fileID: 0}
   InsertedDragDrop: {fileID: 0}
 --- !u!114 &3085514987049677036
 MonoBehaviour:
@@ -111,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityNumber: 0
   LoadoutNumber: 0
+  GlobalSlot: 0
   NextSlot: {fileID: 0}
 --- !u!82 &196032490553090160
 AudioSource:

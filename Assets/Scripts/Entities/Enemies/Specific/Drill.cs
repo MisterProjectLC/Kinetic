@@ -57,7 +57,10 @@ public class Drill : MonoBehaviour
         Physics.SphereCast(enemy.Model.transform.position, 1.25f, enemy.Model.transform.forward, out RaycastHit hitInfo,
             5f, layers.layers, QueryTriggerInteraction.Collide);
         if (hitInfo.collider && hitInfo.collider.GetComponentInParent<Drill>() != this)
+        {
             GetComponent<Attack>().AttackTarget(hitInfo.collider.gameObject);
+            yield return new WaitForSeconds(0.12f);
+        }
 
         if (enemy.GetMoveVelocity().magnitude >= 0.5f)
             StartCoroutine(Attack());
