@@ -13,6 +13,11 @@ public class Localizer : MonoBehaviour
         UpdateText();
     }
 
+    private void OnDestroy()
+    {
+        LocalizationSystem.OnLanguageUpdate -= UpdateText;
+    }
+
 
     public string GetKey()
     {

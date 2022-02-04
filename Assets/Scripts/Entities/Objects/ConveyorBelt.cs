@@ -25,7 +25,7 @@ public class ConveyorBelt : MonoBehaviour
         SpawnPosition = movepad.GetUpperExtremePoint();
         DespawnPosition = movepad.GetLowerExtremePoint();
         //BeltDirection = movepad.GetMoveDirection().normalized;
-        BeltSize = new Vector3(transform.localScale.z, 1f, 1f);
+        BeltSize = new Vector3(transform.lossyScale.z, 1f, 1f);
 
         SpawnTime = 5f/movepad.Speed;
         /*

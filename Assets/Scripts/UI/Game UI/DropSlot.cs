@@ -27,7 +27,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         Offset = Vector2.zero;
         Label = GetComponentInChildren<Text>().gameObject;
         Label.GetComponent<Text>().text = LabelText.value;
-        StartCoroutine("EnableSound");
+        StartCoroutine(EnableSound());
         GetComponent<AudioSource>().ignoreListenerPause = true;
     }
 
