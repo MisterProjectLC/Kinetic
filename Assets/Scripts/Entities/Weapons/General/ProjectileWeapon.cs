@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ProjectileShooter))]
 public class ProjectileWeapon : Weapon
 {
     [SerializeField]

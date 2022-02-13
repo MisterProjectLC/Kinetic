@@ -28,6 +28,7 @@ public class ObjectManager : MonoBehaviour
         SuspendedCrate,
         PaybackExplosion,
         ConveyorBeltDetail,
+        KatanaSlash,
         Count
     }
 

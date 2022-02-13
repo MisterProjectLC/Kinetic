@@ -59,7 +59,7 @@ public class Translocate : SecondaryAbility
         GetComponent<AudioSource>().Play();
         float lastTimeScale = Time.timeScale;
         Time.timeScale = 0f;
-        int framesToWait = (int)(player.transform.position - targetCoords).magnitude / 3;
+        int framesToWait = Mathf.Min(10, (int)(player.transform.position - targetCoords).magnitude / 3);
         for (int i = 0; i < framesToWait; i++)
         {
             player.transform.position = Vector3.Lerp(player.transform.position, targetCoords, 0.04f);

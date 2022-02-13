@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonLoader : MonoBehaviour
+public class TriggerLoader : MonoBehaviour
 {
     [SerializeField]
     List<string> ScenesLoaded;
