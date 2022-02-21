@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
+  Agressor: {fileID: 0}
 --- !u!114 &3536989481799197300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
+  AlreadyInitialized: 0
 --- !u!1 &5814223675256522330
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +170,7 @@ GameObject:
   - component: {fileID: 3089195028377839892}
   - component: {fileID: 1707721761667071292}
   - component: {fileID: 2406996717939443314}
+  - component: {fileID: 611213686730826846}
   m_Layer: 14
   m_Name: Cylinder
   m_TagString: Untagged
@@ -238,3 +241,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &611213686730826846
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8072250908670764435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5000002
+  m_Height: 2.0000005
+  m_Direction: 1
+  m_Center: {x: 0.00000005960466, y: 0, z: -0.00000008940697}

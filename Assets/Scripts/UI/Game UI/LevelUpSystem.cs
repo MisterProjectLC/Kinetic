@@ -223,7 +223,7 @@ public class LevelUpSystem : MonoBehaviour
         this.loweredMenu = loweredMenu;
         foreach (RectTransform rectTransform in GetComponentsInChildren<RectTransform>())
         {
-            if (rectTransform.gameObject.name == "Background")
+            if (rectTransform.gameObject.name == "LM-Background")
                 rectTransform.anchoredPosition += loweredMenu ? -new Vector2(0f, 60f) : new Vector2(0f, 60f);
         }
     }

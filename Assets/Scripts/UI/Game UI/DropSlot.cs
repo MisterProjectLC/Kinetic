@@ -67,6 +67,9 @@ public class DropSlot : MonoBehaviour, IDropHandler
 
     public void OnRemove(GameObject dragDrop)
     {
+        if (!InsertedDragDrop || !InsertedDragDropOldParent)
+            return;
+
         InsertedDragDrop.transform.SetParent(InsertedDragDropOldParent);
         Debug.Log("Removed: " + InsertedDragDrop.GetComponent<LoadoutOption>().Option.name + ", " + InsertedDragDropOldParent.gameObject.name);
         InsertedDragDrop = null;

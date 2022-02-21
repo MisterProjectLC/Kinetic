@@ -14,6 +14,15 @@ public class Projectile : MonoBehaviour
 
     private float clock = 0f;
     private Vector3 moveVelocity;
+    public Vector3 MoveVelocity { 
+        get {
+            return moveVelocity;
+        } 
+        set {
+            moveVelocity = value;
+        }
+    }
+
     private Vector3 m_LastRootPosition;
     private LayerMask hitLayers;
 

@@ -191,7 +191,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1056472193603156170
 MonoBehaviour:
@@ -591,7 +591,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7414593297214519493
 Rigidbody:
@@ -967,7 +967,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5917140286660060292
 MonoBehaviour:
@@ -1026,7 +1026,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6450270223927221608
 MonoBehaviour:
@@ -1073,7 +1073,14 @@ MonoBehaviour:
     SPREAD: None
 
     A cyberkatana capable of emitting
-    powerful energy slashes that slice through multiple enemies.'
+    powerful energy slashes that slice through multiple enemies.
+
+
+    This ability
+    resets its cooldown upon any kill.
+
+    If the Style meter hits 80% or higher,
+    its cooldown resets upon any hit instead.'
   Localized:
     key: ninja_katana
 --- !u!1 &4698384497654706963
@@ -1279,7 +1286,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5273812271440728085
 MonoBehaviour:
@@ -1504,7 +1511,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3914573725090297544
 MonoBehaviour:
@@ -1761,7 +1768,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5704373933498883485
 MonoBehaviour:
@@ -2021,6 +2028,93 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!1 &8659259196117612103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2890342457042447387}
+  - component: {fileID: 3463386441659457413}
+  - component: {fileID: 3976822608011759517}
+  - component: {fileID: 7909470340281564198}
+  m_Layer: 12
+  m_Name: Deflect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2890342457042447387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659259196117612103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4021532750877547998}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3463386441659457413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659259196117612103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf1b3fb4ddf3ce4ea8db2c3a1b91560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayName: Deflect
+  Cooldown: 2
+  HoldAbility: 0
+  ReleaseAbility: 0
+  SoundEffects: []
+  ParentAbility: {fileID: 0}
+  DeflectDuration: 0.15
+  layers: {fileID: 11400000, guid: fd74d764036a2914aa95da1286d9c38f, type: 2}
+--- !u!114 &3976822608011759517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659259196117612103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'Deflects incoming projectiles and redirects them towards your crosshair.
+    Precise timing is necessary to pull this off.
+
+
+    Successfully deflecting a
+    projectile resets this ability''s cooldown.'
+  Localized:
+    key: ninja_deflect
+--- !u!114 &7909470340281564198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659259196117612103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 1
+  Agressor: {fileID: 0}
 --- !u!1 &8791866288957817034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2051,7 +2145,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8089954478560255746
 MonoBehaviour:
@@ -2121,6 +2215,7 @@ Transform:
   - {fileID: 2341182423810318684}
   - {fileID: 8567209057711964616}
   - {fileID: 53945362300564579}
+  - {fileID: 2890342457042447387}
   - {fileID: 7478956445705428809}
   - {fileID: 3451851543787638553}
   - {fileID: 1751639598095803834}
@@ -2266,12 +2361,15 @@ MonoBehaviour:
     secondaryAbility: 
     prerequisiteAbilities: []
   - option: {fileID: 4554023032501292862}
-    secondaryAbility: Dash
+    secondaryAbility: Deflect
     prerequisiteAbilities: []
   - option: {fileID: 6358242602411863829}
     secondaryAbility: 
     prerequisiteAbilities:
     - Extra Jump
+  - option: {fileID: 8659259196117612103}
+    secondaryAbility: 
+    prerequisiteAbilities: []
   AbilitiesEnabled: 1
   DownCooldown: 0.1
   UpCooldown: 0.1
@@ -2486,15 +2584,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bc21ac47bb905447b7aabaf21b8f14e, type: 3}
---- !u!1 &6923643163349663185 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8962014088670307922, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2038653517123148675}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8374904072922748519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2038653517123148675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6923643163349663185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8962014088670307922, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
     type: 3}
   m_PrefabInstance: {fileID: 2038653517123148675}
   m_PrefabAsset: {fileID: 0}
@@ -2801,6 +2899,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5279745370496076940, guid: 7c10f67b36848b44eb99a63396bdb998,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6986962949196218161, guid: 7c10f67b36848b44eb99a63396bdb998,
         type: 3}
       propertyPath: m_RootOrder
@@ -2819,7 +2922,7 @@ PrefabInstance:
     - target: {fileID: 6986962949196218161, guid: 7c10f67b36848b44eb99a63396bdb998,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.4
       objectReference: {fileID: 0}
     - target: {fileID: 6986962949196218161, guid: 7c10f67b36848b44eb99a63396bdb998,
         type: 3}

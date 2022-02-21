@@ -25,7 +25,7 @@ public class AttackProjectile : MonoBehaviour
 
     private void OnHit(Collider collider)
     {
-        if (!collider.gameObject.GetComponent<Damageable>() || 
+        if (collider.gameObject.GetComponent<Damageable>() && 
             previousHits.Contains(collider.gameObject.GetComponent<Damageable>().GetHealth()))
             return;
 
@@ -34,13 +34,15 @@ public class AttackProjectile : MonoBehaviour
 
         SpawnImpactObject();
 
-        if (penetrateCount > 0)
+        if (penetrateCount > 0 && collider.gameObject.GetComponent<Damageable>())
         {
             penetrateCount--;
             previousHits.Add(collider.gameObject.GetComponent<Damageable>().GetHealth());
         }
         else
+        {
             GetComponent<Projectile>().Destroy();
+        }
     }
 
     public void Detonate()

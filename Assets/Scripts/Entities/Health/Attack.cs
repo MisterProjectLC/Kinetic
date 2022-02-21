@@ -19,6 +19,13 @@ public class Attack : MonoBehaviour
         Agressor = GetComponentInParent<Actor>();
     }
 
+    private void OnDisable()
+    {
+        OnAttack = null;
+        OnCritical = null;
+        OnKill = null;
+    }
+
     public void AttackTarget(GameObject target, float multiplier = 1f)
     {
         Damageable targetHit = target.GetComponent<Damageable>();
