@@ -1138,6 +1138,7 @@ MonoBehaviour:
     enabled: 0
   - animator: {fileID: 1694743046388675215}
     enabled: 0
+  StartSubmenu: -1
   Mixer: {fileID: 24100000, guid: 9b68496a114988c40a3efe2b336cb9ee, type: 2}
   languageDropdown: {fileID: 3873333669788336202}
   optionData:
@@ -2440,7 +2441,7 @@ PrefabInstance:
     - target: {fileID: 12807884394827103, guid: 9366f0513b845bd46be95d42f4aebdd4,
         type: 3}
       propertyPath: m_MinValue
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2795596508630969690, guid: 9366f0513b845bd46be95d42f4aebdd4,
         type: 3}

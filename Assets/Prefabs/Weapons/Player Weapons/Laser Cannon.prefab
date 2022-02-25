@@ -134,6 +134,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1049088
   DefaultAlpha: -1
+  AlphaDecayRate: 1
   Alpha: 0
 --- !u!114 &7974985875732045502
 MonoBehaviour:
@@ -161,6 +162,9 @@ MonoBehaviour:
   MaxDistance: 300
   StopAtFirstHit: 0
   Sparks: {fileID: 0}
+  BeamLayers:
+    serializedVersion: 2
+    m_Bits: 1049088
 --- !u!114 &5985085885755048812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
+  damage: 15
   Agressor: {fileID: 0}
 --- !u!114 &1773521077793833581
 MonoBehaviour:
@@ -330,6 +334,8 @@ MonoBehaviour:
 
     Scoring a multikill with this weapon resets
     its cooldown.'
+  Localized:
+    key: 
 --- !u!1001 &1468549801508599737
 PrefabInstance:
   m_ObjectHideFlags: 0

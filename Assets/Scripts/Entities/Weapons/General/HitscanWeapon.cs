@@ -18,6 +18,10 @@ public class HitscanWeapon : Weapon
     List<Health> enemies = new List<Health>(25);
     public UnityAction<RaycastHit> OnHit;
 
+    [Tooltip("Layer mask")]
+    [SerializeField]
+    LayerMask BeamLayers;
+
     Attack attack;
 
 
@@ -38,7 +42,7 @@ public class HitscanWeapon : Weapon
         }
         else
         {
-            Physics.Raycast(Mouth.position, direction, out RaycastHit rayHit, MaxDistance, HitLayers.layers);
+            Physics.Raycast(Mouth.position, direction, out RaycastHit rayHit, MaxDistance, BeamLayers);
             Vector3 extremePoint;
             if (rayHit.collider)
                 extremePoint = rayHit.point;

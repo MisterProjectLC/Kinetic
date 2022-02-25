@@ -26,7 +26,7 @@ public class DamageBorder : MonoBehaviour
     void OnDamage(int damage)
     {
         audioSource.Play();
-        canvasGroup.alpha = 0.1f * damage;
+        canvasGroup.alpha = 0.2f * damage;
     }
 
 

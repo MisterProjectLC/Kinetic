@@ -19,6 +19,7 @@ public abstract class Ability : MonoBehaviour
 
     [SerializeField]
     AudioClip[] SoundEffects;
+    AudioSource audioSource;
 
     public UnityAction<Input> OnExecute;
     public UnityAction<Ability> OnExecuteAbility;
@@ -26,6 +27,7 @@ public abstract class Ability : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         if (OnExecute == null)
             OnExecute += (Input input) => OnExecuteAbility?.Invoke(this);
     }
@@ -76,7 +78,7 @@ public abstract class Ability : MonoBehaviour
 
     protected void PlaySound(AudioClip sound)
     {
-        GetComponent<AudioSource>().clip = sound;
-        GetComponent<AudioSource>().Play();
+        audioSource.clip = sound;
+        audioSource.Play();
     } 
 }

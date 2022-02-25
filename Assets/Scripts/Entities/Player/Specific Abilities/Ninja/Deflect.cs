@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Deflect : SecondaryAbility
 {
-    [Tooltip("Deflect Duration")]
-    [SerializeField]
-    float DeflectDuration = 0.15f;
-
     [SerializeField]
     LayersConfig layers; 
 
@@ -17,6 +13,9 @@ public class Deflect : SecondaryAbility
     Animator animator;
 
     Vector3 halfExtents;
+
+    [SerializeField]
+    AudioClip deflectSound;
 
     public void Start()
     {
@@ -64,8 +63,14 @@ public class Deflect : SecondaryAbility
     {
         for (int i = 0; i < hitCount; i++)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSecondsRealtime(0.05f);
             animator.SetTrigger("Shoot");
+            PlaySound(deflectSound);
+            float oldTime = Time.timeScale;
+            Time.timeScale = 0.1f;
+
+            yield return new WaitForSecondsRealtime(0.1f);
+            Time.timeScale = oldTime;
         }
     }
 }

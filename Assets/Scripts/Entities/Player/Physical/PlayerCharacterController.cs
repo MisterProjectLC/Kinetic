@@ -192,8 +192,10 @@ public class PlayerCharacterController : MonoBehaviour
         //Vector3 saved2 = Vector3.zero;
         while (Forces.Count > 0)
         {
-            //saved2 = Forces.Peek();
-            MoveVelocity += Forces.Dequeue();
+            Vector3 force = Forces.Dequeue();
+            MoveVelocity += force;
+            if (force.y > 1f)
+                m_LastTimeJumped = Time.time;
         }
 
         m_Controller.Move(MoveVelocity * Time.deltaTime);

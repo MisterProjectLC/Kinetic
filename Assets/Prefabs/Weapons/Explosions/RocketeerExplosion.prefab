@@ -62,12 +62,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Radius: 5
+  CenterRate: 1
   FallOffRate: 0.4
   NeuteredRate: 0.75
   HitLayers: {fileID: 11400000, guid: 84cc419c1733af643993c7877c42d8dd, type: 2}
   NeuteredHitLayers:
     serializedVersion: 2
     m_Bits: 2048
+  GetClosestPoint: 1
 --- !u!114 &4274277110719107929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 3
+  damage: 3
+  Agressor: {fileID: 0}
 --- !u!114 &4796216369014699922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 9
-  alreadyInitialized: 0
+  AlreadyInitialized: 0
 --- !u!82 &7171234845455418299
 AudioSource:
   m_ObjectHideFlags: 0

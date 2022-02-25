@@ -11,11 +11,17 @@ public class GrapplingHook : SecondaryAbility
 
     Hook hook;
 
+    [SerializeField]
+    List<AudioClip> releaseSounds;
+
+
     private void Start()
     {
         hook = Instantiate(hookPrefab, transform.position, Quaternion.identity).GetComponent<Hook>();
         hook.Ability = this;
         hook.gameObject.SetActive(false);
+
+        GetComponentInParent<LoadoutManager>().OnLoadoutSwitch += OnLoadoutSwitch;
 
         foreach (Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
             attack.OnKill += (Attack a, GameObject g, bool b) => ResetCooldown();
@@ -35,11 +41,25 @@ public class GrapplingHook : SecondaryAbility
             GetComponentInParent<PlayerCharacterController>().GravityEnabled = true;
             ResetCooldown();
         } else
+            Unhook();
+    }
+
+    void OnLoadoutSwitch()
+    {
+        if (hook.gameObject.activeInHierarchy)
         {
-            if (GetComponentInParent<StyleMeter>().Critical)
-                ResetCooldown();
+            hook.gameObject.SetActive(!hook.gameObject.activeInHierarchy);
+            Unhook();
         }
     }
+
+    void Unhook()
+    {
+        PlaySound(releaseSounds[Random.Range(0, releaseSounds.Count)]);
+        if (GetComponentInParent<StyleMeter>().Critical)
+            ResetCooldown();
+    }
+
 
     public void OnHookDestroy()
     {

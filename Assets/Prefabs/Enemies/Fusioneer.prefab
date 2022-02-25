@@ -2229,6 +2229,9 @@ MonoBehaviour:
   MaxDistance: 400
   StopAtFirstHit: 0
   Sparks: {fileID: 0}
+  BeamLayers:
+    serializedVersion: 2
+    m_Bits: 1049088
 --- !u!114 &6682026250023813008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2360,7 +2363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
+  damage: 1
   Agressor: {fileID: 0}
 --- !u!1 &2746340166411352364
 GameObject:
@@ -2747,6 +2750,9 @@ MonoBehaviour:
   MaxDistance: 400
   StopAtFirstHit: 0
   Sparks: {fileID: 0}
+  BeamLayers:
+    serializedVersion: 2
+    m_Bits: 1049088
 --- !u!114 &8750204675526862708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2781,7 +2787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
+  damage: 2
   Agressor: {fileID: 0}
 --- !u!82 &7914942596287862566
 AudioSource:
@@ -9260,7 +9266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5105881270902281926}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -0.1568, z: 0.1953}
+  m_LocalPosition: {x: 0, y: -0.17431088, z: 0.19529998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1866656948603867525}
@@ -9510,6 +9516,9 @@ MonoBehaviour:
   MaxDistance: 400
   StopAtFirstHit: 0
   Sparks: {fileID: 0}
+  BeamLayers:
+    serializedVersion: 2
+    m_Bits: 1049088
 --- !u!114 &1844409341445744086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9544,7 +9553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 3
+  damage: 2
   Agressor: {fileID: 0}
 --- !u!82 &7939051727722374980
 AudioSource:

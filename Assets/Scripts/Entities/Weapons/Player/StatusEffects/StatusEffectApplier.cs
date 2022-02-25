@@ -6,11 +6,17 @@ public class StatusEffectApplier : MonoBehaviour
 {
     public float Knockback = 0f;
     public StatusEffect[] Effects;
-    private Attack attack;
 
     private void Start()
     {
-        GetComponent<Attack>().OnAttack += AffectTarget;
+        if (!GetComponent<Poolable>())
+            GetComponent<Attack>().OnAttack += AffectTarget;
+    }
+
+    private void OnEnable()
+    {
+        if (GetComponent<Poolable>())
+            GetComponent<Attack>().OnAttack += AffectTarget;
     }
 
 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4149807066090890599}
   - component: {fileID: 8248575022387800516}
   m_Layer: 14
-  m_Name: RocketLauncherExplosion 1
+  m_Name: RocketLauncherExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,12 +62,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Radius: 5
+  CenterRate: 1
   FallOffRate: 0.4
   NeuteredRate: 0.25
   HitLayers: {fileID: 11400000, guid: 84cc419c1733af643993c7877c42d8dd, type: 2}
   NeuteredHitLayers:
     serializedVersion: 2
     m_Bits: 4096
+  GetClosestPoint: 1
 --- !u!114 &7008449775376283013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 6
+  damage: 6
+  Agressor: {fileID: 0}
 --- !u!114 &1773818962129064270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 5
+  AlreadyInitialized: 0
 --- !u!82 &4149807066090890599
 AudioSource:
   m_ObjectHideFlags: 0

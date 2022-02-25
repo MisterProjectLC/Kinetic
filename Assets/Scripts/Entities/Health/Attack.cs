@@ -6,7 +6,15 @@ using UnityEngine.Events;
 public class Attack : MonoBehaviour
 {
     [Header("Attributes")]
-    public int Damage = 1;
+    [SerializeField]
+    int damage = 1;
+    int actualDamage = 1;
+
+    public int Damage
+    {
+        get { return actualDamage; }
+        set { actualDamage = value; }
+    }
 
     public UnityAction<GameObject, float, int> OnAttack;
     public UnityAction<Health> OnCritical;
@@ -14,16 +22,24 @@ public class Attack : MonoBehaviour
     [HideInInspector]
     public Actor Agressor;
 
+    bool poolable = false;
+
     private void Awake()
     {
+        actualDamage = damage;
         Agressor = GetComponentInParent<Actor>();
+        poolable = !(GetComponent<Poolable>() == null);
     }
 
     private void OnDisable()
     {
-        OnAttack = null;
-        OnCritical = null;
-        OnKill = null;
+        if (poolable)
+        {
+            actualDamage = damage;
+            OnAttack = null;
+            OnCritical = null;
+            OnKill = null;
+        }
     }
 
     public void AttackTarget(GameObject target, float multiplier = 1f)
@@ -39,7 +55,7 @@ public class Attack : MonoBehaviour
         if (targetHit)
         {
             targetHit.OnDamage += OnDamageInvoke;
-            targetHit.InflictDamage((int)(multiplier*Damage), this);
+            targetHit.InflictDamage((int)(multiplier* actualDamage), this);
             targetHit.OnDamage -= OnDamageInvoke;
         }
     }

@@ -15,6 +15,9 @@ public class Hook : MonoBehaviour
 
     [Header("Attributes")]
     public float PullForce = 10f;
+    public float MaxDistance = 120f;
+
+    PlayerCharacterController shooter;
 
 
     // Start is called before the first frame update
@@ -30,8 +33,8 @@ public class Hook : MonoBehaviour
         if (Ability)
             Ability.OnHookDestroy();
 
-        if (projectile.Shooter)
-            projectile.Shooter.GetComponent<PlayerCharacterController>().GravityEnabled = true;
+        if (shooter)
+            shooter.GravityEnabled = true;
         
     }
 
@@ -43,15 +46,22 @@ public class Hook : MonoBehaviour
 
         if (projectile.KeepAlive)
         {
-            projectile.Shooter.GetComponent<PlayerCharacterController>().ApplyForce((transform.position - 
-                projectile.Shooter.GetComponent<PlayerCharacterController>().PlayerCamera.transform.position).normalized
-                * PullForce * Time.deltaTime);
+            if (!shooter)
+                shooter = projectile.Shooter.GetComponent<PlayerCharacterController>();
+
+            float multiplier = shooter.IsGrounded ? 5f : 1f;
+
+            Vector3 force = (transform.position - shooter.PlayerCamera.transform.position).normalized;
+            shooter.ApplyForce(force * PullForce * multiplier * Time.deltaTime);
 
             if (!hookedObject || !hookedObject.activeInHierarchy)
                 gameObject.SetActive(false);
             else
                 transform.position = hookedObject.transform.position + relativePosition;
         }
+
+        if ((projectile.Shooter.transform.position - transform.position).magnitude > MaxDistance)
+            gameObject.SetActive(false);
     }
 
 

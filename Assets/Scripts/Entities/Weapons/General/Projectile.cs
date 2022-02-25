@@ -24,6 +24,8 @@ public class Projectile : MonoBehaviour
     }
 
     private Vector3 m_LastRootPosition;
+    private LayerMask selfHitLayers;
+    float extraAutoHitTime = 0f;
     private LayerMask hitLayers;
 
     [HideInInspector]
@@ -38,7 +40,7 @@ public class Projectile : MonoBehaviour
     [HideInInspector]
     public GameObject Shooter;
 
-    public void Setup(Vector3 moveDirection, LayerMask layerMask, GameObject shooter = null)
+    public void Setup(Vector3 moveDirection, LayerMask layerMask, GameObject shooter = null, float extraAutoHitTime = 0f)
     {
         clock = 0f;
         KeepAlive = false;
@@ -47,6 +49,8 @@ public class Projectile : MonoBehaviour
         moveVelocity = moveDirection.normalized * Attributes.MoveSpeed;
         transform.right = moveDirection.normalized;
         Shooter = shooter;
+        selfHitLayers = shooter.layer;
+        this.extraAutoHitTime = extraAutoHitTime;
 
         m_LastRootPosition = Root.position;
     }
@@ -98,8 +102,9 @@ public class Projectile : MonoBehaviour
                 }
             }
 
-            if (foundHit)              
-                OnHit?.Invoke(closestHit.collider);
+            if (foundHit && !(closestHit.collider.gameObject.layer == selfHitLayers && 
+                clock < (AUTOHIT_WAITTIME+extraAutoHitTime) / Attributes.MoveSpeed))
+               OnHit?.Invoke(closestHit.collider);
         }
 
         m_LastRootPosition = Root.position;
