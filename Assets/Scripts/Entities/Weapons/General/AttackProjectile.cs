@@ -4,7 +4,9 @@ using UnityEngine;
 public class AttackProjectile : MonoBehaviour
 {
     public ObjectManager.PoolableType ImpactType;
-    public GameObject ImpactObject;
+    [SerializeField]
+    GameObject ImpactObject;
+    GameObject impactObject;
     public int PenetrateCount = 0;
     List<Health> previousHits = new List<Health>();
     int penetrateCount = 0;
@@ -19,6 +21,7 @@ public class AttackProjectile : MonoBehaviour
 
     private void OnEnable()
     {
+        impactObject = ImpactObject;
         penetrateCount = PenetrateCount;
         previousHits.Clear();
     }
@@ -45,24 +48,31 @@ public class AttackProjectile : MonoBehaviour
         }
     }
 
-    public void Detonate()
+    public GameObject Detonate()
     {
-        SpawnImpactObject();
+        GameObject newObject = SpawnImpactObject();
         GetComponent<Projectile>().Destroy();
+        return newObject;
     }
 
-    private void SpawnImpactObject()
+    private GameObject SpawnImpactObject()
     {
-        if (!ImpactObject)
-            return;
+        if (!impactObject)
+            return null;
 
-        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(ImpactObject.GetComponent<Poolable>().Type, ImpactObject);
+        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(impactObject.GetComponent<Poolable>().Type, impactObject);
         newObject.transform.position = transform.position;
         if (newObject.GetComponent<Attack>() && GetComponent<Attack>())
         {
             newObject.GetComponent<Attack>().Agressor = GetComponent<Attack>().Agressor;
-            if (!newObject.GetComponent<Poolable>() || !newObject.GetComponent<Poolable>().AlreadyInitialized)
-                GetComponent<Attack>().SetupClone(newObject.GetComponent<Attack>());
+            GetComponent<Attack>().SetupClone(newObject.GetComponent<Attack>());
         }
+
+        return newObject;
+    }
+
+    public void SetImpactObject(GameObject obj)
+    {
+        impactObject = obj;
     }
 }

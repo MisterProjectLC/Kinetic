@@ -97,7 +97,7 @@ public class Movepad : MonoBehaviour
                 return;
 
             if (!isJump)
-                player.ApplyForce(moveVector);
+                player.ApplyForce(moveVector, Sticky);
             else
             {
                 player.MoveVelocity = moveVector;

@@ -29,6 +29,7 @@ public class ObjectManager : MonoBehaviour
         PaybackExplosion,
         ConveyorBeltDetail,
         KatanaSlash,
+        BigRocketLauncherExplosion,
         Count
     }
 

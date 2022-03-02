@@ -49,7 +49,7 @@ MonoBehaviour:
     m_Bits: 4096
   SpawnPoint: {fileID: 0}
   DespawnPoint: {fileID: 0}
-  detectSize: {x: 19, y: 0.25, z: 19}
+  detectSize: {x: 16, y: 0.25, z: 16}
   detectPosOffset: {x: 0, y: 0.5, z: 0}
   moveVector: {x: 0, y: 0, z: 0}
   Speed: 1
@@ -423,6 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 3
   Buttons: []
+  LowerButtons: []
   UpperPosition: {fileID: 0}
   LowerPosition: {fileID: 0}
 --- !u!114 &8757397697694412793

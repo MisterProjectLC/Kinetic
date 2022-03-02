@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Detonate : SecondaryAbility
 {
+    [SerializeField]
+    GameObject bigExplosion;
+
     public override void Execute(Input input)
     {
         int control = 1000;
+        List<GameObject> projectilesList = ((ProjectileWeapon)((WeaponAbility)ParentAbility).WeaponRef).ActiveProjectiles;
 
-        while (((ProjectileWeapon)((WeaponAbility)ParentAbility).WeaponRef).ActiveProjectiles.Count > 0 && control > 0)
+        while (projectilesList.Count > 0 && control > 0)
         {
             control--;
-            ((ProjectileWeapon)((WeaponAbility)ParentAbility).WeaponRef).ActiveProjectiles[0].GetComponent<AttackProjectile>().Detonate();
+            projectilesList[0].GetComponent<AttackProjectile>().SetImpactObject(bigExplosion);
+            projectilesList[0].GetComponent<AttackProjectile>().Detonate();
         }
 
         ((WeaponAbility)ParentAbility).ResetCooldown();

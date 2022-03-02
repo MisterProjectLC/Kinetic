@@ -30,7 +30,7 @@ public class Dash : Ability
         player.gameObject.layer = LayerMask.NameToLayer("Shifted");
         player.MoveControlEnabled = false;
         player.MoveVelocity = DashSpeed * player.PlayerCamera.transform.TransformVector(inputHandler.GetMoveInput());
-        StartCoroutine("EndDash");
+        StartCoroutine(EndDash());
     }
 
 

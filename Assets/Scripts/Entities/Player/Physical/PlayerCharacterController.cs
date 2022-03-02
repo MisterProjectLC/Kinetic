@@ -5,6 +5,19 @@ using UnityEngine.Events;
 //[RequireComponent(typeof(PlayerInputHandler))]
 public class PlayerCharacterController : MonoBehaviour
 {
+    struct Force
+    {
+        public Vector3 force;
+        public bool sticky;
+
+        public Force(Vector3 force, bool sticky)
+        {
+            this.force = force;
+            this.sticky = sticky;
+        }
+    }
+
+
     [Header("References")]
     [Tooltip("Reference to the main camera used for the player")]
     public Camera PlayerCamera;
@@ -64,7 +77,7 @@ public class PlayerCharacterController : MonoBehaviour
 
 
     public Vector3 MoveVelocity { get; set; }
-    private Queue<Vector3> Forces;
+    private Queue<Force> Forces;
     public bool IsGrounded = true;
     CharacterController m_Controller;
     PlayerInputHandler m_InputHandler;
@@ -86,7 +99,7 @@ public class PlayerCharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Forces = new Queue<Vector3>();
+        Forces = new Queue<Force>();
         MoveVelocity = new Vector3(0f, 0f, 0f);
         MoveControlEnabled = true;
         m_Controller = GetComponent<CharacterController>();
@@ -192,9 +205,9 @@ public class PlayerCharacterController : MonoBehaviour
         //Vector3 saved2 = Vector3.zero;
         while (Forces.Count > 0)
         {
-            Vector3 force = Forces.Dequeue();
-            MoveVelocity += force;
-            if (force.y > 1f)
+            Force force = Forces.Dequeue();
+            MoveVelocity += force.force;
+            if (force.force.y > 1f && !force.sticky)
                 m_LastTimeJumped = Time.time;
         }
 
@@ -202,9 +215,9 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
 
-    public void ApplyForce(Vector3 Force)
+    public void ApplyForce(Vector3 Force, bool sticky = false)
     {
-        Forces.Enqueue(Force);
+        Forces.Enqueue(new Force(Force, sticky));
     }
 
     public void Translate(Vector3 movement)
@@ -307,8 +320,7 @@ public class PlayerCharacterController : MonoBehaviour
 
     public void StopOnTrigger(Collider other)
     {
-        Vector3 print = MoveVelocity;
-        MoveVelocity = Vector3.ProjectOnPlane(MoveVelocity, other.ClosestPoint(transform.position));
+        //MoveVelocity = Vector3.ProjectOnPlane(MoveVelocity, other.ClosestPoint(transform.position));
         //Debug.Log(print + ", " + MoveVelocity);
     }
 

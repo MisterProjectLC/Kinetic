@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector]
     public float Stunned = 0f;
+    float paralyzed = 0f;
 
     bool airborne = true;
     private NavMeshAgent pathAgent;
@@ -75,8 +76,16 @@ public class Enemy : MonoBehaviour
         if (Stunned <= 0f)
         {
             ActivateWeapons();
-            if (OnActiveUpdate != null)
-                OnActiveUpdate.Invoke();
+            if (paralyzed <= 0f)
+            {
+                OnActiveUpdate?.Invoke();
+            }
+            else
+            {
+                paralyzed -= Time.deltaTime;
+                if (paralyzed <= 0f && pathAgent)
+                    pathAgent.isStopped = true;
+            }
         }
         else
         {
@@ -120,7 +129,7 @@ public class Enemy : MonoBehaviour
 
         // Air
         if (airborne)
-            moveVelocity += Vector3.down * GravityMultiplier * Constants.Gravity * Time.deltaTime;
+            moveVelocity += Vector3.down * GravityMultiplier * 0.5f * Constants.Gravity * Time.deltaTime;
         // Ground
         else
         {
@@ -208,15 +217,22 @@ public class Enemy : MonoBehaviour
             pathAgent.isStopped = true;
     }
 
+    public void ReceiveParalyze(float duration)
+    {
+        paralyzed = duration;
+        if (pathAgent && pathAgent.isOnNavMesh)
+            pathAgent.isStopped = true;
+    }
+
     public void ReceiveKnockback(Vector3 knockback)
     {
         if (!Movable)
             return;
 
-        moveVelocity += (knockback / (2 * Weight));
+        moveVelocity += knockback / (2 * Weight);
         //Debug.Log("MV: " + moveVelocity);
 
-        // Parar no chão
+        // Stop on the ground
         if (moveVelocity.y < 0f)
             moveVelocity = Vector3.ProjectOnPlane(moveVelocity, Vector3.up);
 

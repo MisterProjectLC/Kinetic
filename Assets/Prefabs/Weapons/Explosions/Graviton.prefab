@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7689309710378173641}
   - component: {fileID: 5458124195391303904}
   - component: {fileID: 22772827171470403}
-  - component: {fileID: 764313433112388447}
+  - component: {fileID: 5553185517356068331}
   m_Layer: 14
   m_Name: Graviton
   m_TagString: Untagged
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
+  damage: 1
   Agressor: {fileID: 0}
 --- !u!114 &7689309710378173641
 MonoBehaviour:
@@ -209,22 +209,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Knockback: -30
-  Effects: []
---- !u!114 &764313433112388447
+  Effects:
+  - {fileID: 5553185517356068331}
+--- !u!114 &5553185517356068331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530802152247089991}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 428a598b0a8a81a42b6ac1de094f5796, type: 3}
+  m_Script: {fileID: 11500000, guid: 076bc1c36891a50469e2605bcde5dd31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TickDuration: 8
   TickTime: 0.1
-  StunDuration: 1
+  ParalyzeDuration: 5
 --- !u!1 &4656270986459733377
 GameObject:
   m_ObjectHideFlags: 0

@@ -78,6 +78,8 @@ public abstract class Ability : MonoBehaviour
 
     protected void PlaySound(AudioClip sound)
     {
+        if (!audioSource)
+            return;
         audioSource.clip = sound;
         audioSource.Play();
     } 
