@@ -104,7 +104,6 @@ public class PlayerCharacterController : MonoBehaviour
         MoveControlEnabled = true;
         m_Controller = GetComponent<CharacterController>();
         m_InputHandler = GetComponent<PlayerInputHandler>();
-        OnCollision += StopOnCollision;
         OnTrigger += StopOnTrigger;
     }
 
@@ -306,7 +305,7 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
 
-    public void StopOnCollision(ControllerColliderHit hit)
+    void StopOnCollision(ControllerColliderHit hit)
     {
         if (Vector3.Dot(hit.moveDirection, hit.normal) <= 0)
         {
@@ -363,6 +362,7 @@ public class PlayerCharacterController : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         OnCollision?.Invoke(hit);
+        StopOnCollision(hit);
     }
 
     private void OnTriggerEnter(Collider other)

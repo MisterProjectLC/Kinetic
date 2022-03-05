@@ -31,6 +31,7 @@ public class Charge : Ability
 
     PlayerCharacterController player;
     Attack attack;
+    ExtraJump extraJump;
 
     // Start is called before the first frame update
     public void Start()
@@ -41,7 +42,7 @@ public class Charge : Ability
         attack = GetComponent<Attack>();
         GetComponentInParent<StyleMeter>().OnCritical += OnCritical;
 
-        foreach (Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
+        foreach (Attack attack in player.GetComponentsInChildren<Attack>())
             attack.OnKill += (Attack a, GameObject g, bool b) => OnKill();
     }
 
@@ -102,6 +103,11 @@ public class Charge : Ability
         {
             player.SetSlowdown(1f, "charge");
             player.SetSlowdown(1f, "charge", false);
+
+            if (extraJump)
+                extraJump.ResetJump();
+            else
+                extraJump = player.GetComponentInChildren<ExtraJump>();
 
             if (player.IsGrounded)
                 player.Translate(Vector3.up*1.15f);

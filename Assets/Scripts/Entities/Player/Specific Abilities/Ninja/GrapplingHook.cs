@@ -9,7 +9,9 @@ public class GrapplingHook : SecondaryAbility
     public Transform Mouth;
     public LayerMask HitLayers;
 
+    PlayerCharacterController player;
     Hook hook;
+    ExtraJump extraJump;
 
     [SerializeField]
     List<AudioClip> releaseSounds;
@@ -17,6 +19,8 @@ public class GrapplingHook : SecondaryAbility
 
     private void Start()
     {
+        player = GetComponentInParent<PlayerCharacterController>();
+
         hook = Instantiate(hookPrefab, transform.position, Quaternion.identity).GetComponent<Hook>();
         hook.Ability = this;
         hook.gameObject.SetActive(false);
@@ -55,6 +59,11 @@ public class GrapplingHook : SecondaryAbility
 
     void Unhook()
     {
+        if (extraJump)
+            extraJump.ResetJump();
+        else
+            extraJump = player.GetComponentInChildren<ExtraJump>();
+
         PlaySound(releaseSounds[Random.Range(0, releaseSounds.Count)]);
         if (GetComponentInParent<StyleMeter>().Critical)
             ResetCooldown();

@@ -215,6 +215,11 @@ public class LevelUpSystem : MonoBehaviour
         }
     }
 
+    public void DebugLevelUp()
+    {
+        LevelUp(Type.Passive);
+    }
+
     void SetLoweredMenu(bool loweredMenu)
     {
         if (this.loweredMenu == loweredMenu)

@@ -30,6 +30,7 @@ public class ObjectManager : MonoBehaviour
         ConveyorBeltDetail,
         KatanaSlash,
         BigRocketLauncherExplosion,
+        CollisionExplosion,
         Count
     }
 

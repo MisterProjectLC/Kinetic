@@ -13,6 +13,8 @@ public class Dash : Ability
     PlayerInputHandler inputHandler;
     Attack attack;
 
+    ExtraJump extraJump;
+
     bool dashing = false;
 
     public void Start()
@@ -26,6 +28,11 @@ public class Dash : Ability
 
     public override void Execute(Input input)
     {
+        if (extraJump)
+            extraJump.ResetJump();
+        else
+            extraJump = player.GetComponentInChildren<ExtraJump>();
+
         dashing = true;
         player.gameObject.layer = LayerMask.NameToLayer("Shifted");
         player.MoveControlEnabled = false;

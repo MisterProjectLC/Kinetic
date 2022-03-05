@@ -380,6 +380,65 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &3241069975669373158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6452605973996929548}
+  - component: {fileID: 6024573679260689546}
+  - component: {fileID: 4656760338141244960}
+  m_Layer: 12
+  m_Name: Extra Jump
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6452605973996929548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3241069975669373158}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4021532750877547998}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6024573679260689546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3241069975669373158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e2ec239f5f234479ab1ea85d4cdc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4656760338141244960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3241069975669373158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Lets the player jump an extra time before having to touch a surface.
+  Localized:
+    key: ninja_extrajump
 --- !u!1 &3401051246386459786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,6 +1533,84 @@ MonoBehaviour:
     a shield in front of the player which protects them from incoming fire.'
   Localized:
     key: vanguard_frontalshield
+--- !u!1 &5759895014368333225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1080758445839013086}
+  - component: {fileID: 266890744467231716}
+  - component: {fileID: 3571691083905309033}
+  - component: {fileID: 1402234564046349868}
+  m_Layer: 12
+  m_Name: Blast Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1080758445839013086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759895014368333225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4021532750877547998}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &266890744467231716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759895014368333225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849f96d3d3205454483e961bb4d264ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 5059452173142551493, guid: f125cceb921bb894b9098ba5323b1db0,
+    type: 3}
+  minimumVelocity: 27
+  cooldown: 2
+--- !u!114 &3571691083905309033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759895014368333225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  Agressor: {fileID: 0}
+--- !u!114 &1402234564046349868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759895014368333225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Spawn an explosion when colliding at fast speeds.
+  Localized:
+    key: vanguard_collision
 --- !u!1 &5935564171822933945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,8 +1784,6 @@ MonoBehaviour:
   ReleaseAbility: 0
   SoundEffects: []
   ParentAbility: {fileID: 0}
-  explosion: {fileID: 7428323586207960768, guid: 8e0144992dcfefe48969c2d376d36fbb,
-    type: 3}
   bigExplosion: {fileID: 1937756902610758601, guid: 6d3a9133eec5073439ab9a9687085cab,
     type: 3}
 --- !u!114 &3831685550693252153
@@ -2029,6 +2164,8 @@ Transform:
   - {fileID: 5927203501554255039}
   - {fileID: 4253676340069340440}
   - {fileID: 7816245253526124877}
+  - {fileID: 6452605973996929548}
+  - {fileID: 1080758445839013086}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2159,6 +2296,12 @@ MonoBehaviour:
     secondaryAbility: 
     prerequisiteAbilities: []
   - option: {fileID: 4101398689657722995}
+    secondaryAbility: 
+    prerequisiteAbilities: []
+  - option: {fileID: 3241069975669373158}
+    secondaryAbility: 
+    prerequisiteAbilities: []
+  - option: {fileID: 5759895014368333225}
     secondaryAbility: 
     prerequisiteAbilities: []
   AbilitiesEnabled: 1
@@ -2395,15 +2538,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 245d7c791efffd74b806e11960ed1bf8, type: 3}
---- !u!1 &4973758252977665999 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7088198090136532333, guid: 245d7c791efffd74b806e11960ed1bf8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2835016363911021218}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5848571593649446009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2835016363911021218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4973758252977665999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7088198090136532333, guid: 245d7c791efffd74b806e11960ed1bf8,
     type: 3}
   m_PrefabInstance: {fileID: 2835016363911021218}
   m_PrefabAsset: {fileID: 0}

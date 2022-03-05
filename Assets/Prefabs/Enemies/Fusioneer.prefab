@@ -2363,7 +2363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 0
   Agressor: {fileID: 0}
 --- !u!1 &2746340166411352364
 GameObject:
@@ -9266,7 +9266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5105881270902281926}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.17431088, z: 0.19529998}
+  m_LocalPosition: {x: -0.000033307075, y: -0.12923881, z: 0.19489853}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1866656948603867525}
@@ -10159,6 +10159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!82 &2104330772191621562
 AudioSource:
   m_ObjectHideFlags: 0

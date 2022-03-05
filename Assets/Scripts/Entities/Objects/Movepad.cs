@@ -50,7 +50,7 @@ public class Movepad : MonoBehaviour
     {
         if (DespawnPoint && SpawnPoint)
         {
-            moveVector = (DespawnPoint.position - SpawnPoint.position).normalized * Speed;
+            moveVector = transform.InverseTransformVector((DespawnPoint.position - SpawnPoint.position).normalized * Speed);
             if (!overrideAutomaticSize)
                 detectSize = new Vector3(Mathf.Abs(DespawnPoint.localPosition.x - SpawnPoint.localPosition.x) / 2, 
                     1f, transform.localScale.z*1.5f);
@@ -87,6 +87,8 @@ public class Movepad : MonoBehaviour
 
     private void ApplyMove(GameObject target)
     {
+        Vector3 currentMoveVector = GetMoveDirection();
+
         if (target.GetComponent<PlayerCharacterController>() || target.GetComponentInParent<PlayerCharacterController>())
         {
             PlayerCharacterController player = target.GetComponent<PlayerCharacterController>();
@@ -97,24 +99,24 @@ public class Movepad : MonoBehaviour
                 return;
 
             if (!isJump)
-                player.ApplyForce(moveVector, Sticky);
+                player.ApplyForce(currentMoveVector, Sticky);
             else
             {
-                player.MoveVelocity = moveVector;
+                player.MoveVelocity = currentMoveVector;
                 player.IsGrounded = false;
                 player.transform.position += Vector3.up;
             }
         }
 
         else if (target.GetComponentInParent<Enemy>() && 
-            (Vector3.Dot(moveVector, target.GetComponentInParent<Enemy>().GetMoveVelocity()) < 0f || 
-            moveVector.magnitude > target.GetComponentInParent<Enemy>().GetMoveVelocity().magnitude))
-            target.GetComponentInParent<Enemy>().ReceiveKnockback(moveVector);
+            (Vector3.Dot(currentMoveVector, target.GetComponentInParent<Enemy>().GetMoveVelocity()) < 0f ||
+            currentMoveVector.magnitude > target.GetComponentInParent<Enemy>().GetMoveVelocity().magnitude))
+            target.GetComponentInParent<Enemy>().ReceiveKnockback(currentMoveVector);
     }
 
     public Vector3 GetMoveDirection()
     {
-        return moveVector;
+        return moveVector.magnitude * transform.TransformVector(moveVector.normalized);
     }
 
     public void SetMoveDirection(Vector3 value)
