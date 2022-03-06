@@ -49,9 +49,6 @@ jobs:
           name: Build
           path: build
 
-      - name: Rename build
-        run: cp -r "build/StandaloneWindows64" "build/Kinetic"
-
       - name: Zip build
         run: |
           pushd 'build/Kinetic'
