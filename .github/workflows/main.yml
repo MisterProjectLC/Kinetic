@@ -15,7 +15,6 @@ jobs:
     name: Build my project
     runs-on: ubuntu-latest
     steps:
-
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -60,8 +59,30 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: Kinetic - Windows Build.zip
-          name: Windows Release ${{ steps.tag.outputs.tag }}
+          name: Windows Release
+    
+    build:
+    name: Build my project
+    runs-on: ubuntu-latest
+    steps:
+     # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+    
+      # Cache Library
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library
 
+      # Test
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v2
+        with:
+          unityVersion: 2020.3.13f1
+      
       # Build Linux
       - name: Build linux project
         uses: game-ci/unity-builder@v2
@@ -88,4 +109,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: Kinetic - Linux Build.zip
-          name: Linux Release ${{ steps.tag.outputs.tag }}
+          name: Linux Release
