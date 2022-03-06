@@ -11,7 +11,7 @@ env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
-  build:
+  build_windows:
     name: Build my project on Windows
     runs-on: ubuntu-latest
     steps:
@@ -61,11 +61,11 @@ jobs:
           files: Kinetic - Windows Build.zip
           name: Windows Release
     
-    build:
+  build_linux:
     name: Build my project on Linux
     runs-on: ubuntu-latest
     steps:
-     # Checkout
+      # Checkout
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
