@@ -51,7 +51,7 @@ jobs:
 
       - name: Zip build
         run: |
-          pushd 'build/Kinetic'
+          pushd 'build/StandaloneWindows64'
           zip -r '../../Kinetic - Windows Build.zip' .
           popd
 
