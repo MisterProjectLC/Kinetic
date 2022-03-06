@@ -50,7 +50,7 @@ jobs:
           path: build
 
       - name: Rename build
-        run: mv 'build/StandaloneWindows64' 'build/Kinetic'
+        run: cp "build/StandaloneWindows64" "build/Kinetic"
 
       - name: Zip build
         run: |
