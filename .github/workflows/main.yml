@@ -49,9 +49,12 @@ jobs:
           name: Build
           path: build
 
+      - name: Rename build
+        run: mv 'build/StandaloneWindows64' 'build/Kinetic'
+
       - name: Zip build
         run: |
-          pushd 'build/StandaloneWindows64'
+          pushd 'build/Kinetic'
           zip -r '../../Kinetic - Windows Build.zip' .
           popd
 
@@ -59,7 +62,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: Kinetic - Windows Build.zip
-          name: Windows Release
+          name: Kinetic Release
     
   build_linux:
     name: Build my project on Linux
@@ -109,4 +112,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: Kinetic - Linux Build.zip
-          name: Linux Release
+          name: Kinetic Release
