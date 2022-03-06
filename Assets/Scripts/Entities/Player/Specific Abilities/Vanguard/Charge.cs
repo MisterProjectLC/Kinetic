@@ -60,8 +60,8 @@ public class Charge : Ability
 
     void StopCharging()
     {
-        if (charged && player.MoveVelocity.magnitude < MinimumForce / 4)
-            StartCoroutine("ChargeFalse");
+        if (charged && player.MoveVelocity.magnitude < MinimumForce / 8)
+            StartCoroutine(ChargeFalse());
     }
 
     IEnumerator ChargeFalse()
@@ -69,15 +69,24 @@ public class Charge : Ability
         yield return new WaitForSeconds(0.5f);
         charged = false;
     }
-    
+
+
+    IEnumerator Freeze()
+    {
+        Time.timeScale = 0.15f;
+        yield return new WaitForSecondsRealtime(0.5f);
+        Time.timeScale = 1f;
+    }
+
 
     void Colliding(ControllerColliderHit hit)
     {
-        if (charged)
+        if (charged && player.MoveVelocity.magnitude > 10f && hit.gameObject.GetComponent<Damageable>())
         {
             attack.AttackTarget(hit.gameObject);
             PlaySound(CollisionSFX);
             charged = false;
+            StartCoroutine(Freeze());
         }
     }
 

@@ -167,7 +167,8 @@ public class Enemy : MonoBehaviour
         {
             // Collision
             Ray ray = new Ray(Model.transform.position, moveVelocity.normalized);
-            Physics.Raycast(ray, out RaycastHit hitInfo, CollisionDistance, GroundLayers.layers, QueryTriggerInteraction.Ignore);
+            Physics.Raycast(ray, out RaycastHit hitInfo, CollisionDistance*moveVelocity.magnitude/20f, 
+                GroundLayers.layers, QueryTriggerInteraction.Ignore);
             if (hitInfo.collider)
             {
                 OnKnockbackCollision?.Invoke(moveVelocity);

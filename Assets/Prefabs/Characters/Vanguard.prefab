@@ -1581,7 +1581,7 @@ MonoBehaviour:
   explosion: {fileID: 5059452173142551493, guid: f125cceb921bb894b9098ba5323b1db0,
     type: 3}
   minimumVelocity: 27
-  cooldown: 2
+  cooldown: 1
 --- !u!114 &3571691083905309033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1608,7 +1608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Spawn an explosion when colliding at fast speeds.
+  description: Generate an explosion when colliding at fast speeds.
   Localized:
     key: vanguard_collision
 --- !u!1 &5935564171822933945

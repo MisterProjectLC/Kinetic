@@ -15,7 +15,6 @@ public class Killheal : MonoBehaviour
         }
     }
 
-
     void Heal()
     {
         health.Heal(1);
