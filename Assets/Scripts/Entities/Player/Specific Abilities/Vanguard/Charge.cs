@@ -86,7 +86,7 @@ public class Charge : Ability
             attack.AttackTarget(hit.gameObject);
             PlaySound(CollisionSFX);
             charged = false;
-            StartCoroutine(Freeze());
+            //StartCoroutine(Freeze());
         }
     }
 

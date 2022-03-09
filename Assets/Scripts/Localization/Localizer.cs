@@ -6,6 +6,9 @@ public class Localizer : MonoBehaviour
     [SerializeField]
     LocalizedString Key;
 
+    [HideInInspector]
+    public string Text;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -38,5 +41,7 @@ public class Localizer : MonoBehaviour
 
         if (GetComponentInChildren<Text>())
             GetComponentInChildren<Text>().text = Key.value;
+
+        Text = Key.value;
     }
 }

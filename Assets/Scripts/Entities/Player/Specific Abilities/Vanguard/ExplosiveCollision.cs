@@ -16,7 +16,7 @@ public class ExplosiveCollision : MonoBehaviour
     [SerializeField]
     float cooldown = 1f;
 
-    float clock = 0f;
+    float clock = 1f;
 
     // Start is called before the first frame update
     void Start()

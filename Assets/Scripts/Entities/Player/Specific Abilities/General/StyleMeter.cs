@@ -13,8 +13,9 @@ public class StyleMeter : MonoBehaviour
         Movement,
         Variety,
         Airborne,
-        IndirectKill,
-        Damage
+        HazardKill,
+        Damage,
+        Count
     }
 
     const int ABILITY_MEMORY = 5;
@@ -22,6 +23,7 @@ public class StyleMeter : MonoBehaviour
 
     Health health;
     PlayerCharacterController player;
+    Dictionary<Categories, Localizer> localizers = new Dictionary<Categories, Localizer>();
 
     public UnityAction OnUpdate;
     public UnityAction OnDeplete;
@@ -49,6 +51,10 @@ public class StyleMeter : MonoBehaviour
     private void Start()
     {
         player = GetComponentInParent<PlayerCharacterController>();
+        Transform styleTexts = transform.Find("StyleTexts");
+        for (Categories i = Categories.Kill; i != Categories.Count; i++)
+            if (i != Categories.Airborne)
+                localizers.Add(i, styleTexts.Find(i.ToString()).GetComponent<Localizer>());
 
         clock = config.ComboMaxTime;
         SetJuiceLeft(JuiceMax);
@@ -80,7 +86,7 @@ public class StyleMeter : MonoBehaviour
         {
             movementClock = 0f;
             if (player.MoveVelocity.magnitude > config.MovementSpeed)
-                GainJuice(config.MovementGain, (int)Categories.Movement, "Movement");
+                GainJuice(config.MovementGain, (int)Categories.Movement, localizers[Categories.Movement].Text);
         }
 
         // Airborne bonus
@@ -105,7 +111,7 @@ public class StyleMeter : MonoBehaviour
         lastAbilities.Add(ability);
 
         if (clock < config.CombatMaxTime)
-            GainJuice(config.VarietyGain * ((lastAbilities.Count - 1) - index), (int)Categories.Variety, "Variety");
+            GainJuice(config.VarietyGain * ((lastAbilities.Count - 1) - index), (int)Categories.Variety, localizers[Categories.Variety].Text);
     }
 
 
@@ -127,7 +133,7 @@ public class StyleMeter : MonoBehaviour
         StyleCrate styleCrate = target.GetComponent<StyleCrate>();
 
         if (styleCrate && styleCrate.StyleOnCritical != 0f)
-            GainJuice(styleCrate.StyleOnCritical, (int)Categories.Damage, "Damage");
+            GainJuice(styleCrate.StyleOnCritical, (int)Categories.Damage, localizers[Categories.Damage].Text);
     }
 
     void StyleKill(GameObject target, bool indirect)
@@ -136,18 +142,18 @@ public class StyleMeter : MonoBehaviour
 
         if (indirect)
         {
-            GainJuice(config.IndirectGain, (int)Categories.IndirectKill, "Trap Kill");
+            GainJuice(config.IndirectGain, (int)Categories.HazardKill, localizers[Categories.HazardKill].Text);
             return;
         }
 
         if (!target.GetComponent<StyleCrate>())
             return;
 
-        GainJuice(target.GetComponent<StyleCrate>().StyleOnKill, (int)Categories.Kill, "Kill");
+        GainJuice(target.GetComponent<StyleCrate>().StyleOnKill, (int)Categories.Kill, localizers[Categories.Kill].Text);
         if (clock < config.MultiMaxTime)
-            GainJuice(config.MultiGain, (int)Categories.Multikill, "Multikill");
+            GainJuice(config.MultiGain, (int)Categories.Multikill, localizers[Categories.Multikill].Text);
         else if (clock < config.ComboMaxTime)
-            GainJuice(config.ChainGain, (int)Categories.ChainKill, "Chain Kill");
+            GainJuice(config.ChainGain, (int)Categories.ChainKill, localizers[Categories.ChainKill].Text);
 
         clock = 0f;
     }
@@ -155,7 +161,7 @@ public class StyleMeter : MonoBehaviour
     void OnDamage(int damage, Attack attack)
     {
         if (attack == null || attack.Agressor != GetComponent<Actor>())
-            SpendJuice(damage * config.DamageLoss, (int)Categories.Hurt, "Hurt");
+            SpendJuice(damage * config.DamageLoss, (int)Categories.Hurt, localizers[Categories.Hurt].Text);
     }
 
 

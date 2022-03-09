@@ -5,6 +5,13 @@ public class Hermes : MonoBehaviour
 {
     static bool init = false;
 
+    enum NullableBool
+    {
+        False = 0,
+        True,
+        Null
+    }
+
     public enum Properties
     {
         _First,
@@ -16,6 +23,7 @@ public class Hermes : MonoBehaviour
         MouseInvert,
         OutlineEnabled,
         Language,
+        Resolution,
         _Last
     }
 
@@ -31,6 +39,9 @@ public class Hermes : MonoBehaviour
             PlayerPrefs.SetInt(key.ToString(), (int)value);
         else if (value is bool)
             PlayerPrefs.SetInt(key.ToString(), (bool)value ? 1 : 0);
+
+        if (value is bool)
+            value = (bool)value ? NullableBool.True : NullableBool.False;
 
         if (properties.ContainsKey(key))
             properties[key] = value;
@@ -51,24 +62,39 @@ public class Hermes : MonoBehaviour
 
     public static bool GetBool(Properties key)
     {
-        Debug.Assert(properties.ContainsKey(key) && properties[key] is bool);
-        return (bool)properties[key];
+        Debug.Assert(properties.ContainsKey(key) && properties[key] is NullableBool);
+        return (NullableBool)properties[key] == NullableBool.True;
+    }
+
+    public static bool IsInit(Properties key)
+    {
+        Debug.Assert(properties.ContainsKey(key));
+        if (properties[key] is NullableBool)
+            return (NullableBool)properties[key] != NullableBool.Null;
+        else if (properties[key] is float)
+            return (float)properties[key] != -1f;
+        else
+            return (int)properties[key] != -1;
     }
 
 
     static void GenerateFloat(Properties key)
     {
-        SetProperty(key, PlayerPrefs.GetFloat(key.ToString()));
+        SetProperty(key, PlayerPrefs.GetFloat(key.ToString(), -1));
     }
 
     static void GenerateInt(Properties key)
     {
-        SetProperty(key, PlayerPrefs.GetInt(key.ToString()));
+        SetProperty(key, PlayerPrefs.GetInt(key.ToString(), -1));
     }
 
     static void GenerateBool(Properties key)
     {
-        SetProperty(key, PlayerPrefs.GetInt(key.ToString()) == 1);
+        int value = PlayerPrefs.GetInt(key.ToString(), -1);
+        if (value != -1)
+            SetProperty(key, (NullableBool)value);
+        else
+            SetProperty(key, NullableBool.Null);
     }
 
 
@@ -87,6 +113,7 @@ public class Hermes : MonoBehaviour
         GenerateBool(Properties.MouseInvert);
         GenerateBool(Properties.OutlineEnabled);
         GenerateInt(Properties.Language);
+        GenerateInt(Properties.Resolution);
     }
 
 

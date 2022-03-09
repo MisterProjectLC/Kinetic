@@ -27,8 +27,12 @@ public class DropSlot : MonoBehaviour, IDropHandler
         Offset = Vector2.zero;
         Label = GetComponentInChildren<Text>().gameObject;
         Label.GetComponent<Text>().text = LabelText.value;
-        StartCoroutine(EnableSound());
         GetComponent<AudioSource>().ignoreListenerPause = true;
+    }
+
+    void OnEnable()
+    {
+        StartCoroutine(EnableSound());
     }
 
     IEnumerator EnableSound()
@@ -48,10 +52,14 @@ public class DropSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(GameObject dragDrop)
     {
+        if (InsertedDragDrop)
+            return;
+
         Label.SetActive(false);
 
         if (GetComponent<AudioSource>() && soundEnabled)
             GetComponent<AudioSource>().Play();
+
 
         InsertedDragDropOldParent = dragDrop.transform.parent;
         Debug.Log("Dropped: " + dragDrop.GetComponent<LoadoutOption>().Option.name + ", " + InsertedDragDropOldParent.gameObject.name + 
@@ -74,5 +82,6 @@ public class DropSlot : MonoBehaviour, IDropHandler
         Debug.Log("Removed: " + InsertedDragDrop.GetComponent<LoadoutOption>().Option.name + ", " + InsertedDragDropOldParent.gameObject.name);
         InsertedDragDrop = null;
         Label.SetActive(true);
+        soundEnabled = true;
     }
 }

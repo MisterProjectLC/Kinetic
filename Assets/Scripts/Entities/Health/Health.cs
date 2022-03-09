@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    static float LastAttackWait = 15f;
+    static float LastAttackWait = 20f;
 
     [HideInInspector]
     public int CurrentHealth = 5;

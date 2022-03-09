@@ -9,7 +9,7 @@ public class OptionDataDrawer : PropertyDrawer
 {
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        return 50;
+        return 75;
     }
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -43,7 +43,8 @@ public class OptionDataDrawer : PropertyDrawer
         // Calculate rects
         var objectRect = new Rect(position.x, position.y, position.width/2, 18);
         var firstDropRect = new Rect(position.x + 2*position.width/3, position.y, position.width/3, position.height/2);
-        var secondDropRect = new Rect(position.x, position.y + position.height/2, position.width/2, position.height/2);
+        var secondDropRect = new Rect(position.x, position.y + 0.9f*position.height/3, position.width/2, position.height/3);
+        var defaultValueRect = new Rect(position.x, position.y + 1.8f*position.height/3, position.width/2, position.height/4);
 
         // Using BeginProperty / EndProperty on the parent property means that
         // prefab override logic works on the entire property.
@@ -94,6 +95,25 @@ public class OptionDataDrawer : PropertyDrawer
                 AddMenuItemForProperty(menu, i.ToString(), i);
 
             menu.ShowAsContext();
+        }
+
+        // DEFAULT VALUE --------------------------------------------------------------
+        switch (selected)
+        {
+            case OptionData.Components.Slider:
+                property.FindPropertyRelative("defaultFloat").floatValue =
+                    EditorGUI.FloatField(defaultValueRect, property.FindPropertyRelative("defaultFloat").floatValue);
+                break;
+
+            case OptionData.Components.Toggle:
+                property.FindPropertyRelative("defaultBool").boolValue =
+                    EditorGUI.Toggle(defaultValueRect, property.FindPropertyRelative("defaultBool").boolValue);
+                break;
+
+            case OptionData.Components.Dropdown:
+                property.FindPropertyRelative("defaultInt").intValue =
+                    EditorGUI.IntField(defaultValueRect, property.FindPropertyRelative("defaultInt").intValue);
+                break;
         }
 
         EditorGUI.EndProperty();

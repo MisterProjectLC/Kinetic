@@ -13,8 +13,15 @@ public class OptionData
     }
 
     public Components selected = Components.Slider;
+
     public Slider slider;
+    public float defaultFloat;
+
     public Toggle toggle;
+    public bool defaultBool;
+
     public Dropdown dropdown;
+    public int defaultInt;
+
     public Hermes.Properties property = Hermes.Properties.SoundVolume;
 }

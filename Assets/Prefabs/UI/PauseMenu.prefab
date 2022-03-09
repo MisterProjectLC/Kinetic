@@ -220,6 +220,7 @@ MonoBehaviour:
   submenus:
   - animator: {fileID: 1468567494280501719}
     enabled: 0
+  StartSubmenu: -1
   transitions: {fileID: 4301069829396782417, guid: faf0b785c323af844bcc4215f1517629,
     type: 3}
 --- !u!1 &1468567494128176026
@@ -267,6 +268,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1468567493987577557}
     m_Modifications:
+    - target: {fileID: 1188279505377211361, guid: 187f602257aed034494dfdf997af52e2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1188279505377211361, guid: 187f602257aed034494dfdf997af52e2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2631129327545503097, guid: 187f602257aed034494dfdf997af52e2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2631129327545503097, guid: 187f602257aed034494dfdf997af52e2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4030530450496905075, guid: 187f602257aed034494dfdf997af52e2,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -445,6 +466,16 @@ PrefabInstance:
     - target: {fileID: 6122957578779559785, guid: 187f602257aed034494dfdf997af52e2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710029651691264330, guid: 187f602257aed034494dfdf997af52e2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710029651691264330, guid: 187f602257aed034494dfdf997af52e2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

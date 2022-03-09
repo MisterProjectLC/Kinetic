@@ -18,7 +18,7 @@ public class FallArea : MonoBehaviour
             other.GetComponentInChildren<PlayerFallHandler>().FallRespawnPoint = FallRespawnPoint.position;
         }
 
-        if (other.GetComponentInParent<Enemy>())
+        if (other.GetComponentInParent<Enemy>() && !other.GetComponentInParent<FlyingEnemy>())
         {
             Debug.Log("Enemy fall");
             Health enemyHealth = other.GetComponentInParent<Enemy>().GetComponent<Health>();
