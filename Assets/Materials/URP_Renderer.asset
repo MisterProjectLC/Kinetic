@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: RenderWeaponsOpaque
-    Event: 550
+    Event: 500
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -35,10 +35,10 @@ MonoBehaviour:
       failOperation: 0
       zFailOperation: 0
     cameraSettings:
-      overrideCamera: 0
+      overrideCamera: 1
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 90.7
+      cameraFieldOfView: 75
 --- !u!114 &-4766490229996560027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,14 +56,14 @@ MonoBehaviour:
     passTag: RenderWeaponsTransparent
     Event: 550
     filterSettings:
-      RenderQueueType: 0
+      RenderQueueType: 1
       LayerMask:
         serializedVersion: 2
         m_Bits: 128
       PassNames: []
     overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
-    overrideDepthState: 1
+    overrideDepthState: 0
     depthCompareFunction: 4
     enableWrite: 1
     stencilSettings:
@@ -74,10 +74,10 @@ MonoBehaviour:
       failOperation: 0
       zFailOperation: 0
     cameraSettings:
-      overrideCamera: 0
+      overrideCamera: 1
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 70
+      cameraFieldOfView: 75
 --- !u!114 &-4337471307164691355
 MonoBehaviour:
   m_ObjectHideFlags: 0

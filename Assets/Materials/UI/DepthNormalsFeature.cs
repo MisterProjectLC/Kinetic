@@ -17,7 +17,9 @@ public class DepthNormalsFeature : ScriptableRendererFeature
 
         public DepthNormalsPass(RenderQueueRange renderQueueRange, LayerMask layerMask, Material material)
         {
-            m_FilteringSettings = new FilteringSettings(renderQueueRange, layerMask);
+            int myLayerIndexVariable = LayerMask.NameToLayer("Weapon");
+            int myLayerMaskVariable = ~(1 << myLayerIndexVariable);
+            m_FilteringSettings = new FilteringSettings(renderQueueRange, myLayerMaskVariable);
             depthNormalsMaterial = material;
         }
 
@@ -97,7 +99,7 @@ public class DepthNormalsFeature : ScriptableRendererFeature
     {
         depthNormalsMaterial = CoreUtils.CreateEngineMaterial("Hidden/Internal-DepthNormalsTexture");
         depthNormalsPass = new DepthNormalsPass(RenderQueueRange.opaque, -1, depthNormalsMaterial);
-        depthNormalsPass.renderPassEvent = RenderPassEvent.AfterRenderingPrePasses;
+        depthNormalsPass.renderPassEvent = RenderPassEvent.AfterRenderingTransparents;
         depthNormalsTexture.Init("_CameraDepthNormalsTexture");
     }
 

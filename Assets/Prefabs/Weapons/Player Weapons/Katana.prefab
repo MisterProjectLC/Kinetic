@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4030636285321456032}
   - component: {fileID: 4689628979944144268}
   - component: {fileID: 1808539309778542224}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Katana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,9 +144,10 @@ AudioSource:
   m_GameObject: {fileID: 1570064485261180041}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -263,7 +264,7 @@ GameObject:
   - component: {fileID: 5887085657301273952}
   - component: {fileID: 2409941699991442818}
   - component: {fileID: 7284074910589107206}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1414,7 +1415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4840363009312787268}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Offset
   m_TagString: Untagged
   m_Icon: {fileID: 0}

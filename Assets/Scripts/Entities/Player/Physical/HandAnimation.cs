@@ -12,5 +12,8 @@ public class HandAnimation : MonoBehaviour
     {
         GetComponent<Animator>().SetBool("Walking",
                 playerCharacter.IsGrounded && Vector3.ProjectOnPlane(playerCharacter.MoveVelocity, Vector3.up).magnitude > 4f);
+
+        GetComponent<Animator>().SetBool("Flying",
+                !playerCharacter.IsGrounded && playerCharacter.MoveVelocity.magnitude > 12f);
     }
 }
