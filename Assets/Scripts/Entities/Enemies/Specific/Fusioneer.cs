@@ -33,8 +33,8 @@ public class Fusioneer : MonoBehaviour
         GyroCannon = GetComponent<Enemy>().weapons[2];
         LaserPointer = GetComponent<Enemy>().weapons[3];
 
-        rocketLauncher.OnFire += FireAnimation;
-        LaserCannon.OnFire += LaserShot;
+        rocketLauncher.SubscribeToFire(FireAnimation);
+        LaserCannon.SubscribeToFire(LaserShot);
 
         crystalShield.OnDeactivate += PhaseTwo;
         GetComponent<Health>().OnCriticalLevel += PhaseThree;
@@ -84,14 +84,14 @@ public class Fusioneer : MonoBehaviour
     }
 
 
-    void FireAnimation()
+    void FireAnimation(Weapon weapon)
     {
         animator.SetTrigger("Fire");
         if ((playerTransform.position - enemy.Model.transform.position).magnitude <= maxDistance)
             enemy.ReceiveKnockback(rocketLauncher.BackwardsForce * -rocketLauncher.Mouth.transform.forward);
     }
 
-    void LaserShot()
+    void LaserShot(Weapon weapon)
     {
         GetComponent<Enemy>().OnlyShootIfPlayerInView = false;
         chargingLaser = false;

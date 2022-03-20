@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,6 +17,7 @@ public abstract class Ability : MonoBehaviour
 
     public bool HoldAbility = false;
     public bool ReleaseAbility = false;
+    bool waiting = true;
 
     [SerializeField]
     AudioClip[] SoundEffects;
@@ -30,18 +32,27 @@ public abstract class Ability : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (OnExecute == null)
             OnExecute += (Input input) => OnExecuteAbility?.Invoke(this);
+
     }
 
-    private void Start()
+    private void OnEnable()
     {
         if (OnExecute == null)
             OnExecute += (Input input) => OnExecuteAbility?.Invoke(this);
+
+        StartCoroutine(StopWaiting());
     }
 
     private void Update()
     {
         Timer = Timer > 0f ? Timer - Time.deltaTime : 0f;
         OnUpdate?.Invoke();
+    }
+
+    IEnumerator StopWaiting()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        waiting = false;
     }
 
 
@@ -52,7 +63,7 @@ public abstract class Ability : MonoBehaviour
 
     public void Activate(Input input)
     {
-        if (Timer <= 0f)
+        if (Timer <= 0f && !waiting)
         {
             Timer = Cooldown;
             Execute(input);

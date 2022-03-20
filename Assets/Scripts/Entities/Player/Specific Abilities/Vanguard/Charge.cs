@@ -40,7 +40,7 @@ public class Charge : Ability
         player.OnCollision += Colliding;
         OnUpdate += StopCharging;
         attack = GetComponent<Attack>();
-        GetComponentInParent<StyleMeter>().OnCritical += OnCritical;
+        GetComponentInParent<StyleMeter>().SubscribeToCritical(OnCritical);
 
         foreach (Attack attack in player.GetComponentsInChildren<Attack>())
             attack.OnKill += (Attack a, GameObject g, bool b) => OnKill();

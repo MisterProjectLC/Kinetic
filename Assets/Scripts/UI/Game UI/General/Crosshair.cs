@@ -42,7 +42,7 @@ public class Crosshair : MonoBehaviour
     private void Start()
     {
         foreach (Weapon weapon in ActorsManager.AM.GetPlayer().GetComponentsInChildren<Weapon>())
-            weapon.OnFire += ExpandCrosshair;
+            weapon.SubscribeToFire(ExpandCrosshair);
 
         foreach (Attack attack in ActorsManager.AM.GetPlayer().GetComponentsInChildren<Attack>())
             attack.OnAttack += ActivateHitmarker;
@@ -120,7 +120,7 @@ public class Crosshair : MonoBehaviour
     }
 
 
-    void ExpandCrosshair()
+    void ExpandCrosshair(Weapon weapon)
     {
         crosshairFrame = crosshairExpandedFrame;
         crosshair.sprite = expandedCrosshair;

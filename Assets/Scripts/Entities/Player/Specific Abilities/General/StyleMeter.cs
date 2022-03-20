@@ -27,7 +27,9 @@ public class StyleMeter : MonoBehaviour
 
     public UnityAction OnUpdate;
     public UnityAction OnDeplete;
-    public UnityAction<bool> OnCritical;
+    UnityAction<bool> OnCritical;
+    public void SubscribeToCritical(UnityAction<bool> subscribee) { OnCritical += subscribee; }
+
     public UnityAction<float, int, string> OnEvent;
     public UnityAction<int, bool> OnBonus;
 
@@ -41,6 +43,8 @@ public class StyleMeter : MonoBehaviour
 
     [SerializeField]
     SlowdownConfig config;
+    [SerializeField]
+    Transform styleTexts;
 
     float movementClock = 0f;
     float clock = 0f;
@@ -51,7 +55,6 @@ public class StyleMeter : MonoBehaviour
     private void Start()
     {
         player = GetComponentInParent<PlayerCharacterController>();
-        Transform styleTexts = transform.Find("StyleTexts");
         for (Categories i = Categories.Kill; i != Categories.Count; i++)
             if (i != Categories.Airborne)
                 localizers.Add(i, styleTexts.Find(i.ToString()).GetComponent<Localizer>());

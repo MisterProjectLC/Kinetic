@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -34,15 +33,26 @@ public abstract class Weapon : MonoBehaviour
     public float FireCooldown = 0f;
     float clock = 0f;
 
+    [SerializeField]
+    int maxAmmo = -1;
+    public bool InfiniteAmmo = false;
+    public int MaxAmmo { get { return maxAmmo; } private set { maxAmmo = value; } }
+    public int Ammo { get; private set; } = 12;
+
     public float InitialFireCooldown = 0f;
 
     [SerializeField]
     AudioClip[] SoundEffects;
 
-    public UnityAction OnFire;
+    UnityAction<Weapon> OnFire;
+    public void SubscribeToFire(UnityAction<Weapon> subscriptor) { OnFire += subscriptor; }
+
+    UnityAction OnOutOfAmmo;
+    public void SubscribeToOutOfAmmo(UnityAction subscriptor) { OnOutOfAmmo += subscriptor; }
 
     private void Start()
     {
+        Ammo = maxAmmo;
         clock = InitialFireCooldown;
         MaxSpreadAngle /= 100f;
     }
@@ -64,7 +74,17 @@ public abstract class Weapon : MonoBehaviour
 
     public void Fire()
     {
-        OnFire?.Invoke();
+        if (!InfiniteAmmo)
+        {
+            // Deal with Ammo
+            if (Ammo == 0)
+                return;
+            Ammo--;
+            if (Ammo == 0)
+                OnOutOfAmmo.Invoke();
+        }
+
+        OnFire?.Invoke(this);
         if (SoundEffects.Length > 0)
             PlaySound(SoundEffects[Random.Range(0, SoundEffects.Length)]);
 
@@ -100,4 +120,19 @@ public abstract class Weapon : MonoBehaviour
     }
 
     public abstract void Shoot(Vector3 direction);
+
+    public void ReplenishAmmo()
+    {
+        ReplenishAmmo(1);
+    }
+
+    public void ReplenishAmmo(int ammo)
+    {
+        float fraction = (ammo * (float)MaxAmmo / 20) % 1;
+        float rand = Random.Range(0, 1);
+
+        Ammo = Mathf.Min(Ammo + (ammo * MaxAmmo / 20), MaxAmmo);
+        if (fraction >= rand)
+            Ammo = Mathf.Min(Ammo + 1, MaxAmmo);
+    }
 }

@@ -1017,13 +1017,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d63d8eaf3733a64cb4a0a37f64a6656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!43 &529690742
+--- !u!43 &586832675
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1698
+  m_Name: pb_Mesh-1726
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1957,6 +1957,11 @@ PrefabInstance:
       propertyPath: type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5693096097450936213, guid: a6019f35805a207418c7eb6898809f63,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5693096097450936215, guid: a6019f35805a207418c7eb6898809f63,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2544,6 +2549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: type
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5693096097450936213, guid: a6019f35805a207418c7eb6898809f63,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5693096097450936215, guid: a6019f35805a207418c7eb6898809f63,
         type: 3}
@@ -3184,7 +3194,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 529690742}
+      objectReference: {fileID: 586832675}
     - target: {fileID: 1056472193603156170, guid: 8c84573c6f3ef0f48b35407f5cd2f08d,
         type: 3}
       propertyPath: Range
@@ -3204,7 +3214,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 529690742}
+      objectReference: {fileID: 586832675}
     - target: {fileID: 2996059635077275235, guid: 8c84573c6f3ef0f48b35407f5cd2f08d,
         type: 3}
       propertyPath: m_Tangents.Array.data[16].x
@@ -3444,7 +3454,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 529690742}
+      objectReference: {fileID: 586832675}
     - target: {fileID: 9089919347116189794, guid: 8c84573c6f3ef0f48b35407f5cd2f08d,
         type: 3}
       propertyPath: m_Name

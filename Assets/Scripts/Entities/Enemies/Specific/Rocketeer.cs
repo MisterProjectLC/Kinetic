@@ -19,7 +19,7 @@ public class Rocketeer : MonoBehaviour
     void Start()
     {
         weapon = GetComponent<Enemy>().weapons[0];
-        weapon.OnFire += FireAnimation;
+        weapon.SubscribeToFire(FireAnimation);
         GetComponent<Health>().OnCriticalLevel += Stagger;
         animator = GetComponent<Animator>();
         enemy = GetComponent<Enemy>();
@@ -40,7 +40,7 @@ public class Rocketeer : MonoBehaviour
         enemy.GravityMultiplier = 0;
     }
 
-    void FireAnimation()
+    void FireAnimation(Weapon weapon)
     {
         animator.SetTrigger("Fire");
         if ((playerTransform.position - enemy.Model.transform.position).magnitude <= maxDistance)

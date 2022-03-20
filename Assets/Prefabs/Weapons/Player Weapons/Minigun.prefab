@@ -92,9 +92,11 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 1
   FireCooldown: 0.015
+  maxAmmo: 60
+  InfiniteAmmo: 0
   InitialFireCooldown: 0
   SoundEffects:
-  - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
+  - {fileID: 8300000, guid: 33dc9a56928b6f14894641d82bd8abe1, type: 3}
   Projectile: {fileID: 7750975500520401991, guid: e628c2c6caa94ce46b9a00c7a877f7fc,
     type: 3}
 --- !u!114 &297512775353511095
@@ -170,7 +172,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.65
-  m_Pitch: 1
+  m_Pitch: 0.75
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -301,13 +303,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7409596822161239090}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.36, y: -0.73, z: 8.05}
+  m_LocalRotation: {x: -0.05226704, y: 0.032725662, z: 0.0017137376, w: 0.99809533}
+  m_LocalPosition: {x: -5.28, y: -0.9, z: 7.57}
   m_LocalScale: {x: 15, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 4737951187669904328}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -5.995, y: 3.756, z: 0}
 --- !u!114 &9017924222327057586
 MonoBehaviour:
   m_ObjectHideFlags: 0

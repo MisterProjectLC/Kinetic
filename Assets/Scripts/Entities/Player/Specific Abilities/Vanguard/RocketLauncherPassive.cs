@@ -18,7 +18,7 @@ public class RocketLauncherPassive : MonoBehaviour
     {
         weapon = GetComponent<ProjectileWeapon>();
         ability = GetComponent<Ability>();
-        GetComponentInParent<StyleMeter>().OnCritical += OnCritical;
+        GetComponentInParent<StyleMeter>().SubscribeToCritical(OnCritical);
     }
 
     void OnCritical(bool critical)

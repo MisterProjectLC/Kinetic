@@ -108,6 +108,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 1
+  maxAmmo: -1
   InitialFireCooldown: 0
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!114 &2595723714813451258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +561,7 @@ MonoBehaviour:
   StylePerDamage: 0
   StyleOnCritical: 1
   StyleOnKill: 3
+  enemyType: 1
 --- !u!54 &3438627743808673325
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1790,6 +1793,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 1
+  maxAmmo: -1
   InitialFireCooldown: 0.5
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -1808,6 +1812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!64 &5085034628851407984
 MeshCollider:
   m_ObjectHideFlags: 0

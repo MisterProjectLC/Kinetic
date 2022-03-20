@@ -21,7 +21,7 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ActorsManager.AM.GetPlayer().GetComponent<StyleMeter>().OnCritical += OnCritical;
+        ActorsManager.AM.GetPlayer().GetComponent<StyleMeter>().SubscribeToCritical(OnCritical);
     }
 
 

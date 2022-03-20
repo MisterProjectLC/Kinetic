@@ -1393,6 +1393,7 @@ MonoBehaviour:
   StylePerDamage: 0
   StyleOnCritical: 3
   StyleOnKill: 15
+  enemyType: 2
 --- !u!82 &7413753500681677849
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2224,6 +2225,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 1
   FireCooldown: 100
+  maxAmmo: -1
   InitialFireCooldown: 0
   SoundEffects: []
   MaxDistance: 400
@@ -2744,6 +2746,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 3000
+  maxAmmo: -1
   InitialFireCooldown: 0
   SoundEffects:
   - {fileID: 8300000, guid: 386e2b3e6d7dd8c4da59c6f311a879d0, type: 3}
@@ -9510,6 +9513,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 8
+  maxAmmo: -1
   InitialFireCooldown: 0
   SoundEffects:
   - {fileID: 8300000, guid: 386e2b3e6d7dd8c4da59c6f311a879d0, type: 3}
@@ -10141,6 +10145,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 1
+  maxAmmo: -1
   InitialFireCooldown: 120
   SoundEffects:
   - {fileID: 8300000, guid: 4105042febbe7df42845f74cc06cb0ce, type: 3}

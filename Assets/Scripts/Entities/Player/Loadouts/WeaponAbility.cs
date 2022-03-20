@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponAbility : Ability
@@ -19,7 +17,6 @@ public class WeaponAbility : Ability
         Cooldown = WeaponRef.FireCooldown;
         BackwardsForce = WeaponRef.BackwardsForce;
     }
-
 
     public override void Execute(Input input)
     {

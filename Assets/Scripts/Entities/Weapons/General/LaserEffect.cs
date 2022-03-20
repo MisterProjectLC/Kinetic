@@ -33,7 +33,7 @@ public class LaserEffect : MonoBehaviour
         Laser = newInstance.GetComponent<LineRenderer>();
         Laser.material = laserMaterial;
         WeaponRef = GetComponent<HitscanWeapon>();
-        WeaponRef.OnFire += OnFire;
+        WeaponRef.SubscribeToFire(OnFire);
     }
 
     void OnDisable()
@@ -66,7 +66,7 @@ public class LaserEffect : MonoBehaviour
     }
 
 
-    void OnFire()
+    void OnFire(Weapon weapon)
     {
         Physics.Raycast(WeaponRef.Mouth.position, WeaponRef.Mouth.forward, out RaycastHit hit, MaxDistance, layersConfig);
         if (DefaultAlpha >= 0f)

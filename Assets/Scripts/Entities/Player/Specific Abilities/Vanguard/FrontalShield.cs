@@ -11,6 +11,9 @@ public class FrontalShield : SecondaryAbility
     [SerializeField]
     float Duration;
 
+    [SerializeField]
+    AudioClip breakSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,7 @@ public class FrontalShield : SecondaryAbility
 
     void OnShieldDeplete()
     {
+        PlaySound(breakSound);
         shield.SetActive(false);
     }
 }

@@ -30,7 +30,7 @@ public class GrapplingHook : SecondaryAbility
         foreach (Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
             attack.OnKill += (Attack a, GameObject g, bool b) => ResetCooldown();
 
-        GetComponentInParent<StyleMeter>().OnCritical += (critical) => { if (critical) ResetCooldown(); };
+        GetComponentInParent<StyleMeter>().SubscribeToCritical((critical) => { if (critical) ResetCooldown(); });
     }
 
     public override void Execute(Input input)

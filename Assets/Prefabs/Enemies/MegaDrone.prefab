@@ -163,6 +163,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
   InitialFireCooldown: 0.125
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -278,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!1 &1200504357058805001
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +447,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
   InitialFireCooldown: 0.25
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -560,6 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!1 &1771465725199382577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,6 +1188,7 @@ MonoBehaviour:
   StylePerDamage: 0
   StyleOnCritical: 3
   StyleOnKill: 5
+  enemyType: 2
 --- !u!82 &7085931297983018094
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1363,6 +1368,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
   InitialFireCooldown: 0.825
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -1478,6 +1484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!1 &5676612676861548455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,6 +1594,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
   InitialFireCooldown: 0.375
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -1702,6 +1710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!1 &6833223233742521991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,6 +1988,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
   InitialFireCooldown: 0.75
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -2094,6 +2104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!1 &8542724871655829409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,6 +2158,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
   InitialFireCooldown: 0
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -2262,6 +2274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!1 &8697484512686914325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2315,6 +2328,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
   InitialFireCooldown: 0.95
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -2430,6 +2444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!1 &8862300455926287115
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,6 +2557,7 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
   InitialFireCooldown: 0.625
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
@@ -2657,3 +2673,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0

@@ -14,7 +14,7 @@ public class StyleBar : BarUI
     {
         styleMeter = ActorsManager.Player.GetComponent<StyleMeter>();
         styleMeter.OnUpdate += UpdateStylebar;
-        styleMeter.OnCritical += UpdateCritical;
+        styleMeter.SubscribeToCritical(UpdateCritical);
         
     }
 

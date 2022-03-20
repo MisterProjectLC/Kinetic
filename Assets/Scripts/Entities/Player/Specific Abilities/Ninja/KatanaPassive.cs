@@ -10,7 +10,7 @@ public class KatanaPassive : MonoBehaviour
     public void Start()
     {
         ability = GetComponent<WeaponAbility>();
-        GetComponentInParent<StyleMeter>().OnCritical += OnCritical;
+        GetComponentInParent<StyleMeter>().SubscribeToCritical(OnCritical);
         GetComponent<Attack>().OnAttack += (GameObject g, float f, int i) => CritReset();
         GetComponent<Attack>().OnKill += (Attack a, GameObject g, bool b) => ability.ResetCooldown();
     }
