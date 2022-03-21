@@ -273,7 +273,7 @@ public class PlayerCharacterController : MonoBehaviour
     public RaycastHit? WallCheck()
     {
         if (Physics.CapsuleCast(GetCapsuleTopHemisphere(), GetCapsuleBottomHemisphere(), m_Controller.radius - Physics.defaultContactOffset,
-            MoveVelocity, out RaycastHit hit, GroundCheckDistanceInAir, GroundCheckLayers))
+            MoveVelocity.normalized, out RaycastHit hit, GroundCheckDistanceInAir, GroundCheckLayers))
             return hit;
 
         return null;

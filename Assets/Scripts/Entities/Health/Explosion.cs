@@ -2,19 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AreaAttack))]
 public class Explosion : MonoBehaviour
 {
-    struct CollisionData
-    {
-        public Health health;
-        public Collider closestCollider;
-
-        public CollisionData(Health health, Collider collider)
-        {
-            this.health = health;
-            this.closestCollider = collider;
-        }
-    }
 
     [Header("Attributes")]
     [Tooltip("Explosion range")]
@@ -41,7 +31,7 @@ public class Explosion : MonoBehaviour
     [SerializeField]
     const int maxColliders = 150;
     Collider[] colliders = new Collider[maxColliders];
-    List<CollisionData> enemies = new List<CollisionData>(30);
+    List<AreaAttack.CollisionData> enemies = new List<AreaAttack.CollisionData>(30);
 
     [SerializeField]
     bool GetClosestPoint = true;
@@ -58,7 +48,7 @@ public class Explosion : MonoBehaviour
     {
         colliders = new Collider[maxColliders];
         enemies.Clear();
-        StartCoroutine("Explode");
+        StartCoroutine(Explode());
     }
 
     IEnumerator Explode()
@@ -70,24 +60,10 @@ public class Explosion : MonoBehaviour
 
         Physics.OverlapSphereNonAlloc(transform.position, Radius, colliders, HitLayers.layers);
         // Get the closest collider of each health entity
-        foreach (Collider collider in colliders)
-        {
-            if (!collider || !collider.GetComponent<Damageable>())
-                continue;
-
-            if (enemies.Exists(e => e.health == collider.GetComponent<Damageable>().GetHealth()))
-            {
-                CollisionData cd = enemies.Find(e => e.health == collider.GetComponent<Damageable>().GetHealth());
-                if ((cd.closestCollider.ClosestPoint(transform.position) - transform.position).magnitude >
-                    (collider.ClosestPoint(transform.position) - transform.position).magnitude)
-                    cd.closestCollider = collider;
-            }
-            else
-                enemies.Add(new CollisionData(collider.GetComponent<Damageable>().GetHealth(), collider));
-        }
+        enemies = GetComponent<AreaAttack>().RefineHits(colliders);
 
         // Calculate and apply the damage
-        foreach (CollisionData collision in enemies)
+        foreach (AreaAttack.CollisionData collision in enemies)
         {
             Collider collider = collision.closestCollider;
 

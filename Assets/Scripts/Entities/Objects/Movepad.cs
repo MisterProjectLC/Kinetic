@@ -50,7 +50,7 @@ public class Movepad : MonoBehaviour
     {
         if (DespawnPoint && SpawnPoint)
         {
-            moveVector = transform.InverseTransformVector((DespawnPoint.position - SpawnPoint.position).normalized * Speed);
+            moveVector = transform.InverseTransformVector(DespawnPoint.position - SpawnPoint.position).normalized * Speed;
             if (!overrideAutomaticSize)
                 detectSize = new Vector3(Mathf.Abs(DespawnPoint.localPosition.x - SpawnPoint.localPosition.x) / 2, 
                     1f, transform.localScale.z*1.5f);
@@ -116,7 +116,7 @@ public class Movepad : MonoBehaviour
 
     public Vector3 GetMoveDirection()
     {
-        return moveVector.magnitude * transform.TransformVector(moveVector.normalized);
+        return moveVector.magnitude * transform.TransformVector(moveVector).normalized;
     }
 
     public void SetMoveDirection(Vector3 value)

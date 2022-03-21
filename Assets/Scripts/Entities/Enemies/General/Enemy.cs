@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour
+public class Enemy : PhysicsEntity
 {
     [SerializeField]
     bool debug = false;
@@ -19,11 +19,6 @@ public class Enemy : MonoBehaviour
 
     [Header("Attributes")]
     public bool Movable = true;
-    public float HoverHeight = 1f;
-    public float GravityMultiplier = 1f;
-    float lastGravityMultiplier = 1f;
-    public float AirDesacceleration = 0f;
-    public float Weight = 1f;
 
     [Header("Options")]
     [SerializeField]
@@ -45,7 +40,10 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent pathAgent;
     Transform playerTransform;
 
-    public UnityAction OnActiveUpdate;
+    UnityAction OnUnstunnedUpdate;
+    public void SubscribeToUnstunnedUpdate(UnityAction subscriber) { OnUnstunnedUpdate += subscriber; }
+    UnityAction OnActiveUpdate;
+    public void SubscribeToActiveUpdate(UnityAction subscriber) { OnActiveUpdate += subscriber; }
     public UnityAction<Vector3> OnKnockbackCollision;
 
     private void Awake()
@@ -68,10 +66,12 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    override protected void MyUpdate()
     {
         FeelGravity();
         FeelKnockback();
+
+        OnUnstunnedUpdate?.Invoke();
 
         if (Stunned <= 0f)
         {
@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void FeelGravity()
+    override protected void FeelGravity()
     {
         if (!Movable)
             return;
@@ -153,7 +153,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void FeelKnockback()
+    override protected void FeelKnockback()
     {
         // Automatic desacceleration (for airborne enemies)
         if (AirDesacceleration > 0 && moveVelocity.magnitude > 0)
@@ -225,7 +225,7 @@ public class Enemy : MonoBehaviour
             pathAgent.isStopped = true;
     }
 
-    public void ReceiveKnockback(Vector3 knockback)
+    override public void ReceiveKnockback(Vector3 knockback)
     {
         if (!Movable)
             return;
@@ -241,13 +241,13 @@ public class Enemy : MonoBehaviour
             pathAgent.updatePosition = false;
     }
 
-    public void WarpPosition(Vector3 newPosition)
+    override public void WarpPosition(Vector3 newPosition)
     {
         airborne = true;
         transform.position = newPosition;
     }
 
-    public Vector3 GetMoveVelocity()
+    override public Vector3 GetMoveVelocity()
     {
         return moveVelocity;
     }

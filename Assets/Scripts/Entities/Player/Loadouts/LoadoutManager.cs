@@ -274,16 +274,17 @@ public class LoadoutManager : MonoBehaviour
             Loadouts[loadout].abilities[abilityNumber].Assigned = false;
 
         if (ability != null)
+        {
             Loadouts[loadout].abilities[abilityNumber] = ability;
+            ability.Assigned = true;
+        }
         else
             Loadouts[loadout].abilities[abilityNumber] = null;
 
         //Debug.Log(loadout + ", " + abilityNumber + ": " + ability.name);
         //Debug.Log(Loadouts[loadout].abilities[abilityNumber].gameObject.name);
-        ability.Assigned = true;
 
-        if (OnLoadoutSwitch != null)
-            OnLoadoutSwitch.Invoke();
+        OnLoadoutSwitch?.Invoke();
     }
 
     public void SetPassive(GameObject passive, bool isActivated)

@@ -7,6 +7,10 @@ public class MusicManager : MonoBehaviour
     [HideInInspector]
     public static MusicManager MM;
 
+    GameObject player;
+    [SerializeField]
+    Transform objective;
+
     [SerializeField]
     AudioSource BaseMusic;
     [SerializeField]
@@ -21,7 +25,8 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ActorsManager.AM.GetPlayer().GetComponent<StyleMeter>().SubscribeToCritical(OnCritical);
+        player = ActorsManager.AM.GetPlayer().gameObject;
+        player.GetComponent<StyleMeter>().SubscribeToCritical(OnCritical);
     }
 
 
@@ -34,6 +39,12 @@ public class MusicManager : MonoBehaviour
         }
 
         StyleMusic.volume = Mathf.Lerp(StyleMusic.volume, targetVolume, Time.deltaTime);
+
+        if (player && objective)
+        {
+            Vector3 direction = player.transform.InverseTransformDirection((objective.position - player.transform.position)).normalized;
+            BaseMusic.panStereo = direction.x;
+        }
     }
 
     void OnCritical(bool critical)

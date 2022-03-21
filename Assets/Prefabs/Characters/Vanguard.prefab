@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Charge
   Cooldown: 6
+  Assigned: 0
   HoldAbility: 1
   ReleaseAbility: 1
   SoundEffects: []
@@ -531,6 +532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Graviton
   Cooldown: 0.5
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -1471,6 +1473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Spatial Anchor
   Cooldown: 3
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -1483,6 +1486,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5927203501554255039}
+  - component: {fileID: 5034638831426822223}
+  - component: {fileID: 5144143887004683363}
+  - component: {fileID: 5027220914044462853}
+  - component: {fileID: 8252907531443649738}
+  - component: {fileID: 7690056239633244854}
+  - component: {fileID: 2346515985707169094}
+  - component: {fileID: 4782870396575690594}
   m_Layer: 12
   m_Name: Plasma Pulse
   m_TagString: Untagged
@@ -1504,6 +1514,197 @@ Transform:
   m_Father: {fileID: 4021532750877547998}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5034638831426822223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345972669044204675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b46ed90c6ec4d4419a7036347194546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayName: Plasma Pulse
+  Cooldown: 5
+  Assigned: 0
+  HoldAbility: 0
+  ReleaseAbility: 0
+  SoundEffects:
+  - {fileID: 8300000, guid: 6dc290f662befa84985a35ad6f018cb6, type: 3}
+  ParentAbility: {fileID: 0}
+  plasmaParticles: {fileID: 1359768642992881187}
+  ProjLayers: {fileID: 11400000, guid: fd74d764036a2914aa95da1286d9c38f, type: 2}
+  EnemyLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
+--- !u!114 &5144143887004683363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345972669044204675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
+  Localized:
+    key: vanguard_plasmapulse
+--- !u!82 &5027220914044462853
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345972669044204675}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &8252907531443649738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345972669044204675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  Agressor: {fileID: 0}
+--- !u!114 &7690056239633244854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345972669044204675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fee2822ec33c1345aeeb13701519d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2346515985707169094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345972669044204675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Knockback: 25
+  Effects:
+  - {fileID: 4782870396575690594}
+--- !u!114 &4782870396575690594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345972669044204675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428a598b0a8a81a42b6ac1de094f5796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TickDuration: 8
+  TickTime: 0.1
+  StunDuration: 2
 --- !u!1 &5349026757627506031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,6 +1752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Frontal Shield
   Cooldown: 10
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -1925,6 +2127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Detonate
   Cooldown: 0.05
+  Assigned: 0
   HoldAbility: 1
   ReleaseAbility: 0
   SoundEffects: []
@@ -2113,6 +2316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Payback
   Cooldown: 14
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -2440,7 +2644,7 @@ MonoBehaviour:
     secondaryAbility: 
     prerequisiteAbilities: []
   - option: {fileID: 4973758252977665999}
-    secondaryAbility: 
+    secondaryAbility: Plasma Pulse
     prerequisiteAbilities: []
   - option: {fileID: 4101398689657722995}
     secondaryAbility: 
@@ -2451,6 +2655,10 @@ MonoBehaviour:
   - option: {fileID: 5759895014368333225}
     secondaryAbility: 
     prerequisiteAbilities: []
+  - option: {fileID: 5345972669044204675}
+    secondaryAbility: 
+    prerequisiteAbilities:
+    - Laser Cannon
   AbilitiesEnabled: 1
   DownCooldown: 0.1
   UpCooldown: 0.1
@@ -2700,6 +2908,12 @@ GameObject:
 --- !u!4 &5848571593649446009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2835016363911021218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1359768642992881187 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3857014482737314945, guid: 245d7c791efffd74b806e11960ed1bf8,
     type: 3}
   m_PrefabInstance: {fileID: 2835016363911021218}
   m_PrefabAsset: {fileID: 0}

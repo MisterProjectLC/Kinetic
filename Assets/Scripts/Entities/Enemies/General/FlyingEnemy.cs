@@ -37,7 +37,7 @@ public class FlyingEnemy : MonoBehaviour
     {
         playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
         enemy = GetComponent<Enemy>();
-        enemy.OnActiveUpdate += OnActiveUpdate;
+        enemy.SubscribeToActiveUpdate(OnActiveUpdate);
     }
 
     void OnActiveUpdate()

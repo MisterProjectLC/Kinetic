@@ -25,7 +25,7 @@ public class Drill : MonoBehaviour
     void Start()
     {
         enemy = GetComponent<Enemy>();
-        enemy.OnActiveUpdate += ChargeUpdate;
+        enemy.SubscribeToActiveUpdate(ChargeUpdate);
         faceTarget = GetComponent<FaceTarget>();
     }
 

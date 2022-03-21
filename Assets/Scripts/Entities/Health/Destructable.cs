@@ -41,9 +41,10 @@ public class Destructable : MonoBehaviour
             if (GetComponent<UniqueID>())
                 GetComponent<UniqueID>().RegisterID();
 
+            Vector3 entityForce = GetComponent<PhysicsEntity>() ? GetComponent<PhysicsEntity>().GetMoveVelocity() : Vector3.zero;
             foreach (Rigidbody rigidbody in newBroken.GetComponentsInChildren<Rigidbody>())
             {
-                rigidbody.AddForce(Random.insideUnitSphere * Random.Range(0.05f, 0.5f), ForceMode.Impulse);
+                rigidbody.AddForce(entityForce + Random.insideUnitSphere * Random.Range(0.05f, 0.5f), ForceMode.Impulse);
             }
         }
 

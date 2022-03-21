@@ -12,7 +12,7 @@ public class AmmoIndicator : MonoBehaviour
 
     Weapon currentWeapon = null;
 
-    private void Start()
+    private void Awake()
     {
         text = GetComponentInChildren<Text>();
         animator = text.GetComponent<Animator>();

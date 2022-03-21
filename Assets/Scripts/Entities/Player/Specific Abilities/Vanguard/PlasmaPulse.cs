@@ -1,0 +1,54 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(AreaAttack))]
+public class PlasmaPulse : SecondaryAbility
+{
+    [SerializeField]
+    ParticleSystem plasmaParticles;
+
+    [SerializeField]
+    LayersConfig ProjLayers;
+
+    [SerializeField]
+    LayersConfig EnemyLayers;
+
+    PlayerCharacterController player;
+    Attack attack;
+    AreaAttack areaAttack;
+
+    Vector3 halfExtents;
+
+    public void Start()
+    {
+        attack = GetComponent<Attack>();
+        areaAttack = GetComponent<AreaAttack>();
+        player = GetComponentInParent<PlayerCharacterController>();
+        halfExtents = new Vector3(2f, 2f, 2f);
+    }
+
+
+    public override void Execute(Input input)
+    {
+        plasmaParticles.Play();
+
+        RaycastHit[] hits = Physics.BoxCastAll(player.PlayerCamera.transform.position + player.PlayerCamera.transform.forward, halfExtents,
+            player.PlayerCamera.transform.forward, Quaternion.identity, 5f, ProjLayers.layers, QueryTriggerInteraction.Collide);
+
+        foreach (RaycastHit hit in hits) {
+            Poolable poolable = hit.collider.GetComponent<Poolable>();
+            if (poolable)
+                ObjectManager.OM.EraseObject(poolable);
+            else
+                Destroy(hit.collider.gameObject);
+        }
+
+        hits = Physics.BoxCastAll(player.PlayerCamera.transform.position + player.PlayerCamera.transform.forward, halfExtents,
+            player.PlayerCamera.transform.forward, Quaternion.identity, 5f, EnemyLayers.layers, QueryTriggerInteraction.Collide);
+
+        List<AreaAttack.CollisionData> enemies = areaAttack.RefineHits(hits);
+
+        foreach (AreaAttack.CollisionData enemy in enemies)
+            attack.AttackTarget(enemy.closestCollider.gameObject);
+    }
+}

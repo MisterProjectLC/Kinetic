@@ -34,14 +34,14 @@ public class FaceTarget : MonoBehaviour
         Enemy enemy = GetComponent<Enemy>();
         if (!enemy)
             enemy = GetComponentInParent<Enemy>();
-        enemy.OnActiveUpdate += OnActiveUpdate;
+        enemy.SubscribeToUnstunnedUpdate(OnUnstunnedUpdate);
 
         if (!partThatMoves)
             partThatMoves = enemy.Model;
     }
 
     // Update is called once per frame
-    void OnActiveUpdate()
+    void OnUnstunnedUpdate()
     {
         // Constant rotation
         partThatMoves.transform.rotation = Quaternion.RotateTowards(currentPosition, 

@@ -15,7 +15,7 @@ public abstract class EnemyNavigation : MonoBehaviour
     {
         navClock = updateCooldown;
         pathAgent = GetComponent<NavMeshAgent>();
-        GetComponent<Enemy>().OnActiveUpdate += ManageNavigation;
+        GetComponent<Enemy>().SubscribeToActiveUpdate(ManageNavigation);
     }
 
     private void ManageNavigation()
