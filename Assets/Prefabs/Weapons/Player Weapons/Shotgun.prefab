@@ -170,12 +170,14 @@ MonoBehaviour:
   BulletCount: 9
   Automatic: 0
   FireCooldown: 0.5
-  maxAmmo: 12
+  maxAmmo: 18
   InfiniteAmmo: 0
   InitialFireCooldown: 0
+  OutOfAmmoSoundEffect: {fileID: 8300000, guid: eb56b1d3713d4484b83d0b948249bda3,
+    type: 3}
   SoundEffects:
-  - {fileID: 8300000, guid: e3cd01ad5804cfd4c8598dd155f6462a, type: 3}
   - {fileID: 8300000, guid: 23e0748f17919694cae98abbd1b59a8a, type: 3}
+  - {fileID: 8300000, guid: da548c51e7dba1b45baf2acbc4b43c92, type: 3}
   MaxDistance: 50
   StopAtFirstHit: 1
   Sparks: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c, type: 3}

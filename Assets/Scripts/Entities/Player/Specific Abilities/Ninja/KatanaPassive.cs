@@ -10,9 +10,9 @@ public class KatanaPassive : MonoBehaviour
     public void Start()
     {
         ability = GetComponent<WeaponAbility>();
-        GetComponentInParent<StyleMeter>().SubscribeToCritical(OnCritical);
+        //GetComponentInParent<StyleMeter>().SubscribeToCritical(OnCritical);
         GetComponent<Attack>().OnAttack += (GameObject g, float f, int i) => CritReset();
-        GetComponent<Attack>().OnKill += (Attack a, GameObject g, bool b) => ability.ResetCooldown();
+        //GetComponent<Attack>().OnKill += (Attack a, GameObject g, bool b) => ability.ResetCooldown();
     }
 
     void OnCritical(bool critical)
@@ -22,7 +22,6 @@ public class KatanaPassive : MonoBehaviour
 
     void CritReset()
     {
-        if (crit)
-            ability.ResetCooldown();
+        ability.ResetCooldown();
     }
 }

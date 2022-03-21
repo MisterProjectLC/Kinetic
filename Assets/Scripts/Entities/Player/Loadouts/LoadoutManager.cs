@@ -270,6 +270,9 @@ public class LoadoutManager : MonoBehaviour
 
     public void SetAbility(Ability ability, int loadout, int abilityNumber)
     {
+        if (Loadouts[loadout].abilities[abilityNumber])
+            Loadouts[loadout].abilities[abilityNumber].Assigned = false;
+
         if (ability != null)
             Loadouts[loadout].abilities[abilityNumber] = ability;
         else
@@ -277,6 +280,7 @@ public class LoadoutManager : MonoBehaviour
 
         //Debug.Log(loadout + ", " + abilityNumber + ": " + ability.name);
         //Debug.Log(Loadouts[loadout].abilities[abilityNumber].gameObject.name);
+        ability.Assigned = true;
 
         if (OnLoadoutSwitch != null)
             OnLoadoutSwitch.Invoke();

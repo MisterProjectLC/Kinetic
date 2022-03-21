@@ -804,6 +804,7 @@ MonoBehaviour:
   maxAmmo: -1
   InfiniteAmmo: 0
   InitialFireCooldown: 0
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: ad2c426facb2ccd4fac20694288cdea0, type: 3}
   MaxDistance: 100
@@ -1125,10 +1126,7 @@ MonoBehaviour:
 
 
     This ability
-    resets its cooldown upon any kill.
-
-    If the Style meter hits 80% or higher,
-    its cooldown resets upon any hit instead.'
+    resets its cooldown upon any hit.'
   Localized:
     key: ninja_katana
 --- !u!1 &4698384497654706963

@@ -42,13 +42,12 @@ public abstract class Weapon : MonoBehaviour
     public float InitialFireCooldown = 0f;
 
     [SerializeField]
+    AudioClip OutOfAmmoSoundEffect;
+    [SerializeField]
     AudioClip[] SoundEffects;
 
     UnityAction<Weapon> OnFire;
     public void SubscribeToFire(UnityAction<Weapon> subscriptor) { OnFire += subscriptor; }
-
-    UnityAction OnOutOfAmmo;
-    public void SubscribeToOutOfAmmo(UnityAction subscriptor) { OnOutOfAmmo += subscriptor; }
 
     private void Start()
     {
@@ -78,10 +77,12 @@ public abstract class Weapon : MonoBehaviour
         {
             // Deal with Ammo
             if (Ammo == 0)
+            {
+                if (OutOfAmmoSoundEffect)
+                    PlaySound(OutOfAmmoSoundEffect);
                 return;
+            }
             Ammo--;
-            if (Ammo == 0)
-                OnOutOfAmmo.Invoke();
         }
 
         OnFire?.Invoke(this);

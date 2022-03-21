@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class AmmoIndicator : MonoBehaviour
 {
+    bool infiniteAmmo = false;
     bool inAnimation = false;
     Text text;
     Animator animator;
+
+    Weapon currentWeapon = null;
 
     private void Start()
     {
@@ -17,18 +20,27 @@ public class AmmoIndicator : MonoBehaviour
 
     public void Setup(GameObject player)
     {
+        player.GetComponentInChildren<AmmoManager>().SubscribeToOutOfAmmo(OnOutOfAmmo);
         player.GetComponentInChildren<AmmoManager>().SubscribeToInfiniteAmmo(OnInfiniteAmmo);
+        player.GetComponentInChildren<AmmoManager>().SubscribeToAmmoUpdate(OnAmmoUpdate);
     }
 
-    public void OnOutOfAmmo()
+    public void SetCurrentWeapon(Weapon weapon)
+    {
+        gameObject.SetActive(weapon != null);
+        currentWeapon = weapon;
+    }
+
+    void OnOutOfAmmo()
     {
         SetInAnimation(true);
-        text.text = "OUT OF AMMO";
+        text.text = "FIND AN AMMO PACK";
     }
 
 
-    public void OnInfiniteAmmo(bool isInfinite)
+    void OnInfiniteAmmo(bool isInfinite)
     {
+        infiniteAmmo = isInfinite;
         SetInAnimation(isInfinite);
         if (isInfinite)
             text.text = "NO AMMO LIMIT";
@@ -37,16 +49,19 @@ public class AmmoIndicator : MonoBehaviour
 
     void SetInAnimation(bool inAnimation)
     {
+        if (this.inAnimation == inAnimation)
+            return;
         this.inAnimation = inAnimation;
         animator.SetBool("Animating", inAnimation);
     }
 
 
-    public void UpdateWeapon(Weapon weapon)
+    public void OnAmmoUpdate(Weapon weapon)
     {
-        if (inAnimation)
+        if (infiniteAmmo || currentWeapon != weapon)
             return;
 
+        SetInAnimation(false);
         animator.SetTrigger("Ping");
         Debug.Log("Ping");
 

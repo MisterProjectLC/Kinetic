@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fc8093567364cf24da1bc3b41c0cfc68, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bbf8a29300e208f4fa03d4d51d04ae24, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 3
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6418685621230579872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b06fde5a1d2f343b41f91b7d85d5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 972135380271945308}
 --- !u!82 &5710965230890979431
 AudioSource:
   m_ObjectHideFlags: 0

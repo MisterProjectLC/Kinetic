@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public abstract class Powerup : MonoBehaviour
@@ -8,10 +9,28 @@ public abstract class Powerup : MonoBehaviour
 
     public UnityAction<GameObject> OnPowerup;
 
+    [SerializeField]
+    GameObject icon;
+
+    private void Start()
+    {
+        Debug.Log("Tywin " + gameObject.name);
+
+        Setup();
+    }
+
+    protected abstract void Setup();
+
     // Update is called once per frame
     void Update()
     {
         transform.Rotate(rotation * Time.deltaTime, Space.Self);
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log(gameObject.name);
+        icon.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,9 +61,10 @@ public abstract class Powerup : MonoBehaviour
 
     IEnumerator AutoDestruct()
     {
+        icon.SetActive(false);
+
         if (GetComponent<AudioSource>())
-            //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         else
             yield return new WaitForSeconds(0.001f);
 

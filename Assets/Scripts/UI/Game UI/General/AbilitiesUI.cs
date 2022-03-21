@@ -20,33 +20,18 @@ public class AbilitiesUI : MonoBehaviour
         loadoutManager.OnDeviceSwitch += DeviceUpdate;
         loadoutManager.OnLoadoutSwitch += LoadoutUpdate;
         LoadoutUpdate();
-
-        foreach (WeaponAbility wa in ActorsManager.Player.GetComponent<LoadoutManager>().GetComponentsInChildren<WeaponAbility>())
-        {
-            wa.WeaponRef.SubscribeToFire(OnFire);
-        }
     }
 
 
     private void Update()
     {
-        bool weaponExists = false;
-
         for (int i = 0; i < AbilityViews.Length; i++)
         {
             AbilityViews[i].AbilityUpdate(abilities[i]);
             if (abilities[i] && abilities[i] is WeaponAbility)
-                weaponExists = true;
+                ammoIndicator.SetCurrentWeapon(((WeaponAbility)abilities[i]).WeaponRef);
         }
-
-        ammoIndicator.gameObject.SetActive(weaponExists);
     }
-
-    void OnFire(Weapon weapon)
-    {
-        ammoIndicator.UpdateWeapon(weapon);
-    }
-
 
     void DeviceUpdate(Device device)
     {

@@ -122,9 +122,11 @@ MonoBehaviour:
   BulletCount: 1
   Automatic: 1
   FireCooldown: 0.1
-  maxAmmo: 60
+  maxAmmo: 80
   InfiniteAmmo: 0
   InitialFireCooldown: 0
+  OutOfAmmoSoundEffect: {fileID: 8300000, guid: eb56b1d3713d4484b83d0b948249bda3,
+    type: 3}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   MaxDistance: 100

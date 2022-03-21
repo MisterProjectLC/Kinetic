@@ -9,6 +9,7 @@ public abstract class Ability : MonoBehaviour
     [Tooltip("Cooldown")]
     public float Cooldown = 5f;
     public float Timer { get; protected set; } = 0f;
+    public bool Assigned = false;
 
     public enum Input {
         ButtonUp,

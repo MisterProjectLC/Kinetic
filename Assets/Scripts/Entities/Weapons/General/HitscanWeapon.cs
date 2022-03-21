@@ -24,7 +24,6 @@ public class HitscanWeapon : Weapon
 
     Attack attack;
 
-
     void Awake()
     {
         attack = GetComponent<Attack>();

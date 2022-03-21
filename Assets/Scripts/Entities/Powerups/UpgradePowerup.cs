@@ -20,6 +20,8 @@ public class UpgradePowerup : Powerup
 
     }
 
+    protected override void Setup() { }
+
     void Upgrade(GameObject player)
     {
         if (GetComponent<UniqueID>())
