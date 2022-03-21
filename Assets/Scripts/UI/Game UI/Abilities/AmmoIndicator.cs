@@ -12,6 +12,11 @@ public class AmmoIndicator : MonoBehaviour
 
     Weapon currentWeapon = null;
 
+    [SerializeField]
+    LocalizedString outOfAmmoText;
+    [SerializeField]
+    LocalizedString infiniteAmmoText;
+
     private void Awake()
     {
         text = GetComponentInChildren<Text>();
@@ -34,7 +39,7 @@ public class AmmoIndicator : MonoBehaviour
     void OnOutOfAmmo()
     {
         SetInAnimation(true);
-        text.text = "FIND AN AMMO PACK";
+        text.text = outOfAmmoText.value;
     }
 
 
@@ -43,7 +48,7 @@ public class AmmoIndicator : MonoBehaviour
         infiniteAmmo = isInfinite;
         SetInAnimation(isInfinite);
         if (isInfinite)
-            text.text = "NO AMMO LIMIT";
+            text.text = infiniteAmmoText.value;
 
     }
 

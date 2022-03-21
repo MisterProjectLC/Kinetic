@@ -12,7 +12,6 @@ public class WeaponAbility : Ability
     public void Awake()
     {
         player = GetComponentInParent<PlayerCharacterController>();
-        DisplayName = WeaponRef.DisplayName;
         HoldAbility = WeaponRef.Automatic;
         Cooldown = WeaponRef.FireCooldown;
         BackwardsForce = WeaponRef.BackwardsForce;

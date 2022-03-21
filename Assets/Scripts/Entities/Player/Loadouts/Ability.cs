@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public abstract class Ability : MonoBehaviour
 {
-    public string DisplayName = "";
+    public LocalizedString LocalizedName;
 
     [Tooltip("Cooldown")]
     public float Cooldown = 5f;

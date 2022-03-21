@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b67c2eeefab334194801a17e79d04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Charge
+  LocalizedName:
+    key: vanguard_charge_title
   Cooldown: 6
   Assigned: 0
   HoldAbility: 1
@@ -530,7 +531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9912f4374639bba4c8f1bfa5dab206b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Graviton
+  LocalizedName:
+    key: vanguard_graviton_title
   Cooldown: 0.5
   Assigned: 0
   HoldAbility: 0
@@ -1471,7 +1473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d544779e76c9bfb45917b33fb04581fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Spatial Anchor
+  LocalizedName:
+    key: 
   Cooldown: 3
   Assigned: 0
   HoldAbility: 0
@@ -1526,7 +1529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b46ed90c6ec4d4419a7036347194546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Plasma Pulse
+  LocalizedName:
+    key: vanguard_plasmapulse_title
   Cooldown: 5
   Assigned: 0
   HoldAbility: 0
@@ -1549,7 +1553,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4d0582bcdf61c45bcd839ad97a5cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: 'DAMAGE: 2
+
+    STUN DURATION: 2 seconds
+
+    Emits an energy pulse
+    that stuns and knockbacks nearby enemies. Projectiles caught in the blast are
+    also destroyed.'
   Localized:
     key: vanguard_plasmapulse
 --- !u!82 &5027220914044462853
@@ -1750,7 +1760,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 345cd811df4dd3f419f1555eac0a6f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Frontal Shield
+  LocalizedName:
+    key: vanguard_frontalshield_title
   Cooldown: 10
   Assigned: 0
   HoldAbility: 0
@@ -2125,7 +2136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efee3e9b7894fb44d8bd3515a4613de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Detonate
+  LocalizedName:
+    key: vanguard_detonate_title
   Cooldown: 0.05
   Assigned: 0
   HoldAbility: 1
@@ -2314,7 +2326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1df255856f66c4693186aa487488ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Payback
+  LocalizedName:
+    key: vanguard_payback_title
   Cooldown: 14
   Assigned: 0
   HoldAbility: 0
@@ -2516,7 +2529,6 @@ Transform:
   - {fileID: 7816245253526124877}
   - {fileID: 6452605973996929548}
   - {fileID: 1080758445839013086}
-  - {fileID: 5873444382423609665}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2621,42 +2633,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialOptions:
   - option: {fileID: 7710702315391486102}
-    secondaryAbility: Frontal Shield
+    secondaryAbility:
+      key: vanguard_frontalshield_title
     prerequisiteAbilities: []
   - option: {fileID: 2626429706252960998}
-    secondaryAbility: Detonate
+    secondaryAbility:
+      key: vanguard_detonate_title
     prerequisiteAbilities: []
   - option: {fileID: 1875275233879253910}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   Options:
   - option: {fileID: 5349026757627506031}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 6554826155812535130}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 8675959487470734100}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities:
     - Graviton
   - option: {fileID: 3401051246386459786}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 4973758252977665999}
-    secondaryAbility: Plasma Pulse
+    secondaryAbility:
+      key: vanguard_plasmapulse_title
     prerequisiteAbilities: []
   - option: {fileID: 4101398689657722995}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 3241069975669373158}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 5759895014368333225}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 5345972669044204675}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities:
     - Laser Cannon
   AbilitiesEnabled: 1
@@ -2679,7 +2703,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DrainActive: 0
   config: {fileID: 11400000, guid: 757d2325b58a0f14488c7c8b4c0dc1e9, type: 2}
-  styleTexts: {fileID: 5873444382423609665}
 --- !u!143 &3891292215102862298
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3045,81 +3068,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4534391726659963112}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5971074281504769312
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 4021532750877547998}
-    m_Modifications:
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2831437422528079975, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_Name
-      value: StyleTexts
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a92f68ce0a6d8ce4c8489cf5537abe8d, type: 3}
---- !u!4 &5873444382423609665 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5971074281504769312}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6871013754593390580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3189,15 +3137,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b17e97baf1399124f87ee295121d45c7, type: 3}
---- !u!20 &4947734628076399948 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2014055666174919352, guid: b17e97baf1399124f87ee295121d45c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6871013754593390580}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &735082137932237708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6154511750951806072, guid: b17e97baf1399124f87ee295121d45c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6871013754593390580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &4947734628076399948 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2014055666174919352, guid: b17e97baf1399124f87ee295121d45c7,
     type: 3}
   m_PrefabInstance: {fileID: 6871013754593390580}
   m_PrefabAsset: {fileID: 0}

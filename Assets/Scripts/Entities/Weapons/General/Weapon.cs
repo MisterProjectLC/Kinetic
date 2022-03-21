@@ -8,8 +8,6 @@ public abstract class Weapon : MonoBehaviour
     public Transform Mouth;
 
     [Header("General")]
-    public string DisplayName = "";
-
     [Tooltip("Layer mask")]
     public LayersConfig HitLayers;
 

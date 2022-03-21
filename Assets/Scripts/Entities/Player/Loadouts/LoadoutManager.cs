@@ -33,7 +33,7 @@ public class LoadoutManager : MonoBehaviour
         }
 
         [Tooltip("Leave empty if none")]
-        public string secondaryAbility;
+        public LocalizedString secondaryAbility;
         public List<string> prerequisiteAbilities;
     }
 

@@ -65,7 +65,7 @@ public class AbilityView : MonoBehaviour
         }
 
         image.gameObject.SetActive(true);
-        Label.text = currentAbility.DisplayName;
+        Label.text = currentAbility.LocalizedName.value;
         CooldownRect.sizeDelta = Vector2.zero;
     }
 }

@@ -205,8 +205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b494ff4a85b3864ea15001a32f74d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Translocate
+  LocalizedName:
+    key: ninja_translocate_title
   Cooldown: 1
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -375,8 +377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f34d66262a7a84ea4759f0f96dc261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Dash
+  LocalizedName:
+    key: ninja_dash_title
   Cooldown: 2
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -794,7 +798,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
-  DisplayName: Stun Wave
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   backwardsForce: 0
   MaxSpreadAngle: 6
@@ -869,8 +872,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Stun Wave
+  LocalizedName:
+    key: 
   Cooldown: 5
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -1346,8 +1351,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29faeae5cfbb484792ed4a375549c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Shell Bombs
+  LocalizedName:
+    key: ninja_shellbombs_title
   Cooldown: 8
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -1657,8 +1664,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06b033c9e3d18e48809e1a279166859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Grappling Hook
+  LocalizedName:
+    key: 
   Cooldown: 4
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -1834,8 +1843,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ba6938c1182274ba1303d875c95e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Rewind
+  LocalizedName:
+    key: ninja_rewind_title
   Cooldown: 12
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -2126,8 +2137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf1b3fb4ddf3ce4ea8db2c3a1b91560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Deflect
+  LocalizedName:
+    key: ninja_deflect_title
   Cooldown: 2
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -2177,7 +2190,8 @@ AudioSource:
   m_GameObject: {fileID: 8659259196117612103}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8321005151277517591, guid: 9b68496a114988c40a3efe2b336cb9ee,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2374,7 +2388,6 @@ Transform:
   - {fileID: 2775557084548612624}
   - {fileID: 1280739795873682838}
   - {fileID: 3316337986417469446}
-  - {fileID: 5689260359080958489}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2479,47 +2492,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialOptions:
   - option: {fileID: 2225249382224139414}
-    secondaryAbility: Translocate
+    secondaryAbility:
+      key: ninja_translocate_title
     prerequisiteAbilities: []
   - option: {fileID: 6923643163349663185}
-    secondaryAbility: Grappling Hook
+    secondaryAbility:
+      key: ninja_shotgun_title
     prerequisiteAbilities: []
   - option: {fileID: 7349922464857806567}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   Options:
   - option: {fileID: 1292416793624679719}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 758061105512210739}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 8006630410610024068}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities:
     - Shell Bombs
   - option: {fileID: 5307980427766246164}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 4382853588751367982}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 4101398689657722995}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities:
     - Extra Jump
   - option: {fileID: 8791866288957817034}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities: []
   - option: {fileID: 4554023032501292862}
-    secondaryAbility: Deflect
+    secondaryAbility:
+      key: ninja_deflect_title
     prerequisiteAbilities: []
   - option: {fileID: 6358242602411863829}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities:
     - Extra Jump
   - option: {fileID: 8659259196117612103}
-    secondaryAbility: 
+    secondaryAbility:
+      key: 
     prerequisiteAbilities:
     - Katana
   AbilitiesEnabled: 1
@@ -2542,7 +2568,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DrainActive: 0
   config: {fileID: 11400000, guid: 757d2325b58a0f14488c7c8b4c0dc1e9, type: 2}
-  styleTexts: {fileID: 5689260359080958489}
 --- !u!143 &3891292215102862298
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2848,15 +2873,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 473ea86f386f05244a77ca280c2129f8, type: 3}
---- !u!4 &778479117601111840 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2483760642977702375, guid: 473ea86f386f05244a77ca280c2129f8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2933428334205624007}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2225249382224139414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3914768282061949521, guid: 473ea86f386f05244a77ca280c2129f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2933428334205624007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &778479117601111840 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2483760642977702375, guid: 473ea86f386f05244a77ca280c2129f8,
     type: 3}
   m_PrefabInstance: {fileID: 2933428334205624007}
   m_PrefabAsset: {fileID: 0}
@@ -3139,92 +3164,17 @@ PrefabInstance:
       objectReference: {fileID: 958540071565868630}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c10f67b36848b44eb99a63396bdb998, type: 3}
---- !u!4 &5335766436650077318 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6986962949196218161, guid: 7c10f67b36848b44eb99a63396bdb998,
-    type: 3}
-  m_PrefabInstance: {fileID: 3097032358484587447}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4554023032501292862 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1570064485261180041, guid: 7c10f67b36848b44eb99a63396bdb998,
     type: 3}
   m_PrefabInstance: {fileID: 3097032358484587447}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5596706355427946104
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 4021532750877547998}
-    m_Modifications:
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2831437422528079975, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
-        type: 3}
-      propertyPath: m_Name
-      value: StyleTexts
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a92f68ce0a6d8ce4c8489cf5537abe8d, type: 3}
---- !u!4 &5689260359080958489 stripped
+--- !u!4 &5335766436650077318 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 242964445629740129, guid: a92f68ce0a6d8ce4c8489cf5537abe8d,
+  m_CorrespondingSourceObject: {fileID: 6986962949196218161, guid: 7c10f67b36848b44eb99a63396bdb998,
     type: 3}
-  m_PrefabInstance: {fileID: 5596706355427946104}
+  m_PrefabInstance: {fileID: 3097032358484587447}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8252660478905351021
 PrefabInstance:

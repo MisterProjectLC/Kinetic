@@ -64,7 +64,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
-  DisplayName: Katana
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   backwardsForce: 15
   MaxSpreadAngle: 0
@@ -74,6 +73,7 @@ MonoBehaviour:
   maxAmmo: 8
   InfiniteAmmo: 0
   InitialFireCooldown: 0
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: 8ce7c7f18ab27da49af900411b6d170c, type: 3}
   Projectile: {fileID: 9015410660270033442, guid: 03e69b1fbe88571468f4c5880783ec93,
@@ -131,8 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Katana
+  LocalizedName:
+    key: ninja_katana_title
   Cooldown: 0.8
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []

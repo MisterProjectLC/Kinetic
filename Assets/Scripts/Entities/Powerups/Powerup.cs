@@ -14,8 +14,6 @@ public abstract class Powerup : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Tywin " + gameObject.name);
-
         Setup();
     }
 
@@ -29,7 +27,6 @@ public abstract class Powerup : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log(gameObject.name);
         icon.SetActive(true);
     }
 
@@ -46,7 +43,6 @@ public abstract class Powerup : MonoBehaviour
         if (GetComponent<AudioSource>())
         {
             GetComponent<AudioSource>().Play();
-            Debug.Log("Played sound");
         }
 
         OnPowerup?.Invoke(player.gameObject);

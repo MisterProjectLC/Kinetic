@@ -23,7 +23,7 @@ public class StyleMeter : MonoBehaviour
 
     Health health;
     PlayerCharacterController player;
-    Dictionary<Categories, Localizer> localizers = new Dictionary<Categories, Localizer>();
+    Dictionary<Categories, LocalizedString> localizers = new Dictionary<Categories, LocalizedString>();
 
     public UnityAction OnUpdate;
     public UnityAction OnDeplete;
@@ -43,8 +43,6 @@ public class StyleMeter : MonoBehaviour
 
     [SerializeField]
     SlowdownConfig config;
-    [SerializeField]
-    Transform styleTexts;
 
     float movementClock = 0f;
     float clock = 0f;
@@ -57,7 +55,7 @@ public class StyleMeter : MonoBehaviour
         player = GetComponentInParent<PlayerCharacterController>();
         for (Categories i = Categories.Kill; i != Categories.Count; i++)
             if (i != Categories.Airborne)
-                localizers.Add(i, styleTexts.Find(i.ToString()).GetComponent<Localizer>());
+                localizers.Add(i, new LocalizedString("style_" + i.ToString().ToLower()));
 
         clock = config.ComboMaxTime;
         SetJuiceLeft(JuiceMax);
@@ -89,7 +87,7 @@ public class StyleMeter : MonoBehaviour
         {
             movementClock = 0f;
             if (player.MoveVelocity.magnitude > config.MovementSpeed)
-                GainJuice(config.MovementGain, (int)Categories.Movement, localizers[Categories.Movement].Text);
+                GainJuice(config.MovementGain, (int)Categories.Movement, localizers[Categories.Movement].value);
         }
 
         // Airborne bonus
@@ -114,7 +112,7 @@ public class StyleMeter : MonoBehaviour
         lastAbilities.Add(ability);
 
         if (clock < config.CombatMaxTime)
-            GainJuice(config.VarietyGain * ((lastAbilities.Count - 1) - index), (int)Categories.Variety, localizers[Categories.Variety].Text);
+            GainJuice(config.VarietyGain * ((lastAbilities.Count - 1) - index), (int)Categories.Variety, localizers[Categories.Variety].value);
     }
 
 
@@ -136,7 +134,7 @@ public class StyleMeter : MonoBehaviour
         StyleCrate styleCrate = target.GetComponent<StyleCrate>();
 
         if (styleCrate && styleCrate.StyleOnCritical != 0f)
-            GainJuice(styleCrate.StyleOnCritical, (int)Categories.Damage, localizers[Categories.Damage].Text);
+            GainJuice(styleCrate.StyleOnCritical, (int)Categories.Damage, localizers[Categories.Damage].value);
     }
 
     void StyleKill(GameObject target, bool indirect)
@@ -145,18 +143,18 @@ public class StyleMeter : MonoBehaviour
 
         if (indirect)
         {
-            GainJuice(config.IndirectGain, (int)Categories.HazardKill, localizers[Categories.HazardKill].Text);
+            GainJuice(config.IndirectGain, (int)Categories.HazardKill, localizers[Categories.HazardKill].value);
             return;
         }
 
         if (!target.GetComponent<StyleCrate>())
             return;
 
-        GainJuice(target.GetComponent<StyleCrate>().StyleOnKill, (int)Categories.Kill, localizers[Categories.Kill].Text);
+        GainJuice(target.GetComponent<StyleCrate>().StyleOnKill, (int)Categories.Kill, localizers[Categories.Kill].value);
         if (clock < config.MultiMaxTime)
-            GainJuice(config.MultiGain, (int)Categories.Multikill, localizers[Categories.Multikill].Text);
+            GainJuice(config.MultiGain, (int)Categories.Multikill, localizers[Categories.Multikill].value);
         else if (clock < config.ComboMaxTime)
-            GainJuice(config.ChainGain, (int)Categories.ChainKill, localizers[Categories.ChainKill].Text);
+            GainJuice(config.ChainGain, (int)Categories.ChainKill, localizers[Categories.ChainKill].value);
 
         clock = 0f;
     }
@@ -164,7 +162,7 @@ public class StyleMeter : MonoBehaviour
     void OnDamage(int damage, Attack attack)
     {
         if (attack == null || attack.Agressor != GetComponent<Actor>())
-            SpendJuice(damage * config.DamageLoss, (int)Categories.Hurt, localizers[Categories.Hurt].Text);
+            SpendJuice(damage * config.DamageLoss, (int)Categories.Hurt, localizers[Categories.Hurt].value);
     }
 
 

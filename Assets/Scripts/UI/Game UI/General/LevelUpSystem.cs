@@ -96,7 +96,7 @@ public class LevelUpSystem : MonoBehaviour
             else
             {
                 initialSlots[i].OnDrop(loadoutOption.gameObject);
-                if (i != 0 && option.secondaryAbility.Length > 0)
+                if (i != 0 && option.secondaryAbility.value.Length > 0)
                     i++;
             }
             i++;
@@ -171,7 +171,7 @@ public class LevelUpSystem : MonoBehaviour
     {
         // Instantiate object
         GameObject newInstance = null;
-        if (option.secondaryAbility.Length <= 0)
+        if (option.secondaryAbility.value.Length <= 0)
             newInstance = Instantiate(optionPrefab);
         else
         {
@@ -181,7 +181,7 @@ public class LevelUpSystem : MonoBehaviour
 
         // Set sibling order
         newInstance.transform.SetParent(transform);
-        if (option.secondaryAbility.Length > 0)
+        if (option.secondaryAbility.value.Length > 0)
             newInstance.transform.SetSiblingIndex(siblingBaseCount);
 
         // Setup loadout option
@@ -247,7 +247,7 @@ public class LevelUpSystem : MonoBehaviour
         List<LoadoutOption> optionsToDelete = new List<LoadoutOption>();
         foreach (LoadoutOption potentialToUnlock in optionsLocked)
         {
-            string displayName = option.Ability ? option.Ability.DisplayName : option.Option.name;
+            string displayName = option.Ability ? option.Ability.LocalizedName.value : option.Option.name;
             if (potentialToUnlock.PrerequisiteAbilities.Contains(displayName))
             {
                 potentialToUnlock.PrerequisiteAbilities.Remove(displayName);

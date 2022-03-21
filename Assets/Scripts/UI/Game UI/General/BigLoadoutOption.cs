@@ -6,6 +6,8 @@ public class BigLoadoutOption : MonoBehaviour
     LoadoutSlot primarySlot;
     LoadoutSlot secondarySlot;
 
+    LocalizedString secondaryName = new LocalizedString();
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,11 +23,25 @@ public class BigLoadoutOption : MonoBehaviour
         //secondarySlot.GetComponent<DropSlot>().Offset = GetComponent<RectTransform>().anchoredPosition;
     }
 
-
-    public void SetSecondaryAbility(string secondaryAbility)
+    private void OnEnable()
     {
-        secondarySlot.GetComponent<DropSlot>().Type = secondaryAbility;
-        secondarySlot.GetComponentInChildren<Text>().text = secondaryAbility;
+        UpdateSecondaryAbility();
+    }
+
+
+    public void SetSecondaryAbility(LocalizedString secondaryAbility)
+    {
+        secondaryName = secondaryAbility;
+        UpdateSecondaryAbility();
+    }
+
+    void UpdateSecondaryAbility()
+    {
+        if (secondaryName.key == "")
+            return;
+
+        secondarySlot.GetComponent<DropSlot>().Type = secondaryName.value;
+        secondarySlot.GetComponent<DropSlot>().LabelText = secondaryName.key;
     }
 
     public void InsertOnSecondary(LoadoutOption option)

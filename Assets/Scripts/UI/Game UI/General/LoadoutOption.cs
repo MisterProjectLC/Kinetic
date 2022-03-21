@@ -23,35 +23,44 @@ public class LoadoutOption : MonoBehaviour
     Image passiveOverlay;
     public UnityAction<LoadoutOption> OnInsert;
 
+    TooltipTrigger tooltipTrigger;
+    DragDrop dragDrop;
+
+    LocalizedString localizedString = new LocalizedString("");
+    Text label;
+
 
     // Start is called before the first frame update
     void Start()
     {
         string abilityName;
+        dragDrop = GetComponent<DragDrop>();
 
         if (Ability)
         {
-            abilityName = Ability.DisplayName;
-            GetComponent<DragDrop>().Type = "Ability";
+            localizedString = Ability.LocalizedName;
+            abilityName = localizedString.value;
+            dragDrop.Type = Ability is SecondaryAbility ? localizedString.value : "Ability";
         } else 
         {
             GetComponentInChildren<Text>().text = Option.name;
             abilityName = Option.name;
-            GetComponent<DragDrop>().Type = "Passive";
+            dragDrop.Type = "Passive";
             passiveOverlay.enabled = true;
         }
 
-        GetComponentInChildren<Text>().text = abilityName;
-        GetComponent<TooltipTrigger>().Title = abilityName;
+        label = GetComponentInChildren<Text>();
+        label.text = abilityName;
 
+        tooltipTrigger = GetComponent<TooltipTrigger>();
+        tooltipTrigger.Title = abilityName;
 
-        if (Ability && Ability is SecondaryAbility)
-            GetComponent<DragDrop>().Type = Ability.DisplayName;
+        dragDrop.OnInsert += OnInsertFunc;
+        dragDrop.OnRemove += RemoveFromSlot;
+        if (dragDrop.AssignedSlot)
+            OnInsertFunc(dragDrop.AssignedSlot);
 
-        GetComponent<DragDrop>().OnInsert += OnInsertFunc;
-        GetComponent<DragDrop>().OnRemove += RemoveFromSlot;
-        if (GetComponent<DragDrop>().AssignedSlot)
-            OnInsertFunc(GetComponent<DragDrop>().AssignedSlot);
+        UpdateText();
     }
 
 
@@ -76,13 +85,19 @@ public class LoadoutOption : MonoBehaviour
 
     void UpdateText()
     {
-        if (!Option)
+        if (!Option || localizedString.key == "")
             return;
 
         if (Ability)
-            GetComponent<TooltipTrigger>().Description = "COOLDOWN: " + Ability.Cooldown.ToString() +
+        {
+            if (Ability is SecondaryAbility)
+                dragDrop.Type = localizedString.value;
+
+            label.text = localizedString.value;
+            tooltipTrigger.Description = "COOLDOWN: " + Ability.Cooldown.ToString() +
                 " " + LocalizationSystem.GetLocalizedText("seconds") + "\n" + Ability.GetComponent<Description>().Value;
+        }
         else
-            GetComponent<TooltipTrigger>().Description = Option.GetComponent<Description>().Value;
+            tooltipTrigger.Description = Option.GetComponent<Description>().Value;
     }
 }

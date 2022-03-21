@@ -4880,7 +4880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6006346eaf2f74093eb0d26d2630a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Laser Cannon
+  LocalizedName:
+    key: vanguard_lasercannon_title
   Cooldown: 2.5
   Assigned: 0
   HoldAbility: 1
@@ -4932,7 +4933,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
-  DisplayName: Laser Cannon
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0

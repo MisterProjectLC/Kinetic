@@ -717,6 +717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Key:
     key: loadout_dragdrop
+  Text: 
 --- !u!1 &3275032973236093906
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,6 +887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Key:
     key: loadouts_passives
+  Text: 
 --- !u!1 &3275032973606420053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,7 +1110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3275032973704429780}
   - component: {fileID: 3275032973704429783}
-  - component: {fileID: 1965947236494436686}
+  - component: {fileID: 5226009275293107089}
   - component: {fileID: 3275032973704429782}
   m_Layer: 5
   m_Name: Loadout Manager
@@ -1200,7 +1202,7 @@ MonoBehaviour:
     type: 3}
   heavyOptionPrefab: {fileID: 8191001801631402917, guid: 221c0e91fae7bc2479e4398045595563,
     type: 3}
---- !u!114 &1965947236494436686
+--- !u!114 &5226009275293107089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1209,7 +1211,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3275032973704429781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49e8720fa2cc54b498dc1780842c8ed6, type: 3}
+  m_Script: {fileID: 11500000, guid: e4a5b5970f548074d8918125dbe32ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   submenus:
@@ -1219,7 +1221,7 @@ MonoBehaviour:
     enabled: 0
   - animator: {fileID: 5450613198660269736}
     enabled: 0
-  StartSubmenu: 0
+  StartSubmenu: -1
 --- !u!225 &3275032973704429782
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1931,7 +1933,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1965947236494436686}
+      - m_Target: {fileID: 5226009275293107089}
         m_TargetAssemblyTypeName: Menu, Scripts.UI.Menu
         m_MethodName: SubmenuButton
         m_Mode: 3
@@ -2197,7 +2199,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1965947236494436686}
+      - m_Target: {fileID: 5226009275293107089}
         m_TargetAssemblyTypeName: Menu, Scripts.UI.Menu
         m_MethodName: SubmenuButton
         m_Mode: 3
@@ -2401,7 +2403,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1965947236494436686}
+      - m_Target: {fileID: 5226009275293107089}
         m_TargetAssemblyTypeName: Menu, Scripts.UI.Menu
         m_MethodName: SubmenuButton
         m_Mode: 3

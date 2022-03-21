@@ -11,10 +11,10 @@ public class DropSlot : MonoBehaviour, IDropHandler
     public Vector2 Offset = Vector2.zero;
 
     [SerializeField]
-    LocalizedString LabelText = "";
+    public LocalizedString LabelText = "";
 
     [HideInInspector]
-    GameObject Label;
+    Text Label;
 
     public DragDrop InsertedDragDrop;
     Transform InsertedDragDropOldParent;
@@ -25,19 +25,19 @@ public class DropSlot : MonoBehaviour, IDropHandler
     private void Awake()
     {
         Offset = Vector2.zero;
-        Label = GetComponentInChildren<Text>().gameObject;
-        Label.GetComponent<Text>().text = LabelText.value;
+        Label = GetComponentInChildren<Text>();
         GetComponent<AudioSource>().ignoreListenerPause = true;
     }
 
     void OnEnable()
     {
+        Label.GetComponent<Text>().text = LabelText.value;
         StartCoroutine(EnableSound());
     }
 
     IEnumerator EnableSound()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.03f);
         soundEnabled = true;
     }
 
@@ -55,7 +55,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         if (InsertedDragDrop)
             return;
 
-        Label.SetActive(false);
+        Label.gameObject.SetActive(false);
 
         if (GetComponent<AudioSource>() && soundEnabled)
             GetComponent<AudioSource>().Play();
@@ -81,7 +81,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         InsertedDragDrop.transform.SetParent(InsertedDragDropOldParent);
         Debug.Log("Removed: " + InsertedDragDrop.GetComponent<LoadoutOption>().Option.name + ", " + InsertedDragDropOldParent.gameObject.name);
         InsertedDragDrop = null;
-        Label.SetActive(true);
+        Label.gameObject.SetActive(true);
         soundEnabled = true;
     }
 }

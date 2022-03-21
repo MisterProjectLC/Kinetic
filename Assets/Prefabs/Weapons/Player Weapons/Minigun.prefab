@@ -85,7 +85,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 0}
-  DisplayName: Minigun
   HitLayers: {fileID: 11400000, guid: 3254346a7331ea44092ede3e5ea051d5, type: 2}
   backwardsForce: 1
   MaxSpreadAngle: 2
@@ -141,8 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: 
+  LocalizedName:
+    key: vanguard_minigun_title
   Cooldown: 5
+  Assigned: 0
   HoldAbility: 0
   ReleaseAbility: 1
   SoundEffects: []
