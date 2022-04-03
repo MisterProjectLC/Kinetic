@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3024661876146182163}
   - component: {fileID: 1737337248362625111}
   - component: {fileID: 613301853154046507}
-  - component: {fileID: 7891841571973231203}
+  - component: {fileID: 6984005952175916755}
+  - component: {fileID: 3127176890621827606}
   - component: {fileID: 1466952034047088296}
   - component: {fileID: 2503708963167366664}
-  - component: {fileID: 5751226101885776970}
   m_Layer: 14
   m_Name: ShellBombExplosion
   m_TagString: Untagged
@@ -70,7 +70,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   GetClosestPoint: 1
---- !u!114 &7891841571973231203
+--- !u!114 &6984005952175916755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,11 +79,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 7768923870411819302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e6d41c0fcbd10e4ebe1bae2091d0bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
   Agressor: {fileID: 0}
+  Knockback: 25
+--- !u!114 &3127176890621827606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768923870411819302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Agressor: {fileID: 0}
+  damage: 10
 --- !u!114 &1466952034047088296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,20 +209,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5751226101885776970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7768923870411819302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Knockback: 25
-  Effects: []
 --- !u!1001 &5605394422224496733
 PrefabInstance:
   m_ObjectHideFlags: 0

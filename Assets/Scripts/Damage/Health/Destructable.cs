@@ -42,7 +42,7 @@ public class Destructable : MonoBehaviour
             if (MatchModelScale)
                 newBroken.transform.localScale = OriginalModel.transform.lossyScale;
 
-            Vector3 entityForce = m_Health.GetComponent<PhysicsEntity>() ? m_Health.GetComponent<PhysicsEntity>().GetMoveVelocity() : Vector3.zero;
+            Vector3 entityForce = m_Health.GetComponent<PhysicsEntity>() != null ? m_Health.GetComponent<PhysicsEntity>().GetMoveVelocity() : Vector3.zero;
             entityForce = entityForce.normalized * 13*Mathf.Clamp(entityForce.magnitude, 0f, 140f);
             foreach (Rigidbody rigidbody in newBroken.GetComponentsInChildren<Rigidbody>())
                 rigidbody.AddForce(entityForce + Random.insideUnitSphere * Random.Range(0.05f, 0.5f), ForceMode.Impulse);
@@ -53,6 +53,7 @@ public class Destructable : MonoBehaviour
         else
             StartCoroutine(Destruct());
     }
+
 
     IEnumerator Destruct()
     {

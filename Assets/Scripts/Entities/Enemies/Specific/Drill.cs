@@ -21,18 +21,21 @@ public class Drill : MonoBehaviour
     float ChargeCooldown = 3f;
     float clock = 0f;
 
+    [SerializeField]
+    List<StatusEffect> blockingEffects;
+
     // Start is called before the first frame update
     void Start()
     {
         enemy = GetComponent<Enemy>();
-        enemy.SubscribeToActiveUpdate(ChargeUpdate);
+        enemy.SubscribeToUpdate(ChargeUpdate);
         faceTarget = GetComponent<FaceTarget>();
     }
 
     // Update is called once per frame
     void ChargeUpdate()
     {
-        if (!enemy.IsPlayerInView())
+        if (!enemy.IsPlayerInView() || enemy.HasAnyOfTheseStatusEffects(blockingEffects))
             return;
 
         clock += Time.deltaTime;
@@ -43,7 +46,7 @@ public class Drill : MonoBehaviour
         {
             faceTarget.turnSpeed = 10f;
             clock = Random.Range(0f, 1f);
-            enemy.ReceiveKnockback(enemy.Model.transform.forward.normalized * ChargeSpeed);
+            enemy.ReceiveForce(enemy.Model.transform.forward.normalized * ChargeSpeed);
             StartCoroutine(Attack());
         }
 

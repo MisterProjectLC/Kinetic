@@ -31,8 +31,9 @@ public class Deflect : SecondaryAbility
             animator = ParentAbility.GetComponent<Animator>();
         animator.SetTrigger("Deflect");
 
-        RaycastHit[] hits = Physics.BoxCastAll(player.PlayerCamera.transform.position + player.PlayerCamera.transform.forward, halfExtents, 
-            player.PlayerCamera.transform.forward, Quaternion.identity, 5f, layers.layers, QueryTriggerInteraction.Collide);
+        Camera playerCamera = player.GetPlayerCamera();
+        RaycastHit[] hits = Physics.BoxCastAll(playerCamera.transform.position + playerCamera.transform.forward, halfExtents,
+            playerCamera.transform.forward, Quaternion.identity, 5f, layers.layers, QueryTriggerInteraction.Collide);
 
         int hitCount = 0;
         foreach (RaycastHit hit in hits)
@@ -43,10 +44,10 @@ public class Deflect : SecondaryAbility
             if (!proj)
                 continue;
 
-            proj.MoveVelocity = proj.MoveVelocity.magnitude * 2 * player.PlayerCamera.transform.forward;
+            proj.MoveVelocity = proj.MoveVelocity.magnitude * 2 * playerCamera.transform.forward;
             hitCount++;
 
-            Attack theirAttack = proj.GetComponent<Attack>();
+            AttackDamage theirAttack = proj.GetComponent<AttackDamage>();
             if (theirAttack)
             {
                 theirAttack.Damage *= 3;
@@ -57,6 +58,7 @@ public class Deflect : SecondaryAbility
         }
 
         StartCoroutine(DeflectAnim(hitCount));
+
     }
 
     IEnumerator DeflectAnim(int hitCount)

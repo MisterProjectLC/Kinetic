@@ -137,8 +137,8 @@ GameObject:
   - component: {fileID: 649140897469009584}
   - component: {fileID: 4439653929532057142}
   - component: {fileID: 255443524484936560}
-  - component: {fileID: 3420071748457353638}
   - component: {fileID: 2491414881264015135}
+  - component: {fileID: -5959307117361330510}
   m_Layer: 14
   m_Name: PlayerLaserBullet
   m_TagString: Untagged
@@ -197,20 +197,6 @@ MonoBehaviour:
   ImpactObject: {fileID: 1543648179472348, guid: aea8a803785a7164eb1b7f48cc4b874c,
     type: 3}
   PenetrateCount: 0
---- !u!114 &3420071748457353638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7750975500520401991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 1
-  Agressor: {fileID: 0}
 --- !u!114 &2491414881264015135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +211,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 6
   AlreadyInitialized: 0
+--- !u!114 &-5959307117361330510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7750975500520401991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  Agressor: {fileID: 0}
 --- !u!1 &8638973107004610931
 GameObject:
   m_ObjectHideFlags: 0

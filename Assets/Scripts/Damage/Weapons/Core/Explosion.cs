@@ -68,7 +68,6 @@ public class Explosion : MonoBehaviour
         {
             Collider collider = collision.closestCollider;
 
-            float rate = ((NeuteredHitLayers.value >> collider.gameObject.layer) == 1) ? NeuteredRate : 1f;
             Vector3 colliderPoint = GetClosestPoint ? collider.ClosestPoint(transform.position) : collider.transform.position;
             float distanceToTarget = (transform.position - colliderPoint).magnitude / Radius;
 
@@ -82,7 +81,11 @@ public class Explosion : MonoBehaviour
             }
 
             foreach (Attack attack in attacks)
+            {
+                float rate = ((NeuteredHitLayers.value >> collider.gameObject.layer) == 1 && !attack.IgnoreNeutered) ? NeuteredRate : 1f;
+                Debug.Log("Rate: " + rate);
                 attack.AttackTarget(collider.gameObject, rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget));
+            }
         }
     }
 

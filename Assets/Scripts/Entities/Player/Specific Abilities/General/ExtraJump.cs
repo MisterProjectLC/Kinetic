@@ -41,9 +41,9 @@ public class ExtraJump : MonoBehaviour
         else if (jumpAvailable)
         {
             jumpAvailable = false;
-            Vector3 jumpSpeed = playerController.PlayerCamera.transform.TransformVector(input.GetMoveInput());
-            playerController.MoveVelocity = new Vector3(jumpSpeed.x * playerController.JumpForce * 1.25f, playerController.JumpForce * 1.25f, 
-                jumpSpeed.z * playerController.JumpForce * 1.25f);
+            Vector3 jumpSpeed = playerController.GetPlayerCamera().transform.TransformVector(input.GetMoveInput());
+            playerController.SetMoveVelocity(new Vector3(jumpSpeed.x * playerController.JumpForce * 1.25f, playerController.JumpForce * 1.25f, 
+                jumpSpeed.z * playerController.JumpForce * 1.25f));
 
             playerController.GetComponent<AudioSource>().Play();
             foreach (ExtraJump jump in playerController.gameObject.GetComponentsInChildren<ExtraJump>())

@@ -6,6 +6,8 @@ public class Rocketeer : MonoBehaviour
 {
     [SerializeField]
     float StaggerDuration = 5f;
+    [SerializeField]
+    StatusEffect StaggerEffect;
 
     [SerializeField]
     float maxDistance = 30f;
@@ -18,7 +20,7 @@ public class Rocketeer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        weapon = GetComponent<Enemy>().weapons[0];
+        weapon = GetComponent<IEnemyWeaponsManager>().GetWeapons()[0];
         weapon.SubscribeToFire(FireAnimation);
         GetComponent<Health>().OnCriticalLevel += Stagger;
         animator = GetComponent<Animator>();
@@ -30,7 +32,7 @@ public class Rocketeer : MonoBehaviour
     void Stagger()
     {
         enemy.GravityMultiplier = 2;
-        enemy.ReceiveStun(StaggerDuration);
+        enemy.ReceiveStatusEffect(StaggerEffect, StaggerDuration);
         StartCoroutine("EndStagger");
     }
 
@@ -44,6 +46,6 @@ public class Rocketeer : MonoBehaviour
     {
         animator.SetTrigger("Fire");
         if ((playerTransform.position - enemy.Model.transform.position).magnitude <= maxDistance)
-            enemy.ReceiveKnockback(weapon.BackwardsForce * -weapon.Mouth.transform.forward);
+            enemy.ReceiveForce(weapon.BackwardsForce * -weapon.Mouth.transform.forward);
     }
 }

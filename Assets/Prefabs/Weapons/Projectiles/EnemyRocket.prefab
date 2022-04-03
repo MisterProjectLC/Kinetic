@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 8245919500898957614}
   - component: {fileID: 5112011732582207912}
   - component: {fileID: 8711886529766933742}
-  - component: {fileID: 6060678579324954168}
+  - component: {fileID: 3080766953749549866}
   - component: {fileID: 7866437215349344963}
   m_Layer: 14
   m_Name: EnemyRocket
@@ -101,7 +101,7 @@ MonoBehaviour:
   ImpactObject: {fileID: 4396919937828005916, guid: f55872ecec0de9f42882e51687812db9,
     type: 3}
   PenetrateCount: 0
---- !u!114 &6060678579324954168
+--- !u!114 &3080766953749549866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,10 +110,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1224324934996319193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
+  damage: 1
   Agressor: {fileID: 0}
 --- !u!114 &7866437215349344963
 MonoBehaviour:

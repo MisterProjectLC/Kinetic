@@ -15,14 +15,14 @@ public class GravitonAbility : Ability
     {
         player = GetComponentInParent<PlayerCharacterController>();
         shooter = GetComponent<ProjectileShooter>();
-        shooter.Setup(Graviton, HitLayers, player.PlayerCamera.transform);
+        shooter.Setup(Graviton, HitLayers, player.GetPlayerCamera().transform);
     }
 
     public override void Execute(Input input)
     {
         if (shooter.ActiveProjectiles.Count <= 0)
         {
-            shooter.ShootProjectile(player.PlayerCamera.transform.forward).GetComponent<Projectile>().OnDestroy += (Projectile p) => SetOffCooldown();
+            shooter.ShootProjectile(player.GetPlayerCamera().transform.forward).GetComponent<Projectile>().OnDestroy += (Projectile p) => SetOffCooldown();
             ResetCooldown();
         } else
         {

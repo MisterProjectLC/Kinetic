@@ -42,7 +42,8 @@ GameObject:
   - component: {fileID: 4737951187669904328}
   - component: {fileID: 8060274933420828594}
   - component: {fileID: 297512775353511095}
-  - component: {fileID: 3228066949501696013}
+  - component: {fileID: 6348623206970381710}
+  - component: {fileID: 3892130618599333723}
   - component: {fileID: 2035550557693848252}
   - component: {fileID: 3399664917418735486}
   - component: {fileID: 199892125515440585}
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
   ExtraAutohitTime: 0
---- !u!114 &3228066949501696013
+--- !u!114 &6348623206970381710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,11 +124,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 6191481536520945790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
   Agressor: {fileID: 0}
+--- !u!114 &3892130618599333723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191481536520945790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6d41c0fcbd10e4ebe1bae2091d0bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Knockback: 5
 --- !u!114 &2035550557693848252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,9 +886,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  CurrentHealth:
+    _owner: {fileID: 7409596822161239090}
+    _ownerName: Frontal Shield
+    _propertyPath: CurrentHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 0
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   CriticalHealth: 1
-  MaxHealth: 30
+  MaxHealth:
+    _owner: {fileID: 7409596822161239090}
+    _ownerName: Frontal Shield
+    _propertyPath: MaxHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 30
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   lastAttack: {fileID: 0}
 --- !u!114 &2799427669241526933
 MonoBehaviour:

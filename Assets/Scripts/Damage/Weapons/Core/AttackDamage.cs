@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AttackDamage : Attack
 {
-
-    [Header("Attributes")]
     [SerializeField]
     int damage = 1;
     int actualDamage = 1;

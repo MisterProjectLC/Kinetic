@@ -35,7 +35,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         clock = SpawnStartDelay;
 
-        playerTransform = ActorsManager.AM.GetPlayer().GetComponent<PlayerCharacterController>().PlayerCamera.transform;
+        playerTransform = ActorsManager.AM.GetPlayerCamera().transform;
 
         if (Spawnee.GetComponent<Poolable>())
             objectType = Spawnee.GetComponent<Poolable>().Type;

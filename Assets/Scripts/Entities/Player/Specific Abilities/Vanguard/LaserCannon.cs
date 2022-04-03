@@ -33,12 +33,12 @@ public class LaserCannon : WeaponAbility
     float alpha = 0f;
     int killsSince = 0;
 
-    Attack attack;
+    AttackDamage attack;
 
     new void Awake()
     {
         LaserEffect = GetComponent<LaserEffect>();
-        attack = GetComponent<Attack>();
+        attack = GetComponent<AttackDamage>();
         attack.OnKill += (Attack a, GameObject g, bool b) => OnKill();
         base.Awake();
     }

@@ -15,9 +15,16 @@ public class Centibomb : MonoBehaviour
 
     float killTimer = 1f;
 
+    RaycastHit[] hitInfos;
+
+    Clock clock;
+
     // Start is called before the first frame update
     void Start()
     {
+        hitInfos = new RaycastHit[1];
+        clock = new Clock(0.5f);
+
         if (GetComponent<NavMeshAgent>().isOnNavMesh)
             GetComponent<NavMeshAgent>().destination = transform.position;
         GetComponent<Enemy>().OnKnockbackCollision += Detonate;
@@ -49,8 +56,11 @@ public class Centibomb : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit hitInfo;
-        Physics.SphereCast(transform.position, 2f, transform.forward, out hitInfo, 3f, sphereCastLayers.value, QueryTriggerInteraction.Collide);
+        if (!clock.TickAndRing(Time.deltaTime))
+            return;
+
+        Physics.SphereCastNonAlloc(transform.position, 2f, transform.forward, hitInfos, 3f, sphereCastLayers.value, QueryTriggerInteraction.Collide);
+        RaycastHit hitInfo = hitInfos[0];
         if (hitInfo.collider) {
             Transform centibomb = hitInfo.collider.transform.parent;
             if (hitInfo.collider.transform.parent && hitInfo.collider.transform.parent.GetComponent<Centibomb>() &&

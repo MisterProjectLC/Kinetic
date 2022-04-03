@@ -14,6 +14,6 @@ public class SpatialAnchor : Ability
 
     public override void Execute(Input input)
     {
-        player.MoveVelocity = Vector3.zero;
+        player.SetMoveVelocity(Vector3.zero);
     }
 }

@@ -54,7 +54,7 @@ public class ExplosiveCollision : MonoBehaviour
         GameObject instance = ObjectManager.OM.SpawnObjectFromPool(explosion.GetComponent<Poolable>().Type, explosion);
         instance.transform.position = transform.position;
         attack.SetupClone(instance.GetComponent<Attack>());
-        instance.GetComponent<Attack>().Damage = Mathf.Min((int)player.MoveVelocity.magnitude / 4, 20);
+        instance.GetComponent<AttackDamage>().Damage = Mathf.Min((int)player.MoveVelocity.magnitude / 4, 20);
         instance.GetComponent<Explosion>().Radius = Mathf.Min((int)player.MoveVelocity.magnitude / 3, 18);
         instance.transform.localScale = Vector3.one * Mathf.Min((int)player.MoveVelocity.magnitude / 20, 3);
     }

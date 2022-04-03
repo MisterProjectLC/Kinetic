@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SmartData.SmartFloat;
 
 public class StyleHUD : MonoBehaviour
 {
@@ -19,8 +20,9 @@ public class StyleHUD : MonoBehaviour
     Text AirborneBonus;
     [SerializeField]
     Text TierText;
+
     [SerializeField]
-    BarUI StyleBar;
+    FloatBar StyleBar;
 
     StyleMeter style;
     CanvasGroup styleCanvasGroup;
@@ -28,7 +30,8 @@ public class StyleHUD : MonoBehaviour
     [SerializeField]
     float TierMultiplier = 3;
 
-    float totalStyle = 0f;
+    [SerializeField]
+    FloatWriter totalStyle;
     int styleTier = 0;
     string[] tiers = {"D", "C", "B", "A", "S", "SS"};
     float fadingClock = 0f;
@@ -139,25 +142,27 @@ public class StyleHUD : MonoBehaviour
 
     void UpdateStyleTotal(float value)
     {
-        totalStyle = value;
+        float sumStyle = value;
 
         // Downgrade
-        if (totalStyle <= 0f && styleTier > 0)
+        if (sumStyle <= 0f && styleTier > 0)
         {
             styleTier--;
-            totalStyle += style.JuiceMax * 10f + 1;
+            sumStyle += style.MaxStyle * 10f + 1;
         }
 
         // Upgrade
-        else if (totalStyle >= style.JuiceMax * 10f && styleTier < 5)
+        else if (sumStyle >= style.MaxStyle * 10f && styleTier < 5)
         {
             styleTier++;
-            totalStyle -= style.JuiceMax * 10f + 1;
+            sumStyle -= style.MaxStyle * 10f + 1;
         }
-        totalStyle = Mathf.Clamp(totalStyle, 0f, style.JuiceMax * 10f);
+        sumStyle = Mathf.Clamp(sumStyle, 0f, style.MaxStyle * 10f);
 
         // Apply
         TierText.text = tiers[styleTier];
-        StyleBar.UpdateBar(totalStyle, style.JuiceMax * 10f);
+
+        totalStyle.value = sumStyle;
+        StyleBar.UpdateBar();
     }
 }

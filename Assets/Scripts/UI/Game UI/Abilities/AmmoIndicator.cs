@@ -68,7 +68,7 @@ public class AmmoIndicator : MonoBehaviour
 
         SetInAnimation(false);
         animator.SetTrigger("Ping");
-        Debug.Log("Ping");
+        //Debug.Log("Ping");
 
         if (!weapon)
             text.text = "";

@@ -2,17 +2,20 @@
     "name": "Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:6b79bdae3fad19d469d3903189a0b5e4",
-        "GUID:81b66f91fd51994439f93b75295c3389",
-        "GUID:1438d34745bea1f4f8824577f1144195",
         "GUID:82f9671d50f921843883b889a5014ad8",
-        "GUID:14e6f3ff83a71f842ad2c4e7008f6e9a"
+        "GUID:1438d34745bea1f4f8824577f1144195",
+        "GUID:81b66f91fd51994439f93b75295c3389",
+        "GUID:14e6f3ff83a71f842ad2c4e7008f6e9a",
+        "GUID:6b79bdae3fad19d469d3903189a0b5e4",
+        "GUID:a450c6ba08279c143b5a63ae3f795e18"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],

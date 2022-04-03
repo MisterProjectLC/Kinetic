@@ -376,7 +376,10 @@ GameObject:
   - component: {fileID: 3561694850552336349}
   - component: {fileID: 170632900509345856}
   - component: {fileID: 8041429361272883083}
+  - component: {fileID: 5114671514459130982}
   - component: {fileID: 2793335532290284254}
+  - component: {fileID: 9063301859718750311}
+  - component: {fileID: 4341066374749288010}
   - component: {fileID: 1989609916023471263}
   - component: {fileID: 260070860282569955}
   - component: {fileID: 4667401134277738239}
@@ -421,9 +424,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  CurrentHealth:
+    _owner: {fileID: 2428469021606675725}
+    _ownerName: Droid
+    _propertyPath: CurrentHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 0
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   CriticalHealth: 1
-  MaxHealth: 6
+  MaxHealth:
+    _owner: {fileID: 2428469021606675725}
+    _ownerName: Droid
+    _propertyPath: MaxHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 6
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   lastAttack: {fileID: 0}
 --- !u!114 &8041429361272883083
 MonoBehaviour:
@@ -441,6 +470,20 @@ MonoBehaviour:
     type: 3}
   MatchModelScale: 0
   OriginalModel: {fileID: 2216102364452169466}
+--- !u!114 &5114671514459130982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428469021606675725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PushSensitivity: 1
+  health: {fileID: 170632900509345856}
 --- !u!114 &2793335532290284254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,21 +497,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  weapons:
-  - {fileID: 8351355231165890608}
-  - {fileID: 959473276770724676}
   Model: {fileID: 2216102364452169466}
   GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
   Movable: 1
+  TurnToMoveDirection: 0
+  CollisionDistance: 5
   HoverHeight: 0.5
   GravityMultiplier: 1
   AirDesacceleration: 0
   Weight: 1
+  IsGrounded: 1
+--- !u!114 &9063301859718750311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428469021606675725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af30bd6cc53dfb84187727fa300065f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
+  HoverHeight: 0.5
+  GravityMultiplier: 1
+  AirDesacceleration: 0
+  Weight: 1
+  Movable: 1
   TurnToMoveDirection: 0
+--- !u!114 &4341066374749288010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428469021606675725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149579b8ab4c2304abb55251964068d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 8351355231165890608}
+  - {fileID: 959473276770724676}
   OnlyShootIfPlayerInView: 1
-  CollisionDistance: 1
-  Stunned: 0
 --- !u!114 &1989609916023471263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +585,8 @@ MonoBehaviour:
   turnVertical: 0
   partThatMoves: {fileID: 0}
   TargetPosition: {fileID: 0}
+  blockingEffects:
+  - {fileID: 11400000, guid: 16265339f8eb60042bfcce8b78eb0cce, type: 2}
 --- !u!114 &7684439068083512808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,6 +604,8 @@ MonoBehaviour:
   turnVertical: 1
   partThatMoves: {fileID: 7570584722447137862}
   TargetPosition: {fileID: 0}
+  blockingEffects:
+  - {fileID: 11400000, guid: 16265339f8eb60042bfcce8b78eb0cce, type: 2}
 --- !u!114 &4618637557585060622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,6 +619,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateCooldown: 0.25
+  blockingEffects:
+  - {fileID: 11400000, guid: c21ab97e677904f44a769394466e46b3, type: 2}
+  - {fileID: 11400000, guid: 16265339f8eb60042bfcce8b78eb0cce, type: 2}
 --- !u!195 &3538263600158351026
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -591,6 +672,7 @@ MonoBehaviour:
   StylePerDamage: 0
   StyleOnCritical: 0
   StyleOnKill: 0.5
+  enemyType: 0
 --- !u!54 &-7734883981587276468
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -804,14 +886,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 2133786073815729642}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 0
   MaxSpreadAngle: 0.05
   BulletCount: 1
   Automatic: 0
   FireCooldown: 1
+  maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -829,6 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!114 &2239840143830028443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1054,14 +1139,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 3195455882003618465}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 0
   MaxSpreadAngle: 0.05
   BulletCount: 1
   Automatic: 0
   FireCooldown: 1
+  maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0.5
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -1079,6 +1166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!64 &9043775903713908497
 MeshCollider:
   m_ObjectHideFlags: 0

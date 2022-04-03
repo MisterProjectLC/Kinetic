@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2684064132486651893}
   - component: {fileID: 1502571618760834993}
   - component: {fileID: 307534647279105485}
-  - component: {fileID: 7008449775376283013}
+  - component: {fileID: 2551881021061461367}
+  - component: {fileID: 7956754108072292293}
   - component: {fileID: 1773818962129064270}
   - component: {fileID: 4149807066090890599}
-  - component: {fileID: 8248575022387800516}
   m_Layer: 14
   m_Name: RocketLauncherExplosion
   m_TagString: Untagged
@@ -70,7 +70,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   GetClosestPoint: 1
---- !u!114 &7008449775376283013
+--- !u!114 &2551881021061461367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,11 +79,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 7428323586207960768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e6d41c0fcbd10e4ebe1bae2091d0bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 6
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
+  Knockback: 100
+--- !u!114 &7956754108072292293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428323586207960768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Agressor: {fileID: 0}
+  IgnoreNeutered: 0
+  damage: 6
 --- !u!114 &1773818962129064270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,20 +211,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8248575022387800516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428323586207960768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Knockback: 100
-  Effects: []
 --- !u!1001 &3652526033923901158
 PrefabInstance:
   m_ObjectHideFlags: 0

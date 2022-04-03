@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1931859933030103327}
   - component: {fileID: 4914202430057852791}
   - component: {fileID: 3536989481799197300}
-  - component: {fileID: 4047515629669841277}
+  - component: {fileID: -6097894714266403441}
   m_Layer: 14
   m_Name: ShellBomb
   m_TagString: Untagged
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   AlreadyInitialized: 0
---- !u!114 &4047515629669841277
+--- !u!114 &-6097894714266403441
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,10 +124,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5531395347504132974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
+  damage: 1
   Agressor: {fileID: 0}
 --- !u!1 &5814223675256522330
 GameObject:

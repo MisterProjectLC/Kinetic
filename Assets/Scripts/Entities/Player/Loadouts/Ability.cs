@@ -29,7 +29,7 @@ public abstract class Ability : MonoBehaviour
     public UnityAction<Ability> OnExecuteAbility;
     protected UnityAction OnUpdate;
 
-    private void Awake()
+    protected void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         if (OnExecute == null)
@@ -37,7 +37,7 @@ public abstract class Ability : MonoBehaviour
 
     }
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         if (OnExecute == null)
             OnExecute += (Input input) => OnExecuteAbility?.Invoke(this);

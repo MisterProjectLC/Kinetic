@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 544445259424315527}
   - component: {fileID: 3679622979997454337}
   - component: {fileID: 938983655641515335}
-  - component: {fileID: 2448547534010214289}
+  - component: {fileID: 3796917861154148952}
   - component: {fileID: 1786263244082662250}
   m_Layer: 14
   m_Name: FusioneerRocket
@@ -197,7 +197,7 @@ MonoBehaviour:
   ImpactObject: {fileID: 4396919937828005916, guid: f55872ecec0de9f42882e51687812db9,
     type: 3}
   PenetrateCount: 0
---- !u!114 &2448547534010214289
+--- !u!114 &3796917861154148952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,10 +206,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7285851156913724016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
+  damage: 1
   Agressor: {fileID: 0}
 --- !u!114 &1786263244082662250
 MonoBehaviour:

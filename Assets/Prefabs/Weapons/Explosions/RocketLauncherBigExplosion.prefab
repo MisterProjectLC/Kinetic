@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6398851222010591996}
   - component: {fileID: 7577530390364723896}
   - component: {fileID: 8770314366077243588}
-  - component: {fileID: 2067711481197105292}
+  - component: {fileID: 9122988376411194887}
+  - component: {fileID: 7477691021480169953}
   - component: {fileID: 7309097698105635911}
   - component: {fileID: 4928605784070733934}
-  - component: {fileID: 1119755924067421389}
   m_Layer: 14
   m_Name: RocketLauncherBigExplosion
   m_TagString: Untagged
@@ -70,7 +70,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   GetClosestPoint: 1
---- !u!114 &2067711481197105292
+--- !u!114 &9122988376411194887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,11 +79,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1937756902610758601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e6d41c0fcbd10e4ebe1bae2091d0bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 6
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
+  Knockback: 100
+--- !u!114 &7477691021480169953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937756902610758601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Agressor: {fileID: 0}
+  IgnoreNeutered: 0
+  damage: 6
 --- !u!114 &7309097698105635911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,20 +211,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1119755924067421389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937756902610758601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Knockback: 100
-  Effects: []
 --- !u!1001 &5711301276405244911
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -46,11 +46,11 @@ public class Walljump : MonoBehaviour
     {
         if (OnWallAir())
         {
-            Vector3 faceDirection = playerController.PlayerCamera.transform.TransformVector(inputHandler.GetMoveInput());
+            Vector3 faceDirection = playerController.GetPlayerCamera().transform.TransformVector(inputHandler.GetMoveInput());
             playerController.GetComponent<AudioSource>().Play();
-            playerController.MoveVelocity = (Vector3.up + new Vector3(wallDirection.x, 0f, wallDirection.z).normalized + 
+            playerController.SetMoveVelocity( (Vector3.up + new Vector3(wallDirection.x, 0f, wallDirection.z).normalized + 
                 new Vector3(faceDirection.x * 1.5f, faceDirection.y > 0f ? faceDirection.y : 0f, faceDirection.z * 1.5f)) *
-                playerController.JumpForce * 1.5f;
+                playerController.JumpForce * 1.5f);
 
             if (currentDetectionTime > 2*k_WallAirDetectionTime/5)
                 currentDetectionTime -= k_WallAirDetectionTime/5;

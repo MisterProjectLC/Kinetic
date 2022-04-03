@@ -21,7 +21,8 @@ public class Translocate : SecondaryAbility
     public override void Execute(Input input)
     {
         // Send Ray and get Info
-        Ray ray = new Ray(player.PlayerCamera.transform.position, player.PlayerCamera.transform.forward);
+        Camera playerCamera = player.GetPlayerCamera();
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         Physics.Raycast(ray, out RaycastHit hitInfo, Range, TargetLayers, QueryTriggerInteraction.Ignore);
 
         Collider collider = hitInfo.collider;
@@ -44,13 +45,14 @@ public class Translocate : SecondaryAbility
 
     IEnumerator RunTranslocate(GameObject target)
     {
-        Vector3 myCoords = new Vector3(player.PlayerCamera.transform.position.x, player.PlayerCamera.transform.position.y, 
-            player.PlayerCamera.transform.position.z);
+        Camera playerCamera = player.GetPlayerCamera();
+        Vector3 myCoords = new Vector3(playerCamera.transform.position.x, playerCamera.transform.position.y,
+            playerCamera.transform.position.z);
         Vector3 targetCoords = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
         player.GetComponent<CharacterController>().enabled = false;
         player.MoveControlEnabled = false;
         abilities.AbilitiesEnabled = false;
-        player.MoveVelocity = Vector3.zero;
+        player.SetMoveVelocity(Vector3.zero);
 
         if (target.GetComponent<NavMeshAgent>())
             target.GetComponent<NavMeshAgent>().enabled = false;

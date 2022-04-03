@@ -110,14 +110,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 5345296704080276421}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0.05
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -135,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!82 &1862918598460337032
 AudioSource:
   m_ObjectHideFlags: 0
@@ -344,9 +347,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  CurrentHealth:
+    _owner: {fileID: 3379298300632395941}
+    _ownerName: Cannon Left
+    _propertyPath: CurrentHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 0
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   CriticalHealth: 1
-  MaxHealth: 3
+  MaxHealth:
+    _owner: {fileID: 3379298300632395941}
+    _ownerName: Cannon Left
+    _propertyPath: MaxHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 3
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   lastAttack: {fileID: 0}
 --- !u!114 &1088624069320341115
 MonoBehaviour:
@@ -390,6 +419,8 @@ GameObject:
   - component: {fileID: 7167164924237744668}
   - component: {fileID: 1058401267633563095}
   - component: {fileID: 5182302744470206594}
+  - component: {fileID: 128374813657964540}
+  - component: {fileID: 3619496284886585739}
   - component: {fileID: 7112065824988104383}
   - component: {fileID: 2444653759116024995}
   - component: {fileID: 1254519644011659959}
@@ -431,9 +462,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  CurrentHealth:
+    _owner: {fileID: 4655438382437377873}
+    _ownerName: Turret
+    _propertyPath: CurrentHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 0
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   CriticalHealth: 1
-  MaxHealth: 10
+  MaxHealth:
+    _owner: {fileID: 4655438382437377873}
+    _ownerName: Turret
+    _propertyPath: MaxHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 10
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   lastAttack: {fileID: 0}
 --- !u!114 &1058401267633563095
 MonoBehaviour:
@@ -464,21 +521,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  weapons:
-  - {fileID: 201204687293336446}
-  - {fileID: 7615488846699971818}
   Model: {fileID: 4655438382437377873}
   GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
   Movable: 0
+  TurnToMoveDirection: 0
+  CollisionDistance: 1
   HoverHeight: 1
   GravityMultiplier: 1
   AirDesacceleration: 0
   Weight: 1
-  TurnToMoveDirection: 0
-  OnlyShootIfPlayerInView: 1
+  IsGrounded: 1
+--- !u!114 &128374813657964540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655438382437377873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db35ed2dcc4b8e245a766fadc0c44441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   CollisionDistance: 1
-  Stunned: 0
+  HoverHeight: 1
+  GravityMultiplier: 1
+  Weight: 1
+--- !u!114 &3619496284886585739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655438382437377873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149579b8ab4c2304abb55251964068d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 201204687293336446}
+  - {fileID: 7615488846699971818}
+  OnlyShootIfPlayerInView: 1
 --- !u!114 &7112065824988104383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +595,8 @@ MonoBehaviour:
   turnVertical: 0
   partThatMoves: {fileID: 0}
   TargetPosition: {fileID: 0}
+  blockingEffects:
+  - {fileID: 11400000, guid: 16265339f8eb60042bfcce8b78eb0cce, type: 2}
 --- !u!114 &1254519644011659959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +640,7 @@ MonoBehaviour:
   StylePerDamage: 0
   StyleOnCritical: 0
   StyleOnKill: 0.5
+  enemyType: 0
 --- !u!82 &149366801859357853
 AudioSource:
   m_ObjectHideFlags: 0
@@ -761,9 +850,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  CurrentHealth:
+    _owner: {fileID: 5029517833402345531}
+    _ownerName: Cannon Right
+    _propertyPath: CurrentHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 0
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   CriticalHealth: 1
-  MaxHealth: 3
+  MaxHealth:
+    _owner: {fileID: 5029517833402345531}
+    _ownerName: Cannon Right
+    _propertyPath: MaxHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 3
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   lastAttack: {fileID: 0}
 --- !u!114 &604446897212688494
 MonoBehaviour:
@@ -1010,14 +1125,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 5032173961085111427}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0.05
   BulletCount: 1
   Automatic: 0
   FireCooldown: 0.5
+  maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -1035,6 +1152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveProjectiles: []
+  ExtraAutohitTime: 0
 --- !u!82 &9067818088951579197
 AudioSource:
   m_ObjectHideFlags: 0

@@ -774,6 +774,7 @@ GameObject:
   - component: {fileID: 303938176602873842}
   - component: {fileID: 2511817439516124872}
   - component: {fileID: 709164827059227580}
+  - component: {fileID: -740370833400025719}
   - component: {fileID: 7091937172390592873}
   - component: {fileID: 8315563375910321687}
   - component: {fileID: 3242980672300510518}
@@ -819,9 +820,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  CurrentHealth:
+    _owner: {fileID: 6673934041642640765}
+    _ownerName: Centibomb
+    _propertyPath: CurrentHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 0
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   CriticalHealth: 1
-  MaxHealth: 5
+  MaxHealth:
+    _owner: {fileID: 6673934041642640765}
+    _ownerName: Centibomb
+    _propertyPath: MaxHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 4
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   lastAttack: {fileID: 0}
 --- !u!114 &2511817439516124872
 MonoBehaviour:
@@ -852,19 +879,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  weapons: []
   Model: {fileID: 8240028139306625353}
   GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
   Movable: 1
+  TurnToMoveDirection: 1
+  CollisionDistance: 1
   HoverHeight: 1
   GravityMultiplier: 1
   AirDesacceleration: 0
   Weight: 1
+  IsGrounded: 1
+--- !u!114 &-740370833400025719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6673934041642640765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af30bd6cc53dfb84187727fa300065f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
+  HoverHeight: 1
+  GravityMultiplier: 1
+  AirDesacceleration: 0
+  Weight: 1
+  Movable: 1
   TurnToMoveDirection: 1
-  OnlyShootIfPlayerInView: 1
-  CollisionDistance: 1
-  Stunned: 0
 --- !u!114 &7091937172390592873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,6 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateCooldown: 3
+  blockingEffects: []
   maxDistance: 30
 --- !u!114 &3242980672300510518
 MonoBehaviour:
@@ -1117,6 +1162,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4912788616224921426}
     m_Modifications:
+    - target: {fileID: 2537913070306596570, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: MaxHealth._ownerName
+      value: Centibomb Body (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537913070306596570, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: CurrentHealth._refType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537913070306596570, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: CurrentHealth._ownerName
+      value: Centibomb Body (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 5881942009606004111, guid: bbe95355c56d8474ba0e8d8e573a1aef,
         type: 3}
       propertyPath: Target
@@ -1207,6 +1267,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4912788616224921426}
     m_Modifications:
+    - target: {fileID: 2537913070306596570, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: MaxHealth._ownerName
+      value: Centibomb Body (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537913070306596570, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: CurrentHealth._ownerName
+      value: Centibomb Body (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 5881942009606004111, guid: bbe95355c56d8474ba0e8d8e573a1aef,
         type: 3}
       propertyPath: Target
@@ -1387,6 +1457,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4912788616224921426}
     m_Modifications:
+    - target: {fileID: 2537913070306596570, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: MaxHealth._ownerName
+      value: Centibomb Body (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537913070306596570, guid: bbe95355c56d8474ba0e8d8e573a1aef,
+        type: 3}
+      propertyPath: CurrentHealth._ownerName
+      value: Centibomb Body (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 5881942009606004111, guid: bbe95355c56d8474ba0e8d8e573a1aef,
         type: 3}
       propertyPath: Target

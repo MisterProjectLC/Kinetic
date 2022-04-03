@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerInputHandler))]
-public class PlayerCharacterController : Entity
+public class PlayerCharacterController : MonoBehaviour, Entity
 {
     struct Force
     {
@@ -60,7 +60,6 @@ public class PlayerCharacterController : Entity
     [Tooltip("Air movement speed hard cap")]
     public float AirborneMaxSpeed = 75f;
 
-
     [Tooltip("Sharpness for the movement when airborne")]
     public float AirborneAcceleration = 8f;
 
@@ -68,13 +67,22 @@ public class PlayerCharacterController : Entity
     [Tooltip("Rotation speed for moving the camera")]
     public float RotationSpeed = 400f;
 
-
-    private Queue<Force> Forces;
+    public float HoverHeight = 1f;
+    public float GravityMultiplier = 1f;
+    protected float lastGravityMultiplier = 1f;
+    public float AirDesacceleration = 0f;
+    public float Weight = 1f;
     public bool IsGrounded = true;
+    Queue<Force> Forces;
+
+    protected Vector3 moveVelocity = Vector3.zero;
+    public Vector3 MoveVelocity { get { return moveVelocity; } }
+
     Camera m_PlayerCamera;
     CharacterController m_Controller;
     PlayerInputHandler m_InputHandler;
     IFallHandler m_FallHandler;
+
     Vector3 m_GroundNormal;
     float m_LastTimeJumped = 0f;
     float m_CameraVerticalAngle = 0f;
@@ -91,10 +99,9 @@ public class PlayerCharacterController : Entity
     public UnityAction<Collider> OnTrigger;
 
 
-    protected new void Awake()
+    protected void Awake()
     {
         m_PlayerCamera = GetComponentInChildren<Camera>();
-        base.Awake();
     }
 
     // Start is called before the first frame update
@@ -111,12 +118,11 @@ public class PlayerCharacterController : Entity
     }
 
     // Update is called once per frame
-    protected override void MyUpdate()
+    void Update()
     {
         CameraMovement();
         CharacterMovement();
     }
-
 
     void CameraMovement()
     {
@@ -144,7 +150,6 @@ public class PlayerCharacterController : Entity
             m_PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
         }
     }
-
 
     void CharacterMovement()
     {
@@ -220,22 +225,24 @@ public class PlayerCharacterController : Entity
         m_Controller.Move(moveVelocity * Time.deltaTime);
     }
 
-    public override void SetMoveVelocity(Vector3 velocity)
+
+    public void SetMoveVelocity(Vector3 velocity)
     {
         moveVelocity = velocity;
     }
 
-    public override void WarpPosition(Vector3 newPosition)
+    public void WarpPosition(Vector3 newPosition)
     {
         transform.position = newPosition;
     }
 
-    public override void ReceiveForce(Vector3 Force, bool Sticky = false)
+    public void ReceiveForce(Vector3 Force, bool Sticky = false)
     {
+        Debug.Log("ReceiveForce " + Force.magnitude);
         Forces.Enqueue(new Force(Force, Sticky));
     }
 
-    public override void ReceiveMotion(Vector3 Force)
+    public void ReceiveMotion(Vector3 Force)
     {
         if (!IsGrounded)
             return;
@@ -305,7 +312,6 @@ public class PlayerCharacterController : Entity
         return null;
     }
 
-
     public void SetSlowdown(float slow, string name, bool ground = true)
     {
         bool found = false;
@@ -356,7 +362,13 @@ public class PlayerCharacterController : Entity
         return Vector3.Angle(transform.up, normal) <= m_Controller.slopeLimit;
     }
 
+    public void FallFatal(float VerticalLimit, Transform FallRespawnPoint)
+    {
+        m_FallHandler.FallFatal(VerticalLimit, FallRespawnPoint);
+    }
 
+
+    #region Getters
     // Gets a reoriented direction that is tangent to a given slope
     Vector3 GetDirectionReorientedOnSlope(Vector3 direction, Vector3 slopeNormal)
     {
@@ -377,6 +389,23 @@ public class PlayerCharacterController : Entity
         return transform.position + (transform.up * (m_Controller.height - m_Controller.radius));
     }
 
+    public Camera GetPlayerCamera()
+    {
+        return m_PlayerCamera;
+    }
+
+    public Vector3 GetMoveVelocity()
+    {
+        return moveVelocity;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
+    #endregion
+
+    #region UnityMessages
     void OnDrawGizmos()
     {
         m_Controller = GetComponent<CharacterController>();
@@ -394,14 +423,22 @@ public class PlayerCharacterController : Entity
     {
         OnTrigger?.Invoke(other);
     }
+    #endregion
 
-    public Camera GetPlayerCamera()
+    #region StatusEffects
+    public void ReceiveStatusEffect(StatusEffect statusEffect, float duration)
     {
-        return m_PlayerCamera;
+        return;
     }
 
-    public override void FallFatal(float VerticalLimit, Transform FallRespawnPoint)
+    public bool HasStatusEffect(StatusEffect statusEffect)
     {
-        m_FallHandler.FallFatal(VerticalLimit, FallRespawnPoint);
+        return false;
     }
+
+    public bool HasAnyOfTheseStatusEffects(List<StatusEffect> statusEffects)
+    {
+        return false;
+    }
+    #endregion
 }

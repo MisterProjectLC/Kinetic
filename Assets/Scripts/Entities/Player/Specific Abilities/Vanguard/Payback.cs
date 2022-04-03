@@ -9,7 +9,7 @@ public class Payback : Ability
     GameObject RedShield;
     [SerializeField]
     GameObject Explosion;
-    Attack attack;
+    AttackDamage attack;
 
     [Tooltip("Attributes")]
     [SerializeField]
@@ -32,7 +32,7 @@ public class Payback : Ability
 
     private void Start()
     {
-        attack = GetComponent<Attack>();
+        attack = GetComponent<AttackDamage>();
 
         foreach (Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
         {
@@ -90,8 +90,8 @@ public class Payback : Ability
         newObject.transform.position = transform.position;
 
         attack.SetupClone(newObject.GetComponent<Attack>());
-        newObject.GetComponent<Attack>().Damage = Mathf.Clamp(damagedSummation, 0, attack.Damage);
-        newObject.GetComponent<StatusEffectApplier>().Knockback = Knockback * Mathf.Clamp01(damagedSummation / (float)MaxDamageAbsorbed);
+        newObject.GetComponent<AttackDamage>().Damage = Mathf.Clamp(damagedSummation, 0, attack.Damage);
+        newObject.GetComponent<KnockbackApplier>().Knockback = Knockback * Mathf.Clamp01(damagedSummation / (float)MaxDamageAbsorbed);
         Debug.Log("Summation: " + damagedSummation);
 
         SetOffCooldown();

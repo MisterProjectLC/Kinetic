@@ -11,6 +11,7 @@ public class ActorsManager : MonoBehaviour
     [SerializeField]
     private string PlayerSerialized;
     public static Actor Player;
+    static Camera PlayerCamera;
 
     [SerializeField]
     Actor Ninja;
@@ -41,6 +42,7 @@ public class ActorsManager : MonoBehaviour
             }
 
             Player.gameObject.SetActive(true);
+            PlayerCamera = Player.GetComponentInChildren<Camera>();
             if (Hermes.SpawnPosition != Vector3.zero)
                 Player.gameObject.transform.position = Hermes.SpawnPosition;
             Actors = new Dictionary<int, List<Actor>>();
@@ -60,5 +62,10 @@ public class ActorsManager : MonoBehaviour
     public Actor GetPlayer()
     {
         return Player;
+    }
+
+    public Camera GetPlayerCamera()
+    {
+        return PlayerCamera;
     }
 }

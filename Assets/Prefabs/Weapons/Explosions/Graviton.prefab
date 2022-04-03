@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 6275628195676441202}
   - component: {fileID: 7417992011150600758}
   - component: {fileID: 8533373112957378634}
-  - component: {fileID: 1399273078537297922}
+  - component: {fileID: 8991903343393847518}
+  - component: {fileID: 5372603987518020729}
   - component: {fileID: 7689309710378173641}
   - component: {fileID: 5458124195391303904}
-  - component: {fileID: 22772827171470403}
-  - component: {fileID: 5553185517356068331}
   m_Layer: 14
   m_Name: Graviton
   m_TagString: Untagged
@@ -71,7 +70,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   GetClosestPoint: 0
---- !u!114 &1399273078537297922
+--- !u!114 &8991903343393847518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,11 +79,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1530802152247089991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e6d41c0fcbd10e4ebe1bae2091d0bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
   Agressor: {fileID: 0}
+  Knockback: -30
+--- !u!114 &5372603987518020729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530802152247089991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Agressor: {fileID: 0}
+  damage: 1
 --- !u!114 &7689309710378173641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,36 +209,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &22772827171470403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530802152247089991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cedcbbb5b94fe747896e71422c13345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Knockback: -30
-  Effects:
-  - {fileID: 5553185517356068331}
---- !u!114 &5553185517356068331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530802152247089991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 076bc1c36891a50469e2605bcde5dd31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TickDuration: 8
-  TickTime: 0.1
-  ParalyzeDuration: 5
 --- !u!1 &4656270986459733377
 GameObject:
   m_ObjectHideFlags: 0

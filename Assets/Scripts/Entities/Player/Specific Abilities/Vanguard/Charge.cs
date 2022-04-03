@@ -101,7 +101,7 @@ public class Charge : Ability
         {
             player.SetSlowdown(Mathf.Lerp(1f, MaxGroundSlowdown, charge/MaxCharge), "charge");
             player.SetSlowdown(Mathf.Lerp(1f, MaxAirSlowdown, charge/MaxCharge), "charge", false);
-            player.MoveVelocity = player.MoveVelocity * (1f - charge / MaxCharge);
+            player.SetMoveVelocity(player.MoveVelocity * (1f - charge / MaxCharge));
             if (charge < MaxCharge)
                 charge += 10*Time.deltaTime;
             else
@@ -120,8 +120,8 @@ public class Charge : Ability
 
             if (player.IsGrounded)
                 player.Translate(Vector3.up*1.15f);
-            player.ApplyForce(Mathf.Lerp(MinimumForce, MaximumForce, charge / MaxCharge) *
-                player.PlayerCamera.transform.TransformVector(Vector3.forward));
+            player.ReceiveForce(Mathf.Lerp(MinimumForce, MaximumForce, charge / MaxCharge) *
+                player.GetPlayerCamera().transform.TransformVector(Vector3.forward));
             charge = 0;
 
             PlaySound(ChargeSFX);

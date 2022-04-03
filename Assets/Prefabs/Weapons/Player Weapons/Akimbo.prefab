@@ -72,7 +72,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2483760642977702375}
   - component: {fileID: 3440668403394659245}
-  - component: {fileID: 5725455477668999714}
+  - component: {fileID: 3286704077105327619}
+  - component: {fileID: 892291502179013986}
   - component: {fileID: 5518751910047628625}
   - component: {fileID: 8089324878251517365}
   - component: {fileID: 7025239874026515430}
@@ -134,7 +135,7 @@ MonoBehaviour:
   BeamLayers:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &5725455477668999714
+--- !u!114 &3286704077105327619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,11 +144,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 3914768282061949521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
   Agressor: {fileID: 0}
+--- !u!114 &892291502179013986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914768282061949521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6d41c0fcbd10e4ebe1bae2091d0bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Knockback: 3
 --- !u!114 &5518751910047628625
 MonoBehaviour:
   m_ObjectHideFlags: 0

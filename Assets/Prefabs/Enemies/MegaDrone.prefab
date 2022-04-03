@@ -156,7 +156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 6615513944598576785}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0
@@ -164,7 +163,9 @@ MonoBehaviour:
   Automatic: 0
   FireCooldown: 0.5
   maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0.125
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -440,7 +441,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 3851746715410455902}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0
@@ -448,7 +448,9 @@ MonoBehaviour:
   Automatic: 0
   FireCooldown: 0.5
   maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0.25
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -1016,8 +1018,11 @@ GameObject:
   - component: {fileID: 7019068028920435900}
   - component: {fileID: 913788656774364023}
   - component: {fileID: 5041044531271935522}
+  - component: {fileID: 7271904276299679495}
   - component: {fileID: 6966362216317753375}
+  - component: {fileID: 2076022252855414820}
   - component: {fileID: 7733382126152665534}
+  - component: {fileID: 2636023141601402291}
   - component: {fileID: 2590546209024311811}
   - component: {fileID: 4508045823689246182}
   - component: {fileID: 6348019847863000368}
@@ -1058,9 +1063,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  CurrentHealth:
+    _owner: {fileID: 4793289203346061809}
+    _ownerName: MegaDrone
+    _propertyPath: CurrentHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 0
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   CriticalHealth: 5
-  MaxHealth: 55
+  MaxHealth:
+    _owner: {fileID: 4793289203346061809}
+    _ownerName: MegaDrone
+    _propertyPath: MaxHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 55
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   lastAttack: {fileID: 0}
 --- !u!114 &913788656774364023
 MonoBehaviour:
@@ -1091,6 +1122,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
+  Model: {fileID: 5676612676861548455}
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
+  ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
+  Movable: 1
+  TurnToMoveDirection: 0
+  CollisionDistance: 10
+  HoverHeight: 2
+  GravityMultiplier: 0
+  AirDesacceleration: 6
+  Weight: 1
+  IsGrounded: 1
+--- !u!114 &7271904276299679495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793289203346061809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149579b8ab4c2304abb55251964068d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   weapons:
   - {fileID: 6965328789113491945}
   - {fileID: 134399976039335024}
@@ -1100,18 +1154,7 @@ MonoBehaviour:
   - {fileID: 7145886008692467793}
   - {fileID: 5191863366057870269}
   - {fileID: 3507722234587027802}
-  Model: {fileID: 5676612676861548455}
-  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
-  ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
-  Movable: 1
-  HoverHeight: 2
-  GravityMultiplier: 0
-  AirDesacceleration: 6
-  Weight: 1
-  TurnToMoveDirection: 0
   OnlyShootIfPlayerInView: 1
-  CollisionDistance: 10
-  Stunned: 0
 --- !u!114 &6966362216317753375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,6 +1168,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Affiliation: 1
+--- !u!114 &2076022252855414820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793289203346061809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f60067ffa62d6044aa47fa21d845ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundLayers: {fileID: 0}
+  CollisionDistance: 10
+  HoverHeight: 2
+  GravityMultiplier: 0
+  Weight: 1
+  Movable: 1
+  AirDesacceleration: 6
 --- !u!114 &7733382126152665534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,6 +1205,20 @@ MonoBehaviour:
   MaximumProximityToWall: 1
   MinimumDistance: 12
   myTrigger: {fileID: 0}
+--- !u!114 &2636023141601402291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793289203346061809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PushSensitivity: 1
+  health: {fileID: 7019068028920435900}
 --- !u!114 &2590546209024311811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1160,6 +1236,7 @@ MonoBehaviour:
   turnVertical: 1
   partThatMoves: {fileID: 0}
   TargetPosition: {fileID: 0}
+  blockingEffects: []
 --- !u!114 &4508045823689246182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,7 +1438,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 4440258680921658245}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0
@@ -1369,7 +1445,9 @@ MonoBehaviour:
   Automatic: 0
   FireCooldown: 0.5
   maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0.825
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -1587,7 +1665,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 8781069906462088167}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0
@@ -1595,7 +1672,9 @@ MonoBehaviour:
   Automatic: 0
   FireCooldown: 0.5
   maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0.375
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -1981,7 +2060,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 5324389194765147635}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0
@@ -1989,7 +2067,9 @@ MonoBehaviour:
   Automatic: 0
   FireCooldown: 0.5
   maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0.75
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -2151,7 +2231,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 758811763874638271}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0
@@ -2159,7 +2238,9 @@ MonoBehaviour:
   Automatic: 0
   FireCooldown: 0.5
   maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -2321,7 +2402,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 8913998214590047099}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0
@@ -2329,7 +2409,9 @@ MonoBehaviour:
   Automatic: 0
   FireCooldown: 0.5
   maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0.95
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,
@@ -2550,7 +2632,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouth: {fileID: 1196394954103093795}
-  DisplayName: 
   HitLayers: {fileID: 11400000, guid: 88a98d54c3a16b8478d3ec2cc07597b0, type: 2}
   backwardsForce: 10
   MaxSpreadAngle: 0
@@ -2558,7 +2639,9 @@ MonoBehaviour:
   Automatic: 0
   FireCooldown: 0.5
   maxAmmo: -1
+  InfiniteAmmo: 0
   InitialFireCooldown: 0.625
+  OutOfAmmoSoundEffect: {fileID: 0}
   SoundEffects:
   - {fileID: 8300000, guid: e87fb8f4525a4d54987189b4bce57d97, type: 3}
   Projectile: {fileID: 5531395347504132974, guid: 6b78a9132495a604fa6acee27b25ede8,

@@ -18,7 +18,7 @@ public class ShellBombAbilty : Ability
     {
         player = GetComponentInParent<PlayerCharacterController>();
         shooter = GetComponent<ProjectileShooter>();
-        shooter.Setup(ShellBomb, HitLayers, player.PlayerCamera.transform);
+        shooter.Setup(ShellBomb, HitLayers, player.GetPlayerCamera().transform);
     }
 
     public override void Execute(Input input)
@@ -38,6 +38,6 @@ public class ShellBombAbilty : Ability
 
     void ShootShellBombs()
     {
-        shooter.ShootProjectile(player.PlayerCamera.transform.forward);
+        shooter.ShootProjectile(player.GetPlayerCamera().transform.forward);
     }
 }

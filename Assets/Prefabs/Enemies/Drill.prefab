@@ -1901,11 +1901,13 @@ GameObject:
   - component: {fileID: 5581418702539360646}
   - component: {fileID: 2356506731659339341}
   - component: {fileID: 9013878835879710388}
-  - component: {fileID: 4805373489946673309}
+  - component: {fileID: 7335466276598990477}
   - component: {fileID: 7631614382890138392}
+  - component: {fileID: 3553488645608801232}
   - component: {fileID: 5526178515769918757}
   - component: {fileID: 5138586834001024132}
   - component: {fileID: 1148114024344264505}
+  - component: {fileID: 6932250984270342726}
   - component: {fileID: 1338229177578445020}
   - component: {fileID: 4003233184245022831}
   - component: {fileID: 2414906221251378281}
@@ -1945,9 +1947,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  CurrentHealth:
+    _owner: {fileID: 7969327006521631947}
+    _ownerName: Drill
+    _propertyPath: CurrentHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 6
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   CriticalHealth: 1
-  MaxHealth: 6
+  MaxHealth:
+    _owner: {fileID: 7969327006521631947}
+    _ownerName: Drill
+    _propertyPath: MaxHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 6
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   lastAttack: {fileID: 0}
 --- !u!114 &2356506731659339341
 MonoBehaviour:
@@ -1982,7 +2010,10 @@ MonoBehaviour:
   RotationSpeed: 250
   ChargeSpeed: 115
   ChargeCooldown: 3
---- !u!114 &4805373489946673309
+  blockingEffects:
+  - {fileID: 11400000, guid: c21ab97e677904f44a769394466e46b3, type: 2}
+  - {fileID: 11400000, guid: 16265339f8eb60042bfcce8b78eb0cce, type: 2}
+--- !u!114 &7335466276598990477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1991,11 +2022,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7969327006521631947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae8d4d2a5c77d94f9d11e66370a12a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
   Agressor: {fileID: 0}
+  damage: 3
 --- !u!114 &7631614382890138392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2009,19 +2040,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  weapons: []
   Model: {fileID: 5902590042825361212}
   GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
   Movable: 1
+  TurnToMoveDirection: 0
+  CollisionDistance: 8
   HoverHeight: 0
   GravityMultiplier: 0
   AirDesacceleration: 5
   Weight: 1
-  TurnToMoveDirection: 0
-  OnlyShootIfPlayerInView: 1
+  IsGrounded: 1
+--- !u!114 &3553488645608801232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7969327006521631947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f60067ffa62d6044aa47fa21d845ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   CollisionDistance: 8
-  Stunned: 0
+  HoverHeight: 0
+  GravityMultiplier: 0
+  AirDesacceleration: 5
+  Weight: 1
+  Movable: 1
 --- !u!114 &5526178515769918757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2070,6 +2118,23 @@ MonoBehaviour:
   turnVertical: 1
   partThatMoves: {fileID: 0}
   TargetPosition: {fileID: 0}
+  blockingEffects:
+  - {fileID: 11400000, guid: c21ab97e677904f44a769394466e46b3, type: 2}
+  - {fileID: 11400000, guid: 16265339f8eb60042bfcce8b78eb0cce, type: 2}
+--- !u!114 &6932250984270342726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7969327006521631947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PushSensitivity: 1
+  health: {fileID: 5581418702539360646}
 --- !u!114 &1338229177578445020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2098,6 +2163,7 @@ MonoBehaviour:
   StylePerDamage: 0
   StyleOnCritical: 0
   StyleOnKill: 0.5
+  enemyType: 0
 --- !u!54 &2414906221251378281
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -12,8 +12,16 @@ public class FallArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponentInChildren<PlayerFallHandler>())
+        Entity entity = other.GetComponentInParent<Entity>();
+        if (entity == null)
+            entity = other.GetComponentInChildren<Entity>();
+
+        if (entity != null)
+            entity.FallFatal(VerticalLimit, FallRespawnPoint);
+        /*
+        if (entity)
         {
+            other.GetComponentInChildren<Entity>().FallFatal(VerticalLimit, FallRespawnPoint);
             other.GetComponentInChildren<PlayerFallHandler>().VerticalLimit = VerticalLimit;
             other.GetComponentInChildren<PlayerFallHandler>().FallRespawnPoint = FallRespawnPoint.position;
         }
@@ -25,5 +33,6 @@ public class FallArea : MonoBehaviour
             if (enemyHealth)
                 enemyHealth.Kill();
         }
+        */
     }
 }

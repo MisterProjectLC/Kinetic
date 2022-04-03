@@ -36,7 +36,7 @@ public class Dash : Ability
         dashing = true;
         player.gameObject.layer = LayerMask.NameToLayer("Shifted");
         player.MoveControlEnabled = false;
-        player.MoveVelocity = DashSpeed * player.PlayerCamera.transform.TransformVector(inputHandler.GetMoveInput());
+        player.SetMoveVelocity(DashSpeed * player.GetPlayerCamera().transform.TransformVector(inputHandler.GetMoveInput()));
         StartCoroutine(EndDash());
     }
 
@@ -47,7 +47,7 @@ public class Dash : Ability
         dashing = false;
         player.gameObject.layer = LayerMask.NameToLayer("Player");
         player.MoveControlEnabled = true;
-        player.MoveVelocity = Vector3.zero;
+        player.SetMoveVelocity(Vector3.zero);
     }
 
 

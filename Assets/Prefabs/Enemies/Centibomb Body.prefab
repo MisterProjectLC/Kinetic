@@ -898,9 +898,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7143288878428937850}
   - component: {fileID: 5881942009606004111}
+  - component: {fileID: 5240925015777397029}
   - component: {fileID: 2537913070306596570}
   - component: {fileID: 420084857831911392}
   - component: {fileID: 3375661173834449556}
+  - component: {fileID: -8888439751343073720}
   - component: {fileID: 5000168887188244545}
   - component: {fileID: 4579921389316767851}
   - component: {fileID: 4567611585965718420}
@@ -943,7 +945,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateCooldown: 0.25
+  blockingEffects: []
   Target: {fileID: 0}
+--- !u!114 &5240925015777397029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903941860336413781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PushSensitivity: 1
+  health: {fileID: 2537913070306596570}
 --- !u!114 &2537913070306596570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,9 +973,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  CurrentHealth:
+    _owner: {fileID: 8903941860336413781}
+    _ownerName: Centibomb Body
+    _propertyPath: CurrentHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 0
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   CriticalHealth: 1
-  MaxHealth: 4
+  MaxHealth:
+    _owner: {fileID: 8903941860336413781}
+    _ownerName: Centibomb Body
+    _propertyPath: MaxHealth
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 0
+    _value: 4
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 0}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   lastAttack: {fileID: 0}
 --- !u!114 &420084857831911392
 MonoBehaviour:
@@ -989,19 +1032,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  weapons: []
   Model: {fileID: 4417699198213755438}
   GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
   Movable: 1
+  TurnToMoveDirection: 1
+  CollisionDistance: 1
   HoverHeight: 1.5
   GravityMultiplier: 1
   AirDesacceleration: 0
   Weight: 1
+  IsGrounded: 1
+--- !u!114 &-8888439751343073720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903941860336413781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af30bd6cc53dfb84187727fa300065f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
+  HoverHeight: 1
+  GravityMultiplier: 1.5
+  AirDesacceleration: 0
+  Weight: 1
+  Movable: 1
   TurnToMoveDirection: 1
-  OnlyShootIfPlayerInView: 1
-  CollisionDistance: 1
-  Stunned: 0
 --- !u!114 &5000168887188244545
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using SmartData.SmartFloat;
 
 public class StyleMeter : MonoBehaviour
 {
@@ -33,10 +34,14 @@ public class StyleMeter : MonoBehaviour
     public UnityAction<float, int, string> OnEvent;
     public UnityAction<int, bool> OnBonus;
 
-    public float JuiceLeft { get; private set; }
+    [SerializeField]
+    FloatWriter currentStyle;
+    public float CurrentStyle { get { return currentStyle; } }
 
     [SerializeField]
-    public float JuiceMax { get; private set; } = 10f;
+    FloatWriter maxStyle;
+    public float MaxStyle { get { return maxStyle; } }
+
 
     [HideInInspector]
     public bool DrainActive = false;
@@ -58,7 +63,7 @@ public class StyleMeter : MonoBehaviour
                 localizers.Add(i, new LocalizedString("style_" + i.ToString().ToLower()));
 
         clock = config.ComboMaxTime;
-        SetJuiceLeft(JuiceMax);
+        SetJuiceLeft(MaxStyle);
         health = GetComponentInParent<Health>();
         health.OnDamageAttack += OnDamage;
         foreach (Attack attack in player.GetComponentsInChildren<Attack>())
@@ -74,7 +79,7 @@ public class StyleMeter : MonoBehaviour
     private void Update()
     {
         // Decay
-        if (JuiceLeft > 0f && DrainActive)
+        if (currentStyle > 0f && DrainActive)
             SpendJuice(Time.deltaTime * config.DepleteRate);
 
         // Combo time
@@ -86,7 +91,7 @@ public class StyleMeter : MonoBehaviour
         if (movementClock > 1f)
         {
             movementClock = 0f;
-            if (player.MoveVelocity.magnitude > config.MovementSpeed)
+            if (player.GetMoveVelocity().magnitude > config.MovementSpeed)
                 GainJuice(config.MovementGain, (int)Categories.Movement, localizers[Categories.Movement].value);
         }
 
@@ -174,7 +179,7 @@ public class StyleMeter : MonoBehaviour
         if (text != "")
             OnEvent?.Invoke(gain, category, text);
 
-        SetJuiceLeft(Mathf.Clamp(JuiceLeft + gain * (player.IsGrounded ? 1 : 1.5f), 0f, JuiceMax));
+        SetJuiceLeft(Mathf.Clamp(currentStyle + gain * (player.IsGrounded ? 1 : 1.5f), 0f, maxStyle));
     }
 
 
@@ -186,11 +191,11 @@ public class StyleMeter : MonoBehaviour
         if (text != "")
             OnEvent?.Invoke(-cost, category, text);
 
-        if (JuiceLeft - cost > 0f)
-            SetJuiceLeft(JuiceLeft - cost);
+        if (currentStyle - cost > 0f)
+            SetJuiceLeft(currentStyle - cost);
         else
         {
-            JuiceLeft = 0f;
+            currentStyle.value = 0f;
             OnDeplete?.Invoke();
         }
     }
@@ -198,11 +203,11 @@ public class StyleMeter : MonoBehaviour
 
     void SetJuiceLeft(float juiceLeft)
     {
-        JuiceLeft = juiceLeft;
+        currentStyle.value = juiceLeft;
         OnUpdate?.Invoke();
 
         bool lastCritical = Critical;
-        Critical = juiceLeft > JuiceMax * config.CriticalPercent;
+        Critical = juiceLeft > maxStyle * config.CriticalPercent;
         if (lastCritical != Critical)
             OnCritical?.Invoke(Critical);
     }
@@ -210,6 +215,6 @@ public class StyleMeter : MonoBehaviour
 
     public float GetCriticalLevel()
     {
-        return config.CriticalPercent * JuiceMax;
+        return config.CriticalPercent * maxStyle;
     }
 }

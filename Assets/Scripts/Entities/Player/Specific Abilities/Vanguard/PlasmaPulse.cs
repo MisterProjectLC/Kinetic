@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AreaAttack))]
 public class PlasmaPulse : SecondaryAbility
 {
     [SerializeField]
@@ -22,7 +21,7 @@ public class PlasmaPulse : SecondaryAbility
     public void Start()
     {
         attack = GetComponent<Attack>();
-        areaAttack = GetComponent<AreaAttack>();
+        areaAttack = new AreaAttack(transform);
         player = GetComponentInParent<PlayerCharacterController>();
         halfExtents = new Vector3(2f, 2f, 2f);
     }
@@ -32,8 +31,10 @@ public class PlasmaPulse : SecondaryAbility
     {
         plasmaParticles.Play();
 
-        RaycastHit[] hits = Physics.BoxCastAll(player.PlayerCamera.transform.position + player.PlayerCamera.transform.forward, halfExtents,
-            player.PlayerCamera.transform.forward, Quaternion.identity, 5f, ProjLayers.layers, QueryTriggerInteraction.Collide);
+        Camera playerCamera = player.GetPlayerCamera();
+
+        RaycastHit[] hits = Physics.BoxCastAll(playerCamera.transform.position + playerCamera.transform.forward, halfExtents,
+            playerCamera.transform.forward, Quaternion.identity, 5f, ProjLayers.layers, QueryTriggerInteraction.Collide);
 
         foreach (RaycastHit hit in hits) {
             Poolable poolable = hit.collider.GetComponent<Poolable>();
@@ -43,8 +44,8 @@ public class PlasmaPulse : SecondaryAbility
                 Destroy(hit.collider.gameObject);
         }
 
-        hits = Physics.BoxCastAll(player.PlayerCamera.transform.position + player.PlayerCamera.transform.forward, halfExtents,
-            player.PlayerCamera.transform.forward, Quaternion.identity, 5f, EnemyLayers.layers, QueryTriggerInteraction.Collide);
+        hits = Physics.BoxCastAll(playerCamera.transform.position + playerCamera.transform.forward, halfExtents,
+            playerCamera.transform.forward, Quaternion.identity, 5f, EnemyLayers.layers, QueryTriggerInteraction.Collide);
 
         List<AreaAttack.CollisionData> enemies = areaAttack.RefineHits(hits);
 
@@ -52,3 +53,4 @@ public class PlasmaPulse : SecondaryAbility
             attack.AttackTarget(enemy.closestCollider.gameObject);
     }
 }
+

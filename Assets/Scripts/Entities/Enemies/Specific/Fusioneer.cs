@@ -19,6 +19,7 @@ public class Fusioneer : MonoBehaviour
     CrystalShield crystalShield;
     Animator animator;
     Enemy enemy;
+    EnemyWeaponsManager weaponsManager;
     Transform playerTransform;
 
     float cooldown = 0.05f;
@@ -28,18 +29,20 @@ public class Fusioneer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rocketLauncher = GetComponent<Enemy>().weapons[0];
-        LaserCannon = GetComponent<Enemy>().weapons[1];
-        GyroCannon = GetComponent<Enemy>().weapons[2];
-        LaserPointer = GetComponent<Enemy>().weapons[3];
+        enemy = GetComponent<Enemy>();
+        weaponsManager = GetComponent<EnemyWeaponsManager>();
+        animator = GetComponent<Animator>();
+
+        rocketLauncher = weaponsManager.GetWeapons()[0];
+        LaserCannon = weaponsManager.GetWeapons()[1];
+        GyroCannon = weaponsManager.GetWeapons()[2];
+        LaserPointer = weaponsManager.GetWeapons()[3];
 
         rocketLauncher.SubscribeToFire(FireAnimation);
         LaserCannon.SubscribeToFire(LaserShot);
 
         crystalShield.OnDeactivate += PhaseTwo;
         GetComponent<Health>().OnCriticalLevel += PhaseThree;
-        animator = GetComponent<Animator>();
-        enemy = GetComponent<Enemy>();
 
         playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
     }
@@ -88,12 +91,12 @@ public class Fusioneer : MonoBehaviour
     {
         animator.SetTrigger("Fire");
         if ((playerTransform.position - enemy.Model.transform.position).magnitude <= maxDistance)
-            enemy.ReceiveKnockback(rocketLauncher.BackwardsForce * -rocketLauncher.Mouth.transform.forward);
+            enemy.ReceiveForce(rocketLauncher.BackwardsForce * -rocketLauncher.Mouth.transform.forward);
     }
 
     void LaserShot(Weapon weapon)
     {
-        GetComponent<Enemy>().OnlyShootIfPlayerInView = false;
+        weaponsManager.OnlyShootIfPlayerInView = false;
         chargingLaser = false;
         LaserPointer.SetOffCooldown();
         LaserPointer.GetComponent<AudioSource>().Stop();

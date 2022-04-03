@@ -13,6 +13,8 @@ public abstract class Attack : MonoBehaviour
 
     bool poolable = false;
 
+    public bool IgnoreNeutered = false;
+
     protected void Awake()
     {
         Agressor = GetComponentInParent<Actor>();

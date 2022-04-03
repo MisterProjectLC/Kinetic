@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +35,8 @@ public class Movepad : MonoBehaviour
     [SerializeField]
     private float cooldownOverride = -1f;
 
-    float clock = 0f;
+    Clock clock;
+
     float cooldown { get {
             if (isJump)
                 return 0.5f;
@@ -48,6 +48,8 @@ public class Movepad : MonoBehaviour
 
     private void Start()
     {
+        clock = new Clock(cooldown);
+
         if (DespawnPoint && SpawnPoint)
         {
             moveVector = transform.InverseTransformVector(DespawnPoint.position - SpawnPoint.position).normalized * Speed;
@@ -69,27 +71,33 @@ public class Movepad : MonoBehaviour
         Collider[] colliders = Physics.OverlapBox(detectorCenter, detectSize, meshRenderer.transform.rotation, detectLayers);
         if (colliders.Length > 0)
         {
-            foreach (Collider collider in colliders)
+            /*foreach (Collider collider in colliders)
                 if (Sticky && collider.GetComponent<PlayerCharacterController>())
-                    collider.GetComponent<PlayerCharacterController>().IsGrounded = true;
+                    collider.GetComponent<PlayerCharacterController>().IsGrounded = true;*/
 
-            if (clock <= 0f)
+            if (clock.CheckIfRing())
             {
-                clock = cooldown;
-                foreach (Collider collider in colliders)
-                    ApplyMove(collider.gameObject);
+                foreach (PhysicsEntity entity in ExtractEntitiesFromColliders(colliders))
+                    ApplyMove(entity.GetGameObject());
             }
         }
 
-        if (clock > 0f)
-            clock -= Time.deltaTime;
+        clock.Ring();
+        clock.Tick(Time.deltaTime);
     }
 
-    private void ApplyMove(GameObject target)
+    void ApplyMove(GameObject target)
     {
         Vector3 currentMoveVector = GetMoveDirection();
 
-        if (target.GetComponent<PlayerCharacterController>() || target.GetComponentInParent<PlayerCharacterController>())
+        PhysicsEntity entity = target.GetComponentInParent<PhysicsEntity>();
+        if (isJump)
+            entity.SetMoveVelocity(currentMoveVector);
+        else
+            entity.ReceiveMotion(currentMoveVector);
+
+        /*
+        if (entity.GetComponentInParent<PlayerCharacterController>())
         {
             PlayerCharacterController player = target.GetComponent<PlayerCharacterController>();
             if (!player)
@@ -99,7 +107,7 @@ public class Movepad : MonoBehaviour
                 return;
 
             if (!isJump)
-                player.ApplyForce(currentMoveVector, Sticky);
+                player.ReceiveForce(currentMoveVector, Sticky);
             else
             {
                 player.MoveVelocity = currentMoveVector;
@@ -112,6 +120,17 @@ public class Movepad : MonoBehaviour
             (Vector3.Dot(currentMoveVector, target.GetComponentInParent<Enemy>().GetMoveVelocity()) < 0f ||
             currentMoveVector.magnitude > target.GetComponentInParent<Enemy>().GetMoveVelocity().magnitude))
             target.GetComponentInParent<Enemy>().ReceiveKnockback(currentMoveVector);
+        */
+    }
+
+    List<PhysicsEntity> ExtractEntitiesFromColliders(Collider[] colliders) {
+        List<PhysicsEntity> physicsEntities = new List<PhysicsEntity>();
+        foreach (Collider collider in colliders) {
+            PhysicsEntity entity = collider.GetComponentInParent<PhysicsEntity>();
+            if (entity != null && !physicsEntities.Contains(entity))
+                physicsEntities.Add(entity);
+        }
+        return physicsEntities;
     }
 
     public Vector3 GetMoveDirection()

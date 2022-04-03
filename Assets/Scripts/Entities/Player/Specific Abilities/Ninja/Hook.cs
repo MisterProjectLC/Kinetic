@@ -51,8 +51,8 @@ public class Hook : MonoBehaviour
 
             float multiplier = shooter.IsGrounded ? 5f : 1f;
 
-            Vector3 force = (transform.position - shooter.PlayerCamera.transform.position).normalized;
-            shooter.ApplyForce(force * PullForce * multiplier * Time.deltaTime);
+            Vector3 force = (transform.position - shooter.GetPlayerCamera().transform.position).normalized;
+            shooter.ReceiveForce(force * PullForce * multiplier * Time.deltaTime);
 
             if (!hookedObject || !hookedObject.activeInHierarchy)
                 gameObject.SetActive(false);
