@@ -8,10 +8,13 @@ public class AbilityView : MonoBehaviour
     RectTransform CooldownRect;
     [SerializeField]
     Text Label;
-    [SerializeField]
-    Text AmmoLabel;
 
     Vector2 AbilitySize;
+    Vector2 AdditionalAbilityPosition = new Vector2(-260, 24);
+
+    GameObject AdditionalAbility;
+
+    public RectTransform CenterTransform { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -30,16 +33,6 @@ public class AbilityView : MonoBehaviour
 
         gameObject.SetActive(true);
         CooldownRect.sizeDelta = AbilitySize * new Vector2(Mathf.Clamp01(1f - (currentAbility.Timer / currentAbility.Cooldown)), 1f);
-
-        bool isWeapon = currentAbility is WeaponAbility;
-        if (isWeapon)
-        {
-            Weapon weapon = ((WeaponAbility)currentAbility).WeaponRef;
-            string text = weapon.Ammo.ToString() + "/" + weapon.MaxAmmo.ToString();
-            AmmoLabel.text = text;
-        }
-
-        AmmoLabel.transform.parent.gameObject.SetActive(isWeapon);
     }
 
 
@@ -58,14 +51,38 @@ public class AbilityView : MonoBehaviour
     {
         Image image = CooldownRect.GetComponent<Image>();
 
+        if (AdditionalAbility)
+            Destroy(AdditionalAbility);
+
         if (currentAbility == null)
         {
             image.gameObject.SetActive(false);
             return;
         }
 
+        if (currentAbility.abilityView)
+            CreateInstanceView(currentAbility, currentAbility.abilityView, transform);
+        if (currentAbility.centerAbilityView)
+            CreateInstanceView(currentAbility, currentAbility.centerAbilityView, CenterTransform);
+
         image.gameObject.SetActive(true);
         Label.text = currentAbility.LocalizedName.value;
         CooldownRect.sizeDelta = Vector2.zero;
+    }
+
+    void CreateInstanceView(Ability ability, GameObject view, Transform instanceParent)
+    {
+        try
+        {
+            GameObject instance = Instantiate(view);
+            IAbilityAdditionalView additionalView = instance.GetComponent<IAbilityAdditionalView>();
+            additionalView.Setup(ability);
+            additionalView.transform.parent = instanceParent;
+            additionalView.GetComponent<RectTransform>().anchoredPosition = AdditionalAbilityPosition;
+        }
+        catch
+        {
+            Debug.LogError("This Ability's View doesn't have an AdditionalView component!");
+        }
     }
 }

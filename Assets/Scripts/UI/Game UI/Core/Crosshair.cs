@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField]
+    ILoadoutManager loadoutManager;
+    AudioSource audioSource;
+    Animator animator;
+
     [Header("Crosshair")]
     [SerializeField]
     Image crosshair;
@@ -32,12 +38,8 @@ public class Crosshair : MonoBehaviour
     float hitmarkerClock = 0f;
     int hitmarkerFrame = 0;
 
-    AudioSource audioSource;
-
-    LoadoutManager loadoutManager;
     int savedLoadout = 0;
 
-    Animator animator;
 
     private void Start()
     {
@@ -50,7 +52,7 @@ public class Crosshair : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         loadoutManager = ActorsManager.AM.GetPlayer().GetComponent<LoadoutManager>();
-        loadoutManager.OnLoadoutSwitch += RotateCrosshair;
+        loadoutManager.SubscribeToLoadoutSwitch(RotateCrosshair);
         animator = GetComponent<Animator>();
     }
 
@@ -130,11 +132,13 @@ public class Crosshair : MonoBehaviour
 
     void RotateCrosshair()
     {
-        if (savedLoadout > loadoutManager.currentLoadout)
+        int index = loadoutManager.GetCurrentLoadoutIndex();
+
+        if (savedLoadout > index)
             animator.Play("CrosshairRotateLeft");
-        else if (savedLoadout < loadoutManager.currentLoadout)
+        else if (savedLoadout < index)
             animator.Play("CrosshairRotateRight");
 
-        savedLoadout = loadoutManager.currentLoadout;
+        savedLoadout = index;
     }
 }

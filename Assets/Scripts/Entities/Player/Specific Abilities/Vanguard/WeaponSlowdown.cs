@@ -20,7 +20,7 @@ public class WeaponSlowdown : MonoBehaviour
     {
         player = GetComponentInParent<PlayerCharacterController>();
         weaponAbility = GetComponentInParent<WeaponAbility>();
-        weaponAbility.OnExecute += Execute;
+        weaponAbility.SubscribeToExecute(Execute);
     }
 
     private void OnDisable()

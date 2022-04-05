@@ -196,8 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
+  damage: 1
 --- !u!114 &7621062138004609089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6d41c0fcbd10e4ebe1bae2091d0bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Agressor: {fileID: 0}
+  IgnoreNeutered: 0
   Knockback: 3
 --- !u!114 &476817275024576850
 MonoBehaviour:
@@ -240,6 +243,9 @@ MonoBehaviour:
     key: ninja_shotgun_title
   Cooldown: 5
   Assigned: 0
+  abilityView: {fileID: 2453008660556576772, guid: 01709eb4343d7e34fb6dec5397ee8687,
+    type: 3}
+  centerAbilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []

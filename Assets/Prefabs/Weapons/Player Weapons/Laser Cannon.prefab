@@ -4884,6 +4884,9 @@ MonoBehaviour:
     key: vanguard_lasercannon_title
   Cooldown: 2.5
   Assigned: 0
+  abilityView: {fileID: 2453008660556576772, guid: 01709eb4343d7e34fb6dec5397ee8687,
+    type: 3}
+  centerAbilityView: {fileID: 0}
   HoldAbility: 1
   ReleaseAbility: 1
   SoundEffects: []
@@ -4963,8 +4966,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
+  damage: 15
 --- !u!114 &1773521077793833581
 MonoBehaviour:
   m_ObjectHideFlags: 0

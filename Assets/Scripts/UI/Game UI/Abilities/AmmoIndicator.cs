@@ -25,9 +25,10 @@ public class AmmoIndicator : MonoBehaviour
 
     public void Setup(GameObject player)
     {
-        player.GetComponentInChildren<AmmoManager>().SubscribeToOutOfAmmo(OnOutOfAmmo);
-        player.GetComponentInChildren<AmmoManager>().SubscribeToInfiniteAmmo(OnInfiniteAmmo);
-        player.GetComponentInChildren<AmmoManager>().SubscribeToAmmoUpdate(OnAmmoUpdate);
+        AmmoManager ammoManager = player.GetComponentInChildren<AmmoManager>();
+        ammoManager.SubscribeToOutOfAmmo(OnOutOfAmmo);
+        ammoManager.SubscribeToInfiniteAmmo(OnInfiniteAmmo);
+        ammoManager.SubscribeToAmmoUpdate(OnAmmoUpdate);
     }
 
     public void SetCurrentWeapon(Weapon weapon)

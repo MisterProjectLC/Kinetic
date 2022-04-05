@@ -1125,13 +1125,6 @@ MonoBehaviour:
   Model: {fileID: 5676612676861548455}
   GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
-  Movable: 1
-  TurnToMoveDirection: 0
-  CollisionDistance: 10
-  HoverHeight: 2
-  GravityMultiplier: 0
-  AirDesacceleration: 6
-  Weight: 1
   IsGrounded: 1
 --- !u!114 &7271904276299679495
 MonoBehaviour:
@@ -1180,12 +1173,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f60067ffa62d6044aa47fa21d845ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundLayers: {fileID: 0}
+  GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   CollisionDistance: 10
   HoverHeight: 2
   GravityMultiplier: 0
   Weight: 1
-  Movable: 1
   AirDesacceleration: 6
 --- !u!114 &7733382126152665534
 MonoBehaviour:
@@ -1217,8 +1209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushSensitivity: 1
   health: {fileID: 7019068028920435900}
+  PushSensitivity: 1
 --- !u!114 &2590546209024311811
 MonoBehaviour:
   m_ObjectHideFlags: 0

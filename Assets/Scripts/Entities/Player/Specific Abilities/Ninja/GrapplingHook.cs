@@ -25,7 +25,7 @@ public class GrapplingHook : SecondaryAbility
         hook.Ability = this;
         hook.gameObject.SetActive(false);
 
-        GetComponentInParent<LoadoutManager>().OnLoadoutSwitch += OnLoadoutSwitch;
+        GetComponentInParent<LoadoutManager>().SubscribeToLoadoutSwitch(OnLoadoutSwitch);
 
         foreach (Attack attack in GetComponentInParent<PlayerCharacterController>().GetComponentsInChildren<Attack>())
             attack.OnKill += (Attack a, GameObject g, bool b) => ResetCooldown();

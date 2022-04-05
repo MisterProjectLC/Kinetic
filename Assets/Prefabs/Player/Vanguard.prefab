@@ -51,6 +51,7 @@ MonoBehaviour:
     key: vanguard_charge_title
   Cooldown: 6
   Assigned: 0
+  abilityView: {fileID: 0}
   HoldAbility: 1
   ReleaseAbility: 1
   SoundEffects: []
@@ -537,6 +538,7 @@ MonoBehaviour:
     key: vanguard_graviton_title
   Cooldown: 2
   Assigned: 0
+  abilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -1480,6 +1482,7 @@ MonoBehaviour:
     key: 
   Cooldown: 3
   Assigned: 0
+  abilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -1534,6 +1537,7 @@ MonoBehaviour:
     key: vanguard_plasmapulse_title
   Cooldown: 5
   Assigned: 0
+  abilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -1740,6 +1744,7 @@ MonoBehaviour:
     key: vanguard_frontalshield_title
   Cooldown: 7
   Assigned: 0
+  abilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -2117,6 +2122,7 @@ MonoBehaviour:
     key: vanguard_detonate_title
   Cooldown: 0.05
   Assigned: 0
+  abilityView: {fileID: 0}
   HoldAbility: 1
   ReleaseAbility: 0
   SoundEffects: []
@@ -2307,6 +2313,7 @@ MonoBehaviour:
     key: vanguard_payback_title
   Cooldown: 14
   Assigned: 0
+  abilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -2639,8 +2646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushSensitivity: 1
   health: {fileID: 353021178941775288}
+  PushSensitivity: 1
 --- !u!114 &8479089956554939356
 MonoBehaviour:
   m_ObjectHideFlags: 0

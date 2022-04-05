@@ -78,12 +78,61 @@ public class LevelUpSystem : MonoBehaviour
 
     void Start() {
 
-        LoadoutManager loadout = ActorsManager.Player.GetComponent<LoadoutManager>();
-        siblingBaseCount = transform.GetChildCount();
+        ILoadoutManager loadoutManager = GetComponent<ILoadoutManager>();
+        siblingBaseCount = transform.childCount;
 
+        SetupLoadoutSlots(loadoutManager);
+
+        PopulateInitialOptions(loadoutManager);
+
+        // Prepare saved options
+        for (int j = 0; j < Hermes.SpawnAbilities.Count; j++)
+            Hermes.SpawnAbilities[j].SetInGame(false);
+
+        PopulateOptions(loadoutManager);
+
+        // Fix for secondary abilities
+        foreach (Loadout thisLoadout in totalSlots)
+            foreach (DropSlot slot in thisLoadout.slots)
+            {
+                // Check if there's a big loadout option here
+                DragDrop dragDrop = slot.InsertedDragDrop;
+                if (!dragDrop)
+                    continue;
+                BigLoadoutOption bigOption = dragDrop.GetComponent<BigLoadoutOption>();
+                if (!bigOption)
+                    continue;
+
+                // Check, find and insert its secondary ability
+                int nextSlotIndex = slot.GetComponent<LoadoutSlot>().AbilityNumber + 1;
+                if (nextSlotIndex >= thisLoadout.slots.Count || !thisLoadout.slots[nextSlotIndex].InsertedDragDrop)
+                    continue;
+
+                //bigOption.InsertOnSecondary(thisLoadout.slots[nextSlotIndex].InsertedDragDrop.GetComponent<LoadoutOption>());
+            }
+    }
+
+    void SetupLoadoutSlots(ILoadoutManager loadoutManager)
+    {
+        foreach (Loadout loadout in totalSlots)
+        {
+            foreach (DropSlot slot in loadout.slots)
+            {
+                slot.GetComponent<LoadoutSlot>().Setup(loadoutManager);
+            }
+        }
+        foreach (DropSlot slot in passiveSlots)
+        {
+            slot.GetComponent<LoadoutSlot>().Setup(loadoutManager);
+        }
+    }
+
+
+    void PopulateInitialOptions(ILoadoutManager loadoutManager)
+    {
         int i = 0;
         // Populate initial options
-        foreach (LoadoutManager.Option option in loadout.InitialOptions)
+        foreach (LoadoutManager.Option option in loadoutManager.GetInitialOptions())
         {
             LoadoutOption loadoutOption = GenerateOptionInstance(option);
 
@@ -91,7 +140,7 @@ public class LevelUpSystem : MonoBehaviour
             {
                 i--;
                 //initialSlots[i].OnDrop(loadoutOption.gameObject);
-                initialSlots[i-1].InsertedDragDrop.GetComponent<BigLoadoutOption>().InsertOnSecondary(loadoutOption);
+                initialSlots[i - 1].InsertedDragDrop.GetComponent<BigLoadoutOption>().InsertOnSecondary(loadoutOption);
             }
             else
             {
@@ -101,14 +150,12 @@ public class LevelUpSystem : MonoBehaviour
             }
             i++;
         }
+    }
 
-        // Prepare saved options
-        for (int j = 0; j < Hermes.SpawnAbilities.Count; j++)
-            Hermes.SpawnAbilities[j].SetInGame(false);
-                       
-
+    void PopulateOptions(ILoadoutManager loadoutManager)
+    {
         // Populate options
-        foreach (LoadoutManager.Option option in loadout.Options)
+        foreach (LoadoutManager.Option option in loadoutManager.GetOptions())
         {
             LoadoutOption loadoutOption = GenerateOptionInstance(option);
             GameObject GO = loadoutOption.gameObject;
@@ -144,28 +191,8 @@ public class LevelUpSystem : MonoBehaviour
                 }
             }
         }
-
-        // Fix for secondary abilities
-        foreach (Loadout thisLoadout in totalSlots)
-            foreach (DropSlot slot in thisLoadout.slots)
-            {
-                // Check if there's a big loadout option here
-                DragDrop dragDrop = slot.InsertedDragDrop;
-                if (!dragDrop)
-                    continue;
-                BigLoadoutOption bigOption = dragDrop.GetComponent<BigLoadoutOption>();
-                if (!bigOption)
-                    continue;
-
-                // Check, find and insert its secondary ability
-                int nextSlotIndex = slot.GetComponent<LoadoutSlot>().AbilityNumber + 1;
-                if (nextSlotIndex >= thisLoadout.slots.Count || !thisLoadout.slots[nextSlotIndex].InsertedDragDrop)
-                    continue;
-
-                //bigOption.InsertOnSecondary(thisLoadout.slots[nextSlotIndex].InsertedDragDrop.GetComponent<LoadoutOption>());
-            }
-        
     }
+
 
     LoadoutOption GenerateOptionInstance(LoadoutManager.Option option)
     {

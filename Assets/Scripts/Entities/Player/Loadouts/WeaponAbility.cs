@@ -10,7 +10,7 @@ public class WeaponAbility : Ability
     protected float BackwardsForce = 10f;
 
 
-    protected void Awake()
+    protected new void Awake()
     {
         player = GetComponentInParent<PlayerCharacterController>();
         HoldAbility = WeaponRef.Automatic;
@@ -19,7 +19,7 @@ public class WeaponAbility : Ability
         base.Awake();
     }
 
-    private void OnEnable()
+    private new void OnEnable()
     {
         playerCamera = player.GetPlayerCamera();
         base.OnEnable();
@@ -36,6 +36,6 @@ public class WeaponAbility : Ability
     new public void ResetCooldown()
     {
         WeaponRef.ResetClock();
-        ((Ability)this).ResetCooldown();
+        base.ResetCooldown();
     }
 }

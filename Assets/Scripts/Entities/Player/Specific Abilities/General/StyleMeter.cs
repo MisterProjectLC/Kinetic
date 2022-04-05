@@ -73,7 +73,7 @@ public class StyleMeter : MonoBehaviour
         }
 
         foreach (Ability ability in player.GetComponentsInChildren<Ability>())
-            ability.OnExecuteAbility += AbilityUsage;
+            ability.SubscribeToExecuteAbility(AbilityUsage);
     }
 
     private void Update()

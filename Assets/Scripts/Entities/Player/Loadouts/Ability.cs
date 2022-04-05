@@ -12,6 +12,9 @@ public abstract class Ability : MonoBehaviour
     [HideInInspector]
     public bool Assigned = false;
 
+    public GameObject abilityView;
+    public GameObject centerAbilityView;
+
     public enum Input {
         ButtonUp,
         ButtonDown
@@ -25,9 +28,15 @@ public abstract class Ability : MonoBehaviour
     AudioClip[] SoundEffects;
     AudioSource audioSource;
 
-    public UnityAction<Input> OnExecute;
-    public UnityAction<Ability> OnExecuteAbility;
+    UnityAction<Input> OnExecute;
+    public void SubscribeToExecute(UnityAction<Input> subscriber) { OnExecute += subscriber; }
+
+    UnityAction<Ability> OnExecuteAbility;
+    public void SubscribeToExecuteAbility(UnityAction<Ability> subscriber) { OnExecuteAbility += subscriber; }
+    public void UnsubscribeToExecuteAbility(UnityAction<Ability> subscriber) { OnExecuteAbility -= subscriber; }
+
     protected UnityAction OnUpdate;
+
 
     protected void Awake()
     {

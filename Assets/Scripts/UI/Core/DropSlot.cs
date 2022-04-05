@@ -62,8 +62,6 @@ public class DropSlot : MonoBehaviour, IDropHandler
 
 
         InsertedDragDropOldParent = dragDrop.transform.parent;
-        Debug.Log("Dropped: " + dragDrop.GetComponent<LoadoutOption>().Option.name + ", " + InsertedDragDropOldParent.gameObject.name + 
-            ". Offset: " + Offset);
 
         InsertedDragDrop = dragDrop.GetComponent<DragDrop>();
         dragDrop.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + Offset;
@@ -79,7 +77,6 @@ public class DropSlot : MonoBehaviour, IDropHandler
             return;
 
         InsertedDragDrop.transform.SetParent(InsertedDragDropOldParent);
-        Debug.Log("Removed: " + InsertedDragDrop.GetComponent<LoadoutOption>().Option.name + ", " + InsertedDragDropOldParent.gameObject.name);
         InsertedDragDrop = null;
         Label.gameObject.SetActive(true);
         soundEnabled = true;

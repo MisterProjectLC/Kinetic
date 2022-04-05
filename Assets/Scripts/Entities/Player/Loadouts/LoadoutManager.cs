@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class LoadoutManager : MonoBehaviour
+public class LoadoutManager : ILoadoutManager
 {
     // Loadouts
     [System.Serializable]
@@ -41,53 +41,28 @@ public class LoadoutManager : MonoBehaviour
     [Tooltip("List of currently equipped loadouts")]
     [HideInInspector]
     Loadout[] Loadouts = new Loadout[3];
-    public List<Option> InitialOptions;
-    public List<Option> Options;
+    [SerializeField]
+    List<Option> InitialOptions;
+    [SerializeField]
+    List<Option> Options;
 
     [HideInInspector]
     public bool AbilitiesEnabled = true;
 
-    [Header("Cooldown timers")]
-    [Tooltip("Time to put the Device down")]
-    public float DownCooldown = 0.1f;
-
-    [Tooltip("Time to put the Device up")]
-    public float UpCooldown = 0.1f;
-
-
-    [Header("Positions")]
-    [Tooltip("Down position")]
-    [SerializeField]
-    Transform DownTransform;
-
-    [Tooltip("Up position")]
-    [SerializeField]
-    Transform UpTransform;
-
-    [SerializeField]
-    Transform DeviceHolder;
-
     [HideInInspector]
-    public int currentLoadout { get; private set; } = 0;
+    int currentLoadout = 0;
     int lastLoadout = 0;
-    private Device currentDevice;
-    private Device newDevice;
 
-    private float animProgression = 0f;
+    UnityAction<Device> OnDeviceSwitch;
+    public override void SubscribeToDeviceSwitch(UnityAction<Device> subscriber) { OnDeviceSwitch += subscriber; }
 
-    public UnityAction<Device> OnDeviceSwitch;
-    public UnityAction OnLoadoutSwitch;
+    UnityAction OnLoadoutSwitch;
+    public override void SubscribeToLoadoutSwitch(UnityAction subscriber) { OnLoadoutSwitch += subscriber; }
 
-    [HideInInspector]
-    public AnimationStage AnimStage { get; private set; } = AnimationStage.DeviceReady;
-    public enum AnimationStage {
-        DeviceDown,
-        DeviceUp,
-        DeviceReady
-    }
-
-    // References
+    #region References
     PlayerInputHandler m_InputHandler;
+    DeviceManager m_DeviceManager;
+    #endregion
 
 
     private void Awake()
@@ -99,8 +74,9 @@ public class LoadoutManager : MonoBehaviour
 
     void Start()
     {
+        m_DeviceManager = GetComponentInChildren<DeviceManager>();
         m_InputHandler = GetComponent<PlayerInputHandler>();
-        StartCoroutine("StartDelayed");
+        StartCoroutine(StartDelayed());
     }
 
 
@@ -111,13 +87,9 @@ public class LoadoutManager : MonoBehaviour
         foreach (Ability ab in GetCurrentLoadout())
             if (ab && ab.GetComponent<Device>())
             {
-                currentDevice = ab.GetComponent<Device>();
+                m_DeviceManager.CurrentDevice = ab.GetComponent<Device>();
                 break;
             }
-
-        AnimStage = AnimationStage.DeviceUp;
-        animProgression = UpCooldown;
-        AttachCurrentToDeviceHolder();
     }
     
 
@@ -126,63 +98,56 @@ public class LoadoutManager : MonoBehaviour
     {
         ActivateAbilities();
         ManageLoadouts();
-        ManageDevices();
+        m_DeviceManager.UpdateDevices();
     }
 
 
-    public void ActivateAbilities()
+    void ActivateAbilities()
     {
         if (!AbilitiesEnabled)
             return;
 
         for (int i = 0; i < GetCurrentLoadout().Length; i++)
         {
-            if (!GetCurrentLoadout()[i])
+            Ability thisAbility = GetCurrentLoadout()[i];
+            if (!thisAbility)
                 continue;
 
             bool down = m_InputHandler.GetAbilityDown(i + 1);
-            bool hold = (m_InputHandler.GetAbility(i + 1) && GetCurrentLoadout()[i].HoldAbility);
-            bool up = (m_InputHandler.GetAbilityUp(i + 1) && GetCurrentLoadout()[i].ReleaseAbility);
+            bool hold = (m_InputHandler.GetAbility(i + 1) && thisAbility.HoldAbility);
+            bool up = (m_InputHandler.GetAbilityUp(i + 1) && thisAbility.ReleaseAbility);
 
             if (down || hold || up)
             {
-                if (AnimStage != AnimationStage.DeviceReady)
+                if (m_DeviceManager.IsCurrentDeviceReady())
                     return;
 
                 // Switch Devices
-                if (GetCurrentLoadout()[i].GetComponent<Device>())
+                if (thisAbility.GetComponent<Device>())
                     SwitchDevice(i);
 
                 // Activate
-                GetCurrentLoadout()[i].Activate(down || hold ? Ability.Input.ButtonDown : Ability.Input.ButtonUp);
+                thisAbility.Activate(down || hold ? Ability.Input.ButtonDown : Ability.Input.ButtonUp);
             }
         }
     }
 
 
-    public void SwitchDevice(int DeviceIndex)
+    public override void SwitchDevice(int DeviceIndex)
     {
         SwitchDevice(GetCurrentLoadout()[DeviceIndex].GetComponent<Device>(), false);
     }
 
-    public void SwitchDevice(Device Device, bool forceSwitch)
+    public override void SwitchDevice(Device Device, bool forceSwitch)
     {
-        newDevice = Device;
-        if (newDevice != currentDevice || forceSwitch)
-        {
-            AnimStage = AnimationStage.DeviceDown;
-            animProgression = DownCooldown;
-        }
-
-        if (Device)
-            Device.gameObject.SetActive(true);
+        m_DeviceManager.SwitchDevice(Device, forceSwitch);
 
         if (OnDeviceSwitch != null)
             OnDeviceSwitch.Invoke(Device);
     }
 
 
-    public void ManageLoadouts()
+    void ManageLoadouts()
     {
         int loadoutButton = -1;
         if (m_InputHandler.GetSwitch())
@@ -204,71 +169,13 @@ public class LoadoutManager : MonoBehaviour
 
             if (Device == null)
                 Debug.Log("Loadout lacks a Device");
-            OnLoadoutSwitch.Invoke();
+            OnLoadoutSwitch?.Invoke();
             SwitchDevice(Device, true);
         }
     }
 
 
-    public void ManageDevices()
-    {
-        // Animation End
-        if (animProgression <= 0f)
-        {
-            switch (AnimStage)
-            {
-                case AnimationStage.DeviceDown:
-                    AnimStage = AnimationStage.DeviceUp;
-                    animProgression = UpCooldown;
-                    if (currentDevice != null)
-                    {
-                        DeviceHolder.position = DownTransform.position;
-                        DeviceHolder.rotation = DownTransform.rotation;
-                        if (currentDevice.GetComponent<WeaponAbility>())
-                            currentDevice.GetComponent<WeaponAbility>().ResetCooldown();
-                        currentDevice.gameObject.SetActive(false);
-
-                        currentDevice.transform.SetParent(DeviceHolder.parent);
-                    }
-                    currentDevice = newDevice;
-                    AttachCurrentToDeviceHolder();
-                    break;
-
-                case AnimationStage.DeviceUp:
-                    AnimStage = AnimationStage.DeviceReady;
-                    DeviceHolder.position = UpTransform.position;
-                    DeviceHolder.rotation = UpTransform.rotation;
-                    break;
-            }
-        }
-
-        // Animation Progress
-        else
-        {
-            if (currentDevice != null)
-                switch (AnimStage)
-                {
-                    case AnimationStage.DeviceDown:
-                        DeviceHolder.position = Vector3.Lerp(UpTransform.position, DownTransform.position,
-                            (DownCooldown - animProgression) / DownCooldown);
-                        DeviceHolder.rotation = Quaternion.Lerp(UpTransform.rotation, DownTransform.rotation,
-                            (DownCooldown - animProgression) / DownCooldown);
-                        break;
-
-                    case AnimationStage.DeviceUp:
-                        DeviceHolder.position = Vector3.Lerp(DownTransform.position, UpTransform.position,
-                            (UpCooldown - animProgression) / UpCooldown);
-                        DeviceHolder.rotation = Quaternion.Lerp(DownTransform.rotation, UpTransform.rotation,
-                            (UpCooldown - animProgression) / UpCooldown);
-                        break;
-                }
-
-            animProgression -= Time.deltaTime;
-        }
-    }
-
-
-    public void SetAbility(Ability ability, int loadout, int abilityNumber)
+    public override void SetAbility(Ability ability, int loadout, int abilityNumber)
     {
         if (Loadouts[loadout].abilities[abilityNumber])
             Loadouts[loadout].abilities[abilityNumber].Assigned = false;
@@ -287,31 +194,35 @@ public class LoadoutManager : MonoBehaviour
         OnLoadoutSwitch?.Invoke();
     }
 
-    public void SetPassive(GameObject passive, bool isActivated)
+    public override void SetPassive(GameObject passive, bool isActivated)
     {
         passive.SetActive(isActivated);
     }
 
 
-    public Ability[] GetCurrentLoadout()
+    public override Ability[] GetCurrentLoadout()
     {
         return Loadouts[currentLoadout].abilities;
     }
 
-
-    public Device GetCurrentDevice()
+    public override int GetCurrentLoadoutIndex()
     {
-        return currentDevice;
+        return currentLoadout;
     }
 
 
-    void AttachCurrentToDeviceHolder()
+    public override Device GetCurrentDevice()
     {
-        if (currentDevice)
-        {
-            currentDevice.transform.SetParent(DeviceHolder);
-            currentDevice.transform.position = DeviceHolder.position;
-            currentDevice.transform.rotation = DeviceHolder.rotation;
-        }
+        return m_DeviceManager.CurrentDevice;
+    }
+
+    public override List<Option> GetInitialOptions()
+    {
+        return InitialOptions;
+    }
+
+    public override List<Option> GetOptions()
+    {
+        return Options;
     }
 }

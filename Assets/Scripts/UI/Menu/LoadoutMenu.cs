@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class LoadoutMenu : Menu
 {
-    LoadoutManager loadoutManager;
+    ILoadoutManager loadoutManager;
 
     new void Start()
     {
         
-        loadoutManager = ActorsManager.Player.GetComponent<LoadoutManager>();
+        loadoutManager = GetComponent<ILoadoutManager>();
         base.Start();
     }
 
     private void OnEnable()
     {
-        if (loadoutManager && !submenus[loadoutManager.currentLoadout].enabled)
-            SubmenuButton(loadoutManager.currentLoadout);
+        if (loadoutManager != null && !submenus[loadoutManager.GetCurrentLoadoutIndex()].enabled)
+            SubmenuButton(loadoutManager.GetCurrentLoadoutIndex());
     }
 }

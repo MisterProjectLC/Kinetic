@@ -7,6 +7,12 @@ public class LoadoutSlot : MonoBehaviour
     public bool GlobalSlot = false;
 
     public LoadoutSlot NextSlot;
+    ILoadoutManager loadoutManager;
+
+    public void Setup(ILoadoutManager loadoutManager)
+    {
+        this.loadoutManager = loadoutManager;
+    }
 
     public void SetOption(GameObject option, bool activating)
     {
@@ -18,14 +24,11 @@ public class LoadoutSlot : MonoBehaviour
 
         if (GlobalSlot)
             for (int i = 0; i < LevelUpSystem.LUS.GetLoadoutCount(); i++)
-                ActorsManager.Player.GetComponent<LoadoutManager>().SetAbility(activating ? option.GetComponent<Ability>() : null,
-                    i, AbilityNumber);
+                loadoutManager.SetAbility(activating ? option.GetComponent<Ability>() : null, i, AbilityNumber);
         else
-
             if (LoadoutNumber >= 0)
-                ActorsManager.Player.GetComponent<LoadoutManager>().SetAbility(activating ? option.GetComponent<Ability>() : null, 
-                    LoadoutNumber, AbilityNumber);
+                loadoutManager.SetAbility(activating ? option.GetComponent<Ability>() : null, LoadoutNumber, AbilityNumber);
             else
-                ActorsManager.Player.GetComponent<LoadoutManager>().SetPassive(option, activating);
+                loadoutManager.SetPassive(option, activating);
     }
 }
