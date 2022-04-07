@@ -12,37 +12,14 @@ public class LoadoutManager : ILoadoutManager
         public Ability[] abilities;
     }
 
-    [System.Serializable]
-    public struct Option
-    {
-        public GameObject option;
-        public Ability ability
-        {
-            get
-            {
-                return option.GetComponent<Ability>();
-            }
-        }
-
-        public bool isPassive
-        {
-            get
-            {
-                return !option.GetComponent<Ability>();
-            }
-        }
-
-        [Tooltip("Leave empty if none")]
-        public LocalizedString secondaryAbility;
-        public List<string> prerequisiteAbilities;
-    }
-
     [Header("General")]
     [Tooltip("List of currently equipped loadouts")]
     [HideInInspector]
     Loadout[] Loadouts = new Loadout[3];
     [SerializeField]
     List<Option> InitialOptions;
+    [SerializeField]
+    List<Option> InitialPassives;
     [SerializeField]
     List<Option> Options;
 
@@ -67,6 +44,8 @@ public class LoadoutManager : ILoadoutManager
 
     private void Awake()
     {
+        m_DeviceManager = GetComponentInChildren<DeviceManager>();
+        m_InputHandler = GetComponent<PlayerInputHandler>();
         for (int i = 0; i < Loadouts.Length; i++)
             Loadouts[i].abilities = new Ability[4];
     }
@@ -74,8 +53,6 @@ public class LoadoutManager : ILoadoutManager
 
     void Start()
     {
-        m_DeviceManager = GetComponentInChildren<DeviceManager>();
-        m_InputHandler = GetComponent<PlayerInputHandler>();
         StartCoroutine(StartDelayed());
     }
 
@@ -194,9 +171,9 @@ public class LoadoutManager : ILoadoutManager
         OnLoadoutSwitch?.Invoke();
     }
 
-    public override void SetPassive(GameObject passive, bool isActivated)
+    public override void SetPassive(Upgrade passive, bool isActivated)
     {
-        passive.SetActive(isActivated);
+        passive.gameObject.SetActive(isActivated);
     }
 
 
@@ -209,7 +186,6 @@ public class LoadoutManager : ILoadoutManager
     {
         return currentLoadout;
     }
-
 
     public override Device GetCurrentDevice()
     {
@@ -224,5 +200,10 @@ public class LoadoutManager : ILoadoutManager
     public override List<Option> GetOptions()
     {
         return Options;
+    }
+
+    public override List<Option> GetInitialPassives()
+    {
+        return InitialPassives;
     }
 }

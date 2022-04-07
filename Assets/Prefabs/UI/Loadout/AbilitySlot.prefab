@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 1961359280970812944}
   - component: {fileID: 1961359280970812946}
   - component: {fileID: 1961359280970812945}
-  - component: {fileID: 4929332021024705010}
-  - component: {fileID: 3085514987049677036}
   - component: {fileID: 196032490553090160}
+  - component: {fileID: 7484358322541026063}
   m_Layer: 5
-  m_Name: LoadoutSlot
+  m_Name: AbilitySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,39 +78,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4929332021024705010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961359280970812959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6051bb75e7b9b04d99d07d37c1af042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: Ability
-  Offset: {x: 0, y: 10}
-  LabelText:
-    key: 
-  InsertedDragDrop: {fileID: 0}
---- !u!114 &3085514987049677036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961359280970812959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f116f579df83b4c41987a26f37ab5403, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AbilityNumber: 0
-  LoadoutNumber: 0
-  GlobalSlot: 0
-  NextSlot: {fileID: 0}
 --- !u!82 &196032490553090160
 AudioSource:
   m_ObjectHideFlags: 0
@@ -209,6 +175,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7484358322541026063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961359280970812959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7886e61cbadb8f84a8896ff38b1836e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: Ability
+  Offset: {x: 0, y: 0}
+  LabelText:
+    key: 
+  InsertedDragDrop: {fileID: 0}
+  AbilityNumber: 0
+  LoadoutNumber: 0
+  GlobalSlot: 0
+  NextSlot: {fileID: 0}
+  loadoutManager: {fileID: 0}
 --- !u!1 &1961359281005953378
 GameObject:
   m_ObjectHideFlags: 0

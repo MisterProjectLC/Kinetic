@@ -1,25 +1,25 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
-public class BigLoadoutOption : MonoBehaviour
+public class BigLoadoutOption : LoadoutOption
 {
-    LoadoutSlot primarySlot;
-    LoadoutSlot secondarySlot;
+    AbilitySlot primarySlot;
+    [SerializeField]
+    AbilitySlot secondarySlot;
 
     LocalizedString secondaryName = new LocalizedString();
 
     // Start is called before the first frame update
-    void Awake()
+    protected void Awake()
     {
-        secondarySlot = GetComponentInChildren<LoadoutSlot>();
-        secondarySlot.GetComponent<DropSlot>().OnInserted += OnSecondaryInsert;
-        DragDrop dragDrop = GetComponent<DragDrop>();
-        dragDrop.OnInsert += OnPrimaryInsert;
-        dragDrop.OnRemove += OnPrimaryRemove;
+        secondarySlot.OnInsertedAbility += OnSecondaryInsert;
+        SubscribeToInsert(OnPrimaryInsert);
+        OnRemove += OnPrimaryRemove;
     }
 
-    private void Start()
+    protected new void Start()
     {
+        base.Start();
         //secondarySlot.GetComponent<DropSlot>().Offset = GetComponent<RectTransform>().anchoredPosition;
     }
 
@@ -28,10 +28,10 @@ public class BigLoadoutOption : MonoBehaviour
         UpdateSecondaryAbility();
     }
 
-
-    public void SetSecondaryAbility(LocalizedString secondaryAbility)
+    public void SetupSecondaryAbility(ILoadoutManager loadoutManager, LocalizedString secondaryAbility)
     {
         secondaryName = secondaryAbility;
+        secondarySlot.Setup(loadoutManager);
         UpdateSecondaryAbility();
     }
 
@@ -40,27 +40,27 @@ public class BigLoadoutOption : MonoBehaviour
         if (secondaryName.key == "")
             return;
 
-        secondarySlot.GetComponent<DropSlot>().Type = secondaryName.value;
-        secondarySlot.GetComponent<DropSlot>().LabelText = secondaryName.key;
+        secondarySlot.Type = secondaryName.value;
+        secondarySlot.LabelText = secondaryName.key;
     }
 
     public void InsertOnSecondary(LoadoutOption option)
     {
-        secondarySlot.GetComponent<DropSlot>().OnDrop(option.gameObject);
+        secondarySlot.OnDrop(option.gameObject);
+        Debug.Log("InsertOnSecondary");
     }
 
-    void OnSecondaryInsert(DragDrop option)
+    void OnSecondaryInsert(LoadoutOption option)
     {
-        ((SecondaryAbility)option.GetComponent<LoadoutOption>().Ability).ParentAbility =
-            GetComponent<LoadoutOption>().Ability.GetComponent<Ability>();
+        ((SecondaryAbility)option.Option).ParentAbility = (Ability)Option;
     }
 
     public void OnPrimaryInsert(DropSlot slot)
     {
-        primarySlot = slot.GetComponent<LoadoutSlot>();
+        primarySlot = (AbilitySlot)slot;
 
         // Inserting into the last slot
-        if (primarySlot.NextSlot == null || primarySlot.NextSlot.GetComponent<DropSlot>().InsertedDragDrop != null)
+        if (primarySlot.NextSlot == null || primarySlot.NextSlot.InsertedDragDrop != null)
             secondarySlot.gameObject.SetActive(false);
 
         // Inserting into an actual rational slot
@@ -72,22 +72,20 @@ public class BigLoadoutOption : MonoBehaviour
             primarySlot.NextSlot.gameObject.SetActive(false);
         }
 
-        secondarySlot.GetComponent<DropSlot>().Offset = GetComponent<RectTransform>().anchoredPosition;
-        Debug.Log("Secondary Offset: " + secondarySlot.GetComponent<DropSlot>().Offset);
+        secondarySlot.Offset = GetComponent<RectTransform>().anchoredPosition;
+        Debug.Log("Secondary Offset: " + secondarySlot.Offset);
     }
 
     void OnPrimaryRemove(DropSlot slot)
     {
-        DropSlot secondaryDropSlot = secondarySlot.GetComponent<DropSlot>();
+        if (secondarySlot.InsertedDragDrop && secondarySlot.InsertedDragDrop.OnRemove != null)
+            secondarySlot.InsertedDragDrop.OnRemove?.Invoke(secondarySlot);
 
-        if (secondaryDropSlot.InsertedDragDrop && secondaryDropSlot.InsertedDragDrop.OnRemove != null)
-            secondaryDropSlot.InsertedDragDrop.OnRemove?.Invoke(secondaryDropSlot);
-
-        if (secondaryDropSlot.gameObject.activeInHierarchy)
+        if (secondarySlot.gameObject.activeInHierarchy)
         {
             primarySlot.NextSlot.gameObject.SetActive(true);
-            if (secondaryDropSlot.InsertedDragDrop)
-                secondaryDropSlot.OnRemove(secondaryDropSlot.InsertedDragDrop.gameObject);
+            if (secondarySlot.InsertedDragDrop)
+                secondarySlot.OnRemove(secondarySlot.InsertedDragDrop.gameObject);
             secondarySlot.gameObject.SetActive(false);
         }
     }

@@ -31,36 +31,37 @@ public class FlyingEnemy : MonoBehaviour
     Collider myTrigger;
 
     float enemyCollisionCooldown = 1f;
-    Clock clock;
+    Clock tickClock;
+    Clock collisionClock;
 
     RaycastHit[] hitInfos;
+    RaycastHit[] hits;
     bool stopped = false;
+
+    const float TIME_UNTIL_FRAME_UPDATE = 0.04f;
 
     private void Start()
     {
-        clock = new Clock(enemyCollisionCooldown);
+        tickClock = new Clock(TIME_UNTIL_FRAME_UPDATE);
+        collisionClock = new Clock(enemyCollisionCooldown);
         hitInfos = new RaycastHit[20];
+        hits = new RaycastHit[1];
 
         playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
         enemy = GetComponent<Enemy>();
-       physics = GetComponent<IEnemyPhysics>();
+        physics = GetComponent<IEnemyPhysics>();
         enemy.SubscribeToUpdate(OnUpdate);
     }
 
     void OnUpdate()
     {
-        if (!enemy.IsPlayerInView())
-            return;
-
-
-
-        if (clock.TickAndRing(Time.deltaTime) && myTrigger)
+        if (collisionClock.TickAndRing(Time.deltaTime) && myTrigger)
         {
             Physics.SphereCastNonAlloc(enemy.Model.transform.position + enemy.Model.transform.forward*1.5f, 
                 0.23f, enemy.Model.transform.forward, hitInfos, physics.GetCollisionDistance(), LayerMask.GetMask("EnemyTrigger"));
 
             foreach (RaycastHit hit in hitInfos)
-                if (hit.collider != myTrigger)
+                if (hit.collider && hit.collider != myTrigger)
                 {
                     stopped = true;
                     return;
@@ -69,7 +70,7 @@ public class FlyingEnemy : MonoBehaviour
             stopped = false;
         }
 
-        if (stopped)
+        if (stopped || !tickClock.TickAndRing(Time.deltaTime) || !enemy.IsPlayerInView())
             return;
 
         Vector3 playerDistance = playerTransform.position - enemy.Model.transform.position;
@@ -77,12 +78,12 @@ public class FlyingEnemy : MonoBehaviour
 
         // X movement
         if (playerDistance.magnitude > MinimumDistance)
-            transform.position += playerDistance.normalized * MotorSpeed * Time.deltaTime;
+            transform.position += playerDistance.normalized * MotorSpeed * TIME_UNTIL_FRAME_UPDATE;
 
         // Y movement
-        if (!(DetectTooCloseWall() ||DetectTooCloseGroundOrCeiling()))
+        if (!(DetectTooCloseWall() || DetectTooCloseGroundOrCeiling()))
             transform.position = Vector3.Lerp(transform.position,
-                new Vector3(transform.position.x, playerTransform.position.y, transform.position.z), VerticalSpeed * Time.deltaTime);
+                new Vector3(transform.position.x, playerTransform.position.y, transform.position.z), VerticalSpeed * TIME_UNTIL_FRAME_UPDATE);
     }
 
     bool DetectTooCloseWall()
@@ -91,8 +92,8 @@ public class FlyingEnemy : MonoBehaviour
             return false;
 
         Ray ray = new Ray(enemy.Model.transform.position, playerTransform.position - enemy.Model.transform.position);
-        Physics.Raycast(ray, out RaycastHit hit, MaximumProximityToWall, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
-        return hit.collider;
+        Physics.RaycastNonAlloc(ray, hits, MaximumProximityToWall, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
+        return hits[0].collider;
     }
 
 
@@ -103,7 +104,7 @@ public class FlyingEnemy : MonoBehaviour
 
         Ray ray = new Ray(enemy.Model.transform.position, Vector3.up * 
             (enemy.Model.transform.position.y < playerTransform.position.y ? 1f : -1f));
-        Physics.Raycast(ray, out RaycastHit hit, MaximumProximityToGround, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
-        return hit.collider;
+        Physics.RaycastNonAlloc(ray, hits, MaximumProximityToGround, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
+        return hits[0].collider;
     }
 }

@@ -238,7 +238,6 @@ public class PlayerCharacterController : MonoBehaviour, Entity
 
     public void ReceiveForce(Vector3 Force, bool Sticky = false)
     {
-        Debug.Log("ReceiveForce " + Force.magnitude);
         Forces.Enqueue(new Force(Force, Sticky));
     }
 

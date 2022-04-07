@@ -5,13 +5,11 @@ using UnityEngine;
 public class UpgradePowerup : Powerup
 {
     [SerializeField]
-    LevelUpSystem.Type type = LevelUpSystem.Type.Skill;
+    LevelUpSystem.Type type = LevelUpSystem.Type.Ability;
 
     // Start is called before the first frame update
     void Awake()
     {
-        OnPowerup += Upgrade;
-
         if (GetComponent<UniqueID>())
             GetComponent<UniqueID>().OnObjectRegistered += () => { 
                 Debug.Log("Destroyed: " + GetComponent<UniqueID>().ID); 
@@ -20,9 +18,7 @@ public class UpgradePowerup : Powerup
 
     }
 
-    protected override void Setup() { }
-
-    void Upgrade(GameObject player)
+    protected override void ActivatePowerup(GameObject player)
     {
         if (GetComponent<UniqueID>())
             GetComponent<UniqueID>().RegisterID();

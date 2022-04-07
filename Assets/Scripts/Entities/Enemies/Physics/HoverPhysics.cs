@@ -12,6 +12,9 @@ public class HoverPhysics : IEnemyPhysics
         return hitInfo;
     }
 
+    RaycastHit[] hits = new RaycastHit[1];
+    float lastRayDistance = 0f;
+
     public override void Stop()
     {
         moveVelocity = Vector3.zero;
@@ -19,8 +22,14 @@ public class HoverPhysics : IEnemyPhysics
 
     protected override void FeelGravity()
     {
-        RaycastHit hit = RayToGround();
-        airborne = (hit.collider == null);
+        if (lastRayDistance < 5f)
+        {
+            RaycastHit hit = RayToGround();
+            airborne = (hit.collider == null);
+            lastRayDistance = hit.distance;
+        }
+        else
+            airborne = true;
 
         // Air
         if (airborne)
@@ -48,20 +57,22 @@ public class HoverPhysics : IEnemyPhysics
                 moveVelocity = Vector3.zero;
         }
 
-        
         // Collision
-        Ray ray = new Ray(Model.transform.position, moveVelocity.normalized);
-        Physics.Raycast(ray, out RaycastHit hitInfo, CollisionDistance * moveVelocity.magnitude / 12f,
-                GroundLayers.layers, QueryTriggerInteraction.Ignore);
-        if (hitInfo.collider)
+        if (moveVelocity.magnitude > 0.2f)
         {
-            OnKnockbackCollision?.Invoke(moveVelocity);
-            moveVelocity = Vector3.zero;
-        }
+            Ray ray = new Ray(Model.transform.position, moveVelocity.normalized);
+            Physics.RaycastNonAlloc(ray, hits, CollisionDistance * moveVelocity.magnitude / 12f,
+                    GroundLayers.layers, QueryTriggerInteraction.Ignore);
+            if (hits[0].collider)
+            {
+                OnKnockbackCollision?.Invoke(moveVelocity);
+                moveVelocity = Vector3.zero;
+            }
 
-        // Movement
-        transform.position += moveVelocity * Time.deltaTime;
-    }
+            // Movement
+            transform.position += moveVelocity * Time.deltaTime;
+        }
+}
 
     public override void ReceiveForce(Vector3 force, bool sticky = false)
     {

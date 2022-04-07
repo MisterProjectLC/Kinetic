@@ -15,8 +15,9 @@ public class ConveyorBelt : MonoBehaviour
     Movepad movepad;
     //Vector3 BeltDirection;
 
-    float SpawnTime = 5f;
-    float clock = 0f;
+    float SpawnTime = 6f;
+
+    Clock clock;
 
 
     private void Start()
@@ -27,7 +28,8 @@ public class ConveyorBelt : MonoBehaviour
         //BeltDirection = movepad.GetMoveDirection().normalized;
         BeltSize = new Vector3(transform.lossyScale.z, 1f, 1f);
 
-        SpawnTime = 5f/movepad.Speed;
+        SpawnTime /= movepad.Speed;
+        clock = new Clock(SpawnTime);
         /*
         if (Vector3.Dot(BeltDirection, (DespawnPosition - SpawnPosition).normalized) < 0)
         {
@@ -55,10 +57,7 @@ public class ConveyorBelt : MonoBehaviour
         }
             
         // Spawn Stuff
-        clock += Time.deltaTime;
-        if (clock > SpawnTime) {
-            clock = 0f;
-
+        if (clock.TickAndRing(Time.deltaTime)) {
             GameObject instance = ObjectManager.OM.SpawnObjectFromPool(Detail.GetComponent<Poolable>().Type, Detail);
             instance.transform.position = SpawnPosition;
             instance.transform.rotation = transform.rotation * Quaternion.Euler(0f, 90f, 0f);

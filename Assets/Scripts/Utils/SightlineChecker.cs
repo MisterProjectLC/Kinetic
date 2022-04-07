@@ -9,9 +9,9 @@ public class SightlineChecker
     LayerMask viewBlockedLayers;
     float distanceOffset = 5f;
 
-    public SightlineChecker(Transform watcher, LayerMask viewBlockedLayers, float distanceOffset = 22f)
+    public SightlineChecker(Transform watcher, LayerMask viewBlockedLayers, float distanceOffset = 0f)
     {
-        hits = new RaycastHit[20];
+        hits = new RaycastHit[5];
         this.watcher = watcher;
         this.viewBlockedLayers = viewBlockedLayers;
         this.distanceOffset = distanceOffset;

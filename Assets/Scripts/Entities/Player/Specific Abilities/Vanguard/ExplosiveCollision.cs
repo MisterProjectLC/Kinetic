@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosiveCollision : MonoBehaviour
+public class ExplosiveCollision : Passive
 {
     PlayerCharacterController player;
     Attack attack;

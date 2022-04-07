@@ -2,14 +2,7 @@ using UnityEngine;
 
 public class HealthPowerup : Powerup
 {
-
-    // Start is called before the first frame update
-    protected override void Setup()
-    {
-        OnPowerup += Heal;
-    }
-
-    void Heal(GameObject player)
+    protected override void ActivatePowerup(GameObject player)
     {
         if (player.GetComponent<Health>())
             player.GetComponent<Health>().Heal(player.GetComponent<Health>().MaxHealth);

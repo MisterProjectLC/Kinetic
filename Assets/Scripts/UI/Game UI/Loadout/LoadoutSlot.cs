@@ -1,34 +1,28 @@
 using UnityEngine;
 
-public class LoadoutSlot : MonoBehaviour
+public abstract class LoadoutSlot : DropSlot
 {
     public int AbilityNumber = 0;
-    public int LoadoutNumber = 0;
-    public bool GlobalSlot = false;
 
-    public LoadoutSlot NextSlot;
-    ILoadoutManager loadoutManager;
+    [HideInInspector]
+    public ILoadoutManager loadoutManager;
 
     public void Setup(ILoadoutManager loadoutManager)
     {
         this.loadoutManager = loadoutManager;
     }
 
-    public void SetOption(GameObject option, bool activating)
+    protected abstract int GetLoadoutNumber();
+
+    public void SetOption(Upgrade option, bool activating)
     {
         if (activating)
-            Hermes.SpawnAbilities.Add(new Hermes.SavedAbility(option.name, LoadoutNumber, AbilityNumber));
+            SavedLoadout.AddSpawnAbility(new SavedLoadout.SavedAbility(option.name, GetLoadoutNumber(), AbilityNumber));
         else
-            Hermes.SpawnAbilities.RemoveAll(x => x.loadout == LoadoutNumber && x.slot == AbilityNumber);
+            SavedLoadout.RemoveSpawnAbility(GetLoadoutNumber(), AbilityNumber);
 
-
-        if (GlobalSlot)
-            for (int i = 0; i < LevelUpSystem.LUS.GetLoadoutCount(); i++)
-                loadoutManager.SetAbility(activating ? option.GetComponent<Ability>() : null, i, AbilityNumber);
-        else
-            if (LoadoutNumber >= 0)
-                loadoutManager.SetAbility(activating ? option.GetComponent<Ability>() : null, LoadoutNumber, AbilityNumber);
-            else
-                loadoutManager.SetPassive(option, activating);
+        SetOptionPrivate(option, activating);
     }
+
+    public abstract void SetOptionPrivate(Upgrade option, bool activating);
 }

@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: ninja_translocate_title
+  Type: 
   Cooldown: 1
   Assigned: 0
   abilityView: {fileID: 0}
@@ -413,6 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: ninja_dash_title
+  Type: 
   Cooldown: 2
   Assigned: 0
   abilityView: {fileID: 0}
@@ -929,6 +931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: 
+  Type: 
   Cooldown: 5
   Assigned: 0
   abilityView: {fileID: 0}
@@ -1065,7 +1068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7816245253526124877
 Transform:
   m_ObjectHideFlags: 0
@@ -1092,6 +1095,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6f3897f9da946499b48169106b8c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LocalizedName:
+    key: killheal_title
+  Type: 
 --- !u!114 &425287587543554713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,6 +1157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40248c05a6d6c844f99cabd97ae290bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LocalizedName:
+    key: ninja_walljump_title
+  Type: 
 --- !u!114 &2075398117668125390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,6 +1419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: ninja_shellbombs_title
+  Type: 
   Cooldown: 8
   Assigned: 0
   abilityView: {fileID: 0}
@@ -1614,7 +1624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1280739795873682838
 Transform:
   m_ObjectHideFlags: 0
@@ -1641,6 +1651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e2ec239f5f234479ab1ea85d4cdc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LocalizedName:
+    key: ninja_extrajump_title
+  Type: 
 --- !u!114 &2611739486399847875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1726,6 +1739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: ninja_grapplinghook_title
+  Type: 
   Cooldown: 4
   Assigned: 0
   abilityView: {fileID: 0}
@@ -1907,6 +1921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: ninja_rewind_title
+  Type: 
   Cooldown: 12
   Assigned: 0
   abilityView: {fileID: 0}
@@ -2203,6 +2218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: ninja_deflect_title
+  Type: 
   Cooldown: 2
   Assigned: 0
   abilityView: {fileID: 0}
@@ -2362,7 +2378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2775557084548612624
 Transform:
   m_ObjectHideFlags: 0
@@ -2389,6 +2405,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e2ec239f5f234479ab1ea85d4cdc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LocalizedName:
+    key: ninja_doublejump_title
+  Type: 
 --- !u!114 &17516710838392440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2602,69 +2621,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialOptions:
-  - option: {fileID: 2225249382224139414}
+  - option: {fileID: 6410504191450364786}
     secondaryAbility:
       key: ninja_translocate_title
     prerequisiteAbilities: []
-  - option: {fileID: 6923643163349663185}
+  - option: {fileID: 3643475396191345307}
     secondaryAbility:
       key: ninja_grapplinghook_title
     prerequisiteAbilities: []
-  - option: {fileID: 7349922464857806567}
+  - option: {fileID: 7951354861340485890}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities: []
+  InitialPassives:
+  - option: {fileID: 5917140286660060292}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
   Options:
-  - option: {fileID: 1292416793624679719}
+  - option: {fileID: 3757266375381288519}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
-  - option: {fileID: 758061105512210739}
+  - option: {fileID: 5704373933498883485}
     secondaryAbility:
-      key: 
-    prerequisiteAbilities: []
-  - option: {fileID: 8006630410610024068}
-    secondaryAbility:
-      key: 
+      key: ninja_dash_title
     prerequisiteAbilities:
-    - Shell Bombs
-  - option: {fileID: 5307980427766246164}
+    - key: 
+  - option: {fileID: 1056472193603156170}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
-  - option: {fileID: 4382853588751367982}
+  - option: {fileID: 8089954478560255746}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
-  - option: {fileID: 4101398689657722995}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities:
-    - Extra Jump
-  - option: {fileID: 8791866288957817034}
+  - option: {fileID: 6450270223927221608}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
-  - option: {fileID: 4554023032501292862}
+  - option: {fileID: 5273812271440728085}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities: []
+  - option: {fileID: 2095700901615344151}
     secondaryAbility:
       key: ninja_deflect_title
     prerequisiteAbilities: []
-  - option: {fileID: 6358242602411863829}
+  - option: {fileID: 3914573725090297544}
     secondaryAbility:
       key: 
     prerequisiteAbilities:
-    - Double Jump
-  - option: {fileID: 8659259196117612103}
+    - key: ninja_doublejump_title
+  - option: {fileID: 3463386441659457413}
     secondaryAbility:
       key: 
     prerequisiteAbilities:
-    - Katana
+    - key: ninja_katana_title
   AbilitiesEnabled: 1
-  DownCooldown: 0.1
-  UpCooldown: 0.1
-  DownTransform: {fileID: 7885829806726108092}
-  UpTransform: {fileID: 5701861848161749029}
-  DeviceHolder: {fileID: 6042770964539169377}
 --- !u!114 &2741010674107934635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2911,15 +2925,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bc21ac47bb905447b7aabaf21b8f14e, type: 3}
---- !u!1 &6923643163349663185 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8962014088670307922, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
+--- !u!114 &3643475396191345307 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3376284662852059416, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
     type: 3}
   m_PrefabInstance: {fileID: 2038653517123148675}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923643163349663185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8374904072922748519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7526467649445924324, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2038653517123148675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6923643163349663185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8962014088670307922, guid: 0bc21ac47bb905447b7aabaf21b8f14e,
     type: 3}
   m_PrefabInstance: {fileID: 2038653517123148675}
   m_PrefabAsset: {fileID: 0}
@@ -3012,15 +3038,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 473ea86f386f05244a77ca280c2129f8, type: 3}
---- !u!1 &2225249382224139414 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3914768282061949521, guid: 473ea86f386f05244a77ca280c2129f8,
+--- !u!114 &6410504191450364786 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8089324878251517365, guid: 473ea86f386f05244a77ca280c2129f8,
     type: 3}
   m_PrefabInstance: {fileID: 2933428334205624007}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2225249382224139414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &778479117601111840 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2483760642977702375, guid: 473ea86f386f05244a77ca280c2129f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2933428334205624007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2225249382224139414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3914768282061949521, guid: 473ea86f386f05244a77ca280c2129f8,
     type: 3}
   m_PrefabInstance: {fileID: 2933428334205624007}
   m_PrefabAsset: {fileID: 0}
@@ -3303,15 +3341,27 @@ PrefabInstance:
       objectReference: {fileID: 958540071565868630}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c10f67b36848b44eb99a63396bdb998, type: 3}
---- !u!1 &4554023032501292862 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1570064485261180041, guid: 7c10f67b36848b44eb99a63396bdb998,
+--- !u!114 &2095700901615344151 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4030636285321456032, guid: 7c10f67b36848b44eb99a63396bdb998,
     type: 3}
   m_PrefabInstance: {fileID: 3097032358484587447}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4554023032501292862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5335766436650077318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6986962949196218161, guid: 7c10f67b36848b44eb99a63396bdb998,
+    type: 3}
+  m_PrefabInstance: {fileID: 3097032358484587447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4554023032501292862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1570064485261180041, guid: 7c10f67b36848b44eb99a63396bdb998,
     type: 3}
   m_PrefabInstance: {fileID: 3097032358484587447}
   m_PrefabAsset: {fileID: 0}
@@ -3384,15 +3434,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b17e97baf1399124f87ee295121d45c7, type: 3}
---- !u!4 &2877344068314980117 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6154511750951806072, guid: b17e97baf1399124f87ee295121d45c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 8252660478905351021}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &7598709527419484629 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2014055666174919352, guid: b17e97baf1399124f87ee295121d45c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8252660478905351021}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2877344068314980117 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6154511750951806072, guid: b17e97baf1399124f87ee295121d45c7,
     type: 3}
   m_PrefabInstance: {fileID: 8252660478905351021}
   m_PrefabAsset: {fileID: 0}

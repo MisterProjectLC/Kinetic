@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExtraJump : MonoBehaviour
+public class ExtraJump : Passive
 {
     PlayerCharacterController playerController;
     PlayerInputHandler input;

@@ -83,7 +83,7 @@ public class Explosion : MonoBehaviour
             foreach (Attack attack in attacks)
             {
                 float rate = ((NeuteredHitLayers.value >> collider.gameObject.layer) == 1 && !attack.IgnoreNeutered) ? NeuteredRate : 1f;
-                Debug.Log("Rate: " + rate);
+                //Debug.Log("Rate: " + rate);
                 attack.AttackTarget(collider.gameObject, rate * Mathf.Lerp(CenterRate, FallOffRate, distanceToTarget));
             }
         }

@@ -120,16 +120,5 @@ public class Hermes : MonoBehaviour
     public static Vector3 SpawnPosition = Vector3.zero;
     public static List<string> SpawnAreas = new List<string>() { "L_Engi_Tutorial" };
 
-    [System.Serializable]
-    public struct SavedAbility { public string name; public int loadout; public int slot; public bool inGame;
-        public SavedAbility(string name, int loadout, int slot)
-        {
-            this.name = name; this.loadout = loadout; this.slot = slot; inGame = true;
-        }
-
-        public void SetInGame(bool t) { inGame = t; }
-    }
-    public static List<SavedAbility> SpawnAbilities = new List<SavedAbility>();
-
     public static bool newGame = false;
 }

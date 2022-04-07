@@ -90,9 +90,8 @@ GameObject:
   - component: {fileID: 7176151791261132244}
   - component: {fileID: 7176151791261132246}
   - component: {fileID: 7176151791261132245}
-  - component: {fileID: 6252509666598588970}
-  - component: {fileID: 2951334679710618756}
   - component: {fileID: 7368044965325029246}
+  - component: {fileID: 2344039327604241005}
   m_Layer: 5
   m_Name: LoadoutSlot
   m_TagString: Untagged
@@ -158,39 +157,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6252509666598588970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7176151791261132251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6051bb75e7b9b04d99d07d37c1af042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: Sada
-  Offset: {x: 0, y: 0}
-  LabelText:
-    key: 
-  InsertedDragDrop: {fileID: 0}
---- !u!114 &2951334679710618756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7176151791261132251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f116f579df83b4c41987a26f37ab5403, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AbilityNumber: 0
-  LoadoutNumber: 0
-  GlobalSlot: 0
-  NextSlot: {fileID: 0}
 --- !u!82 &7368044965325029246
 AudioSource:
   m_ObjectHideFlags: 0
@@ -288,6 +254,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2344039327604241005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7176151791261132251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7886e61cbadb8f84a8896ff38b1836e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: Ability
+  Offset: {x: 0, y: 0}
+  LabelText:
+    key: 
+  InsertedDragDrop: {fileID: 0}
+  AbilityNumber: 0
+  loadoutManager: {fileID: 0}
+  LoadoutNumber: 0
+  GlobalSlot: 0
+  NextSlot: {fileID: 0}
 --- !u!1 &7710739573202398841
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,8 +368,6 @@ GameObject:
   - component: {fileID: 8191001801631402916}
   - component: {fileID: 8191001801631402918}
   - component: {fileID: 1018027073914770998}
-  - component: {fileID: 4138703145497877412}
-  - component: {fileID: 8203318453217548488}
   - component: {fileID: 7205150191107028999}
   - component: {fileID: 7055743705906331044}
   - component: {fileID: 1974953503471212543}
@@ -434,34 +420,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b7608064acee241b5f5d1b86563bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4138703145497877412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191001801631402917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b3da714bf0d984fa734bc21293d309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 0
+  Type: Ability
   AssignedSlot: {fileID: 0}
---- !u!114 &8203318453217548488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191001801631402917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c5e884eca54f664baa06960e213c970, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   PrerequisiteAbilities: []
   passiveOverlay: {fileID: 0}
+  secondarySlot: {fileID: 2344039327604241005}
 --- !u!114 &7205150191107028999
 MonoBehaviour:
   m_ObjectHideFlags: 0

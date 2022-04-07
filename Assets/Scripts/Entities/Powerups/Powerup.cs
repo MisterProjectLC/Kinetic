@@ -1,23 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
 public abstract class Powerup : MonoBehaviour
 {
     static Vector3 rotation = new Vector3(0f, 60f, 0f);
 
-    public UnityAction<GameObject> OnPowerup;
-
     [SerializeField]
     GameObject icon;
-
-    private void Start()
-    {
-        Setup();
-    }
-
-    protected abstract void Setup();
 
     // Update is called once per frame
     void Update()
@@ -28,28 +18,26 @@ public abstract class Powerup : MonoBehaviour
     private void OnEnable()
     {
         icon.SetActive(true);
+        GetComponent<Canvas>().worldCamera = Camera.main;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         PlayerCharacterController player = other.GetComponent<PlayerCharacterController>();
 
-        if (!player)
-            return;
-
-        if (!ValidPowerup(player))
+        if (!player || !ValidPowerup(player))
             return;
 
         if (GetComponent<AudioSource>())
-        {
             GetComponent<AudioSource>().Play();
-        }
 
-        OnPowerup?.Invoke(player.gameObject);
+        ActivatePowerup(player.gameObject);
 
         StartCoroutine(AutoDestruct());
         
     }
+
+    protected abstract void ActivatePowerup(GameObject player);
 
     protected virtual bool ValidPowerup(PlayerCharacterController player) {
         return true;

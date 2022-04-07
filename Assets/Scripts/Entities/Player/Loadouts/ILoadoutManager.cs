@@ -4,6 +4,23 @@ using UnityEngine.Events;
 
 public abstract class ILoadoutManager : MonoBehaviour
 {
+    [System.Serializable]
+    public struct Option
+    {
+        public Upgrade option;
+        public bool isPassive
+        {
+            get
+            {
+                return option is Passive;
+            }
+        }
+
+        [Tooltip("Leave empty if none")]
+        public LocalizedString secondaryAbility;
+        public List<LocalizedString> prerequisiteAbilities;
+    }
+
     public abstract void SubscribeToLoadoutSwitch(UnityAction subscriber);
 
     public abstract void SubscribeToDeviceSwitch(UnityAction<Device> subscriber);
@@ -14,7 +31,7 @@ public abstract class ILoadoutManager : MonoBehaviour
 
     public abstract void SetAbility(Ability ability, int loadout, int abilityNumber);
 
-    public abstract void SetPassive(GameObject passive, bool isActivated);
+    public abstract void SetPassive(Upgrade passive, bool isActivated);
 
     public abstract Ability[] GetCurrentLoadout();
 
@@ -22,7 +39,9 @@ public abstract class ILoadoutManager : MonoBehaviour
 
     public abstract Device GetCurrentDevice();
 
-    public abstract List<LoadoutManager.Option> GetInitialOptions();
+    public abstract List<Option> GetInitialOptions();
 
-    public abstract List<LoadoutManager.Option> GetOptions();
+    public abstract List<Option> GetInitialPassives();
+
+    public abstract List<Option> GetOptions();
 }

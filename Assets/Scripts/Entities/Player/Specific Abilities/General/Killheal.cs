@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Killheal : MonoBehaviour
+public class Killheal : Passive
 {
     Health health;
 

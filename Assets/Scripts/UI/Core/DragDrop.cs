@@ -9,25 +9,23 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     CanvasGroup canvasGroup;
 
     public string Type = "Ability";
-    public UnityAction<DropSlot> OnInsert;
+    UnityAction<DropSlot> OnInsert;
+    public void SubscribeToInsert(UnityAction<DropSlot> subscriber) { OnInsert += subscriber; }
+
     public UnityAction<DropSlot> OnRemove;
     public UnityAction OnClick;
     public DropSlot AssignedSlot;
-    
-    private void Awake()
-    {
-        OnInsert += AssignToSlot;
-    }
 
-    private void Start()
+    protected void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    void AssignToSlot(DropSlot slot)
+    public void AssignToSlot(DropSlot slot)
     {
+        OnInsert?.Invoke(slot);
         AssignedSlot = slot;
     }
 

@@ -23,7 +23,7 @@ public class Translocate : SecondaryAbility
         // Send Ray and get Info
         Camera playerCamera = player.GetPlayerCamera();
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        Physics.Raycast(ray, out RaycastHit hitInfo, Range, TargetLayers, QueryTriggerInteraction.Ignore);
+        Physics.Raycast(ray, out RaycastHit hitInfo, Range, TargetLayers, QueryTriggerInteraction.Collide);
 
         Collider collider = hitInfo.collider;
 
@@ -82,11 +82,6 @@ public class Translocate : SecondaryAbility
         player.GetComponent<CharacterController>().enabled = true;
         if (target.GetComponent<NavMeshAgent>())
         {
-            if (target.GetComponent<Enemy>().RayToGround().collider == null)
-                target.GetComponent<NavMeshAgent>().enabled = false;
-            else
-                target.GetComponent<NavMeshAgent>().enabled = true;
-
             target.GetComponent<NavMeshAgent>().enabled = false;
             Debug.Log("Translocate: " + target.GetComponent<NavMeshAgent>().enabled);
         }

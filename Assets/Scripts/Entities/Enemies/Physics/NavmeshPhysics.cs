@@ -12,6 +12,8 @@ public class NavmeshPhysics : IEnemyPhysics
 
     NavMeshAgent pathAgent;
 
+    RaycastHit[] hits = new RaycastHit[1];
+
     private void Start()
     {
         pathAgent = GetComponent<NavMeshAgent>();
@@ -33,8 +35,8 @@ public class NavmeshPhysics : IEnemyPhysics
             ray = new Ray(transform.position + Vector3.up, Vector3.down);
         else
             ray = new Ray(pathAgent.nextPosition + Vector3.up, Vector3.down);
-        Physics.Raycast(ray, out RaycastHit hitInfo, HoverHeight + 1f, GroundLayers.layers, QueryTriggerInteraction.Ignore);
-        return hitInfo;
+        Physics.RaycastNonAlloc(ray, hits, HoverHeight + 1f, GroundLayers.layers, QueryTriggerInteraction.Ignore);
+        return hits[0];
     }
 
     protected override void FeelGravity()
@@ -70,10 +72,12 @@ public class NavmeshPhysics : IEnemyPhysics
         if (!pathAgent.enabled || !pathAgent.updatePosition)
         {
             // Collision
-            Ray ray = new Ray(Model.transform.position, moveVelocity.normalized);
-            Physics.Raycast(ray, out RaycastHit hitInfo, CollisionDistance * moveVelocity.magnitude / 12f,
-                GroundLayers.layers, QueryTriggerInteraction.Ignore);
-            if (hitInfo.collider)
+            if (moveVelocity.magnitude > 0.2f) { 
+                    Ray ray = new Ray(Model.transform.position, moveVelocity.normalized);
+                Physics.RaycastNonAlloc(ray, hits, CollisionDistance * moveVelocity.magnitude / 12f,
+                    GroundLayers.layers, QueryTriggerInteraction.Ignore);
+            }
+            if (hits[0].collider)
             {
                 OnKnockbackCollision?.Invoke(moveVelocity);
                 moveVelocity = Vector3.zero;

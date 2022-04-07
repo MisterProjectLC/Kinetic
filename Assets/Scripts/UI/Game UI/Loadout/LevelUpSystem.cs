@@ -10,7 +10,7 @@ public class LevelUpSystem : MonoBehaviour
     {
         _First,
         Passive,
-        Skill,
+        Ability,
         Weapon,
         _Last
     }
@@ -19,17 +19,17 @@ public class LevelUpSystem : MonoBehaviour
     [System.Serializable]
     public struct Loadout
     {
-        public List<DropSlot> slots;
+        public List<LoadoutSlot> slots;
     }
 
     [SerializeField]
-    DropSlot globalSlot;
+    LoadoutSlot globalSlot;
     [SerializeField]
-    List<Loadout> totalSlots;
+    List<Loadout> abilitySlots;
     [SerializeField]
-    List<DropSlot> passiveSlots;
+    List<LoadoutSlot> passiveSlots;
     [SerializeField]
-    List<DropSlot> initialSlots;
+    List<LoadoutSlot> setupSlots;
     [SerializeField]
     GameObject NewAbilityText;
     [SerializeField]
@@ -38,16 +38,21 @@ public class LevelUpSystem : MonoBehaviour
     CanvasGroup DragInstructions;
 
     [Header("Prefab References")]
-    public GameObject optionPrefab;
-    public GameObject heavyOptionPrefab;
+    [SerializeField]
+    GameObject optionPrefab;
+    [SerializeField]
+    GameObject heavyOptionPrefab;
 
     List<LoadoutOption> optionsLocked = new List<LoadoutOption>();
     Dictionary<Type, List<LoadoutOption>> optionsBank =  new Dictionary<Type, List<LoadoutOption>>();
     List<LoadoutOption> optionsShown = new List<LoadoutOption>();
     List<LoadoutOption> optionsObtained = new List<LoadoutOption>();
 
+    ILoadoutManager loadoutManager;
+
     bool loweredMenu = false;
     int siblingBaseCount = 0;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -60,70 +65,50 @@ public class LevelUpSystem : MonoBehaviour
         for (Type i = Type._First+1; i < Type._Last; i++)
             optionsBank.Add(i, new List<LoadoutOption>());
 
-        for (int i = 0; i < totalSlots.Count; i++)
-            totalSlots[i].slots.Add(globalSlot);
+        for (int i = 0; i < abilitySlots.Count; i++)
+            abilitySlots[i].slots.Add(globalSlot);
+
+        siblingBaseCount = transform.childCount;
+
+        loadoutManager = GetComponent<ILoadoutManager>();
+        SetupLoadoutSlots(loadoutManager);
     }
 
 
     void AddToOptionsBank(LoadoutOption loadoutOption)
     {
-        if (!loadoutOption.Ability)
+        if (loadoutOption.Option is Passive)
             optionsBank[Type.Passive].Add(loadoutOption);
-        else if (loadoutOption.Ability is WeaponAbility)
+        else if (loadoutOption.Option is WeaponAbility)
             optionsBank[Type.Weapon].Add(loadoutOption);
         else
-            optionsBank[Type.Skill].Add(loadoutOption);
+            optionsBank[Type.Ability].Add(loadoutOption);
     }
 
 
-    void Start() {
-
-        ILoadoutManager loadoutManager = GetComponent<ILoadoutManager>();
-        siblingBaseCount = transform.childCount;
-
-        SetupLoadoutSlots(loadoutManager);
-
+    void Start() 
+    {
         PopulateInitialOptions(loadoutManager);
 
         // Prepare saved options
-        for (int j = 0; j < Hermes.SpawnAbilities.Count; j++)
-            Hermes.SpawnAbilities[j].SetInGame(false);
+        for (int j = 0; j < SavedLoadout.GetSpawnAbilityCount(); j++)
+            SavedLoadout.GetSpawnAbility(j).SetInGame(false);
 
         PopulateOptions(loadoutManager);
-
-        // Fix for secondary abilities
-        foreach (Loadout thisLoadout in totalSlots)
-            foreach (DropSlot slot in thisLoadout.slots)
-            {
-                // Check if there's a big loadout option here
-                DragDrop dragDrop = slot.InsertedDragDrop;
-                if (!dragDrop)
-                    continue;
-                BigLoadoutOption bigOption = dragDrop.GetComponent<BigLoadoutOption>();
-                if (!bigOption)
-                    continue;
-
-                // Check, find and insert its secondary ability
-                int nextSlotIndex = slot.GetComponent<LoadoutSlot>().AbilityNumber + 1;
-                if (nextSlotIndex >= thisLoadout.slots.Count || !thisLoadout.slots[nextSlotIndex].InsertedDragDrop)
-                    continue;
-
-                //bigOption.InsertOnSecondary(thisLoadout.slots[nextSlotIndex].InsertedDragDrop.GetComponent<LoadoutOption>());
-            }
     }
 
     void SetupLoadoutSlots(ILoadoutManager loadoutManager)
     {
-        foreach (Loadout loadout in totalSlots)
+        foreach (Loadout loadout in abilitySlots)
         {
-            foreach (DropSlot slot in loadout.slots)
+            foreach (AbilitySlot slot in loadout.slots)
             {
-                slot.GetComponent<LoadoutSlot>().Setup(loadoutManager);
+                slot.Setup(loadoutManager);
             }
         }
-        foreach (DropSlot slot in passiveSlots)
+        foreach (PassiveSlot slot in passiveSlots)
         {
-            slot.GetComponent<LoadoutSlot>().Setup(loadoutManager);
+            slot.Setup(loadoutManager);
         }
     }
 
@@ -132,63 +117,66 @@ public class LevelUpSystem : MonoBehaviour
     {
         int i = 0;
         // Populate initial options
-        foreach (LoadoutManager.Option option in loadoutManager.GetInitialOptions())
+        foreach (ILoadoutManager.Option option in loadoutManager.GetInitialOptions())
         {
             LoadoutOption loadoutOption = GenerateOptionInstance(option);
 
-            if (option.ability is SecondaryAbility)
+            if (option.option is SecondaryAbility)
             {
                 i--;
                 //initialSlots[i].OnDrop(loadoutOption.gameObject);
-                initialSlots[i - 1].InsertedDragDrop.GetComponent<BigLoadoutOption>().InsertOnSecondary(loadoutOption);
+                ((BigLoadoutOption)setupSlots[i - 1].InsertedDragDrop).InsertOnSecondary(loadoutOption);
             }
             else
             {
-                initialSlots[i].OnDrop(loadoutOption.gameObject);
+                setupSlots[i].OnDrop(loadoutOption.gameObject);
                 if (i != 0 && option.secondaryAbility.value.Length > 0)
                     i++;
             }
             i++;
+        }
+
+        i = 0;
+        foreach (ILoadoutManager.Option option in loadoutManager.GetInitialPassives())
+        {
+            LoadoutOption loadoutOption = GenerateOptionInstance(option);
+            passiveSlots[i].OnDrop(loadoutOption.gameObject);
         }
     }
 
     void PopulateOptions(ILoadoutManager loadoutManager)
     {
         // Populate options
-        foreach (LoadoutManager.Option option in loadoutManager.GetOptions())
+        foreach (ILoadoutManager.Option option in loadoutManager.GetOptions())
         {
             LoadoutOption loadoutOption = GenerateOptionInstance(option);
             GameObject GO = loadoutOption.gameObject;
 
-            // Makeshift code for initial Killheal passive
-            if (option.option.name == "Killheal")
+            // Check if already saved
+            if (SavedLoadout.ExistsSpawnAbility(option.option.name))
             {
-                passiveSlots[0].OnDrop(GO);
-                optionsObtained.Add(loadoutOption);
-            }
-            // Setup option
-            else
-            {
-                // Check if already saved
-                if (Hermes.SpawnAbilities.Exists(x => x.name == option.option.name))
-                {
-                    Hermes.SavedAbility ability = Hermes.SpawnAbilities.Find(x => x.name == option.option.name);
-                    Hermes.SpawnAbilities[Hermes.SpawnAbilities.IndexOf(ability)].SetInGame(true);
+                SavedLoadout.SavedAbility ability = SavedLoadout.GetSpawnAbility(option.option.name);
+                SavedLoadout.SetSpawnAbility(ability, SavedLoadout.GetSpawnAbilityIndex(ability));
 
-                    if (ability.loadout != -1)
-                        totalSlots[ability.loadout].slots[ability.slot].OnDrop(GO);
+                if (ability.loadout != -1)
+                {
+                    if (loadoutOption.Option is SecondaryAbility)
+                        ((BigLoadoutOption)abilitySlots[ability.loadout].slots[ability.slot-1].InsertedDragDrop).InsertOnSecondary(loadoutOption);
                     else
-                        passiveSlots[ability.slot].OnDrop(GO);
-                    optionsObtained.Add(loadoutOption);
+                        abilitySlots[ability.loadout].slots[ability.slot].OnDrop(GO);
+
                 }
                 else
-                {
-                    GO.SetActive(false);
-                    if (option.prerequisiteAbilities.Count > 0)
-                        optionsLocked.Add(loadoutOption);
-                    else
-                        AddToOptionsBank(loadoutOption);
-                }
+                    passiveSlots[ability.slot].OnDrop(GO);
+                optionsObtained.Add(loadoutOption);
+            }
+            else
+            {
+                GO.SetActive(false);
+                if (option.prerequisiteAbilities.Count > 0)
+                    optionsLocked.Add(loadoutOption);
+                else
+                    AddToOptionsBank(loadoutOption);
             }
         }
     }
@@ -203,7 +191,7 @@ public class LevelUpSystem : MonoBehaviour
         else
         {
             newInstance = Instantiate(heavyOptionPrefab);
-            newInstance.GetComponent<BigLoadoutOption>().SetSecondaryAbility(option.secondaryAbility);
+            newInstance.GetComponent<BigLoadoutOption>().SetupSecondaryAbility(loadoutManager, option.secondaryAbility);
         }
 
         // Set sibling order
@@ -214,9 +202,9 @@ public class LevelUpSystem : MonoBehaviour
         // Setup loadout option
         LoadoutOption loadoutOption = newInstance.GetComponent<LoadoutOption>();
         loadoutOption.Option = option.option;
-        loadoutOption.PrerequisiteAbilities = new List<string>(option.prerequisiteAbilities);
-        loadoutOption.OnInsert += ChooseOption;
-        loadoutOption.GetComponent<DragDrop>().OnClick += () => StartCoroutine(InstructionsAnimation());
+        loadoutOption.PrerequisiteAbilities = new List<LocalizedString>(option.prerequisiteAbilities);
+        loadoutOption.SubscribeToInsertSelf(ChooseOption);
+        loadoutOption.OnClick += () => StartCoroutine(InstructionsAnimation());
 
         return loadoutOption;
     }
@@ -274,7 +262,7 @@ public class LevelUpSystem : MonoBehaviour
         List<LoadoutOption> optionsToDelete = new List<LoadoutOption>();
         foreach (LoadoutOption potentialToUnlock in optionsLocked)
         {
-            string displayName = option.Ability ? option.Ability.LocalizedName.value : option.Option.name;
+            string displayName = option.Option.LocalizedName.value;
             if (potentialToUnlock.PrerequisiteAbilities.Contains(displayName))
             {
                 potentialToUnlock.PrerequisiteAbilities.Remove(displayName);
@@ -314,6 +302,6 @@ public class LevelUpSystem : MonoBehaviour
 
     public int GetLoadoutCount()
     {
-        return totalSlots.Count;
+        return abilitySlots.Count;
     }
 }

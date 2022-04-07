@@ -14713,7 +14713,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-405396
+  m_Name: pb_Mesh268640
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26907,9 +26907,6 @@ GameObject:
   - component: {fileID: 1550171847}
   - component: {fileID: 1550171846}
   - component: {fileID: 1550171845}
-  - component: {fileID: 1550171844}
-  - component: {fileID: 1550171843}
-  - component: {fileID: 1550171842}
   - component: {fileID: 1550171841}
   m_Layer: 20
   m_Name: Window
@@ -27029,52 +27026,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1550171842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550171839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b7880baa992eab40a595f041b51874d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HealthRef: {fileID: 1550171844}
-  DamageSensitivity: 1
---- !u!114 &1550171843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550171839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ac156716879634485f322747ac5fc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BrokenModelPrefab: {fileID: 2320227338128447710, guid: 64d8f09cbefe77649a2b625c105bacc6,
-    type: 3}
-  MatchModelScale: 0
-  OriginalModel: {fileID: 0}
---- !u!114 &1550171844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550171839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentHealth: 5
-  CriticalHealth: 1
-  MaxHealth: 3
-  lastAttack: {fileID: 0}
 --- !u!64 &1550171845
 MeshCollider:
   m_ObjectHideFlags: 0

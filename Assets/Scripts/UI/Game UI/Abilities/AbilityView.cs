@@ -13,6 +13,7 @@ public class AbilityView : MonoBehaviour
     Vector2 AdditionalAbilityPosition = new Vector2(-260, 24);
 
     GameObject AdditionalAbility;
+    GameObject CenterAdditionalAbility;
 
     public RectTransform CenterTransform { get; set; }
 
@@ -53,6 +54,8 @@ public class AbilityView : MonoBehaviour
 
         if (AdditionalAbility)
             Destroy(AdditionalAbility);
+        if (CenterAdditionalAbility)
+            Destroy(CenterAdditionalAbility);
 
         if (currentAbility == null)
         {
@@ -61,16 +64,16 @@ public class AbilityView : MonoBehaviour
         }
 
         if (currentAbility.abilityView)
-            CreateInstanceView(currentAbility, currentAbility.abilityView, transform);
+            AdditionalAbility = CreateInstanceView(currentAbility, currentAbility.abilityView, transform);
         if (currentAbility.centerAbilityView)
-            CreateInstanceView(currentAbility, currentAbility.centerAbilityView, CenterTransform);
+            CenterAdditionalAbility = CreateInstanceView(currentAbility, currentAbility.centerAbilityView, CenterTransform);
 
         image.gameObject.SetActive(true);
         Label.text = currentAbility.LocalizedName.value;
         CooldownRect.sizeDelta = Vector2.zero;
     }
 
-    void CreateInstanceView(Ability ability, GameObject view, Transform instanceParent)
+    GameObject CreateInstanceView(Ability ability, GameObject view, Transform instanceParent)
     {
         try
         {
@@ -79,10 +82,12 @@ public class AbilityView : MonoBehaviour
             additionalView.Setup(ability);
             additionalView.transform.parent = instanceParent;
             additionalView.GetComponent<RectTransform>().anchoredPosition = AdditionalAbilityPosition;
+            return instance;
         }
         catch
         {
             Debug.LogError("This Ability's View doesn't have an AdditionalView component!");
+            return null;
         }
     }
 }

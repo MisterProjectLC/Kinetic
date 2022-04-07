@@ -85,7 +85,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8191001801631402916}
   - component: {fileID: 8191001801631402918}
-  - component: {fileID: 6734680125517493548}
   - component: {fileID: 8408471341550830166}
   - component: {fileID: 5203395209883525984}
   - component: {fileID: 8191001801631402919}
@@ -126,20 +125,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8191001801631402917}
   m_CullTransparentMesh: 1
---- !u!114 &6734680125517493548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191001801631402917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b3da714bf0d984fa734bc21293d309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 0
-  AssignedSlot: {fileID: 0}
 --- !u!114 &8408471341550830166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,8 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5e884eca54f664baa06960e213c970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ability: {fileID: 0}
-  isPassive: 0
+  Type: Ability
+  AssignedSlot: {fileID: 0}
+  Option: {fileID: 0}
+  PrerequisiteAbilities: []
   passiveOverlay: {fileID: 3488476042514456108}
 --- !u!114 &5203395209883525984
 MonoBehaviour:

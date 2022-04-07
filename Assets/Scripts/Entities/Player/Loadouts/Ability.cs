@@ -2,10 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Ability : MonoBehaviour
+public abstract class Ability : Upgrade
 {
-    public LocalizedString LocalizedName;
-
     [Tooltip("Cooldown")]
     public float Cooldown = 5f;
     public float Timer { get; protected set; } = 0f;
@@ -40,6 +38,8 @@ public abstract class Ability : MonoBehaviour
 
     protected void Awake()
     {
+        Type = "Ability";
+
         audioSource = GetComponent<AudioSource>();
         if (OnExecute == null)
             OnExecute += (Input input) => OnExecuteAbility?.Invoke(this);

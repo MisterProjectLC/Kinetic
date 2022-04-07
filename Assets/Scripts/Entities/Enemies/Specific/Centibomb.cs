@@ -15,15 +15,18 @@ public class Centibomb : MonoBehaviour
 
     float killTimer = 1f;
 
+    Health health;
+    ChaseTarget chaseTarget;
     RaycastHit[] hitInfos;
-
     Clock clock;
 
     // Start is called before the first frame update
     void Start()
     {
         hitInfos = new RaycastHit[1];
-        clock = new Clock(0.5f);
+        clock = new Clock(0.8f);
+        health = GetComponent<Health>();
+        chaseTarget = GetComponent<ChaseTarget>();
 
         if (GetComponent<NavMeshAgent>().isOnNavMesh)
             GetComponent<NavMeshAgent>().destination = transform.position;
@@ -44,12 +47,12 @@ public class Centibomb : MonoBehaviour
 
     private void Update()
     {
-        if (!leader && (!GetComponent<ChaseTarget>().Target ||
-            (GetComponent<ChaseTarget>().Target.position - transform.position).magnitude > MAX_EXPLOSION_DISTANCE))
+        if (!leader && (!chaseTarget.Target ||
+            (chaseTarget.Target.position - transform.position).magnitude > MAX_EXPLOSION_DISTANCE))
         {
             killTimer -= Time.deltaTime;
             if (killTimer < 0f)
-                GetComponent<Health>().Kill();
+                health.Kill();
         }
     
     }
@@ -65,11 +68,11 @@ public class Centibomb : MonoBehaviour
             Transform centibomb = hitInfo.collider.transform.parent;
             if (hitInfo.collider.transform.parent && hitInfo.collider.transform.parent.GetComponent<Centibomb>() &&
                 centibomb.name.StartsWith("Centibomb") && !siblings.Contains(centibomb.GetComponent<Centibomb>()))
-                    GetComponent<Health>().Kill();
+                health.Kill();
 
             else if (hitInfo.collider.name != "EN_Centobomba" && (!centibomb || centibomb.name != "EN_Centobomba"))
             {
-                GetComponent<Health>().Kill();
+                health.Kill();
             }
         }
     }
@@ -77,12 +80,12 @@ public class Centibomb : MonoBehaviour
     void Detonate(Vector3 moveVelocity)
     {
         if (moveVelocity.magnitude > 2f)
-            GetComponent<Health>().Kill();
+            health.Kill();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
-            GetComponent<Health>().Kill();
+            health.Kill();
     }
 }

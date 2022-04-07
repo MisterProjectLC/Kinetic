@@ -33,7 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2862948054975451143
 MonoBehaviour:
@@ -49,9 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: vanguard_charge_title
+  Type: 
   Cooldown: 6
   Assigned: 0
   abilityView: {fileID: 0}
+  centerAbilityView: {fileID: 0}
   HoldAbility: 1
   ReleaseAbility: 1
   SoundEffects: []
@@ -274,7 +276,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3392988569540818523
 MonoBehaviour:
@@ -396,7 +398,7 @@ GameObject:
   - component: {fileID: 6659303644955643467}
   - component: {fileID: 182347201895830892}
   m_Layer: 12
-  m_Name: ReplenishAmmo
+  m_Name: Ammo Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -445,7 +447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6452605973996929548
 Transform:
   m_ObjectHideFlags: 0
@@ -458,7 +460,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6024573679260689546
 MonoBehaviour:
@@ -472,6 +474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e2ec239f5f234479ab1ea85d4cdc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LocalizedName:
+    key: ninja_extrajump_title
+  Type: 
 --- !u!114 &4656760338141244960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,7 +525,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1422791180443009761
 MonoBehaviour:
@@ -536,9 +541,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: vanguard_graviton_title
+  Type: 
   Cooldown: 2
   Assigned: 0
   abilityView: {fileID: 0}
+  centerAbilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -708,7 +715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7816245253526124877
 Transform:
   m_ObjectHideFlags: 0
@@ -721,7 +728,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5917140286660060292
 MonoBehaviour:
@@ -735,6 +742,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6f3897f9da946499b48169106b8c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LocalizedName:
+    key: killheal_title
+  Type: 
 --- !u!114 &5566846527493726951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1345,7 +1355,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1158625610870190918
 MonoBehaviour:
@@ -1464,7 +1474,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8520425101159635055
 MonoBehaviour:
@@ -1480,9 +1490,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: 
+  Type: 
   Cooldown: 3
   Assigned: 0
   abilityView: {fileID: 0}
+  centerAbilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -1519,7 +1531,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5034638831426822223
 MonoBehaviour:
@@ -1535,9 +1547,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: vanguard_plasmapulse_title
+  Type: 
   Cooldown: 5
   Assigned: 0
   abilityView: {fileID: 0}
+  centerAbilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -1726,7 +1740,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3645659837728276841
 MonoBehaviour:
@@ -1742,9 +1756,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: vanguard_frontalshield_title
+  Type: 
   Cooldown: 7
   Assigned: 0
   abilityView: {fileID: 0}
+  centerAbilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects:
@@ -1901,7 +1917,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &266890744467231716
 MonoBehaviour:
@@ -1915,6 +1931,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849f96d3d3205454483e961bb4d264ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LocalizedName:
+    key: vanguard_collision_title
+  Type: 
   explosion: {fileID: 5059452173142551493, guid: f125cceb921bb894b9098ba5323b1db0,
     type: 3}
   minimumVelocity: 27
@@ -2074,6 +2093,54 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &6383806001972914918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4530609435515411584}
+  - component: {fileID: 8156488002346827242}
+  m_Layer: 12
+  m_Name: Device Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4530609435515411584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383806001972914918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4021532750877547998}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8156488002346827242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383806001972914918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e1694ff5c76a14ea07888abba6b9d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DownCooldown: 0.1
+  UpCooldown: 0.1
+  DownTransform: {fileID: 7885829806726108092}
+  UpTransform: {fileID: 5701861848161749029}
+  DeviceHolder: {fileID: 6212540214247160696}
 --- !u!1 &6554826155812535130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2104,7 +2171,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &262964791305891837
 MonoBehaviour:
@@ -2120,9 +2187,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: vanguard_detonate_title
+  Type: 
   Cooldown: 0.05
   Assigned: 0
   abilityView: {fileID: 0}
+  centerAbilityView: {fileID: 0}
   HoldAbility: 1
   ReleaseAbility: 0
   SoundEffects: []
@@ -2295,7 +2364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4021532750877547998}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7394917379718597850
 MonoBehaviour:
@@ -2311,9 +2380,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalizedName:
     key: vanguard_payback_title
+  Type: 
   Cooldown: 14
   Assigned: 0
   abilityView: {fileID: 0}
+  centerAbilityView: {fileID: 0}
   HoldAbility: 0
   ReleaseAbility: 0
   SoundEffects: []
@@ -2503,6 +2574,7 @@ Transform:
   - {fileID: 958540071565868630}
   - {fileID: 1637050396762626434}
   - {fileID: 6659303644955643467}
+  - {fileID: 4530609435515411584}
   - {fileID: 307492438962099070}
   - {fileID: 4404136333278151258}
   - {fileID: 4763104984783528517}
@@ -2661,63 +2733,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialOptions:
-  - option: {fileID: 7710702315391486102}
+  - option: {fileID: 2509313351557390932}
     secondaryAbility:
       key: vanguard_frontalshield_title
     prerequisiteAbilities: []
-  - option: {fileID: 2626429706252960998}
+  - option: {fileID: 6285873315432413957}
     secondaryAbility:
       key: vanguard_detonate_title
     prerequisiteAbilities: []
-  - option: {fileID: 1875275233879253910}
+  - option: {fileID: 2862948054975451143}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities: []
+  InitialPassives:
+  - option: {fileID: 5917140286660060292}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
   Options:
-  - option: {fileID: 5349026757627506031}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities: []
-  - option: {fileID: 6554826155812535130}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities: []
-  - option: {fileID: 8675959487470734100}
+  - option: {fileID: 5034638831426822223}
     secondaryAbility:
       key: 
     prerequisiteAbilities:
-    - Graviton
-  - option: {fileID: 3401051246386459786}
+    - key: vanguard_lasercannon_title
+  - option: {fileID: 262964791305891837}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
-  - option: {fileID: 4973758252977665999}
+  - option: {fileID: 7394917379718597850}
+    secondaryAbility:
+      key: vanguard_graviton_title
+    prerequisiteAbilities:
+    - key: 
+  - option: {fileID: 3645659837728276841}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities: []
+  - option: {fileID: 6339347368594958605}
     secondaryAbility:
       key: vanguard_plasmapulse_title
     prerequisiteAbilities: []
-  - option: {fileID: 4101398689657722995}
+  - option: {fileID: 266890744467231716}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
-  - option: {fileID: 3241069975669373158}
+  - option: {fileID: 6024573679260689546}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
-  - option: {fileID: 5759895014368333225}
+  - option: {fileID: 1422791180443009761}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
-  - option: {fileID: 5345972669044204675}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities:
-    - Laser Cannon
   AbilitiesEnabled: 1
-  DownCooldown: 0.1
-  UpCooldown: 0.1
-  DownTransform: {fileID: 7885829806726108092}
-  UpTransform: {fileID: 5701861848161749029}
-  DeviceHolder: {fileID: 6212540214247160696}
 --- !u!114 &5083631963515002129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2979,21 +3047,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 245d7c791efffd74b806e11960ed1bf8, type: 3}
---- !u!198 &1359768642992881187 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3857014482737314945, guid: 245d7c791efffd74b806e11960ed1bf8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2835016363911021218}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4973758252977665999 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7088198090136532333, guid: 245d7c791efffd74b806e11960ed1bf8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2835016363911021218}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5848571593649446009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8534968615730699995, guid: 245d7c791efffd74b806e11960ed1bf8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2835016363911021218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6339347368594958605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8116017064017062831, guid: 245d7c791efffd74b806e11960ed1bf8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2835016363911021218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b6006346eaf2f74093eb0d26d2630a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!198 &1359768642992881187 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3857014482737314945, guid: 245d7c791efffd74b806e11960ed1bf8,
     type: 3}
   m_PrefabInstance: {fileID: 2835016363911021218}
   m_PrefabAsset: {fileID: 0}
@@ -3119,6 +3193,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4534391726659963112}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2509313351557390932 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2035550557693848252, guid: d82bd914086771c429bf7396d515caa8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4534391726659963112}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710702315391486102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6357191845059044570 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7409596822161239090, guid: d82bd914086771c429bf7396d515caa8,
@@ -3194,15 +3280,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b17e97baf1399124f87ee295121d45c7, type: 3}
---- !u!20 &4947734628076399948 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2014055666174919352, guid: b17e97baf1399124f87ee295121d45c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6871013754593390580}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &735082137932237708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6154511750951806072, guid: b17e97baf1399124f87ee295121d45c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6871013754593390580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &4947734628076399948 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2014055666174919352, guid: b17e97baf1399124f87ee295121d45c7,
     type: 3}
   m_PrefabInstance: {fileID: 6871013754593390580}
   m_PrefabAsset: {fileID: 0}
@@ -3300,15 +3386,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0923f79b33e6ce04e871c4363a512e72, type: 3}
---- !u!4 &3485480176587976528 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6193918609679044302, guid: 0923f79b33e6ce04e871c4363a512e72,
-    type: 3}
-  m_PrefabInstance: {fileID: 7326180014631215518}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2626429706252960998 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4744861131574945144, guid: 0923f79b33e6ce04e871c4363a512e72,
     type: 3}
   m_PrefabInstance: {fileID: 7326180014631215518}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3485480176587976528 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6193918609679044302, guid: 0923f79b33e6ce04e871c4363a512e72,
+    type: 3}
+  m_PrefabInstance: {fileID: 7326180014631215518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6285873315432413957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3643475396191345307, guid: 0923f79b33e6ce04e871c4363a512e72,
+    type: 3}
+  m_PrefabInstance: {fileID: 7326180014631215518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2626429706252960998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8c64c8fc893e44bb56bd159c55eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

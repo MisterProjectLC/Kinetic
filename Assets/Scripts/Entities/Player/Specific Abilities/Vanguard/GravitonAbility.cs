@@ -11,11 +11,12 @@ public class GravitonAbility : Ability
     PlayerCharacterController player;
     ProjectileShooter shooter;
 
-    void Awake()
+    new void Awake()
     {
         player = GetComponentInParent<PlayerCharacterController>();
         shooter = GetComponent<ProjectileShooter>();
         shooter.Setup(Graviton, HitLayers, player.GetPlayerCamera().transform);
+        base.Awake();
     }
 
     public override void Execute(Input input)

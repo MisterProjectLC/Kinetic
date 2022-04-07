@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Walljump : MonoBehaviour
+public class Walljump : Passive
 {
     PlayerCharacterController playerController;
     PlayerInputHandler inputHandler;
+
+    [SerializeField]
+    float JumpForceMultiplier = 1f;
 
     float m_LastTimeWallAirTouched = 0f;
     [SerializeField]
@@ -20,6 +23,7 @@ public class Walljump : MonoBehaviour
         playerController.OnJumpAir += Execute;
         playerController.OnCollision += OnWallCollision;
     }
+
 
     private void Update()
     {
@@ -50,7 +54,7 @@ public class Walljump : MonoBehaviour
             playerController.GetComponent<AudioSource>().Play();
             playerController.SetMoveVelocity( (Vector3.up + new Vector3(wallDirection.x, 0f, wallDirection.z).normalized + 
                 new Vector3(faceDirection.x * 1.5f, faceDirection.y > 0f ? faceDirection.y : 0f, faceDirection.z * 1.5f)) *
-                playerController.JumpForce * 1.5f);
+                playerController.JumpForce * JumpForceMultiplier);
 
             if (currentDetectionTime > 2*k_WallAirDetectionTime/5)
                 currentDetectionTime -= k_WallAirDetectionTime/5;

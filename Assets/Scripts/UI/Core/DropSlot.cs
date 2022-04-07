@@ -65,7 +65,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
 
         InsertedDragDrop = dragDrop.GetComponent<DragDrop>();
         dragDrop.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + Offset;
-        InsertedDragDrop.OnInsert?.Invoke(this);
+        InsertedDragDrop.AssignToSlot(this);
         InsertedDragDrop.transform.SetParent(transform);
         OnInserted?.Invoke(InsertedDragDrop);
     }
