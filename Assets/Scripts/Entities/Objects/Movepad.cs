@@ -93,6 +93,7 @@ public class Movepad : MonoBehaviour
         PhysicsEntity entity = target.GetComponentInParent<PhysicsEntity>();
         if (isJump)
             entity.SetMoveVelocity(currentMoveVector);
+        
         else
             entity.ReceiveMotion(currentMoveVector);
 

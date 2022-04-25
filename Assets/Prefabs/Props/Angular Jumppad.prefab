@@ -50,9 +50,9 @@ MonoBehaviour:
     m_Bits: 4096
   SpawnPoint: {fileID: 0}
   DespawnPoint: {fileID: 0}
-  detectSize: {x: 1, y: 1, z: 2}
+  detectSize: {x: 5, y: 5, z: 10}
   detectPosOffset: {x: 0, y: 0, z: 0}
-  moveVector: {x: 0, y: 0, z: 0}
+  moveVector: {x: 0, y: 30, z: -30}
   Speed: 5
   isJump: 1
   Sticky: 0

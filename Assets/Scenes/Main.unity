@@ -1940,6 +1940,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6019f35805a207418c7eb6898809f63, type: 3}
+--- !u!4 &1270160108 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 314597726491234192, guid: 5a70493fa036aa44ba8506c1ee89a7f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1317512741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1317512741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1954,9 +1960,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -9010037413353034529, guid: 5a70493fa036aa44ba8506c1ee89a7f7,
         type: 3}
+      propertyPath: Checkpoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -9010037413353034529, guid: 5a70493fa036aa44ba8506c1ee89a7f7,
+        type: 3}
       propertyPath: checkMethod
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -9010037413353034529, guid: 5a70493fa036aa44ba8506c1ee89a7f7,
+        type: 3}
+      propertyPath: CheckpointPosition
+      value: 
+      objectReference: {fileID: 2044135327}
     - target: {fileID: 314597726491234192, guid: 5a70493fa036aa44ba8506c1ee89a7f7,
         type: 3}
       propertyPath: m_RootOrder
@@ -2056,7 +2072,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1734
+  m_Name: pb_Mesh-1732
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3567,6 +3583,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4021532750877547998, guid: 8c84573c6f3ef0f48b35407f5cd2f08d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4021532750877547998, guid: 8c84573c6f3ef0f48b35407f5cd2f08d,
         type: 3}
@@ -5648,6 +5669,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2683daa23fcb0f440b2ee6b31adeb4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2044135326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2044135327}
+  m_Layer: 9
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2044135327
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044135326}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1270160108}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!43 &2107093221
 Mesh:
   m_ObjectHideFlags: 0

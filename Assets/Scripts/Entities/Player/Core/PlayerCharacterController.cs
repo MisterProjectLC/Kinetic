@@ -222,6 +222,7 @@ public class PlayerCharacterController : MonoBehaviour, Entity
                 m_LastTimeJumped = Time.time;
         }
 
+        Debug.Log(moveVelocity);
         m_Controller.Move(moveVelocity * Time.deltaTime);
     }
 
@@ -229,6 +230,11 @@ public class PlayerCharacterController : MonoBehaviour, Entity
     public void SetMoveVelocity(Vector3 velocity)
     {
         moveVelocity = velocity;
+        if (moveVelocity.y > 0.5)
+        {
+            m_LastTimeJumped = Time.time;
+            IsGrounded = false;
+        }
     }
 
     public void WarpPosition(Vector3 newPosition)

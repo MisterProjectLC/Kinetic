@@ -22,10 +22,12 @@ public class AbilitySlot : LoadoutSlot
             for (int i = 0; i < LevelUpSystem.LUS.GetLoadoutCount(); i++)
                 loadoutManager.SetAbility(activating ? option.GetComponent<Ability>() : null, i, AbilityNumber);
         else
+        {
             if (LoadoutNumber >= 0)
-            loadoutManager.SetAbility(activating ? option.GetComponent<Ability>() : null, LoadoutNumber, AbilityNumber);
-        else
-            loadoutManager.SetPassive(option, activating);
+                loadoutManager.SetAbility(activating ? option.GetComponent<Ability>() : null, LoadoutNumber, AbilityNumber);
+            else
+                loadoutManager.SetPassive(option, activating);
+        }
     }
 
     protected override int GetLoadoutNumber()

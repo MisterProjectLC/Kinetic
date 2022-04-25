@@ -154,14 +154,17 @@ public class LoadoutManager : ILoadoutManager
 
     public override void SetAbility(Ability ability, int loadout, int abilityNumber)
     {
+        // Unassign previous
         if (Loadouts[loadout].abilities[abilityNumber])
             Loadouts[loadout].abilities[abilityNumber].Assigned = false;
 
+        // Assign new
         if (ability != null)
         {
             Loadouts[loadout].abilities[abilityNumber] = ability;
             ability.Assigned = true;
         }
+        // Leave at null
         else
             Loadouts[loadout].abilities[abilityNumber] = null;
 
@@ -177,6 +180,7 @@ public class LoadoutManager : ILoadoutManager
     }
 
 
+    #region Setters
     public override Ability[] GetCurrentLoadout()
     {
         return Loadouts[currentLoadout].abilities;
@@ -206,4 +210,5 @@ public class LoadoutManager : ILoadoutManager
     {
         return InitialPassives;
     }
+    #endregion
 }
