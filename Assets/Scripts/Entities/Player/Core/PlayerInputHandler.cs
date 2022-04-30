@@ -16,6 +16,7 @@ public class PlayerInputHandler : MonoBehaviour
     const string Switch = "Switch";
     const string Ability = "Ability";
     const string Slowtime = "Slowtime";
+    const string Kick = "Kick";
 
     [Header("Inverting Axis (and Allies lol)")]
     [Tooltip("Used to flip the horizontal input axis")]
@@ -88,6 +89,10 @@ public class PlayerInputHandler : MonoBehaviour
         return InputAndUnpaused && Input.GetButtonDown(Slowtime);
     }
 
+    public bool GetKick()
+    {
+        return InputAndUnpaused && Input.GetButtonDown(Kick);
+    }
 
     public bool GetAbility(int number)
     {

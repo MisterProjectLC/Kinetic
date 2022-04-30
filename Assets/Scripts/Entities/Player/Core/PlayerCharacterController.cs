@@ -222,7 +222,6 @@ public class PlayerCharacterController : MonoBehaviour, Entity
                 m_LastTimeJumped = Time.time;
         }
 
-        Debug.Log(moveVelocity);
         m_Controller.Move(moveVelocity * Time.deltaTime);
     }
 

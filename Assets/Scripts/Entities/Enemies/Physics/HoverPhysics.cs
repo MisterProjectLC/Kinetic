@@ -66,7 +66,7 @@ public class HoverPhysics : IEnemyPhysics
             if (hits[0].collider)
             {
                 OnKnockbackCollision?.Invoke(moveVelocity);
-                moveVelocity = Vector3.zero;
+                moveVelocity = Vector3.ProjectOnPlane(moveVelocity, hits[0].normal);
             }
 
             // Movement

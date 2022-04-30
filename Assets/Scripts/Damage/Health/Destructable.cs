@@ -26,11 +26,13 @@ public class Destructable : MonoBehaviour
             OriginalModel = gameObject;
 
         m_Health = GetComponent<Health>();
-        m_Health.OnDie += OnDie;
+        m_Health.OnDie += () => StartCoroutine(OnDie());
     }
 
-    void OnDie()
+    IEnumerator OnDie()
     {
+        yield return new WaitForSeconds(0.2f);
+
         if (BrokenModelPrefab != null)
         {
             if (GetComponent<UniqueID>())
@@ -44,8 +46,9 @@ public class Destructable : MonoBehaviour
 
             Vector3 entityForce = m_Health.GetComponent<PhysicsEntity>() != null ? m_Health.GetComponent<PhysicsEntity>().GetMoveVelocity() : Vector3.zero;
             entityForce = entityForce.normalized * 13*Mathf.Clamp(entityForce.magnitude, 0f, 140f);
-            foreach (Rigidbody rigidbody in newBroken.GetComponentsInChildren<Rigidbody>())
-                rigidbody.AddForce(entityForce + Random.insideUnitSphere * Random.Range(0.05f, 0.5f), ForceMode.Impulse);
+            BrokenEnemy brokenEnemy = newBroken.GetComponent<BrokenEnemy>();
+            if (brokenEnemy)
+                brokenEnemy.SetVelocity(entityForce + Random.insideUnitSphere * Random.Range(0.05f, 0.5f));
         }
 
         if (GetComponent<Poolable>())

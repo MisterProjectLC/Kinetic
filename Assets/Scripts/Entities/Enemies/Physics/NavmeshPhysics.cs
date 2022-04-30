@@ -73,14 +73,14 @@ public class NavmeshPhysics : IEnemyPhysics
         {
             // Collision
             if (moveVelocity.magnitude > 0.2f) { 
-                    Ray ray = new Ray(Model.transform.position, moveVelocity.normalized);
+                Ray ray = new Ray(Model.transform.position, moveVelocity.normalized);
                 Physics.RaycastNonAlloc(ray, hits, CollisionDistance * moveVelocity.magnitude / 12f,
                     GroundLayers.layers, QueryTriggerInteraction.Ignore);
             }
             if (hits[0].collider)
             {
                 OnKnockbackCollision?.Invoke(moveVelocity);
-                moveVelocity = Vector3.zero;
+                moveVelocity = Vector3.ProjectOnPlane(moveVelocity, hits[0].normal);
             }
 
             // Movement
