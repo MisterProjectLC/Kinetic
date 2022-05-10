@@ -11,7 +11,7 @@ public class MusicChanger : MonoBehaviour
     void Start()
     {
         gameTrigger = GetComponent<GameTrigger>();
-        gameTrigger.OnTriggerActivate += OnTriggerActivate;
+        gameTrigger.SubscribeToTriggerActivate(OnTriggerActivate);
     }
 
 

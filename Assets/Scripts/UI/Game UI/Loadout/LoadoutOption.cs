@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,7 +38,6 @@ public class LoadoutOption : DragDrop
         tooltipTrigger.Title = abilityName;
 
         SubscribeToInsert(OnInsertFunc);
-        OnRemove += RemoveFromSlot;
         if (AssignedSlot)
             OnInsertFunc(AssignedSlot);
 
@@ -54,15 +52,7 @@ public class LoadoutOption : DragDrop
 
     void OnInsertFunc(DropSlot dropSlot)
     {
-        LoadoutSlot slot = dropSlot.GetComponent<LoadoutSlot>();
-        slot.SetOption(Option, true);
         OnInsertSelf?.Invoke(this);
-    }
-
-    void RemoveFromSlot(DropSlot dropSlot)
-    {
-        LoadoutSlot slot = dropSlot.GetComponent<LoadoutSlot>();
-        slot.SetOption(Option, false);
     }
 
 

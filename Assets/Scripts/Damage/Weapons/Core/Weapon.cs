@@ -120,6 +120,11 @@ public abstract class Weapon : MonoBehaviour
 
     public abstract void Shoot(Vector3 direction);
 
+    public void SetAmmo(int ammo)
+    {
+        Ammo = Mathf.Min(MaxAmmo, ammo);
+    }
+
     public void ReplenishAmmo()
     {
         ReplenishAmmo(1);

@@ -84,9 +84,27 @@ public class LoadoutManagerProxy : ILoadoutManager
         trueLoadoutManager.SubscribeToDeviceSwitch(subscriber);
     }
 
+    public override void SubscribeToNewUpgrade(UnityAction<int, int, Upgrade> subscriber)
+    {
+        Start();
+        trueLoadoutManager.SubscribeToNewUpgrade(subscriber);
+    }
+
     public override int GetCurrentLoadoutIndex()
     {
         Start();
         return trueLoadoutManager.GetCurrentLoadoutIndex();
+    }
+
+    public override Ability[] GetLoadout(int loadout)
+    {
+        Start();
+        return trueLoadoutManager.GetLoadout(loadout);
+    }
+
+    public override void SetCurrentLoadout(int loadout)
+    {
+        Start();
+        SetCurrentLoadout(loadout);
     }
 }

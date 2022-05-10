@@ -22,7 +22,6 @@ public class Pushable : MonoBehaviour, IPushable
 
     public void ReceiveForce(Vector3 force, Attack attack, bool isSticky = false)
     {
-        Debug.Log("Pushable ReceiveForce " + PushSensitivity * force.magnitude);
         if (entity != null)
         {
             entity.ReceiveForce(PushSensitivity * force, isSticky);

@@ -5,7 +5,7 @@ public class BigLoadoutOption : LoadoutOption
 {
     AbilitySlot primarySlot;
     [SerializeField]
-    AbilitySlot secondarySlot;
+    SecondaryAbilitySlot secondarySlot;
 
     LocalizedString secondaryName = new LocalizedString();
 
@@ -40,8 +40,7 @@ public class BigLoadoutOption : LoadoutOption
         if (secondaryName.key == "")
             return;
 
-        secondarySlot.Type = secondaryName.value;
-        secondarySlot.LabelText = secondaryName.key;
+        secondarySlot.SetSecondaryAbility(secondaryName);
     }
 
     public void InsertOnSecondary(LoadoutOption option)

@@ -21,7 +21,7 @@ public class Button : MonoBehaviour
             gameObject.GetComponentInChildren<Renderer>().material = disabledMaterial;
 
         if (trigger.IsOneshot())
-            trigger.OnTriggerActivate += Disable;
+            trigger.SubscribeToTriggerActivate(Disable);
         trigger.OnFreeOfBlockers += Enable;
         trigger.OnResetOneshot += Enable;
     }

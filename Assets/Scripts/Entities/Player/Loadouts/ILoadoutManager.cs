@@ -25,6 +25,8 @@ public abstract class ILoadoutManager : MonoBehaviour
 
     public abstract void SubscribeToDeviceSwitch(UnityAction<Device> subscriber);
 
+    public abstract void SubscribeToNewUpgrade(UnityAction<int, int, Upgrade> subscriber);
+
     public abstract void SwitchDevice(int DeviceIndex);
 
     public abstract void SwitchDevice(Device Device, bool forceSwitch);
@@ -33,7 +35,11 @@ public abstract class ILoadoutManager : MonoBehaviour
 
     public abstract void SetPassive(Upgrade passive, bool isActivated);
 
+    public abstract void SetCurrentLoadout(int loadout);
+
     public abstract Ability[] GetCurrentLoadout();
+
+    public abstract Ability[] GetLoadout(int loadout);
 
     public abstract int GetCurrentLoadoutIndex();
 

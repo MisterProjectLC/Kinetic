@@ -9,14 +9,12 @@ public class ActorsManager : MonoBehaviour
     public static Dictionary<int, List<Actor>> Actors;
 
     [SerializeField]
-    private string PlayerSerialized;
+    Hermes.PlayerClass ActiveClass;
+    [SerializeField]
+    SerializableDictionary<Hermes.PlayerClass, Actor> ClassToActor;
+
     public static Actor Player;
     static Camera PlayerCamera;
-
-    [SerializeField]
-    Actor Ninja;
-    [SerializeField]
-    Actor Vanguard;
 
     // Start is called before the first frame update
     void Awake()
@@ -27,26 +25,27 @@ public class ActorsManager : MonoBehaviour
         {
             AM = this;
 
-            if (PlayerSerialized != "" && Hermes.heroName == "")
-                Hermes.heroName = PlayerSerialized;
+            if (ActiveClass != Hermes.PlayerClass.Null && Hermes.CurrentClass == Hermes.PlayerClass.Null)
+                Hermes.CurrentClass = ActiveClass;
 
-            switch (Hermes.heroName)
-            {
-                default:
-                    Player = Ninja;
-                    break;
-
-                case "Vanguard":
-                    Player = Vanguard;
-                    break;
-            }
+            Player = ClassToActor[Hermes.CurrentClass];
 
             Player.gameObject.SetActive(true);
             PlayerCamera = Player.GetComponentInChildren<Camera>();
-            if (Hermes.SpawnPosition != Vector3.zero)
-                Player.gameObject.transform.position = Hermes.SpawnPosition;
             Actors = new Dictionary<int, List<Actor>>();
         }
+    }
+
+    private void Start()
+    {
+        StartCoroutine(InitialSpawnPosition());
+    }
+
+    IEnumerator InitialSpawnPosition()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (Hermes.SpawnPosition != Vector3.zero)
+            Player.gameObject.transform.position = Hermes.SpawnPosition;
     }
 
 

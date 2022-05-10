@@ -12,7 +12,7 @@ public class AlterWorldUI : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        gameTrigger.OnTriggerActivate += AlterUI;
+        gameTrigger.SubscribeToTriggerActivate(AlterUI);
         gameTrigger.OnTriggerDestroy += AlterUI;
 
         if (GetComponent<UniqueID>())

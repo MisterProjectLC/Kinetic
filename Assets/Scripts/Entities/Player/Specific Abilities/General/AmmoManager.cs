@@ -82,6 +82,21 @@ public class AmmoManager : MonoBehaviour
     }
 
 
+    public void SetAmmo(Weapon targetWeapon, int ammo)
+    {
+        Debug.Log("David Tenant");
+        targetWeapon.SetAmmo(ammo);
+        if (targetWeapon.Ammo == 0)
+        {
+            foreach (WeaponAbility weapon in weapons)
+                if (weapon.Assigned && weapon.WeaponRef.Ammo > 0)
+                    return;
+
+            OutOfAmmo();
+        }
+    }
+
+
     public void ReplenishOnPowerup(GameObject consumedPowerup)
     {
         consumedPowerups.Add(consumedPowerup);

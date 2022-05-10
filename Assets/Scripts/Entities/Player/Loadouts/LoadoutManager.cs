@@ -36,6 +36,9 @@ public class LoadoutManager : ILoadoutManager
     UnityAction OnLoadoutSwitch;
     public override void SubscribeToLoadoutSwitch(UnityAction subscriber) { OnLoadoutSwitch += subscriber; }
 
+    UnityAction<int, int, Upgrade> OnNewUpgrade;
+    public override void SubscribeToNewUpgrade(UnityAction<int, int, Upgrade> subscriber) { OnNewUpgrade += subscriber; }
+
     #region References
     PlayerInputHandler m_InputHandler;
     DeviceManager m_DeviceManager;
@@ -134,21 +137,26 @@ public class LoadoutManager : ILoadoutManager
 
         if (loadoutButton != -2 && loadoutButton != currentLoadout && loadoutButton < Loadouts.Length)
         {
-            lastLoadout = currentLoadout;
-            currentLoadout = loadoutButton;
-            Device Device = null;
-            foreach (Ability ab in GetCurrentLoadout())
-                if (ab && ab.GetComponent<Device>())
-                {
-                    Device = ab.GetComponent<Device>();
-                    break;
-                }
-
-            if (Device == null)
-                Debug.Log("Loadout lacks a Device");
-            OnLoadoutSwitch?.Invoke();
-            SwitchDevice(Device, true);
+            SetCurrentLoadout(loadoutButton);
         }
+    }
+
+    public override void SetCurrentLoadout(int loadout)
+    {
+        lastLoadout = currentLoadout;
+        currentLoadout = loadout;
+        Device Device = null;
+        foreach (Ability ab in GetCurrentLoadout())
+            if (ab && ab.GetComponent<Device>())
+            {
+                Device = ab.GetComponent<Device>();
+                break;
+            }
+
+        if (Device == null)
+            Debug.Log("Loadout lacks a Device");
+        OnLoadoutSwitch?.Invoke();
+        SwitchDevice(Device, true);
     }
 
 
@@ -168,9 +176,8 @@ public class LoadoutManager : ILoadoutManager
         else
             Loadouts[loadout].abilities[abilityNumber] = null;
 
-        //Debug.Log(loadout + ", " + abilityNumber + ": " + ability.name);
-        //Debug.Log(Loadouts[loadout].abilities[abilityNumber].gameObject.name);
 
+        OnNewUpgrade?.Invoke(loadout, abilityNumber, ability);
         OnLoadoutSwitch?.Invoke();
     }
 
@@ -180,7 +187,7 @@ public class LoadoutManager : ILoadoutManager
     }
 
 
-    #region Setters
+    #region Getters
     public override Ability[] GetCurrentLoadout()
     {
         return Loadouts[currentLoadout].abilities;
@@ -209,6 +216,22 @@ public class LoadoutManager : ILoadoutManager
     public override List<Option> GetInitialPassives()
     {
         return InitialPassives;
+    }
+
+    public override Ability[] GetLoadout(int loadout)
+    {
+        return Loadouts[loadout].abilities;
+    }
+
+    public List<WeaponAbility> GetWeaponAbilities()
+    {
+        List<WeaponAbility> weaponAbilities = new List<WeaponAbility>();
+        foreach (Loadout loadout in Loadouts)
+            foreach (Ability ability in loadout.abilities)
+                if (ability is WeaponAbility)
+                    weaponAbilities.Add((WeaponAbility)ability);
+
+        return weaponAbilities;
     }
     #endregion
 }

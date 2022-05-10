@@ -19,8 +19,6 @@ public class ScenePartLoader : MonoBehaviour
 
     [SerializeField]
     bool Checkpoint;
-    [SerializeField]
-    Transform CheckpointPosition;
 
     [SerializeField]
     List<string> RequiredScenes;
@@ -125,7 +123,7 @@ public class ScenePartLoader : MonoBehaviour
         // Save checkpoint
         if (Checkpoint)
         {
-            Hermes.SpawnPosition = CheckpointPosition.position;
+            //Hermes.SpawnPosition = CheckpointPosition.position;
             List<string> s = new List<string>(RequiredScenes);
             s.Insert(0, gameObject.name);
             Hermes.SpawnAreas = s;
@@ -144,6 +142,11 @@ public class ScenePartLoader : MonoBehaviour
             Debug.Log("Saving objects: " + ob);
         SaveManager.Save(PerpetualObjects, gameObject.name);
         SceneManager.UnloadSceneAsync(gameObject.name);
+    }
+
+    public bool HasCheckpoint()
+    {
+        return Checkpoint;
     }
 
     private void OnTriggerEnter(Collider other)

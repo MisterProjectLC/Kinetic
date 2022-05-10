@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
     void Start()
     {
         foreach (GameTrigger Button in Buttons)
-            Button.OnTriggerActivate += Activate;
+            Button.SubscribeToTriggerActivate(Activate);
     }
 
     // Update is called once per frame

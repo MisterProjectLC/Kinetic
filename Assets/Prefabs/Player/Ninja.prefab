@@ -1549,7 +1549,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.05
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 75
   orthographic: 0
   orthographic size: 5
@@ -2631,38 +2631,41 @@ MonoBehaviour:
     secondaryAbility:
       key: ninja_grapplinghook_title
     prerequisiteAbilities: []
-  - option: {fileID: 7951354861340485890}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities: []
   InitialPassives:
   - option: {fileID: 5917140286660060292}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
   Options:
+  - option: {fileID: 7951354861340485890}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities: []
   - option: {fileID: 3757266375381288519}
     secondaryAbility:
       key: 
-    prerequisiteAbilities: []
-  - option: {fileID: 5704373933498883485}
-    secondaryAbility:
-      key: ninja_dash_title
     prerequisiteAbilities:
-    - key: 
+    - key: ninja_grapplinghook_title
   - option: {fileID: 1056472193603156170}
     secondaryAbility:
       key: 
-    prerequisiteAbilities: []
+    prerequisiteAbilities:
+    - key: ninja_grapplinghook_title
+  - option: {fileID: 5273812271440728085}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities:
+    - key: ninja_grapplinghook_title
+  - option: {fileID: 5704373933498883485}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities:
+    - key: ninja_dash_title
   - option: {fileID: 8089954478560255746}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
   - option: {fileID: 6450270223927221608}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities: []
-  - option: {fileID: 5273812271440728085}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []

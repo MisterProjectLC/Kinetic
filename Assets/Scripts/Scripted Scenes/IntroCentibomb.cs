@@ -12,7 +12,7 @@ public class IntroCentibomb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<GameTrigger>().OnTriggerActivate += ActivateCentibombs;
+        GetComponent<GameTrigger>().SubscribeToTriggerActivate(ActivateCentibombs);
     }
 
     void ActivateCentibombs()

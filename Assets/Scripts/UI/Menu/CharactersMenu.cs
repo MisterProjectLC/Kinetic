@@ -14,13 +14,13 @@ public class CharactersMenu : MonoBehaviour
 
     public void NinjaButton()
     {
-        Hermes.heroName = "Ninja";
+        Hermes.CurrentClass = Hermes.PlayerClass.Ninja;
         mainMenu.CharacterButton();
     }
 
     public void VanguardButton()
     {
-        Hermes.heroName = "Vanguard";
+        Hermes.CurrentClass = Hermes.PlayerClass.Vanguard;
         mainMenu.CharacterButton();
     }
 }

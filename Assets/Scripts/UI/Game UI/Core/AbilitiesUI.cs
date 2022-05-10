@@ -9,7 +9,7 @@ public class AbilitiesUI : MonoBehaviour
 
     [SerializeField]
     AbilityView[] AbilityViews;
-    Ability[] abilities;
+    Ability[] abilities = new Ability[4];
 
     [SerializeField]
     AmmoIndicator ammoIndicator;
@@ -36,11 +36,13 @@ public class AbilitiesUI : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < AbilityViews.Length; i++)
+        for (int i = 0; i < Mathf.Min(abilities.Length, AbilityViews.Length); i++)
         {
+            if (!abilities[i])
+                continue;
             AbilityViews[i].AbilityUpdate(abilities[i]);
 
-            if (abilities[i] && abilities[i] is WeaponAbility)
+            if (abilities[i] is WeaponAbility)
                 ammoIndicator.SetCurrentWeapon(((WeaponAbility)abilities[i]).WeaponRef);
         }
     }

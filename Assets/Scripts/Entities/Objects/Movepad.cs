@@ -71,18 +71,17 @@ public class Movepad : MonoBehaviour
         Collider[] colliders = Physics.OverlapBox(detectorCenter, detectSize, meshRenderer.transform.rotation, detectLayers);
         if (colliders.Length > 0)
         {
-            /*foreach (Collider collider in colliders)
-                if (Sticky && collider.GetComponent<PlayerCharacterController>())
-                    collider.GetComponent<PlayerCharacterController>().IsGrounded = true;*/
-
             if (clock.CheckIfRing())
             {
-                foreach (PhysicsEntity entity in ExtractEntitiesFromColliders(colliders))
+                List<PhysicsEntity> entities = ExtractEntitiesFromColliders(colliders);
+                if (entities.Count > 0)
+                    clock.Ring();
+
+                foreach (PhysicsEntity entity in entities)
                     ApplyMove(entity.GetGameObject());
             }
         }
 
-        clock.Ring();
         clock.Tick(Time.deltaTime);
     }
 
@@ -96,32 +95,6 @@ public class Movepad : MonoBehaviour
         
         else
             entity.ReceiveMotion(currentMoveVector);
-
-        /*
-        if (entity.GetComponentInParent<PlayerCharacterController>())
-        {
-            PlayerCharacterController player = target.GetComponent<PlayerCharacterController>();
-            if (!player)
-                player = target.GetComponentInParent<PlayerCharacterController>();
-
-            if (!player.IsGrounded && !isJump)
-                return;
-
-            if (!isJump)
-                player.ReceiveForce(currentMoveVector, Sticky);
-            else
-            {
-                player.MoveVelocity = currentMoveVector;
-                player.IsGrounded = false;
-                player.transform.position += Vector3.up;
-            }
-        }
-
-        else if (target.GetComponentInParent<Enemy>() && 
-            (Vector3.Dot(currentMoveVector, target.GetComponentInParent<Enemy>().GetMoveVelocity()) < 0f ||
-            currentMoveVector.magnitude > target.GetComponentInParent<Enemy>().GetMoveVelocity().magnitude))
-            target.GetComponentInParent<Enemy>().ReceiveKnockback(currentMoveVector);
-        */
     }
 
     List<PhysicsEntity> ExtractEntitiesFromColliders(Collider[] colliders) {

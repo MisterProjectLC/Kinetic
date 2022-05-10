@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class DropSlot : MonoBehaviour, IDropHandler
 {
+    [SerializeField]
     public string Type = "Ability";
     [HideInInspector]
     public Vector2 Offset = Vector2.zero;
@@ -19,10 +20,11 @@ public class DropSlot : MonoBehaviour, IDropHandler
     public DragDrop InsertedDragDrop;
     Transform InsertedDragDropOldParent;
     public UnityAction<DragDrop> OnInserted;
+    public UnityAction<DragDrop> OnRemoved;
 
     bool soundEnabled = false;
 
-    private void Awake()
+    protected void Awake()
     {
         Offset = Vector2.zero;
         Label = GetComponentInChildren<Text>();
@@ -44,7 +46,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponent<DragDrop>() && 
-            eventData.pointerDrag.GetComponent<DragDrop>().Type == Type)
+            eventData.pointerDrag.GetComponent<DragDrop>().Type == GetDropType())
         {
             OnDrop(eventData.pointerDrag);
         }
@@ -80,5 +82,11 @@ public class DropSlot : MonoBehaviour, IDropHandler
         InsertedDragDrop = null;
         Label.gameObject.SetActive(true);
         soundEnabled = true;
+        OnRemoved?.Invoke(dragDrop.GetComponent<DragDrop>());
+    }
+
+    public virtual string GetDropType()
+    {
+        return Type;
     }
 }

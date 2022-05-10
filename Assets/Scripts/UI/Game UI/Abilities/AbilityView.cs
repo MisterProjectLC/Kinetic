@@ -15,12 +15,16 @@ public class AbilityView : MonoBehaviour
     GameObject AdditionalAbility;
     GameObject CenterAdditionalAbility;
 
+    static Color weaponColor = new Color(104f/255, 24f / 255, 36f / 255);
+    static Color abilityColor = new Color(41f / 255, 25f / 255, 69f / 255);
+
     public RectTransform CenterTransform { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
         AbilitySize = CooldownRect.sizeDelta;
+        gameObject.SetActive(false);
     }
 
 
@@ -39,12 +43,7 @@ public class AbilityView : MonoBehaviour
 
     public void DeviceUpdate(Device device)
     {
-        Image image = CooldownRect.GetComponent<Image>();
-        Color color = image.color;
-        if (Label.text == device.gameObject.name)
-            image.color = new Color(color.r, color.g, color.b, 1);
-        else
-            image.color = new Color(color.r, color.g, color.b, 0.4f);
+
     }
 
 
@@ -57,9 +56,9 @@ public class AbilityView : MonoBehaviour
         if (CenterAdditionalAbility)
             Destroy(CenterAdditionalAbility);
 
-        if (currentAbility == null)
+        if (!currentAbility)
         {
-            image.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             return;
         }
 
@@ -68,8 +67,13 @@ public class AbilityView : MonoBehaviour
         if (currentAbility.centerAbilityView)
             CenterAdditionalAbility = CreateInstanceView(currentAbility, currentAbility.centerAbilityView, CenterTransform);
 
-        image.gameObject.SetActive(true);
+        gameObject.SetActive(true);
         Label.text = currentAbility.LocalizedName.value;
+
+        if (currentAbility is WeaponAbility)
+            image.color = weaponColor;
+        else
+            image.color = abilityColor;
         CooldownRect.sizeDelta = Vector2.zero;
     }
 

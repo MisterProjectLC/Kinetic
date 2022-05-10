@@ -35,8 +35,10 @@ public class NavmeshPhysics : IEnemyPhysics
             ray = new Ray(transform.position + Vector3.up, Vector3.down);
         else
             ray = new Ray(pathAgent.nextPosition + Vector3.up, Vector3.down);
-        Physics.RaycastNonAlloc(ray, hits, HoverHeight + 1f, GroundLayers.layers, QueryTriggerInteraction.Ignore);
-        return hits[0];
+
+        RaycastHit rayHit;
+        Physics.Raycast(ray, out rayHit, HoverHeight + 1f, GroundLayers.layers, QueryTriggerInteraction.Ignore);
+        return rayHit;
     }
 
     protected override void FeelGravity()
@@ -46,7 +48,10 @@ public class NavmeshPhysics : IEnemyPhysics
 
         // Air
         if (airborne)
+        {
             moveVelocity += Vector3.down * GravityMultiplier * 0.5f * Constants.Gravity * Time.deltaTime;
+            pathAgent.updatePosition = false;
+        }
         // Ground
         else
         {
@@ -109,7 +114,7 @@ public class NavmeshPhysics : IEnemyPhysics
         if (sticky && !(Vector3.Dot(force, moveVelocity) < 0f || force.magnitude > moveVelocity.magnitude))
             return;
 
-        moveVelocity += force / (2 * Weight);
+        moveVelocity += force / (4 * Weight);
 
         // Stop on the ground
         if (moveVelocity.y < 0f && RayToGround().collider)

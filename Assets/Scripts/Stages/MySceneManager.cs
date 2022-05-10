@@ -122,4 +122,9 @@ public class MySceneManager : MonoBehaviour
         else
             return false;
     }
+
+    public ScenePartLoader GetPartLoader(string scene)
+    {
+        return transform.Find(scene).GetComponent<ScenePartLoader>();
+    }
 }

@@ -13,7 +13,7 @@ public class TriggerLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<GameTrigger>().OnTriggerActivate += LoadScenes;
+        GetComponent<GameTrigger>().SubscribeToTriggerActivate(LoadScenes);
     }
 
 

@@ -13,13 +13,13 @@ public class CustomUI : MonoBehaviour
     {
         if (Trigger)
         {
-            Trigger.OnTriggerActivate += Show;
+            Trigger.SubscribeToTriggerActivate(Show);
             Trigger.OnTriggerDestroy += Show;
         }
 
         if (HideTrigger)
         {
-            HideTrigger.OnTriggerActivate += Hide;
+            HideTrigger.SubscribeToTriggerActivate(Hide);
             HideTrigger.OnTriggerDestroy += Hide;
         }
 
@@ -30,13 +30,13 @@ public class CustomUI : MonoBehaviour
     {
         if (Trigger)
         {
-            Trigger.OnTriggerActivate -= Show;
+            Trigger.UnsubscribeToTriggerActivate(Show);
             Trigger.OnTriggerDestroy -= Show;
         }
 
         if (HideTrigger)
         {
-            HideTrigger.OnTriggerActivate -= Hide;
+            HideTrigger.UnsubscribeToTriggerActivate(Hide);
             HideTrigger.OnTriggerDestroy -= Hide;
         }
     }

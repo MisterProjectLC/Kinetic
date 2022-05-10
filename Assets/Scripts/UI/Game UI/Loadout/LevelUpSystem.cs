@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class LevelUpSystem : MonoBehaviour
 {
@@ -88,13 +89,15 @@ public class LevelUpSystem : MonoBehaviour
 
     void Start() 
     {
-        PopulateInitialOptions(loadoutManager);
+        loadoutManager.SubscribeToNewUpgrade(OnNewUpgrade);
 
         // Prepare saved options
         for (int j = 0; j < SavedLoadout.GetSpawnAbilityCount(); j++)
             SavedLoadout.GetSpawnAbility(j).SetInGame(false);
 
-        PopulateOptions(loadoutManager);
+        PopulateOptions(loadoutManager.GetInitialPassives(), HandleInitialPassive);
+        PopulateOptions(loadoutManager.GetInitialOptions(), HandleInitialOption);
+        PopulateOptions(loadoutManager.GetOptions(), HandleOption);
     }
 
     void SetupLoadoutSlots(ILoadoutManager loadoutManager)
@@ -112,73 +115,72 @@ public class LevelUpSystem : MonoBehaviour
         }
     }
 
-
-    void PopulateInitialOptions(ILoadoutManager loadoutManager)
+    void PopulateOptions(List<ILoadoutManager.Option> optionsList, Action<LoadoutOption> optionHandler)
     {
-        int i = 0;
-        // Populate initial options
-        foreach (ILoadoutManager.Option option in loadoutManager.GetInitialOptions())
+        // Populate options
+        foreach (ILoadoutManager.Option option in optionsList)
         {
             LoadoutOption loadoutOption = GenerateOptionInstance(option);
-
-            if (option.option is SecondaryAbility)
-            {
-                i--;
-                //initialSlots[i].OnDrop(loadoutOption.gameObject);
-                ((BigLoadoutOption)setupSlots[i - 1].InsertedDragDrop).InsertOnSecondary(loadoutOption);
-            }
-            else
-            {
-                setupSlots[i].OnDrop(loadoutOption.gameObject);
-                if (i != 0 && option.secondaryAbility.value.Length > 0)
-                    i++;
-            }
-            i++;
-        }
-
-        i = 0;
-        foreach (ILoadoutManager.Option option in loadoutManager.GetInitialPassives())
-        {
-            LoadoutOption loadoutOption = GenerateOptionInstance(option);
-            passiveSlots[i].OnDrop(loadoutOption.gameObject);
+            optionHandler.Invoke(loadoutOption);
         }
     }
 
-    void PopulateOptions(ILoadoutManager loadoutManager)
+
+    void HandleInitialPassive(LoadoutOption loadoutOption)
     {
-        // Populate options
-        foreach (ILoadoutManager.Option option in loadoutManager.GetOptions())
+        InsertUpgrade(-1, 0, loadoutOption);
+    }
+
+    void HandleInitialOption(LoadoutOption loadoutOption)
+    {
+        // Check if already saved
+        if (SavedLoadout.ExistsSpawnAbility(loadoutOption.Option.name))
         {
-            LoadoutOption loadoutOption = GenerateOptionInstance(option);
-            GameObject GO = loadoutOption.gameObject;
+            SavedLoadout.SavedAbility upgrade = SavedLoadout.GetSpawnAbility(loadoutOption.Option.name);
+            SavedLoadout.SetSpawnAbility(upgrade, SavedLoadout.GetSpawnAbilityIndex(upgrade));
 
-            // Check if already saved
-            if (SavedLoadout.ExistsSpawnAbility(option.option.name))
-            {
-                SavedLoadout.SavedAbility ability = SavedLoadout.GetSpawnAbility(option.option.name);
-                SavedLoadout.SetSpawnAbility(ability, SavedLoadout.GetSpawnAbilityIndex(ability));
-
-                if (ability.loadout != -1)
-                {
-                    if (loadoutOption.Option is SecondaryAbility)
-                        ((BigLoadoutOption)abilitySlots[ability.loadout].slots[ability.slot-1].InsertedDragDrop).InsertOnSecondary(loadoutOption);
-                    else
-                        abilitySlots[ability.loadout].slots[ability.slot].OnDrop(GO);
-
-                }
-                else
-                    passiveSlots[ability.slot].OnDrop(GO);
-                optionsObtained.Add(loadoutOption);
-            }
-            else
-            {
-                GO.SetActive(false);
-                if (option.prerequisiteAbilities.Count > 0)
-                    optionsLocked.Add(loadoutOption);
-                else
-                    AddToOptionsBank(loadoutOption);
-            }
+            InsertUpgrade(upgrade.loadout, upgrade.slot, loadoutOption);
         }
+        else
+        {
+            loadoutOption.gameObject.SetActive(false);
+        }
+    }
+
+    void HandleOption(LoadoutOption loadoutOption)
+    {
+        // Check if already saved
+        if (SavedLoadout.ExistsSpawnAbility(loadoutOption.Option.name))
+        {
+            SavedLoadout.SavedAbility upgrade = SavedLoadout.GetSpawnAbility(loadoutOption.Option.name);
+            SavedLoadout.SetSpawnAbility(upgrade, SavedLoadout.GetSpawnAbilityIndex(upgrade));
+
+            InsertUpgrade(upgrade.loadout, upgrade.slot, loadoutOption);
+        }
+        else
+        {
+            loadoutOption.gameObject.SetActive(false);
+            if (loadoutOption.PrerequisiteAbilities.Count > 0)
+                optionsLocked.Add(loadoutOption);
+            else
+                AddToOptionsBank(loadoutOption);
+        }
+    }
+
+
+    void InsertUpgrade(int loadout, int slot, LoadoutOption loadoutOption)
+    {
+        if (loadout != -1)
+        {
+            if (loadoutOption.Option is SecondaryAbility)
+                ((BigLoadoutOption)abilitySlots[loadout].slots[slot - 1].InsertedDragDrop).InsertOnSecondary(loadoutOption);
+            else
+                abilitySlots[loadout].slots[slot].OnDrop(loadoutOption.gameObject);
+
+        }
+        else
+            passiveSlots[slot].OnDrop(loadoutOption.gameObject);
+        optionsObtained.Add(loadoutOption);
     }
 
 
@@ -218,7 +220,7 @@ public class LevelUpSystem : MonoBehaviour
         SetLoweredMenu(false);
 
         for (int i = 0; i < 3 && thisOptionsBank.Count > 0; i++) {
-            int rnd = Random.Range(0, thisOptionsBank.Count);
+            int rnd = UnityEngine.Random.Range(0, thisOptionsBank.Count);
 
             thisOptionsBank[rnd].gameObject.SetActive(true);
             optionsShown.Add(optionsBank[type][rnd]);
@@ -287,6 +289,20 @@ public class LevelUpSystem : MonoBehaviour
         optionsShown.Clear();
         NewAbilityText.SetActive(false);
         NewAbilitySquare.SetActive(false);
+    }
+
+
+    void OnNewUpgrade(int loadout, int slot, Upgrade upgrade)
+    {
+        if (loadoutManager.GetInitialOptions().Exists(option => option.option == upgrade))
+        {
+            ILoadoutManager.Option option = loadoutManager.GetInitialOptions().Find(option => option.option == upgrade);
+            LoadoutOption loadoutOption = GenerateOptionInstance(option);
+            InsertUpgrade(loadout, slot, loadoutOption);
+
+            SavedLoadout.SavedAbility savedAbility = SavedLoadout.GetSpawnAbility(option.option.name);
+            SavedLoadout.SetSpawnAbility(savedAbility, SavedLoadout.GetSpawnAbilityIndex(savedAbility));
+        }
     }
 
 

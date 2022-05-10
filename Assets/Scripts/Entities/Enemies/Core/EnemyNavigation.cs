@@ -11,6 +11,8 @@ public abstract class EnemyNavigation : MonoBehaviour
     [SerializeField]
     List<StatusEffect> blockingEffects;
 
+    [SerializeField]
+    bool OnlyIfPlayerInView = true;
 
     protected Clock navClock;
     protected NavMeshAgent pathAgent;
@@ -26,7 +28,7 @@ public abstract class EnemyNavigation : MonoBehaviour
 
     private void ManageNavigation()
     {
-        if (!pathAgent || enemy.HasAnyOfTheseStatusEffects(blockingEffects))
+        if (!pathAgent || enemy.HasAnyOfTheseStatusEffects(blockingEffects) || (OnlyIfPlayerInView && !enemy.IsPlayerInView()))
             return;
 
         if (navClock.TickAndRing(Time.deltaTime))

@@ -7,6 +7,14 @@ public abstract class LoadoutSlot : DropSlot
     [HideInInspector]
     public ILoadoutManager loadoutManager;
 
+
+    new void Awake()
+    {
+        OnInserted += OnInsertedOption;
+        OnRemoved += OnRemovedOption;
+        base.Awake();
+    }
+
     public void Setup(ILoadoutManager loadoutManager)
     {
         this.loadoutManager = loadoutManager;
@@ -14,14 +22,19 @@ public abstract class LoadoutSlot : DropSlot
 
     protected abstract int GetLoadoutNumber();
 
-    public void SetOption(Upgrade option, bool activating)
+    public void OnInsertedOption(DragDrop dragDrop)
     {
-        if (activating)
-            SavedLoadout.AddSpawnAbility(new SavedLoadout.SavedAbility(option.name, GetLoadoutNumber(), AbilityNumber));
-        else
-            SavedLoadout.RemoveSpawnAbility(GetLoadoutNumber(), AbilityNumber);
+        Debug.Log("OnInsertedOption");
+        Upgrade option = ((LoadoutOption)dragDrop).Option;
+        SavedLoadout.AddSpawnAbility(new SavedLoadout.SavedAbility(option.name, GetLoadoutNumber(), AbilityNumber));
+        SetOptionPrivate(option, true);
+    }
 
-        SetOptionPrivate(option, activating);
+    public void OnRemovedOption(DragDrop dragDrop)
+    {
+        Upgrade option = ((LoadoutOption)dragDrop).Option;
+        SavedLoadout.RemoveSpawnAbility(GetLoadoutNumber(), AbilityNumber);
+        SetOptionPrivate(option, false);
     }
 
     public abstract void SetOptionPrivate(Upgrade option, bool activating);

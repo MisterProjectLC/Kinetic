@@ -17,7 +17,11 @@ public class GameTrigger : MonoBehaviour
 
     public UnityAction OnFreeOfBlockers;
     public UnityAction OnResetOneshot;
-    public UnityAction OnTriggerActivate;
+
+
+    UnityAction OnTriggerActivate;
+    public void SubscribeToTriggerActivate(UnityAction subscriber) { OnTriggerActivate += subscriber; }
+    public void UnsubscribeToTriggerActivate(UnityAction subscriber) { OnTriggerActivate -= subscriber; }
     public UnityAction OnTriggerDestroy;
 
     private void Awake()

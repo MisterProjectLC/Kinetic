@@ -12,6 +12,13 @@ public class Hermes : MonoBehaviour
         Null
     }
 
+    public enum PlayerClass
+    {
+        Ninja,
+        Vanguard,
+        Null
+    }
+
     public enum Properties
     {
         _First,
@@ -27,7 +34,7 @@ public class Hermes : MonoBehaviour
         _Last
     }
 
-    public static string heroName = "";
+    public static PlayerClass CurrentClass = PlayerClass.Null;
 
     static Dictionary<Properties, object> properties = new Dictionary<Properties, object>();
 

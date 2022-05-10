@@ -32,10 +32,10 @@ public class Elevator : MonoBehaviour
         direction.y = Speed* goingUp;
 
         foreach (GameTrigger button in Buttons)
-            button.OnTriggerActivate += ToggleDirection;
+            button.SubscribeToTriggerActivate(ToggleDirection);
 
         foreach (GameTrigger button in LowerButtons)
-            button.OnTriggerActivate += () => SetDirection(-1);
+            button.SubscribeToTriggerActivate(() => SetDirection(-1));
     }
 
     void ToggleDirection()

@@ -2034,7 +2034,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.05
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 75
   orthographic: 0
   orthographic size: 5
@@ -2742,47 +2742,50 @@ MonoBehaviour:
     secondaryAbility:
       key: vanguard_detonate_title
     prerequisiteAbilities: []
-  - option: {fileID: 2862948054975451143}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities: []
   InitialPassives:
   - option: {fileID: 5917140286660060292}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
   Options:
+  - option: {fileID: 2862948054975451143}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities: []
+  - option: {fileID: 262964791305891837}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities:
+    - key: vanguard_charge_title
+  - option: {fileID: 3645659837728276841}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities:
+    - key: vanguard_charge_title
+  - option: {fileID: 1422791180443009761}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities:
+    - key: vanguard_charge_title
+  - option: {fileID: 7394917379718597850}
+    secondaryAbility:
+      key: 
+    prerequisiteAbilities:
+    - key: vanguard_graviton_title
+  - option: {fileID: 6339347368594958605}
+    secondaryAbility:
+      key: vanguard_plasmapulse_title
+    prerequisiteAbilities: []
   - option: {fileID: 5034638831426822223}
     secondaryAbility:
       key: 
     prerequisiteAbilities:
     - key: vanguard_lasercannon_title
-  - option: {fileID: 262964791305891837}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities: []
-  - option: {fileID: 7394917379718597850}
-    secondaryAbility:
-      key: vanguard_graviton_title
-    prerequisiteAbilities:
-    - key: 
-  - option: {fileID: 3645659837728276841}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities: []
-  - option: {fileID: 6339347368594958605}
-    secondaryAbility:
-      key: vanguard_plasmapulse_title
-    prerequisiteAbilities: []
   - option: {fileID: 266890744467231716}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
   - option: {fileID: 6024573679260689546}
-    secondaryAbility:
-      key: 
-    prerequisiteAbilities: []
-  - option: {fileID: 1422791180443009761}
     secondaryAbility:
       key: 
     prerequisiteAbilities: []
