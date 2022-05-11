@@ -69,6 +69,7 @@ public class PlayerCharacterController : MonoBehaviour, Entity
 
     public float HoverHeight = 1f;
     public float GravityMultiplier = 1f;
+    public float GravityMultiplierWhenFalling = 1f;
     protected float lastGravityMultiplier = 1f;
     public float AirDesacceleration = 0f;
     public float Weight = 1f;
@@ -185,25 +186,21 @@ public class PlayerCharacterController : MonoBehaviour, Entity
                 else
                 {
                     Vector3 newHorizontalVelocity = horizontalVelocity + (moveInput * AirborneAcceleration * AirMultiplier * Time.deltaTime);
-                    if (/*horizontalVelocity.magnitude < AirborneMaxStrafeSpeed || */newHorizontalVelocity.magnitude < horizontalVelocity.magnitude)
+                    if (newHorizontalVelocity.magnitude < horizontalVelocity.magnitude)
                         moveVelocity = newHorizontalVelocity + (moveVelocity.y * Vector3.up);
                 }
-
-                // limit air speed to a maximum, but only horizontally
-                /*
-                float verticalVelocity = MoveVelocity.y;
-                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(MoveVelocity, Vector3.up);
-                horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, AirborneMaxSpeed);
-                MoveVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
-                */
 
                 // Wall checks
                 if (m_InputHandler.GetJump())
                     OnJumpAir?.Invoke();
 
                 // Gravity
-                if (GravityEnabled)
-                    moveVelocity += Vector3.down * Constants.Gravity * GravityMultiplier * (moveVelocity.y < 0f ? AirMultiplier:1f) * Time.deltaTime;
+                if (GravityEnabled && GravityMultiplier != 0f)
+                {
+
+                    moveVelocity += Vector3.down * Constants.Gravity * (moveVelocity.y > 0f ? GravityMultiplier : GravityMultiplierWhenFalling) * 
+                        (moveVelocity.y < 0f ? AirMultiplier : 1f) * Time.deltaTime;
+                }
 
                 moveVelocity = Vector3.ClampMagnitude(moveVelocity, AirborneMaxSpeed);
             }

@@ -1219,10 +1219,10 @@ MonoBehaviour:
     _propertyPath: CurrentHealth
     _autoListen: 0
     _multiIndex: 0
-    _refType: 0
+    _refType: 2
     _value: 0
     _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
+    _smartVar: {fileID: 11400000, guid: 90eea53723d778543b45af14e8026a7e, type: 2}
     _smartMulti: {fileID: 0}
     _onUpdate:
       m_PersistentCalls:
@@ -1234,10 +1234,10 @@ MonoBehaviour:
     _propertyPath: MaxHealth
     _autoListen: 0
     _multiIndex: 0
-    _refType: 0
+    _refType: 2
     _value: 160
     _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
+    _smartVar: {fileID: 11400000, guid: 3bbacf19f8699ee47ad4d92f6638c421, type: 2}
     _smartMulti: {fileID: 0}
     _onUpdate:
       m_PersistentCalls:
@@ -1342,8 +1342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushSensitivity: 1
   health: {fileID: 3937610904369755421}
+  PushSensitivity: 1
 --- !u!114 &3990458549617686974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,6 +1389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateCooldown: 0.25
   blockingEffects: []
+  OnlyIfPlayerInView: 1
 --- !u!114 &2755383025469367199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2847,6 +2848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
   damage: 2
 --- !u!82 &7914942596287862566
 AudioSource:
@@ -9616,6 +9618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
   damage: 3
 --- !u!82 &7939051727722374980
 AudioSource:

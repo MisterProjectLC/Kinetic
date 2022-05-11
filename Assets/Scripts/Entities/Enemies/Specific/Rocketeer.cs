@@ -33,7 +33,7 @@ public class Rocketeer : MonoBehaviour
     {
         enemy.GravityMultiplier = 2;
         enemy.ReceiveStatusEffect(StaggerEffect, StaggerDuration);
-        StartCoroutine("EndStagger");
+        StartCoroutine(EndStagger());
     }
 
     IEnumerator EndStagger()

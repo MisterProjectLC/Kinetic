@@ -13,11 +13,12 @@ public class LevelUpSystem : MonoBehaviour
         Passive,
         Ability,
         Weapon,
+        Initial,
         _Last
     }
 
     // Loadouts
-    [System.Serializable]
+    [Serializable]
     public struct Loadout
     {
         public List<LoadoutSlot> slots;
@@ -29,8 +30,6 @@ public class LevelUpSystem : MonoBehaviour
     List<Loadout> abilitySlots;
     [SerializeField]
     List<LoadoutSlot> passiveSlots;
-    [SerializeField]
-    List<LoadoutSlot> setupSlots;
     [SerializeField]
     GameObject NewAbilityText;
     [SerializeField]
@@ -51,6 +50,7 @@ public class LevelUpSystem : MonoBehaviour
 
     ILoadoutManager loadoutManager;
 
+    Queue<Type> UpgradeQueue = new Queue<Type>();
     bool loweredMenu = false;
     int siblingBaseCount = 0;
 
@@ -143,6 +143,7 @@ public class LevelUpSystem : MonoBehaviour
         }
         else
         {
+            optionsBank[Type.Initial].Add(loadoutOption);
             loadoutOption.gameObject.SetActive(false);
         }
     }
@@ -214,6 +215,12 @@ public class LevelUpSystem : MonoBehaviour
 
     public void LevelUp(Type type)
     {
+        UpgradeQueue.Enqueue(type);
+        if (UpgradeQueue.Count == 1)
+            PopFromUpgradeQueue(UpgradeQueue.Peek());
+    }
+
+    public void PopFromUpgradeQueue(Type type) { 
         List<LoadoutOption> thisOptionsBank = optionsBank[type];
         NewAbilityText.SetActive(true);
         NewAbilitySquare.SetActive(true);
@@ -234,7 +241,9 @@ public class LevelUpSystem : MonoBehaviour
 
     public void DebugLevelUp()
     {
-        LevelUp(Type.Passive);
+        LevelUp(Type.Initial);
+        LevelUp(Type.Weapon);
+        LevelUp(Type.Ability);
     }
 
     void SetLoweredMenu(bool loweredMenu)
@@ -289,6 +298,10 @@ public class LevelUpSystem : MonoBehaviour
         optionsShown.Clear();
         NewAbilityText.SetActive(false);
         NewAbilitySquare.SetActive(false);
+
+        UpgradeQueue.Dequeue();
+        if (UpgradeQueue.Count > 0)
+            PopFromUpgradeQueue(UpgradeQueue.Peek());
     }
 
 

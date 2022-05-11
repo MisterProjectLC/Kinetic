@@ -55,9 +55,15 @@ public class FlyingEnemy : MonoBehaviour
 
     void OnUpdate()
     {
+        CheckOtherFlyingEnemiesCollision();
+        FlyingMovement();
+    }
+
+    void CheckOtherFlyingEnemiesCollision()
+    {
         if (collisionClock.TickAndRing(Time.deltaTime) && myTrigger)
         {
-            Physics.SphereCastNonAlloc(enemy.Model.transform.position + enemy.Model.transform.forward*1.5f, 
+            Physics.SphereCastNonAlloc(enemy.Model.transform.position + enemy.Model.transform.forward * 1.5f,
                 0.23f, enemy.Model.transform.forward, hitInfos, physics.GetCollisionDistance(), LayerMask.GetMask("EnemyTrigger"));
 
             foreach (RaycastHit hit in hitInfos)
@@ -69,22 +75,29 @@ public class FlyingEnemy : MonoBehaviour
 
             stopped = false;
         }
+    }
 
+    void FlyingMovement()
+    {
         if (stopped || !tickClock.TickAndRing(Time.deltaTime) || !enemy.IsPlayerInView())
             return;
 
         Vector3 playerDistance = playerTransform.position - enemy.Model.transform.position;
         playerDistance = Vector3.ProjectOnPlane(playerDistance, Vector3.up);
 
+        //if (DetectTooCloseWall())
+        //    return;
+
         // X movement
-        if (playerDistance.magnitude > MinimumDistance)
+        if (!DetectTooCloseWall() && playerDistance.magnitude > MinimumDistance)
             transform.position += playerDistance.normalized * MotorSpeed * TIME_UNTIL_FRAME_UPDATE;
 
         // Y movement
-        if (!(DetectTooCloseWall() || DetectTooCloseGroundOrCeiling()))
+        if (DetectTooCloseGroundOrCeiling())
             transform.position = Vector3.Lerp(transform.position,
                 new Vector3(transform.position.x, playerTransform.position.y, transform.position.z), VerticalSpeed * TIME_UNTIL_FRAME_UPDATE);
     }
+
 
     bool DetectTooCloseWall()
     {
@@ -92,8 +105,8 @@ public class FlyingEnemy : MonoBehaviour
             return false;
 
         Ray ray = new Ray(enemy.Model.transform.position, playerTransform.position - enemy.Model.transform.position);
-        Physics.RaycastNonAlloc(ray, hits, MaximumProximityToWall, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
-        return hits[0].collider;
+        Physics.Raycast(ray, out RaycastHit hit, MaximumProximityToWall, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
+        return hit.collider;
     }
 
 

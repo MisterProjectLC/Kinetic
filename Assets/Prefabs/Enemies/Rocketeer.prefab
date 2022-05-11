@@ -200,7 +200,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5335522342688025448}
-  - component: {fileID: 5013481790148571764}
   - component: {fileID: 5567375436510083342}
   - component: {fileID: 6347021134187463538}
   m_Layer: 15
@@ -224,19 +223,6 @@ Transform:
   m_Father: {fileID: 1360453792302891938}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5013481790148571764
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232940421288367912}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5567375436510083342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +245,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 232940421288367912}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 2.477946
   m_Height: 11.7936535
@@ -1439,7 +1425,7 @@ MonoBehaviour:
   MotorSpeed: 18
   MaximumProximityToWall: 4
   MinimumDistance: 7
-  myTrigger: {fileID: 0}
+  myTrigger: {fileID: 6347021134187463538}
 --- !u!114 &1831796119583015996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1483,8 +1469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushSensitivity: 1
   health: {fileID: 1778385790811195551}
+  PushSensitivity: 1
 --- !u!114 &8322315004220507059
 MonoBehaviour:
   m_ObjectHideFlags: 0

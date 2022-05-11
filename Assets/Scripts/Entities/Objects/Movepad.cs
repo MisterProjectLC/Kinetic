@@ -93,6 +93,9 @@ public class Movepad : MonoBehaviour
         if (isJump)
             entity.SetMoveVelocity(currentMoveVector);
         
+        else if (Sticky)
+            entity.ReceiveForce(currentMoveVector, Sticky);
+
         else
             entity.ReceiveMotion(currentMoveVector);
     }
