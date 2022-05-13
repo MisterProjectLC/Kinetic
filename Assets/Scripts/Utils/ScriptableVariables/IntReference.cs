@@ -15,7 +15,8 @@ public class IntReference : ValueReference<int>
     IntVariable Variable;
 
     public IntReference()
-    { }
+    {
+    }
 
     public IntReference(int value)
     {

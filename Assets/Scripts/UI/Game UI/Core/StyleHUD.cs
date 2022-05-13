@@ -45,8 +45,9 @@ public class StyleHUD : MonoBehaviour
         style.OnEvent += OnEvent;
         style.OnBonus += OnBonus;
 
-        styleCanvasGroup = GetComponent<CanvasGroup>();
+        totalStyle.Value = 100;
 
+        styleCanvasGroup = GetComponent<CanvasGroup>();
         for (int i = 0; i < lines.Count; i++)
         {
             lines[i].canvasGroup = lines[i].text.GetComponent<CanvasGroup>();

@@ -19,10 +19,9 @@ public class WeaponAbility : Ability
         base.Awake();
     }
 
-    private new void OnEnable()
+    private void Start()
     {
         playerCamera = player.GetPlayerCamera();
-        base.OnEnable();
     }
 
     public override void Execute(Input input)
@@ -30,6 +29,7 @@ public class WeaponAbility : Ability
         player.ReceiveForce(-BackwardsForce * playerCamera.transform.forward);
         if (GetComponent<Animator>())
             GetComponent<Animator>().SetTrigger("Shoot");
+
         WeaponRef.Trigger();
     }
 

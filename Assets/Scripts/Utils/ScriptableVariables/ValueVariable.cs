@@ -14,7 +14,17 @@ public abstract class ValueVariable<T> : ScriptableObject
     public bool DisableInitialValue = false;
     public Action OnChange;
 
+    void Awake()
+    {
+        Start();
+    }
+
     void OnEnable()
+    {
+        Start();
+    }
+
+    public void Start()
     {
         if (!DisableInitialValue)
         {

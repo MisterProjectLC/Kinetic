@@ -13,8 +13,6 @@ public abstract class ValueBar<T> : MonoBehaviour
     protected void Awake()
     {
         barSize = bar.sizeDelta;
-
-        Debug.Log("Teste");
         currentValue.SubscribeToChange(UpdateBar);
     }
 

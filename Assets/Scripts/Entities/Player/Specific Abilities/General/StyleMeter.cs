@@ -62,15 +62,22 @@ public class StyleMeter : MonoBehaviour
                 localizers.Add(i, new LocalizedString("style_" + i.ToString().ToLower()));
 
         clock = config.ComboMaxTime;
+
+        maxStyle.Value  = 10;
         SetJuiceLeft(MaxStyle);
+
+        // Damage Trigger
         health = GetComponentInParent<Health>();
         health.OnDamageAttack += OnDamage;
+
+        // Attack Trigger
         foreach (Attack attack in player.GetComponentsInChildren<Attack>())
         {
             attack.OnCritical += EnemyCritical;
             attack.OnKill += (Attack a, GameObject g, bool b) => StyleKill(g, b);
         }
 
+        // Ability Trigger
         foreach (Ability ability in player.GetComponentsInChildren<Ability>())
             ability.SubscribeToExecuteAbility(AbilityUsage);
     }

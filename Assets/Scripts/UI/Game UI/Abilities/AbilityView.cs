@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +19,8 @@ public class AbilityView : MonoBehaviour
 
     public RectTransform CenterTransform { get; set; }
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         AbilitySize = CooldownRect.sizeDelta;
         gameObject.SetActive(false);

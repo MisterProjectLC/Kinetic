@@ -11,7 +11,6 @@ public class IntBar : ValueBar<int>
     {
         SetReferences(CurrentValue, MaxValue);
         base.Awake();
-        CurrentValue.Value = 6;
     }
 
     public override void UpdateBar()

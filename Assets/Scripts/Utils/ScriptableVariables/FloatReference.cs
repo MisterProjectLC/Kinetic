@@ -14,7 +14,8 @@ public class FloatReference : ValueReference<float>
     FloatVariable Variable;
 
     public FloatReference()
-    { }
+    {
+    }
 
     public FloatReference(int value)
     {
