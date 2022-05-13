@@ -239,13 +239,6 @@ public class LevelUpSystem : MonoBehaviour
         }
     }
 
-    public void DebugLevelUp()
-    {
-        LevelUp(Type.Initial);
-        LevelUp(Type.Weapon);
-        LevelUp(Type.Ability);
-    }
-
     void SetLoweredMenu(bool loweredMenu)
     {
         if (this.loweredMenu == loweredMenu)
@@ -273,7 +266,7 @@ public class LevelUpSystem : MonoBehaviour
         List<LoadoutOption> optionsToDelete = new List<LoadoutOption>();
         foreach (LoadoutOption potentialToUnlock in optionsLocked)
         {
-            string displayName = option.Option.LocalizedName.value;
+            string displayName = option.Option.LocalizedName.key;
             if (potentialToUnlock.PrerequisiteAbilities.Contains(displayName))
             {
                 potentialToUnlock.PrerequisiteAbilities.Remove(displayName);
@@ -332,5 +325,14 @@ public class LevelUpSystem : MonoBehaviour
     public int GetLoadoutCount()
     {
         return abilitySlots.Count;
+    }
+
+    public void DebugLevelUp()
+    {
+        LevelUp(Type.Initial);
+        LevelUp(Type.Weapon);
+        LevelUp(Type.Ability);
+        LevelUp(Type.Ability);
+        LevelUp(Type.Ability);
     }
 }

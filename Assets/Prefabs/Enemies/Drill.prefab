@@ -1947,35 +1947,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth:
-    _owner: {fileID: 7969327006521631947}
-    _ownerName: Drill
-    _propertyPath: CurrentHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 6
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  currentHealth:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   CriticalHealth: 1
-  MaxHealth:
-    _owner: {fileID: 7969327006521631947}
-    _ownerName: Drill
-    _propertyPath: MaxHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 6
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  maxHealth:
+    UseConstant: 1
+    ConstantValue: 6
+    Variable: {fileID: 0}
   lastAttack: {fileID: 0}
 --- !u!114 &2356506731659339341
 MonoBehaviour:
@@ -2026,6 +2006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
   damage: 3
 --- !u!114 &7631614382890138392
 MonoBehaviour:
@@ -2043,13 +2024,6 @@ MonoBehaviour:
   Model: {fileID: 5902590042825361212}
   GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
-  Movable: 1
-  TurnToMoveDirection: 0
-  CollisionDistance: 8
-  HoverHeight: 0
-  GravityMultiplier: 0
-  AirDesacceleration: 5
-  Weight: 1
   IsGrounded: 1
 --- !u!114 &3553488645608801232
 MonoBehaviour:
@@ -2067,9 +2041,8 @@ MonoBehaviour:
   CollisionDistance: 8
   HoverHeight: 0
   GravityMultiplier: 0
-  AirDesacceleration: 5
   Weight: 1
-  Movable: 1
+  AirDesacceleration: 5
 --- !u!114 &5526178515769918757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2133,8 +2106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushSensitivity: 1
   health: {fileID: 5581418702539360646}
+  PushSensitivity: 1
 --- !u!114 &1338229177578445020
 MonoBehaviour:
   m_ObjectHideFlags: 0

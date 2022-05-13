@@ -84,7 +84,6 @@ public class AmmoManager : MonoBehaviour
 
     public void SetAmmo(Weapon targetWeapon, int ammo)
     {
-        Debug.Log("David Tenant");
         targetWeapon.SetAmmo(ammo);
         if (targetWeapon.Ammo == 0)
         {

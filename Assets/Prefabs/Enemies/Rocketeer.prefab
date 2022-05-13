@@ -1312,35 +1312,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth:
-    _owner: {fileID: 4270409125044020690}
-    _ownerName: Rocketeer
-    _propertyPath: CurrentHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  currentHealth:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   CriticalHealth: 40
-  MaxHealth:
-    _owner: {fileID: 4270409125044020690}
-    _ownerName: Rocketeer
-    _propertyPath: MaxHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 75
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  maxHealth:
+    UseConstant: 1
+    ConstantValue: 75
+    Variable: {fileID: 0}
   lastAttack: {fileID: 0}
 --- !u!114 &8460232533797037908
 MonoBehaviour:

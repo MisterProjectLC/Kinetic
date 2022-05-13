@@ -2663,37 +2663,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055899aed88da5340b7a7ac39341a49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth:
-    _owner: {fileID: 9089919347116189794}
-    _ownerName: Vanguard
-    _propertyPath: CurrentHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 2
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 11400000, guid: 8b05bb4dd073b294ea4b83cbfcc39f83, type: 2}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  currentHealth:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: c20f952b9f5aee5479270a2274428b06, type: 2}
   CriticalHealth: 4
-  MaxHealth:
-    _owner: {fileID: 9089919347116189794}
-    _ownerName: Vanguard
-    _propertyPath: MaxHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 2
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 11400000, guid: 07f4dc7d844869f4eb462cfc48147cc9, type: 2}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  maxHealth:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: e6c1b4d1d7e3b784590e999664fa5088, type: 2}
   lastAttack: {fileID: 0}
-  maxHealth: 12
+  playerMaxHealth: 12
 --- !u!114 &2222884685990388292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2804,33 +2784,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStyle:
-    _owner: {fileID: 9089919347116189794}
-    _ownerName: Vanguard
-    _propertyPath: currentStyle
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 2
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 11400000, guid: 59f1490438918604082eccf1c5f06ca3, type: 2}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 59f1490438918604082eccf1c5f06ca3, type: 2}
   maxStyle:
-    _owner: {fileID: 9089919347116189794}
-    _ownerName: Vanguard
-    _propertyPath: maxStyle
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 2
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 11400000, guid: 66e11d7b708d4e340a40c5bc23582aea, type: 2}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 66e11d7b708d4e340a40c5bc23582aea, type: 2}
   DrainActive: 0
   config: {fileID: 11400000, guid: 757d2325b58a0f14488c7c8b4c0dc1e9, type: 2}
 --- !u!143 &3891292215102862298

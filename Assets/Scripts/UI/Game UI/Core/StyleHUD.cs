@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using SmartData.SmartFloat;
 
 public class StyleHUD : MonoBehaviour
 {
@@ -31,7 +30,7 @@ public class StyleHUD : MonoBehaviour
     float TierMultiplier = 3;
 
     [SerializeField]
-    FloatWriter totalStyle;
+    FloatReference totalStyle;
     int styleTier = 0;
     string[] tiers = {"D", "C", "B", "A", "S", "SS"};
     float fadingClock = 0f;
@@ -162,7 +161,7 @@ public class StyleHUD : MonoBehaviour
         // Apply
         TierText.text = tiers[styleTier];
 
-        totalStyle.value = sumStyle;
+        totalStyle.Value = sumStyle;
         StyleBar.UpdateBar();
     }
 }

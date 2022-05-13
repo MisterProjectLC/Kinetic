@@ -1213,35 +1213,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth:
-    _owner: {fileID: 1533658519467415632}
-    _ownerName: Fusioneer
-    _propertyPath: CurrentHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 2
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 11400000, guid: 90eea53723d778543b45af14e8026a7e, type: 2}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  currentHealth:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 90eea53723d778543b45af14e8026a7e, type: 2}
   CriticalHealth: 80
-  MaxHealth:
-    _owner: {fileID: 1533658519467415632}
-    _ownerName: Fusioneer
-    _propertyPath: MaxHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 2
-    _value: 160
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 11400000, guid: 3bbacf19f8699ee47ad4d92f6638c421, type: 2}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  maxHealth:
+    UseConstant: 0
+    ConstantValue: 160
+    Variable: {fileID: 11400000, guid: 3bbacf19f8699ee47ad4d92f6638c421, type: 2}
   lastAttack: {fileID: 0}
 --- !u!114 &6585358452944689878
 MonoBehaviour:

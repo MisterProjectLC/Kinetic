@@ -5,11 +5,11 @@ using UnityEngine;
 public class HealthPlayer : Health
 {
     [SerializeField]
-    int maxHealth = 5;
+    int playerMaxHealth = 5;
 
     protected override void Start()
     {
-        MaxHealth.value = maxHealth;
+        MaxHealth = playerMaxHealth;
         base.Start();
 
     }

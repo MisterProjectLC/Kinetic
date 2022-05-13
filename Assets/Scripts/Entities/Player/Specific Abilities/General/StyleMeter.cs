@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using SmartData.SmartFloat;
 
 public class StyleMeter : MonoBehaviour
 {
@@ -35,11 +34,11 @@ public class StyleMeter : MonoBehaviour
     public UnityAction<int, bool> OnBonus;
 
     [SerializeField]
-    FloatWriter currentStyle;
+    FloatReference currentStyle;
     public float CurrentStyle { get { return currentStyle; } }
 
     [SerializeField]
-    FloatWriter maxStyle;
+    FloatReference maxStyle;
     public float MaxStyle { get { return maxStyle; } }
 
 
@@ -195,7 +194,7 @@ public class StyleMeter : MonoBehaviour
             SetJuiceLeft(currentStyle - cost);
         else
         {
-            currentStyle.value = 0f;
+            currentStyle.Value = 0f;
             OnDeplete?.Invoke();
         }
     }
@@ -203,7 +202,7 @@ public class StyleMeter : MonoBehaviour
 
     void SetJuiceLeft(float juiceLeft)
     {
-        currentStyle.value = juiceLeft;
+        currentStyle.Value = juiceLeft;
         OnUpdate?.Invoke();
 
         bool lastCritical = Critical;

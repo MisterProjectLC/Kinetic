@@ -181,35 +181,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth:
-    _owner: {fileID: 2428469021606675725}
-    _ownerName: Drone
-    _propertyPath: CurrentHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  currentHealth:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   CriticalHealth: 1
-  MaxHealth:
-    _owner: {fileID: 2428469021606675725}
-    _ownerName: Drone
-    _propertyPath: MaxHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 4
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  maxHealth:
+    UseConstant: 1
+    ConstantValue: 4
+    Variable: {fileID: 0}
   lastAttack: {fileID: 0}
 --- !u!114 &8041429361272883083
 MonoBehaviour:
@@ -239,8 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushSensitivity: 1
   health: {fileID: 170632900509345856}
+  PushSensitivity: 1
 --- !u!114 &2793335532290284254
 MonoBehaviour:
   m_ObjectHideFlags: 0

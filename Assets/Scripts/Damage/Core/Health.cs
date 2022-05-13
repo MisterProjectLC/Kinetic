@@ -1,14 +1,38 @@
 using UnityEngine;
 using UnityEngine.Events;
-using SmartData.SmartInt;
 
 public class Health : MonoBehaviour
 {
     static float LastAttackWait = 20f;
 
-    public IntWriter CurrentHealth;
+    [SerializeField]
+    IntReference currentHealth;
+    public int CurrentHealth
+    {
+        get
+        {
+            return currentHealth;
+        }
+        set
+        {
+            currentHealth.Value = value;
+        }
+    }
     public int CriticalHealth = 1;
-    public IntWriter MaxHealth;
+
+    [SerializeField]
+    IntReference maxHealth;
+    public int MaxHealth
+    {
+        get
+        {
+            return maxHealth;
+        }
+        set
+        {
+            maxHealth.Value = value;
+        }
+    }
 
     bool critical = false;
     bool died = false;
@@ -32,7 +56,7 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        CurrentHealth.value = MaxHealth;
+        CurrentHealth = MaxHealth;
     }
 
 
@@ -47,7 +71,7 @@ public class Health : MonoBehaviour
         if (died)
             return;
 
-        CurrentHealth.value -= damage;
+        currentHealth.Value -= damage;
         OnDamage?.Invoke(damage);
         OnDamageAttack?.Invoke(damage, source);
 
@@ -56,14 +80,14 @@ public class Health : MonoBehaviour
         lastAttackOnKill += source.OnKill;
         lastAttackTime = Time.time;
 
-        if (CurrentHealth <= CriticalHealth && !critical)
+        if (currentHealth.Value <= CriticalHealth && !critical)
         {
             critical = true;
             source.OnCritical?.Invoke(this);
             OnCriticalLevel?.Invoke();
         }
 
-        if (CurrentHealth <= 0)
+        if (currentHealth.Value <= 0)
             Die();
     }
 
@@ -99,10 +123,10 @@ public class Health : MonoBehaviour
 
     public void Heal(int heal)
     {
-        CurrentHealth.value = Mathf.Min(MaxHealth, CurrentHealth + heal);
+        currentHealth.Value = Mathf.Min(maxHealth, currentHealth + heal);
         OnHeal?.Invoke(heal);
 
-        if (CurrentHealth > CriticalHealth && critical)    
+        if (currentHealth > CriticalHealth && critical)    
             critical = false;
     }
 }

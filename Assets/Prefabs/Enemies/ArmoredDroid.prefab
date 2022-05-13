@@ -395,35 +395,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth:
-    _owner: {fileID: 1919652729044422252}
-    _ownerName: ArmoredDroid
-    _propertyPath: CurrentHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  currentHealth:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   CriticalHealth: 35
-  MaxHealth:
-    _owner: {fileID: 1919652729044422252}
-    _ownerName: ArmoredDroid
-    _propertyPath: MaxHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 75
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  maxHealth:
+    UseConstant: 1
+    ConstantValue: 75
+    Variable: {fileID: 0}
   lastAttack: {fileID: 0}
 --- !u!114 &6091324306811538666
 MonoBehaviour:
@@ -453,8 +433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0bb927e750d8b4ca2687519b993208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushSensitivity: 1
   health: {fileID: 4129356591579259681}
+  PushSensitivity: 1
 --- !u!114 &2149261098581676479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,13 +451,6 @@ MonoBehaviour:
   Model: {fileID: 2725085774729342363}
   GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
-  Movable: 1
-  TurnToMoveDirection: 0
-  CollisionDistance: 10
-  HoverHeight: 0
-  GravityMultiplier: 1
-  AirDesacceleration: 0
-  Weight: 3
   IsGrounded: 1
 --- !u!114 &4234047996173512466
 MonoBehaviour:
@@ -495,9 +468,7 @@ MonoBehaviour:
   CollisionDistance: 10
   HoverHeight: 0
   GravityMultiplier: 1
-  AirDesacceleration: 0
   Weight: 3
-  Movable: 1
   TurnToMoveDirection: 0
 --- !u!114 &9158300542990285965
 MonoBehaviour:
@@ -594,6 +565,7 @@ MonoBehaviour:
   blockingEffects:
   - {fileID: 11400000, guid: c21ab97e677904f44a769394466e46b3, type: 2}
   - {fileID: 11400000, guid: 16265339f8eb60042bfcce8b78eb0cce, type: 2}
+  OnlyIfPlayerInView: 1
 --- !u!195 &723445349695837651
 NavMeshAgent:
   m_ObjectHideFlags: 0

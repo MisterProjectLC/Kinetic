@@ -71,9 +71,8 @@ public class OptionsMenu : Menu
             }
         }
 
-        Debug.Log("Language " + Hermes.GetInt(Hermes.Properties.Language));
-        Debug.Log("Resolution " + Hermes.GetInt(Hermes.Properties.Resolution));
-
+        //Debug.Log("Language " + Hermes.GetInt(Hermes.Properties.Language));
+        //Debug.Log("Resolution " + Hermes.GetInt(Hermes.Properties.Resolution));
 
         if (Hermes.GetInt(Hermes.Properties.Resolution) == -1) {
             Hermes.SetProperty(Hermes.Properties.Resolution, currentRes);

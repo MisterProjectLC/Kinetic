@@ -1,19 +1,19 @@
 using UnityEngine;
-using SmartData.SmartFloat;
 
-public class FloatBar : ValueBar
+public class FloatBar : ValueBar<float>
 {
     [SerializeField]
-    FloatReader CurrentValue;
+    FloatReference CurrentValue;
     [SerializeField]
-    FloatReader MaxValue;
+    FloatReference MaxValue;
 
-    private void Start()
+    new protected void Awake()
     {
-        CurrentValue.BindListener(UpdateBar);
-        CurrentValue.UnbindUnityEventOnDestroy();
+        SetReferences(CurrentValue, MaxValue);
+        base.Awake();
     }
-    public void UpdateBar()
+
+    public override void UpdateBar()
     {
         if (bar)
             bar.sizeDelta = barSize * new Vector2(Mathf.Clamp01(CurrentValue / MaxValue), 1f);

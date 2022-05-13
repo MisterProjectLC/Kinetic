@@ -1,15 +1,28 @@
 using UnityEngine;
-using SmartData.Abstract;
 
-public class ValueBar : MonoBehaviour
+public abstract class ValueBar<T> : MonoBehaviour
 {
+    ValueReference<T> currentValue;
+    ValueReference<T> maxValue;
+
     [SerializeField]
     protected RectTransform bar;
     protected Vector2 barSize;
 
     // Start is called before the first frame update
-    void Awake()
+    protected void Awake()
     {
         barSize = bar.sizeDelta;
+
+        Debug.Log("Teste");
+        currentValue.SubscribeToChange(UpdateBar);
     }
+
+    protected void SetReferences(ValueReference<T> currentValue, ValueReference<T> maxValue)
+    {
+        this.currentValue = currentValue;
+        this.maxValue = maxValue;
+    }
+
+    public abstract void UpdateBar();
 }

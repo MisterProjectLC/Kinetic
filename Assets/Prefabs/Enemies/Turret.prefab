@@ -347,35 +347,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth:
-    _owner: {fileID: 3379298300632395941}
-    _ownerName: Cannon Left
-    _propertyPath: CurrentHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  currentHealth:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   CriticalHealth: 1
-  MaxHealth:
-    _owner: {fileID: 3379298300632395941}
-    _ownerName: Cannon Left
-    _propertyPath: MaxHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 3
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  maxHealth:
+    UseConstant: 1
+    ConstantValue: 3
+    Variable: {fileID: 0}
   lastAttack: {fileID: 0}
 --- !u!114 &1088624069320341115
 MonoBehaviour:
@@ -462,35 +442,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth:
-    _owner: {fileID: 4655438382437377873}
-    _ownerName: Turret
-    _propertyPath: CurrentHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  currentHealth:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   CriticalHealth: 1
-  MaxHealth:
-    _owner: {fileID: 4655438382437377873}
-    _ownerName: Turret
-    _propertyPath: MaxHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 10
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  maxHealth:
+    UseConstant: 1
+    ConstantValue: 10
+    Variable: {fileID: 0}
   lastAttack: {fileID: 0}
 --- !u!114 &1058401267633563095
 MonoBehaviour:
@@ -524,13 +484,6 @@ MonoBehaviour:
   Model: {fileID: 4655438382437377873}
   GroundLayers: {fileID: 11400000, guid: 3e0d66cfa3e59264ab1e63360800182e, type: 2}
   ViewBlockedLayers: {fileID: 11400000, guid: 55f2d6a6b218e9e4cafc5561dce5186f, type: 2}
-  Movable: 0
-  TurnToMoveDirection: 0
-  CollisionDistance: 1
-  HoverHeight: 1
-  GravityMultiplier: 1
-  AirDesacceleration: 0
-  Weight: 1
   IsGrounded: 1
 --- !u!114 &128374813657964540
 MonoBehaviour:
@@ -850,35 +803,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2775343047ef134395fcccb5bd51a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth:
-    _owner: {fileID: 5029517833402345531}
-    _ownerName: Cannon Right
-    _propertyPath: CurrentHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 0
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  currentHealth:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
   CriticalHealth: 1
-  MaxHealth:
-    _owner: {fileID: 5029517833402345531}
-    _ownerName: Cannon Right
-    _propertyPath: MaxHealth
-    _autoListen: 0
-    _multiIndex: 0
-    _refType: 0
-    _value: 3
-    _smartConst: {fileID: 0}
-    _smartVar: {fileID: 0}
-    _smartMulti: {fileID: 0}
-    _onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
+  maxHealth:
+    UseConstant: 1
+    ConstantValue: 3
+    Variable: {fileID: 0}
   lastAttack: {fileID: 0}
 --- !u!114 &604446897212688494
 MonoBehaviour:
