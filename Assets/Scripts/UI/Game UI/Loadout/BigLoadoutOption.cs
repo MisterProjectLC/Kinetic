@@ -12,15 +12,8 @@ public class BigLoadoutOption : LoadoutOption
     // Start is called before the first frame update
     protected void Awake()
     {
-        secondarySlot.OnInsertedAbility += OnSecondaryInsert;
         SubscribeToInsert(OnPrimaryInsert);
         OnRemove += OnPrimaryRemove;
-    }
-
-    protected new void Start()
-    {
-        base.Start();
-        //secondarySlot.GetComponent<DropSlot>().Offset = GetComponent<RectTransform>().anchoredPosition;
     }
 
     private void OnEnable()
@@ -32,6 +25,7 @@ public class BigLoadoutOption : LoadoutOption
     {
         secondaryName = secondaryAbility;
         secondarySlot.Setup(loadoutManager);
+        secondarySlot.OnInserted += OnSecondaryInsert;
         UpdateSecondaryAbility();
     }
 
@@ -45,13 +39,15 @@ public class BigLoadoutOption : LoadoutOption
 
     public void InsertOnSecondary(LoadoutOption option)
     {
+        ((SecondaryAbility)option.Option).ParentAbility = (Ability)Option;
         secondarySlot.OnDrop(option.gameObject);
-        Debug.Log("InsertOnSecondary");
     }
 
-    void OnSecondaryInsert(LoadoutOption option)
+    void OnSecondaryInsert(DragDrop option)
     {
-        ((SecondaryAbility)option.Option).ParentAbility = (Ability)Option;
+        Debug.Log("OnSecondaryInsert " + Option.LocalizedName.value);
+        SecondaryAbility secondaryAbility = (SecondaryAbility)((LoadoutOption)option).Option;
+        secondaryAbility.ParentAbility = (Ability)Option;
     }
 
     public void OnPrimaryInsert(DropSlot slot)

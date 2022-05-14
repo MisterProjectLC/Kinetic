@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPlayer : Health
+public class HealthWithVariable : Health
 {
     [SerializeField]
-    int playerMaxHealth = 5;
+    int DefaultMaxHealth = 5;
 
     protected override void Start()
     {
-        MaxHealth = playerMaxHealth;
+        MaxHealth = DefaultMaxHealth;
         base.Start();
 
     }

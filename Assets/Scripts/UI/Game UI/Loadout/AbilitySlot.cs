@@ -6,14 +6,12 @@ public class AbilitySlot : LoadoutSlot
     public int LoadoutNumber = 0;
     public bool GlobalSlot = false;
 
-    internal UnityAction<LoadoutOption> OnInsertedAbility;
 
     public LoadoutSlot NextSlot;
 
     private void Start()
     {
         Type = "Ability";
-        OnInsertedAbility += (LoadoutOption a) => { OnInserted(a); };
     }
 
     public override void SetOptionPrivate(Upgrade option, bool activating)

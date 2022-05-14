@@ -27,7 +27,12 @@ public class UniqueID : MonoBehaviour
 
     public void RegisterID()
     {
-        //Debug.Log("Registered " + ID);
         MySceneManager.MSM.RegisterObject(ID, gameObject.scene.name, lifetime);
+    }
+
+
+    public void UnRegisterID()
+    {
+        MySceneManager.MSM.UnRegisterObject(ID, gameObject.scene.name, lifetime);
     }
 }

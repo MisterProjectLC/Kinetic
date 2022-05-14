@@ -45,7 +45,7 @@ public class Rocketeer : MonoBehaviour
     void FireAnimation(Weapon weapon)
     {
         animator.SetTrigger("Fire");
-        if ((playerTransform.position - enemy.Model.transform.position).magnitude <= maxDistance)
-            enemy.ReceiveForce(weapon.BackwardsForce * -weapon.Mouth.transform.forward);
+        //if ((playerTransform.position - enemy.Model.transform.position).magnitude <= maxDistance)
+        //    enemy.ReceiveForce(weapon.BackwardsForce * -weapon.Mouth.transform.forward);
     }
 }

@@ -112,6 +112,14 @@ public class MySceneManager : MonoBehaviour
             loader.GetComponent<ScenePartLoader>().RegisterObject(id, lifetime);
     }
 
+    public void UnRegisterObject(string id, string scene, Lifetime lifetime)
+    {
+        Transform loader = transform.Find(scene);
+
+        if (loader)
+            loader.GetComponent<ScenePartLoader>().UnRegisterObject(id, lifetime);
+    }
+
 
     public bool ObjectRegistered(string id, string scene)
     {

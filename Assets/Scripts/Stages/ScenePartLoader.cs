@@ -98,6 +98,19 @@ public class ScenePartLoader : MonoBehaviour
         }
     }
 
+
+    public void UnRegisterObject(string id, MySceneManager.Lifetime lifetime)
+    {
+        RegisteredObjects.Remove(id);
+
+        if (lifetime >= MySceneManager.Lifetime.ReturnOnQuit)
+        {
+            Debug.Log("Added to Perpetual: " + id);
+            PerpetualObjects.Remove(id);
+        }
+    }
+
+
     public bool CheckObject(string id)
     {
         return RegisteredObjects.Contains(id);

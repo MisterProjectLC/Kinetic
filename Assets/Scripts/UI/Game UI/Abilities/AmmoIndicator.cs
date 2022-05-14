@@ -17,8 +17,19 @@ public class AmmoIndicator : MonoBehaviour
 
     private void Awake()
     {
-        text = GetComponentInChildren<Text>();
-        animator = text.GetComponent<Animator>();
+        GetAnimator();
+        Debug.Log("Animator " + animator);
+    }
+
+    Animator GetAnimator()
+    {
+        if (!animator)
+        {
+            text = GetComponentInChildren<Text>();
+            animator = text.GetComponent<Animator>();
+
+        }
+        return animator;
     }
 
     public void Setup(GameObject player)
@@ -56,7 +67,7 @@ public class AmmoIndicator : MonoBehaviour
         if (this.inAnimation == inAnimation)
             return;
         this.inAnimation = inAnimation;
-        animator.SetBool("Animating", inAnimation);
+        GetAnimator().SetBool("Animating", inAnimation);
     }
 
 
@@ -66,8 +77,7 @@ public class AmmoIndicator : MonoBehaviour
             return;
 
         SetInAnimation(false);
-        animator.SetTrigger("Ping");
-        //Debug.Log("Ping");
+        GetAnimator().SetTrigger("Ping");
 
         if (!weapon)
             text.text = "";

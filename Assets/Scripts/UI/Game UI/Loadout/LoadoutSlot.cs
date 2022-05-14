@@ -24,7 +24,6 @@ public abstract class LoadoutSlot : DropSlot
 
     public void OnInsertedOption(DragDrop dragDrop)
     {
-        Debug.Log("OnInsertedOption");
         Upgrade option = ((LoadoutOption)dragDrop).Option;
         SavedLoadout.AddSpawnAbility(new SavedLoadout.SavedAbility(option.name, GetLoadoutNumber(), AbilityNumber));
         SetOptionPrivate(option, true);

@@ -35,7 +35,8 @@ public class FlyingEnemy : MonoBehaviour
     Clock collisionClock;
 
     RaycastHit[] hitInfos;
-    RaycastHit[] hits;
+
+    Vector3 targetY = Vector3.zero;
     bool stopped = false;
 
     const float TIME_UNTIL_FRAME_UPDATE = 0.04f;
@@ -45,7 +46,6 @@ public class FlyingEnemy : MonoBehaviour
         tickClock = new Clock(TIME_UNTIL_FRAME_UPDATE);
         collisionClock = new Clock(enemyCollisionCooldown);
         hitInfos = new RaycastHit[20];
-        hits = new RaycastHit[1];
 
         playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
         enemy = GetComponent<Enemy>();
@@ -85,17 +85,17 @@ public class FlyingEnemy : MonoBehaviour
         Vector3 playerDistance = playerTransform.position - enemy.Model.transform.position;
         playerDistance = Vector3.ProjectOnPlane(playerDistance, Vector3.up);
 
-        //if (DetectTooCloseWall())
-        //    return;
-
         // X movement
         if (!DetectTooCloseWall() && playerDistance.magnitude > MinimumDistance)
             transform.position += playerDistance.normalized * MotorSpeed * TIME_UNTIL_FRAME_UPDATE;
 
         // Y movement
-        if (DetectTooCloseGroundOrCeiling())
-            transform.position = Vector3.Lerp(transform.position,
-                new Vector3(transform.position.x, playerTransform.position.y, transform.position.z), VerticalSpeed * TIME_UNTIL_FRAME_UPDATE);
+        if (!DetectTooCloseGroundOrCeiling())
+        {
+            targetY = transform.position;
+            targetY.y = playerTransform.position.y;
+            transform.position = Vector3.Lerp(transform.position, targetY, VerticalSpeed * TIME_UNTIL_FRAME_UPDATE);
+        }
     }
 
 
@@ -117,7 +117,7 @@ public class FlyingEnemy : MonoBehaviour
 
         Ray ray = new Ray(enemy.Model.transform.position, Vector3.up * 
             (enemy.Model.transform.position.y < playerTransform.position.y ? 1f : -1f));
-        Physics.RaycastNonAlloc(ray, hits, MaximumProximityToGround, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
-        return hits[0].collider;
+        Physics.Raycast(ray, out RaycastHit hit, MaximumProximityToGround, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
+        return hit.collider;
     }
 }
