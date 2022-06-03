@@ -8,7 +8,7 @@ public class MovingObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += MoveDirection * Time.deltaTime;
+        transform.localPosition += MoveDirection * Time.deltaTime;
     }
 
     public void SetMoveDirection(Vector3 value)

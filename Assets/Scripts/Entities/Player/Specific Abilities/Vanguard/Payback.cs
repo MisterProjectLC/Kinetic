@@ -86,7 +86,7 @@ public class Payback : Ability
         if (damagedSummation > attack.Damage/2)
             PlaySound(DetonateSound);
 
-        GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(Explosion.GetComponent<Poolable>().Type, Explosion);
+        GameObject newObject = ObjectManager.SpawnObjectFromPool(Explosion.GetComponent<Poolable>().Type, Explosion);
         newObject.transform.position = transform.position;
 
         attack.SetupClone(newObject.GetComponent<Attack>());

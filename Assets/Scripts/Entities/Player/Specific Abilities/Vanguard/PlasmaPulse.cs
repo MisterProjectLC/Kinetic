@@ -39,7 +39,7 @@ public class PlasmaPulse : SecondaryAbility
         foreach (RaycastHit hit in hits) {
             Poolable poolable = hit.collider.GetComponent<Poolable>();
             if (poolable)
-                ObjectManager.OM.EraseObject(poolable);
+                ObjectManager.EraseObject(poolable);
             else
                 Destroy(hit.collider.gameObject);
         }

@@ -32,7 +32,7 @@ public class Menu : MonoBehaviour
             SubmenuButton(StartSubmenu);
     }
 
-    public void SubmenuButton(int i)
+    public virtual void SubmenuButton(int i)
     {
         CloseSubmenus(submenus[i].animator);
         submenus[i].enabled = !submenus[i].enabled;

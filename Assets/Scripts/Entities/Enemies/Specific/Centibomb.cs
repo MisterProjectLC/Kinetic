@@ -62,19 +62,28 @@ public class Centibomb : MonoBehaviour
         if (!clock.TickAndRing(Time.deltaTime))
             return;
 
-        Physics.SphereCastNonAlloc(transform.position, 2f, transform.forward, hitInfos, 3f, sphereCastLayers.value, QueryTriggerInteraction.Collide);
-        RaycastHit hitInfo = hitInfos[0];
-        if (hitInfo.collider) {
-            Transform centibomb = hitInfo.collider.transform.parent;
-            if (hitInfo.collider.transform.parent && hitInfo.collider.transform.parent.GetComponent<Centibomb>() &&
-                centibomb.name.StartsWith("Centibomb") && !siblings.Contains(centibomb.GetComponent<Centibomb>()))
-                health.Kill();
+        RaycastHit[] hitInfos = Physics.SphereCastAll(transform.position, 3f, transform.forward, 5f, sphereCastLayers.value, QueryTriggerInteraction.Collide);
+        foreach (RaycastHit hitInfo in hitInfos)
+        {
+            if (!hitInfo.collider)
+                return;
 
-            else if (hitInfo.collider.name != "EN_Centobomba" && (!centibomb || centibomb.name != "EN_Centobomba"))
+            Centibomb centibomb = hitInfo.collider.GetComponentInParent<Centibomb>();
+            if (centibomb)
             {
+                if (centibomb.leader && !siblings.Contains(centibomb))
+                {
+                    Debug.Log("A " + hitInfo.collider.name);
+                    health.Kill();
+                }
+            }
+            else
+            {
+                Debug.Log("B " + hitInfo.collider.name);
                 health.Kill();
             }
         }
+        
     }
 
     void Detonate(Vector3 moveVelocity)

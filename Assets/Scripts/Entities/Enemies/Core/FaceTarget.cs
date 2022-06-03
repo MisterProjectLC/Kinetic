@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class FaceTarget : MonoBehaviour
 {
@@ -30,15 +31,20 @@ public class FaceTarget : MonoBehaviour
     List<StatusEffect> blockingEffects;
     Enemy enemy;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        TargetPosition = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
-        newTargetPosition = TargetPosition.position;
-        enemy = GetComponent<Enemy>();
-        if (!enemy)
-            enemy = GetComponentInParent<Enemy>();
+        enemy = GetComponentInParent<Enemy>();
         enemy.SubscribeToUpdate(OnUpdate);
+        enemy.SubscribeToStart(OnStart);
+    }
+
+
+    // Start is called before the first frame update
+    void OnStart()
+    {
+        TargetPosition = enemy.PlayerTransform;
+        newTargetPosition = TargetPosition.position;
 
         if (!partThatMoves)
             partThatMoves = enemy.Model;

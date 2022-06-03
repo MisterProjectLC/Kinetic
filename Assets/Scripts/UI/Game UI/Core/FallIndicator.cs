@@ -7,12 +7,15 @@ public class FallIndicator : MonoBehaviour
     Image image;
     PlayerFallHandler fallHandler;
 
+    [SerializeField]
+    GameObjectReference PlayerReference;
+
     // Start is called before the first frame update
     void Start()
     {
         image = GetComponent<Image>();
         color = image.color;
-        fallHandler = ActorsManager.AM.GetPlayer().GetComponentInChildren<PlayerFallHandler>();
+        fallHandler = PlayerReference.Reference.GetComponentInChildren<PlayerFallHandler>();
         fallHandler.OnChange += OnChange;
     }
 

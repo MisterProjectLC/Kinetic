@@ -256,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 813385107241053897}
   text: {fileID: 813385107485158054}
+  PlayerReference: {fileID: 11400000, guid: 7fc2f2a4593105e4f85230bc2d790905, type: 2}
 --- !u!82 &813385107241053895
 AudioSource:
   m_ObjectHideFlags: 0
@@ -549,6 +550,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 48c29e08799c37447b8655d65d3c2e1f, type: 3}
   - {fileID: 21300000, guid: 2d60d884b79b2c543a27f97fa723775d, type: 3}
   hitmarkerAnimationTime: 0.1
+  PlayerReference: {fileID: 11400000, guid: 7fc2f2a4593105e4f85230bc2d790905, type: 2}
 --- !u!114 &813385107483658635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,6 +1138,7 @@ MonoBehaviour:
   - {fileID: 2058770342725357284}
   ammoIndicator: {fileID: 8168707496180362286}
   centerTransform: {fileID: 1367462728624538409}
+  PlayerReference: {fileID: 11400000, guid: 7fc2f2a4593105e4f85230bc2d790905, type: 2}
 --- !u!223 &3404656268302727781
 Canvas:
   m_ObjectHideFlags: 0
@@ -1325,6 +1328,7 @@ MonoBehaviour:
   PausedObjects:
   - {fileID: 813385108314336403}
   - {fileID: 811689964462082493}
+  PlayerReference: {fileID: 11400000, guid: 7fc2f2a4593105e4f85230bc2d790905, type: 2}
 --- !u!1 &813385109120222861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +1839,7 @@ MonoBehaviour:
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 3d553de22485e3e4abd03e33ad6d6e9c, type: 2}
   WaitToFade: 5
+  PlayerReference: {fileID: 11400000, guid: 7fc2f2a4593105e4f85230bc2d790905, type: 2}
 --- !u!225 &5549309307328023881
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2288,6 +2293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphaIncrease: 0.25
+  PlayerReference: {fileID: 11400000, guid: 7fc2f2a4593105e4f85230bc2d790905, type: 2}
 --- !u!82 &1394674583191319321
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2781,6 +2787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d531a003dec70e4ebe6c39e638fccbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerReference: {fileID: 11400000, guid: 7fc2f2a4593105e4f85230bc2d790905, type: 2}
 --- !u!223 &6928249984393268258
 Canvas:
   m_ObjectHideFlags: 0

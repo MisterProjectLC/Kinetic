@@ -19,6 +19,9 @@ public class SightlineChecker
 
     public bool IsTargetInWatchersView(Transform target)
     {
+        if (target == null)
+            return true;
+
         Vector3 playerDistance = target.position - watcher.position;
 
         // Check if view is obstructed

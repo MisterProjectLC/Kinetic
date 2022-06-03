@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour, Entity
     public LayersConfig ViewBlockedLayers;
 
     public Transform PlayerTransform { get; private set; }
+    [SerializeField]
+    GameObjectReference PlayerReference;
 
     IEnemyPhysics EnemyPhysics;
     StatusEffectManager statusEffectManager;
@@ -28,6 +30,9 @@ public class Enemy : MonoBehaviour, Entity
     UnityAction OnUpdate;
     public void SubscribeToUpdate(UnityAction subscriber) { OnUpdate += subscriber; }
     public UnityAction<Vector3> OnKnockbackCollision;
+
+    UnityAction OnStart;
+    public void SubscribeToStart(UnityAction subscriber) { OnStart += subscriber; }
 
     [HideInInspector]
     public bool IsGrounded = true;
@@ -42,8 +47,9 @@ public class Enemy : MonoBehaviour, Entity
 
     void Start()
     {
-        PlayerTransform = ActorsManager.AM.GetPlayerCamera().transform;
+        PlayerTransform = PlayerReference.Disabled ? null : PlayerReference.Reference.GetComponentInChildren<Camera>().transform;
         sightlineChecker = new SightlineChecker(Model.transform, ViewBlockedLayers.layers);
+        OnStart?.Invoke();
     }
 
     // Update is called once per frame

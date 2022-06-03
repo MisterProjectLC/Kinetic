@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
@@ -8,6 +6,9 @@ public class MusicManager : MonoBehaviour
     public static MusicManager MM;
 
     GameObject player;
+    [SerializeField]
+    GameObjectReference playerReference;
+
     [SerializeField]
     Transform objective;
 
@@ -25,7 +26,7 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = ActorsManager.AM.GetPlayer().gameObject;
+        player = playerReference.Reference;
         player.GetComponent<StyleMeter>().SubscribeToCritical(OnCritical);
     }
 

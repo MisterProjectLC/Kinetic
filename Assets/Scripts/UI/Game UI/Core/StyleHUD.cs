@@ -38,10 +38,13 @@ public class StyleHUD : MonoBehaviour
     [SerializeField]
     float WaitToFade = 5f;
 
+    [SerializeField]
+    GameObjectReference PlayerReference;
+
     // Start is called before the first frame update
     void Start()
     {
-        style = ActorsManager.AM.GetPlayer().GetComponentInChildren<StyleMeter>();
+        style = PlayerReference.Reference.GetComponentInChildren<StyleMeter>();
         style.OnEvent += OnEvent;
         style.OnBonus += OnBonus;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Poolable : MonoBehaviour
 {
     [SerializeField]
-    public ObjectManager.PoolableType Type;
+    public PoolableEnum Type;
 
     [HideInInspector]
     public bool AlreadyInitialized = false;

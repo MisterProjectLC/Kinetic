@@ -1,60 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
 {
     [HideInInspector]
-    public static ObjectManager OM;
-    [HideInInspector]
-    public Stack<Poolable>[] Poolables;
+    static Dictionary<PoolableEnum, Stack<Poolable>> Poolables = new Dictionary<PoolableEnum, Stack<Poolable>>();
 
-    public int PoolableMaxCount = 200;
+    static int POOLABLE_MAX_COUNT = 200;
 
-    public enum PoolableType
+    private void Awake()
     {
-        LaserSparks = 0,
-        LaserProjectile,
-        ShellBomb,
-        ShellBombExplosion,
-        Rocket,
-        RocketLauncherExplosion,
-        PlayerLaserProjectile,
-        CentibombExplosion,
-        EnemyRocket,
-        RocketeerExplosion,
-        GravitonProjectile,
-        Graviton,
-        SuspendedCrate,
-        PaybackExplosion,
-        ConveyorBeltDetail,
-        KatanaSlash,
-        BigRocketLauncherExplosion,
-        CollisionExplosion,
-        Count
+        ResetPool();
     }
 
-    void Awake()
+    public static GameObject SpawnObjectFromPool(PoolableEnum type, GameObject gameObject)
     {
-        if (!OM)
-            OM = this;
-        else {
-            Destroy(gameObject);
-            return;
-        }
-
-        Poolables = new Stack<Poolable>[(int)PoolableType.Count];
-        for (int i = 0; i < (int)PoolableType.Count; i++)
-            //Poolables[i] = new Poolable[PoolableMaxCount];
-            Poolables[i] = new Stack<Poolable>();
-    }
+        if (!Poolables.ContainsKey(type))
+            Poolables.Add(type, new Stack<Poolable>(POOLABLE_MAX_COUNT));
 
 
-    public GameObject SpawnObjectFromPool(PoolableType type, GameObject gameObject)
-    {
-        if (Poolables[(int)type].Count > 0)
+        if (Poolables[type].Count > 0)
         {
-            GameObject newObject = Poolables[(int)type].Pop().gameObject;
+            GameObject newObject = Poolables[type].Pop().gameObject;
             newObject.SetActive(true);
             return newObject;
         }
@@ -65,10 +32,19 @@ public class ObjectManager : MonoBehaviour
     }
 
 
-    public void EraseObject(Poolable instance)
+    public static void EraseObject(Poolable instance)
     {
         instance.AlreadyInitialized = true;
         instance.gameObject.SetActive(false);
-        Poolables[(int)instance.Type].Push(instance);
+
+        if (!Poolables.ContainsKey(instance.Type))
+            Poolables.Add(instance.Type, new Stack<Poolable>(POOLABLE_MAX_COUNT));
+
+        Poolables[instance.Type].Push(instance);
+    }
+
+    public static void ResetPool()
+    {
+        Poolables = new Dictionary<PoolableEnum, Stack<Poolable>>();
     }
 }

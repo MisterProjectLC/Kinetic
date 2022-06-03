@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +8,8 @@ public class LoadoutMenu : Menu
 
     [SerializeField]
     Text LoadoutText;
+
+    StringBuilder stringBuilder = new StringBuilder(15);
 
     [SerializeField]
     LocalizedString Loadout;
@@ -24,8 +25,14 @@ public class LoadoutMenu : Menu
     {
         if (loadoutManager != null && !submenus[loadoutManager.GetCurrentLoadoutIndex()].enabled)
         {
-            LoadoutText.text = Loadout.value + " " + (1+loadoutManager.GetCurrentLoadoutIndex()).ToString();
+            LoadoutText.text = stringBuilder.Clear().Append(Loadout.value).Append(" ").Append(1+loadoutManager.GetCurrentLoadoutIndex()).ToString();
             SubmenuButton(loadoutManager.GetCurrentLoadoutIndex());
         }
+    }
+
+    public override void SubmenuButton(int i)
+    {
+        base.SubmenuButton(i);
+        LoadoutText.text = stringBuilder.Clear().Append(Loadout.value).Append(" ").Append(1 + i).ToString();
     }
 }

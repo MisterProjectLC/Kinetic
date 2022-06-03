@@ -26,6 +26,6 @@ public class ParticleScript : MonoBehaviour
             }
 
         if (!isPlaying)
-            ObjectManager.OM.EraseObject(GetComponent<Poolable>());
+            ObjectManager.EraseObject(GetComponent<Poolable>());
     }
 }

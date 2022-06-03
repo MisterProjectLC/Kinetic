@@ -35,6 +35,9 @@ public class Pause : MonoBehaviour
 
     public UnityAction<bool> OnTogglePause;
 
+    [SerializeField]
+    GameObjectReference PlayerReference;
+
 
     private void Awake()
     {
@@ -45,7 +48,7 @@ public class Pause : MonoBehaviour
 
     private void Start()
     {
-        playerInput = ActorsManager.AM.GetPlayer().GetComponent<PlayerInputHandler>();
+        playerInput = PlayerReference.Reference.GetComponent<PlayerInputHandler>();
         StartCoroutine(InitialClose());
     }
 

@@ -28,8 +28,6 @@ public class ScenePartLoader : MonoBehaviour
 
     void Start()
     {
-        player = ActorsManager.AM.GetPlayer().transform;
-
         //verify if the scene is already open to avoid opening a scene twice
         if (SceneManager.sceneCount > 0)
             for (int i = 0; i < SceneManager.sceneCount; ++i)

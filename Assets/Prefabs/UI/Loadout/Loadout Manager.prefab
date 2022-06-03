@@ -1171,6 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be9c2cb206ef8146902dbcbacfb24cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerReference: {fileID: 11400000, guid: 7fc2f2a4593105e4f85230bc2d790905, type: 2}
 --- !u!114 &3275032973704429783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1232,7 +1233,7 @@ MonoBehaviour:
   StartSubmenu: -1
   LoadoutText: {fileID: 3275032974160739260}
   Loadout:
-    key: loadout
+    key: loadout_title
 --- !u!225 &3275032973704429782
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1417,7 +1418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3275032974591995594
 RectTransform:
   m_ObjectHideFlags: 0

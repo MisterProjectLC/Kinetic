@@ -9,6 +9,7 @@ public class Actor : MonoBehaviour
 
     public void Start()
     {
-        ActorsManager.AM.RegisterActor(this);
+        if (ActorsManager.AM)
+            ActorsManager.AM.RegisterActor(this);
     }
 }

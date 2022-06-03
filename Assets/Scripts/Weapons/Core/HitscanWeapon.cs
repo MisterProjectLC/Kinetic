@@ -13,7 +13,7 @@ public class HitscanWeapon : Weapon
     [Tooltip("Prefab containing hit animation")]
     [SerializeField]
     GameObject Sparks;
-    ObjectManager.PoolableType SparksType;
+    PoolableEnum SparksType;
 
     List<Health> enemies = new List<Health>(25);
     public UnityAction<RaycastHit> OnHit;
@@ -64,7 +64,7 @@ public class HitscanWeapon : Weapon
 
         if (Sparks != null)
         {
-            GameObject newObject = ObjectManager.OM.SpawnObjectFromPool(SparksType, Sparks);
+            GameObject newObject = ObjectManager.SpawnObjectFromPool(SparksType, Sparks);
             newObject.transform.position = hit.point;
             newObject.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(Random.insideUnitSphere, hit.normal),
                 hit.normal);

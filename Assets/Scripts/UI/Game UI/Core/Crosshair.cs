@@ -40,18 +40,21 @@ public class Crosshair : MonoBehaviour
 
     int savedLoadout = 0;
 
+    [SerializeField]
+    GameObjectReference PlayerReference;
+
 
     private void Start()
     {
-        foreach (Weapon weapon in ActorsManager.AM.GetPlayer().GetComponentsInChildren<Weapon>())
+        foreach (Weapon weapon in PlayerReference.Reference.GetComponentsInChildren<Weapon>())
             weapon.SubscribeToFire(ExpandCrosshair);
 
-        foreach (Attack attack in ActorsManager.AM.GetPlayer().GetComponentsInChildren<Attack>())
+        foreach (Attack attack in PlayerReference.Reference.GetComponentsInChildren<Attack>())
             attack.OnAttack += ActivateHitmarker;
 
         audioSource = GetComponent<AudioSource>();
 
-        loadoutManager = ActorsManager.AM.GetPlayer().GetComponent<LoadoutManager>();
+        loadoutManager = PlayerReference.Reference.GetComponent<LoadoutManager>();
         loadoutManager.SubscribeToLoadoutSwitch(RotateCrosshair);
         animator = GetComponent<Animator>();
     }

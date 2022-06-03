@@ -13,16 +13,19 @@ public class GameOver : MonoBehaviour
     AudioSource audioSource;
     float timeScale = 1f;
 
+    [SerializeField]
+    GameObjectReference PlayerReference;
+
     // Start is called before the first frame update
     void Start()
     {
-        ActorsManager.AM.GetPlayer().GetComponent<Health>().OnDie += StartGameOver;
+        PlayerReference.Reference.GetComponent<Health>().OnDie += StartGameOver;
         audioSource = GetComponent<AudioSource>();
     }
 
     void StartGameOver()
     {
-        StartCoroutine("RunGameOver");
+        StartCoroutine(RunGameOver());
     }
 
     IEnumerator RunGameOver()

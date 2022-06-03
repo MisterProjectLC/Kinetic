@@ -87,6 +87,7 @@ public class PlayerCharacterController : MonoBehaviour, Entity
     Vector3 m_GroundNormal;
     float m_LastTimeJumped = 0f;
     float m_CameraVerticalAngle = 0f;
+    float m_CameraRollAngle = 0f;
     RaycastHit[] hits;
 
     const float k_JumpGroundingPreventionTime = 0.2f;
@@ -148,7 +149,8 @@ public class PlayerCharacterController : MonoBehaviour, Entity
             m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
 
             // apply the vertical angle as a local rotation to the camera transform along its right axis (makes it pivot up and down)
-            m_PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
+            Debug.Log("Roll " + m_CameraRollAngle);
+            m_PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, m_CameraRollAngle);
         }
     }
 
@@ -368,6 +370,11 @@ public class PlayerCharacterController : MonoBehaviour, Entity
         m_FallHandler.FallFatal(VerticalLimit, FallRespawnPoint);
     }
 
+
+    public void SetRollAngle(float angle)
+    {
+        m_CameraRollAngle = angle;
+    }
 
     #region Getters
     // Gets a reoriented direction that is tangent to a given slope

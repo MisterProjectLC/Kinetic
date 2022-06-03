@@ -5024,7 +5024,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b625b98cbdbc64d8dd7db4c624b664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImpactType: 11
   ImpactObject: {fileID: 1530802152247089991, guid: 3c6ddf613960df04f828b8d227a45c7c,
     type: 3}
   PenetrateCount: 0
@@ -5040,7 +5039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd09c72d856c2ee40adee14d1306ef43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 10
+  Type: {fileID: 11400000, guid: 2706cc6e95319af4d8a20907d84d2b76, type: 2}
   AlreadyInitialized: 0
 --- !u!114 &1137994365999330828
 MonoBehaviour:
@@ -5054,8 +5053,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612320c6c9a4d5d44a99d46f4981a582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
+  damage: 1
 --- !u!1 &8842563647958113655
 GameObject:
   m_ObjectHideFlags: 0

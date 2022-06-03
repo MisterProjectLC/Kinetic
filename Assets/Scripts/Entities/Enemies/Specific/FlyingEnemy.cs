@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class FlyingEnemy : MonoBehaviour
 {
-    Transform playerTransform;
     Enemy enemy;
     IEnemyPhysics physics;
 
@@ -41,16 +40,19 @@ public class FlyingEnemy : MonoBehaviour
 
     const float TIME_UNTIL_FRAME_UPDATE = 0.04f;
 
+    private void Awake()
+    {
+        physics = GetComponent<IEnemyPhysics>();
+
+        enemy = GetComponent<Enemy>();
+        enemy.SubscribeToUpdate(OnUpdate);
+    }
+
     private void Start()
     {
         tickClock = new Clock(TIME_UNTIL_FRAME_UPDATE);
         collisionClock = new Clock(enemyCollisionCooldown);
         hitInfos = new RaycastHit[20];
-
-        playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
-        enemy = GetComponent<Enemy>();
-        physics = GetComponent<IEnemyPhysics>();
-        enemy.SubscribeToUpdate(OnUpdate);
     }
 
     void OnUpdate()
@@ -82,18 +84,18 @@ public class FlyingEnemy : MonoBehaviour
         if (stopped || !tickClock.TickAndRing(Time.deltaTime) || !enemy.IsPlayerInView())
             return;
 
-        Vector3 playerDistance = playerTransform.position - enemy.Model.transform.position;
+        Vector3 playerDistance = enemy.PlayerTransform.position - enemy.Model.transform.position;
         playerDistance = Vector3.ProjectOnPlane(playerDistance, Vector3.up);
 
         // X movement
         if (!DetectTooCloseWall() && playerDistance.magnitude > MinimumDistance)
-            transform.position += playerDistance.normalized * MotorSpeed * TIME_UNTIL_FRAME_UPDATE;
+            transform.localPosition += playerDistance.normalized * MotorSpeed * TIME_UNTIL_FRAME_UPDATE;
 
         // Y movement
         if (!DetectTooCloseGroundOrCeiling())
         {
             targetY = transform.position;
-            targetY.y = playerTransform.position.y;
+            targetY.y = enemy.PlayerTransform.position.y;
             transform.position = Vector3.Lerp(transform.position, targetY, VerticalSpeed * TIME_UNTIL_FRAME_UPDATE);
         }
     }
@@ -104,7 +106,7 @@ public class FlyingEnemy : MonoBehaviour
         if (MaximumProximityToWall <= 0)
             return false;
 
-        Ray ray = new Ray(enemy.Model.transform.position, playerTransform.position - enemy.Model.transform.position);
+        Ray ray = new Ray(enemy.Model.transform.position, enemy.PlayerTransform.position - enemy.Model.transform.position);
         Physics.Raycast(ray, out RaycastHit hit, MaximumProximityToWall, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
         return hit.collider;
     }
@@ -116,7 +118,7 @@ public class FlyingEnemy : MonoBehaviour
             return false;
 
         Ray ray = new Ray(enemy.Model.transform.position, Vector3.up * 
-            (enemy.Model.transform.position.y < playerTransform.position.y ? 1f : -1f));
+            (enemy.Model.transform.position.y < enemy.PlayerTransform.position.y ? 1f : -1f));
         Physics.Raycast(ray, out RaycastHit hit, MaximumProximityToGround, enemy.GroundLayers.layers, QueryTriggerInteraction.Ignore);
         return hit.collider;
     }

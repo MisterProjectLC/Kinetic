@@ -52,7 +52,7 @@ public class Destructable : MonoBehaviour
         }
 
         if (GetComponent<Poolable>())
-            ObjectManager.OM.EraseObject(GetComponent<Poolable>());
+            ObjectManager.EraseObject(GetComponent<Poolable>());
         else
             StartCoroutine(Destruct());
     }

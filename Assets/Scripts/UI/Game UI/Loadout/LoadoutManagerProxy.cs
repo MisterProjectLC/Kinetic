@@ -8,6 +8,9 @@ public class LoadoutManagerProxy : ILoadoutManager
     LoadoutManager trueLoadoutManager;
     bool init = false;
 
+    [SerializeField]
+    GameObjectReference PlayerReference;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +18,7 @@ public class LoadoutManagerProxy : ILoadoutManager
             return;
         init = true;
 
-        trueLoadoutManager = ActorsManager.AM.GetPlayer().GetComponent<LoadoutManager>();
+        trueLoadoutManager = PlayerReference.Reference.GetComponent<LoadoutManager>();
     }
 
     public override Device GetCurrentDevice()

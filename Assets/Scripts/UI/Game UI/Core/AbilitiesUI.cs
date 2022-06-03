@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AbilitiesUI : MonoBehaviour
 {
@@ -20,13 +19,16 @@ public class AbilitiesUI : MonoBehaviour
     Dictionary<Ability, GameObject> additionalAbilityViews = new Dictionary<Ability, GameObject>(4);
     List<GameObject> additionalAbilityViewsList = new List<GameObject>(4);
 
+    [SerializeField]
+    GameObjectReference PlayerReference;
+
     // Start is called before the first frame update
     void Start()
     {
         foreach (AbilityView view in AbilityViews)
             view.CenterTransform = centerTransform;
 
-        ammoIndicator.Setup(ActorsManager.Player.gameObject);
+        ammoIndicator.Setup(PlayerReference.Reference);
 
         loadoutManager.SubscribeToDeviceSwitch(DeviceUpdate);
         loadoutManager.SubscribeToLoadoutSwitch(LoadoutUpdate);

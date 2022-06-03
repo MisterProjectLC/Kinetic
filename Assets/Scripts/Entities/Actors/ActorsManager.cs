@@ -13,7 +13,7 @@ public class ActorsManager : MonoBehaviour
     [SerializeField]
     SerializableDictionary<Hermes.PlayerClass, Actor> ClassToActor;
 
-    public static Actor Player;
+    public GameObjectReference PlayerReference;
     static Camera PlayerCamera;
 
     // Start is called before the first frame update
@@ -28,10 +28,11 @@ public class ActorsManager : MonoBehaviour
             if (ActiveClass != Hermes.PlayerClass.Null && Hermes.CurrentClass == Hermes.PlayerClass.Null)
                 Hermes.CurrentClass = ActiveClass;
 
-            Player = ClassToActor[Hermes.CurrentClass];
+            PlayerReference.Reference = ClassToActor[Hermes.CurrentClass].gameObject;
+            Debug.Log(PlayerReference.Reference.name);
 
-            Player.gameObject.SetActive(true);
-            PlayerCamera = Player.GetComponentInChildren<Camera>();
+            PlayerReference.Reference.SetActive(true);
+            PlayerCamera = PlayerReference.Reference.GetComponentInChildren<Camera>();
             Actors = new Dictionary<int, List<Actor>>();
         }
     }
@@ -45,7 +46,7 @@ public class ActorsManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         if (Hermes.SpawnPosition != Vector3.zero)
-            Player.gameObject.transform.position = Hermes.SpawnPosition;
+            PlayerReference.Reference.transform.position = Hermes.SpawnPosition;
     }
 
 
@@ -60,7 +61,7 @@ public class ActorsManager : MonoBehaviour
 
     public Actor GetPlayer()
     {
-        return Player;
+        return PlayerReference.Reference.GetComponent<Actor>();
     }
 
     public Camera GetPlayerCamera()

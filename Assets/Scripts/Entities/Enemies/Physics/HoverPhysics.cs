@@ -33,7 +33,16 @@ public class HoverPhysics : IEnemyPhysics
 
         // Air
         if (airborne)
-            moveVelocity += Vector3.down * GravityMultiplier * 0.5f * Constants.Gravity * Time.deltaTime;
+        {
+            Vector3 adder = Vector3.down;
+            float factor = (GravityMultiplier * 0.5f * Constants.Gravity * Time.deltaTime);
+            adder.x *= factor;
+            adder.y *= factor;
+            adder.z *= factor;
+            moveVelocity.x += adder.x;
+            moveVelocity.y += adder.y;
+            moveVelocity.z += adder.z;
+        }
         // Ground
         else
         {
@@ -52,7 +61,14 @@ public class HoverPhysics : IEnemyPhysics
         // Automatic desacceleration (for airborne enemies)
         if (AirDesacceleration > 0 && moveVelocity.magnitude > 0)
         {
-            moveVelocity -= moveVelocity.normalized * AirDesacceleration * Time.deltaTime;
+            Vector3 subtractor = moveVelocity.normalized;
+            float factor = AirDesacceleration * Time.deltaTime;
+            subtractor.x *= factor;
+            subtractor.y *= factor;
+            subtractor.z *= factor;
+            moveVelocity.x -= subtractor.x;
+            moveVelocity.y -= subtractor.y;
+            moveVelocity.z -= subtractor.z;
             if (moveVelocity.magnitude < 0.5f)
                 moveVelocity = Vector3.zero;
         }
@@ -70,7 +86,7 @@ public class HoverPhysics : IEnemyPhysics
             }
 
             // Movement
-            transform.position += moveVelocity * Time.deltaTime;
+            transform.localPosition += moveVelocity * Time.deltaTime;
         }
 }
 
@@ -79,7 +95,12 @@ public class HoverPhysics : IEnemyPhysics
         if (sticky && !(Vector3.Dot(force, moveVelocity) < 0f || force.magnitude > moveVelocity.magnitude))
             return;
 
-        moveVelocity += force / (2 * Weight);
+        force.x /= 2 * Weight;
+        force.y /= 2 * Weight;
+        force.z /= 2 * Weight;
+        moveVelocity.x += force.x;
+        moveVelocity.y += force.y;
+        moveVelocity.z += force.z;
 
         // Stop on the ground
         if (moveVelocity.y < 0f && RayToGround().collider)

@@ -10,13 +10,16 @@ public class DamageBorder : MonoBehaviour
     [SerializeField]
     float alphaIncrease = 0.25f;
 
+    [SerializeField]
+    GameObjectReference PlayerReference;
+
     // Start is called before the first frame update
     void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         audioSource = GetComponent<AudioSource>();
-        ActorsManager.AM.GetPlayer().GetComponent<Health>().OnDamage += OnDamage;
-        ActorsManager.AM.GetPlayer().GetComponent<Health>().OnHeal += OnHeal;
+        PlayerReference.Reference.GetComponent<Health>().OnDamage += OnDamage;
+        PlayerReference.Reference.GetComponent<Health>().OnHeal += OnHeal;
     }
 
     private void Update()

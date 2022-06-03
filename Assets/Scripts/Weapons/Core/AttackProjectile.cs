@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class AttackProjectile : MonoBehaviour
 {
-    public ObjectManager.PoolableType ImpactType;
     [SerializeField]
     GameObject ImpactObject;
     GameObject impactObject;
+    PoolableEnum impactType;
 
     public int PenetrateCount = 0;
     List<Health> previousHits = new List<Health>();
@@ -24,6 +24,9 @@ public class AttackProjectile : MonoBehaviour
         projectile.OnHit += OnHit;
         penetrateCount = PenetrateCount;
         previousHits = new List<Health>(penetrateCount);
+
+        if (impactObject)
+            impactType = impactObject.GetComponent<Poolable>().Type;
     }
 
     private void OnEnable()
@@ -67,7 +70,7 @@ public class AttackProjectile : MonoBehaviour
         if (!impactObject)
             return null;
 
-        GameObject instance = ObjectManager.OM.SpawnObjectFromPool(impactObject.GetComponent<Poolable>().Type, impactObject);
+        GameObject instance = ObjectManager.SpawnObjectFromPool(impactType, impactObject);
         instance.transform.position = transform.position;
 
         Attack[] instanceAttacks = instance.GetComponents<Attack>();

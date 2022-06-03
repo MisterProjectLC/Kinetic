@@ -5,7 +5,9 @@ using UnityEngine;
 public class ConveyorBelt : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Detail;
+    GameObject Detail;
+    PoolableEnum detailType;
+
     List<GameObject> Details = new List<GameObject>();
 
     Vector3 SpawnPosition;
@@ -22,6 +24,8 @@ public class ConveyorBelt : MonoBehaviour
 
     private void Start()
     {
+        detailType = Detail.GetComponent<Poolable>().Type;
+
         movepad = GetComponent<Movepad>();
         SpawnPosition = movepad.GetUpperExtremePoint();
         DespawnPosition = movepad.GetLowerExtremePoint();
@@ -46,7 +50,7 @@ public class ConveyorBelt : MonoBehaviour
     {
         // Move and delete Stuff
         for (int i = 0; i < Details.Count; i++) {
-            Details[i].transform.position += movepad.GetMoveDirection() * Time.deltaTime;
+            Details[i].transform.localPosition += movepad.GetMoveDirection() * Time.deltaTime;
             if ((SpawnPosition - DespawnPosition).magnitude < (SpawnPosition - Details[i].transform.position).magnitude)
             {
                 Destroy(Details[i]);
@@ -58,7 +62,7 @@ public class ConveyorBelt : MonoBehaviour
             
         // Spawn Stuff
         if (clock.TickAndRing(Time.deltaTime)) {
-            GameObject instance = ObjectManager.OM.SpawnObjectFromPool(Detail.GetComponent<Poolable>().Type, Detail);
+            GameObject instance = ObjectManager.SpawnObjectFromPool(detailType, Detail);
             instance.transform.position = SpawnPosition;
             instance.transform.rotation = transform.rotation * Quaternion.Euler(0f, 90f, 0f);
             instance.transform.localScale = BeltSize;

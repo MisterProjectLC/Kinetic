@@ -49,7 +49,7 @@ public class NavmeshPhysics : IEnemyPhysics
         // Air
         if (airborne)
         {
-            moveVelocity += Vector3.down * GravityMultiplier * 0.5f * Constants.Gravity * Time.deltaTime;
+            moveVelocity += Vector3.down * (GravityMultiplier * 0.5f * Constants.Gravity * Time.deltaTime);
             pathAgent.updatePosition = false;
         }
         // Ground
@@ -96,7 +96,7 @@ public class NavmeshPhysics : IEnemyPhysics
             }
             else
             {
-                transform.position += moveVelocity * Time.deltaTime;
+                transform.localPosition += moveVelocity * Time.deltaTime;
             }
         }
     }
@@ -114,7 +114,12 @@ public class NavmeshPhysics : IEnemyPhysics
         if (sticky && !(Vector3.Dot(force, moveVelocity) < 0f || force.magnitude > moveVelocity.magnitude))
             return;
 
-        moveVelocity += force / (4 * Weight);
+        force.x /= 4 * Weight;
+        force.y /= 4 * Weight;
+        force.z /= 4 * Weight;
+        moveVelocity.x += force.x;
+        moveVelocity.y += force.y;
+        moveVelocity.z += force.z;
 
         // Stop on the ground
         if (moveVelocity.y < 0f && RayToGround().collider)

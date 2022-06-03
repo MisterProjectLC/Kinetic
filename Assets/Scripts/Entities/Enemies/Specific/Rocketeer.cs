@@ -15,7 +15,6 @@ public class Rocketeer : MonoBehaviour
     Weapon weapon;
     Animator animator;
     Enemy enemy;
-    Transform playerTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +24,6 @@ public class Rocketeer : MonoBehaviour
         GetComponent<Health>().OnCriticalLevel += Stagger;
         animator = GetComponent<Animator>();
         enemy = GetComponent<Enemy>();
-
-        playerTransform = ActorsManager.Player.GetComponentInChildren<Camera>().transform;
     }
 
     void Stagger()

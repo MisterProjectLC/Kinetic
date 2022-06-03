@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
   Knockback: 25
 --- !u!114 &3127176890621827606
 MonoBehaviour:
@@ -97,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agressor: {fileID: 0}
+  IgnoreNeutered: 0
   damage: 10
 --- !u!114 &1466952034047088296
 MonoBehaviour:
@@ -110,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd09c72d856c2ee40adee14d1306ef43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 3
+  Type: {fileID: 11400000, guid: 14029c58ec2a30c4aa591b47fe2fc0fa, type: 2}
   AlreadyInitialized: 0
 --- !u!82 &2503708963167366664
 AudioSource:

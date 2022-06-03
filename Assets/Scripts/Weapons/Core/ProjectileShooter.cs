@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileShooter : MonoBehaviour
 {
     GameObject Projectile;
+    PoolableEnum projectileType;
     LayersConfig HitLayers;
     Transform Mouth;
 
@@ -24,6 +25,7 @@ public class ProjectileShooter : MonoBehaviour
     public void Setup(GameObject Projectile, LayersConfig HitLayers, Transform Mouth)
     {
         this.Projectile = Projectile;
+        projectileType = Projectile.GetComponent<Poolable>().Type;
         this.HitLayers = HitLayers;
         this.Mouth = Mouth;
     }
@@ -31,7 +33,7 @@ public class ProjectileShooter : MonoBehaviour
     public GameObject ShootProjectile(Vector3 direction)
     {
         // Projectile attack
-        GameObject instance = ObjectManager.OM.SpawnObjectFromPool(Projectile.GetComponent<Poolable>().Type, Projectile);
+        GameObject instance = ObjectManager.SpawnObjectFromPool(projectileType, Projectile);
         instance.transform.position = Mouth.position;
         instance.GetComponent<Projectile>().Setup(direction, HitLayers.layers, GetComponentInParent<Actor>().gameObject, ExtraAutohitTime);
 

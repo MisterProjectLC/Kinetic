@@ -51,7 +51,7 @@ public class ExplosiveCollision : Passive
 
         clock = cooldown;
         Debug.Log(player.MoveVelocity.magnitude);
-        GameObject instance = ObjectManager.OM.SpawnObjectFromPool(explosion.GetComponent<Poolable>().Type, explosion);
+        GameObject instance = ObjectManager.SpawnObjectFromPool(explosion.GetComponent<Poolable>().Type, explosion);
         instance.transform.position = transform.position;
         attack.SetupClone(instance.GetComponent<Attack>());
         instance.GetComponent<AttackDamage>().Damage = Mathf.Min((int)player.MoveVelocity.magnitude / 4, 20);

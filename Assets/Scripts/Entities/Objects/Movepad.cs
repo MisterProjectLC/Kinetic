@@ -52,7 +52,7 @@ public class Movepad : MonoBehaviour
 
         if (DespawnPoint && SpawnPoint)
         {
-            moveVector = transform.InverseTransformVector(DespawnPoint.position - SpawnPoint.position).normalized * Speed;
+            moveVector = transform.InverseTransformVector(DespawnPoint.localPosition - SpawnPoint.localPosition).normalized * Speed;
             if (!overrideAutomaticSize)
                 detectSize = new Vector3(Mathf.Abs(DespawnPoint.localPosition.x - SpawnPoint.localPosition.x) / 2, 
                     1f, transform.localScale.z*1.5f);
@@ -67,7 +67,7 @@ public class Movepad : MonoBehaviour
 
     private void Update()
     {
-        detectorCenter = DespawnPoint ? (DespawnPoint.position + SpawnPoint.position)/2 : meshRenderer.bounds.center + detectPosOffset;
+        detectorCenter = DespawnPoint ? (DespawnPoint.localPosition + SpawnPoint.localPosition) /2 : meshRenderer.bounds.center + detectPosOffset;
         Collider[] colliders = Physics.OverlapBox(detectorCenter, detectSize, meshRenderer.transform.rotation, detectLayers);
         if (colliders.Length > 0)
         {

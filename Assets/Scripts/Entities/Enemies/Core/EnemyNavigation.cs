@@ -16,7 +16,7 @@ public abstract class EnemyNavigation : MonoBehaviour
 
     protected Clock navClock;
     protected NavMeshAgent pathAgent;
-    Enemy enemy;
+    protected Enemy enemy;
 
     private void Start()
     {

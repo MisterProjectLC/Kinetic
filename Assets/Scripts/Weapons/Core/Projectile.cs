@@ -76,7 +76,7 @@ public class Projectile : MonoBehaviour
             if (clock > Attributes.MaxLifetime)
             {
                 if (GetComponent<Poolable>())
-                    ObjectManager.OM.EraseObject(GetComponent<Poolable>());
+                    ObjectManager.EraseObject(GetComponent<Poolable>());
                 else
                     gameObject.SetActive(false);
             }
@@ -116,7 +116,7 @@ public class Projectile : MonoBehaviour
         OnDestroy?.Invoke(this);
 
         if (GetComponent<Poolable>())
-            ObjectManager.OM.EraseObject(GetComponent<Poolable>());
+            ObjectManager.EraseObject(GetComponent<Poolable>());
         else
             gameObject.SetActive(false);
     }

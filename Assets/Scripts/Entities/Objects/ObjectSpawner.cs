@@ -6,7 +6,7 @@ public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField]
     GameObject Spawnee;
-    ObjectManager.PoolableType? objectType = null;
+    PoolableEnum? objectType = null;
 
     [SerializeField]
     Transform SpawnPoint;
@@ -82,7 +82,7 @@ public class ObjectSpawner : MonoBehaviour
             Vector3 randomOffset = Random.insideUnitSphere * SpawnRadius;
             if (objectType != null)
             {
-                newInstance = ObjectManager.OM.SpawnObjectFromPool((ObjectManager.PoolableType)objectType, Spawnee);
+                newInstance = ObjectManager.SpawnObjectFromPool(objectType, Spawnee);
                 newInstance.transform.SetParent(transform);
                 newInstance.transform.position = SpawnPoint.position + randomOffset;
                 newInstance.transform.rotation = transform.rotation;
