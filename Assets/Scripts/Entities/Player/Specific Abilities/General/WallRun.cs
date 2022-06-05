@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using System;
 
 public class WallRun : MonoBehaviour
 {
@@ -14,14 +15,18 @@ public class WallRun : MonoBehaviour
     public float wallBouncing = 3;
     public float cameraTransitionDuration = 1;
 
-    public float wallGravityDownForce = 20f;
+    [SerializeField]
+    float wallGravityDownForce = 20f;
+    public float WallGravityDownForce { 
+        get { return wallGravityDownForce; }
+        set { wallGravityDownForce = value; wallGravityDownVector = new Vector3(0f, -wallGravityDownForce, 0f); }
+    }
 
     [SerializeField]
     LayersConfig wallLayers;
 
     PlayerCharacterController player;
     Transform playerTransform;
-    PlayerInputHandler input;
 
     Vector3[] DIRECTIONS = new Vector3[5]{
             Vector3.right,
@@ -34,65 +39,115 @@ public class WallRun : MonoBehaviour
     bool isWallRunning = false;
     Vector3 lastWallPosition;
     Vector3 lastWallNormal;
+    Vector3 wallGravityDownVector;
     float elapsedTimeSinceJump = 0;
     float elapsedTimeSinceWallAttach = 0;
     float elapsedTimeSinceWallDetatch = 0;
     float currentVolumeValue = 0;
     float lastVolumeValue = 0;
-    float noiseAmplitude;
+    bool jumping = false;
+
+    Action OnDetach;
+    public void SubscribeToDetach(Action subscribee) { OnDetach += subscribee; }
 
 
     void Start()
     {
         player = GetComponentInParent<PlayerCharacterController>();
+
         playerTransform = player.transform;
-        input = GetComponentInParent<PlayerInputHandler>();
+        wallGravityDownVector = new Vector3(0f, -wallGravityDownForce, 0f);
     }
 
+    #region Interface
+    internal void OnJump()
+    {
+        jumping = true;
 
-    public void LateUpdate()
-    {  
-        // Check if Wallrunning
-        isWallRunning = false;
-        bool canAttach = CanAttachCheck();
-        if (canAttach && CanWallRun())
+        if (isWallRunning)
+            DetachJump();
+    }
+
+    internal void OnTouchWall(Vector3 point, Vector3 normal)
+    {
+        if (jumping && CanWallRun())
+            AttachToWall(point, normal);
+    }
+
+    public void AttachToWall()
+    {
+        float d = Vector3.Dot(lastWallNormal, Vector3.up);
+        if (d <= Mathf.Abs(normalizedAngleThreshold))
         {
-           RaycastHit[] hits = RegisterHits().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
-            if(hits.Length > 0)
-            {
-                AttachToWall(hits[0]);
-                lastWallPosition = hits[0].point;
-                lastWallNormal = hits[0].normal;
-            }
+            Vector3 alongWall = player.GetPlayerCamera().transform.TransformDirection(Vector3.forward);
+            player.SetMoveVelocity(alongWall * (player.GroundWalkSpeed * wallSpeedMultiplier));
+            player.ReceiveForce(wallGravityDownVector);
+            isWallRunning = true;
         }
+    }
+
+    public void AttachToWall(Vector3 point, Vector3 normal)
+    {
+        lastWallPosition = point;
+        lastWallNormal = normal;
+
+        AttachToWall();
+    }
+
+    void DetachJump()
+    {
+        Debug.Log("DetachJump");
+
+        Vector3 moveVelocity = GetWallJumpDirection();
+        moveVelocity.x *= player.JumpForce;
+        moveVelocity.y *= player.JumpForce;
+        moveVelocity.z *= player.JumpForce;
+        moveVelocity.x += player.MoveVelocity.x;
+        moveVelocity.z += player.MoveVelocity.z;
+
+        player.SetMoveVelocity(moveVelocity);
+        DetachFromWall();
+    }
+
+    void DetachFromWall()
+    {
+        isWallRunning = false;
+    }
+    #endregion
+
+
+    void LateUpdate()
+    {
+        // Check if Wallrunning
+        if (CanWallRun())
+        {
+            if (jumping)
+            {
+
+                RaycastHit[] hits = RegisterHits().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
+                if (hits.Length > 0)
+                {
+                    Debug.Log("LateUpdate Attach");
+                    AttachToWall(hits[0].point, hits[0].normal);
+                }
+            }
+        } else
+        {
+            DetachFromWall();
+        }
+
+        ManageCamera();
+        HandleVolume();
 
         if (isWallRunning)
             UpdateWhenWallrunning();
         else
             UpdateWhenNotWallrunning();
 
-        ManageCamera();
-        HandleVolume();
+        jumping = false;
     }
 
-    RaycastHit[] RegisterHits()
-    {
-        RaycastHit[] hits = new RaycastHit[DIRECTIONS.Length];
-        for (int i = 0; i < DIRECTIONS.Length; i++)
-        {
-            Vector3 dir = transform.TransformDirection(DIRECTIONS[i]);
-            Physics.Raycast(playerTransform.position, dir, out hits[i], wallMaxDistance, wallLayers.layers, QueryTriggerInteraction.Ignore);
-#if UNITY_EDITOR
-            if (!hits[i].collider)
-                Debug.DrawRay(playerTransform.position, dir * hits[i].distance, Color.green);
-            else
-                Debug.DrawRay(playerTransform.position, dir * wallMaxDistance, Color.red);
-#endif
-        }
-
-        return hits;
-    }
-
+    #region Update Functions
     void UpdateWhenWallrunning()
     {
         elapsedTimeSinceWallDetatch = 0;
@@ -100,11 +155,6 @@ public class WallRun : MonoBehaviour
             lastVolumeValue = currentVolumeValue;
 
         elapsedTimeSinceWallAttach += Time.deltaTime;
-        //player.ReceiveForce(alongWall * vertical * player.GroundWalkSpeed * wallSpeedMultiplier);
-        player.ReceiveForce(Vector3.down * wallGravityDownForce * Time.deltaTime);
-
-        if (input.GetJump())
-            DetachJump();
     }
 
     void UpdateWhenNotWallrunning()
@@ -116,23 +166,11 @@ public class WallRun : MonoBehaviour
         elapsedTimeSinceWallDetatch += Time.deltaTime;
     }
 
-    void DetachJump()
-    {
-        Vector3 moveVelocity = GetWallJumpDirection();
-        moveVelocity.x *= player.JumpForce;
-        moveVelocity.y *= player.JumpForce;
-        moveVelocity.z *= player.JumpForce;
-        moveVelocity.x += player.MoveVelocity.x;
-        moveVelocity.z += player.MoveVelocity.z;
-
-        player.SetMoveVelocity(moveVelocity);
-    }
-
-    public void ManageCamera()
+    void ManageCamera()
     {
         float dir = CalculateSide();
-        float cameraAngle = player.GetPlayerCamera().transform.eulerAngles.z;
         float targetAngle = dir == 0 ? 0 : Mathf.Sign(dir) * maxAngleRoll;
+        float cameraAngle = player.GetPlayerCamera().transform.eulerAngles.z;
 
         player.SetRollAngle(Mathf.LerpAngle(cameraAngle, targetAngle,
             Mathf.Max(elapsedTimeSinceWallAttach, elapsedTimeSinceWallDetatch) / cameraTransitionDuration));
@@ -148,57 +186,25 @@ public class WallRun : MonoBehaviour
 
         SetVolumeWeight(w);
     }
+    #endregion
 
-
-    bool jumping = false;
-    bool CanAttachCheck()
+    #region Helper Functions
+    RaycastHit[] RegisterHits()
     {
-        // Detect Jump
-        if (input.GetJump())
-            jumping = true;
-
-        if (!jumping)
-            return true;
-
-        elapsedTimeSinceJump += Time.deltaTime;
-        if(elapsedTimeSinceJump > jumpDuration)
+        RaycastHit[] hits = new RaycastHit[DIRECTIONS.Length];
+        for (int i = 0; i < DIRECTIONS.Length; i++)
         {
-            elapsedTimeSinceJump = 0;
-            jumping = false;
+            Vector3 dir = transform.TransformDirection(DIRECTIONS[i]);
+            Physics.Raycast(playerTransform.position, dir, out hits[i], wallMaxDistance, wallLayers.layers, QueryTriggerInteraction.Ignore);
         }
-        return false;
+
+        return hits;
     }
-
-    void AttachToWall(RaycastHit hit) {
-        float d = Vector3.Dot(hit.normal, Vector3.up);
-        if (d <= Mathf.Abs(normalizedAngleThreshold))
-        {
-            Debug.Log("AttachToWall");
-
-            float vertical = input.GetMoveInput().z;
-            Vector3 alongWall = player.GetPlayerCamera().transform.TransformDirection(Vector3.forward);
-            player.SetMoveVelocity(alongWall * vertical * player.GroundWalkSpeed * wallSpeedMultiplier);
-            isWallRunning = true;
-
-#if UNITY_EDITOR
-            Debug.DrawRay(transform.position, alongWall.normalized * 10, Color.green);
-            Debug.DrawRay(transform.position, lastWallNormal * 10, Color.magenta);
-#endif
-        }
-    }
-
-    #region Getters
-    public bool IsWallRunning() => isWallRunning;
 
     bool CanWallRun()
     {
-        float forwardInput = input.GetMoveInput().z;
-        return !player.IsGrounded && forwardInput > 0 && VerticalCheck();
-    }
-
-    bool VerticalCheck()
-    {
-        return !Physics.Raycast(playerTransform.position, Vector3.down, minimumHeight);
+        return !player.IsGrounded /*&& input.GetMoveInput().x != 0 */
+            && !Physics.Raycast(playerTransform.position, Vector3.down, minimumHeight, wallLayers.layers, QueryTriggerInteraction.Ignore);
     }
 
     float CalculateSide()
@@ -206,10 +212,14 @@ public class WallRun : MonoBehaviour
         if (!isWallRunning)
             return 0;
 
-        Vector3 heading = lastWallPosition - transform.position;
-        Vector3 perp = Vector3.Cross(transform.forward, heading);
-        return Vector3.Dot(perp, transform.up);
+        Vector3 heading = lastWallPosition - playerTransform.position;
+        Vector3 perp = Vector3.Cross(playerTransform.forward, heading);
+        return Vector3.Dot(perp, playerTransform.up);
     }
+    #endregion
+
+    #region Getters
+    public bool IsWallRunning() => isWallRunning;
 
     public Vector3 GetWallJumpDirection()
     {

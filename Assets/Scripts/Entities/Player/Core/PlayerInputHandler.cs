@@ -50,17 +50,16 @@ public class PlayerInputHandler : MonoBehaviour
 
     public Vector3 GetMoveInput()
     {
-        if (InputAndUnpaused)
-        {
-            Vector3 move = new Vector3(Input.GetAxisRaw(MoveHorizontal), 0f, Input.GetAxisRaw(MoveVertical));
+        if (!InputAndUnpaused)
+            return Vector3.zero;
+        
+        Vector3 move = new Vector3(Input.GetAxisRaw(MoveHorizontal), 0f, Input.GetAxisRaw(MoveVertical));
 
-            // constrain move input to a maximum magnitude of 1, otherwise diagonal movement might exceed the max move speed defined
-            move = Vector3.ClampMagnitude(move, 1);
+        // constrain move input to a maximum magnitude of 1, otherwise diagonal movement might exceed the max move speed defined
+        move = Vector3.ClampMagnitude(move, 1);
 
-            return move;
-        }
-
-        return Vector3.zero;
+        return move;
+        
     }
 
     public float GetLookInputsHorizontal()

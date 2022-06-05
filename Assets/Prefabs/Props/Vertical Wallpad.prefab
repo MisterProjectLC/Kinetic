@@ -459,7 +459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1989526149563330812}
-  - component: {fileID: 2544877448166919252}
+  - component: {fileID: 423426235832018506}
   m_Layer: 9
   m_Name: Vertical Wallpad
   m_TagString: Untagged
@@ -482,7 +482,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 240, z: 0}
---- !u!114 &2544877448166919252
+--- !u!114 &423426235832018506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6798066803863274850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b40dfee4adfc0438d3a7046076a564, type: 3}
+  m_Script: {fileID: 11500000, guid: 50a201a6e9d75df49bde538ccc669ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7933922360569445264}
@@ -500,14 +500,10 @@ MonoBehaviour:
     m_Bits: 4096
   SpawnPoint: {fileID: 0}
   DespawnPoint: {fileID: 0}
-  detectSize: {x: 120, y: 5, z: 35}
-  detectPosOffset: {x: 0, y: 1, z: 0}
-  moveVector: {x: -1, y: 0, z: -0.7}
-  Speed: 5
-  isJump: 0
-  Sticky: 1
+  detectSize: {x: 1, y: 1, z: 100}
+  detectPosOffset: {x: 0, y: 0, z: 0}
   overrideAutomaticSize: 0
-  cooldownOverride: 0.4
+  cooldown: 0
 --- !u!1 &7544665474976296250
 GameObject:
   m_ObjectHideFlags: 0

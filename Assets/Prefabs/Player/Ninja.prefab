@@ -821,15 +821,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350ad4f472dcae148a11c52c837d8d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallMaxDistance: 2
-  wallSpeedMultiplier: 1.2
-  minimumHeight: 0.5
-  maxAngleRoll: 20
+  wallMaxDistance: 1
+  wallSpeedMultiplier: 1.25
+  minimumHeight: 2
+  maxAngleRoll: 12
   normalizedAngleThreshold: 0.1
   jumpDuration: 2
-  wallBouncing: 3
-  cameraTransitionDuration: 1
-  wallGravityDownForce: 20
+  wallBouncing: 1.65
+  cameraTransitionDuration: 2
+  wallGravityDownForce: 4
   wallLayers: {fileID: 11400000, guid: 541da28cef493fb49b1ad049647a2f95, type: 2}
 --- !u!1 &5407619401830881081
 GameObject:
