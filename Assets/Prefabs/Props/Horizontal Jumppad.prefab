@@ -51,7 +51,7 @@ MonoBehaviour:
   SpawnPoint: {fileID: 0}
   DespawnPoint: {fileID: 0}
   detectSize: {x: 1, y: 1, z: 2}
-  detectPosOffset: {x: 0, y: 0, z: 0}
+  detectPosOffset: {x: 0, y: 10, z: 0}
   overrideAutomaticSize: 0
   cooldown: 0.05
   moveVector: {x: 0, y: 45, z: 0}
@@ -488,7 +488,7 @@ MeshCollider:
   m_GameObject: {fileID: 3834145555886715555}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -922,7 +922,7 @@ MeshCollider:
   m_GameObject: {fileID: 5706458006926669896}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30

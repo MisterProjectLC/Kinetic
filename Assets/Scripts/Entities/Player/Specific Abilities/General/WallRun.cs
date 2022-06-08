@@ -40,15 +40,14 @@ public class WallRun : MonoBehaviour
     Vector3 lastWallPosition;
     Vector3 lastWallNormal;
     Vector3 wallGravityDownVector;
-    float elapsedTimeSinceJump = 0;
     float elapsedTimeSinceWallAttach = 0;
     float elapsedTimeSinceWallDetatch = 0;
     float currentVolumeValue = 0;
     float lastVolumeValue = 0;
-    bool jumping = false;
 
     Action OnDetach;
     public void SubscribeToDetach(Action subscribee) { OnDetach += subscribee; }
+    public void UnsubscribeToDetach(Action subscribee) { OnDetach -= subscribee; }
 
 
     void Start()
@@ -57,21 +56,51 @@ public class WallRun : MonoBehaviour
 
         playerTransform = player.transform;
         wallGravityDownVector = new Vector3(0f, -wallGravityDownForce, 0f);
+
+        player.OnJumpAir += OnJump;
+        player.OnCollision += OnTouchWall;
     }
+
+    private void OnDisable()
+    {
+        Debug.Log("DisableWallrun");
+        player.SetRollAngle(0f);
+    }
+
+
+    void OnTouchWall(ControllerColliderHit hit)
+    {
+        OnTouchWall(hit.point, hit.normal);
+    }
+
 
     #region Interface
     internal void OnJump()
     {
-        jumping = true;
+        if (!gameObject.activeInHierarchy)
+            return;
 
         if (isWallRunning)
+        {
             DetachJump();
+            return;
+        } 
+        else if (CanWallRun())
+        {
+            RaycastHit[] hits = RegisterHits().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
+            if (hits.Length > 0)
+            {
+                lastWallPosition = hits[0].point;
+                lastWallNormal = hits[0].normal;
+                AttachToWall();
+            }
+        }
     }
 
     internal void OnTouchWall(Vector3 point, Vector3 normal)
     {
-        if (jumping && CanWallRun())
-            AttachToWall(point, normal);
+        lastWallPosition = point;
+        lastWallNormal = normal;
     }
 
     public void AttachToWall()
@@ -81,17 +110,9 @@ public class WallRun : MonoBehaviour
         {
             Vector3 alongWall = player.GetPlayerCamera().transform.TransformDirection(Vector3.forward);
             player.SetMoveVelocity(alongWall * (player.GroundWalkSpeed * wallSpeedMultiplier));
-            player.ReceiveForce(wallGravityDownVector);
+            player.GravityEnabled = false;
             isWallRunning = true;
         }
-    }
-
-    public void AttachToWall(Vector3 point, Vector3 normal)
-    {
-        lastWallPosition = point;
-        lastWallNormal = normal;
-
-        AttachToWall();
     }
 
     void DetachJump()
@@ -111,7 +132,10 @@ public class WallRun : MonoBehaviour
 
     void DetachFromWall()
     {
+        Debug.Log("DetachFromWall");
         isWallRunning = false;
+        player.GravityEnabled = true;
+        OnDetach?.Invoke();
     }
     #endregion
 
@@ -119,19 +143,7 @@ public class WallRun : MonoBehaviour
     void LateUpdate()
     {
         // Check if Wallrunning
-        if (CanWallRun())
-        {
-            if (jumping)
-            {
-
-                RaycastHit[] hits = RegisterHits().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
-                if (hits.Length > 0)
-                {
-                    Debug.Log("LateUpdate Attach");
-                    AttachToWall(hits[0].point, hits[0].normal);
-                }
-            }
-        } else
+        if (!CanWallRun())
         {
             DetachFromWall();
         }
@@ -143,8 +155,6 @@ public class WallRun : MonoBehaviour
             UpdateWhenWallrunning();
         else
             UpdateWhenNotWallrunning();
-
-        jumping = false;
     }
 
     #region Update Functions

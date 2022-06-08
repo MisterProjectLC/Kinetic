@@ -3,14 +3,35 @@ using UnityEngine;
 
 public class WallrunPad : Pad
 {
-    GameObject currentTarget;
+    WallRun wallrun;
+    bool active = false;
+    float timeSinceLastDetach = 0f;
+
+    new void Update()
+    {
+        timeSinceLastDetach += Time.deltaTime;
+        base.Update();
+    }
 
     protected override void ApplyEffect(GameObject target)
     {
-        if (currentTarget == target)
+        if (active || timeSinceLastDetach < 1f)
             return;
 
-        currentTarget = target;
-        target.GetComponentInChildren<WallRun>().AttachToWall();
+        active = true;
+        wallrun = target.GetComponentInChildren<WallRun>(true);
+        if (!wallrun)
+            return;
+
+        wallrun.UnsubscribeToDetach(OnDetach);
+        wallrun.gameObject.SetActive(true);
+        wallrun.SubscribeToDetach(OnDetach);
+    }
+
+    void OnDetach()
+    {
+        timeSinceLastDetach = 0f;
+        active = false;
+        wallrun.gameObject.SetActive(false); 
     }
 }

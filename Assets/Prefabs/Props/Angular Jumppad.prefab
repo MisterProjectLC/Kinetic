@@ -50,13 +50,14 @@ MonoBehaviour:
     m_Bits: 4096
   SpawnPoint: {fileID: 0}
   DespawnPoint: {fileID: 0}
-  detectSize: {x: 5, y: 5, z: 10}
-  detectPosOffset: {x: 0, y: 0, z: 0}
+  detectSize: {x: 1, y: 2, z: 2}
+  detectPosOffset: {x: 0, y: 0, z: 0.74}
+  overrideAutomaticSize: 0
+  cooldown: 0.05
   moveVector: {x: 0, y: 30, z: -30}
   Speed: 5
   isJump: 1
   Sticky: 0
-  overrideAutomaticSize: 0
   cooldownOverride: -1
 --- !u!1 &2517669965050839375
 GameObject:

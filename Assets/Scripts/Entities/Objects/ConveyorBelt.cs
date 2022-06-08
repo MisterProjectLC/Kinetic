@@ -14,7 +14,7 @@ public class ConveyorBelt : MonoBehaviour
     Vector3 DespawnPosition;
     Vector3 BeltSize;
 
-    Movepad movepad;
+    Slidepad movepad;
     //Vector3 BeltDirection;
 
     float SpawnTime = 6f;
@@ -26,22 +26,14 @@ public class ConveyorBelt : MonoBehaviour
     {
         detailType = Detail.GetComponent<Poolable>().Type;
 
-        movepad = GetComponent<Movepad>();
+        movepad = GetComponent<Slidepad>();
+        Debug.Log(movepad);
         SpawnPosition = movepad.GetUpperExtremePoint();
         DespawnPosition = movepad.GetLowerExtremePoint();
-        //BeltDirection = movepad.GetMoveDirection().normalized;
         BeltSize = new Vector3(transform.lossyScale.z, 1f, 1f);
 
         SpawnTime /= movepad.Speed;
         clock = new Clock(SpawnTime);
-        /*
-        if (Vector3.Dot(BeltDirection, (DespawnPosition - SpawnPosition).normalized) < 0)
-        {
-            Vector3 helper = SpawnPosition;
-            SpawnPosition = DespawnPosition;
-            DespawnPosition = helper;
-        }
-        */
     }
 
 
@@ -50,11 +42,10 @@ public class ConveyorBelt : MonoBehaviour
     {
         // Move and delete Stuff
         for (int i = 0; i < Details.Count; i++) {
-            Details[i].transform.localPosition += movepad.GetMoveDirection() * Time.deltaTime;
+            Details[i].transform.position += movepad.moveVector * Time.deltaTime;
             if ((SpawnPosition - DespawnPosition).magnitude < (SpawnPosition - Details[i].transform.position).magnitude)
             {
                 Destroy(Details[i]);
-                //ObjectManager.OM.EraseObject(Details[i].GetComponent<Poolable>());
                 Details.RemoveAt(i);
                 i--;
             }
@@ -67,7 +58,6 @@ public class ConveyorBelt : MonoBehaviour
             instance.transform.rotation = transform.rotation * Quaternion.Euler(0f, 90f, 0f);
             instance.transform.localScale = BeltSize;
             instance.transform.parent = transform;
-            //GameObject instance = Instantiate(Detail, SpawnPosition, transform.rotation * Quaternion.Euler(0f, 90f, 0f), transform);
             Details.Add(instance);
         }
     }

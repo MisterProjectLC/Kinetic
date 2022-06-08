@@ -500,10 +500,10 @@ MonoBehaviour:
     m_Bits: 4096
   SpawnPoint: {fileID: 0}
   DespawnPoint: {fileID: 0}
-  detectSize: {x: 1, y: 1, z: 100}
-  detectPosOffset: {x: 0, y: 0, z: 0}
+  detectSize: {x: 120, y: 1, z: 35}
+  detectPosOffset: {x: 0, y: 1, z: 0}
   overrideAutomaticSize: 0
-  cooldown: 0
+  cooldown: 0.05
 --- !u!1 &7544665474976296250
 GameObject:
   m_ObjectHideFlags: 0

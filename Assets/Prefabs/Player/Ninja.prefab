@@ -794,7 +794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3362455901886242811
 Transform:
   m_ObjectHideFlags: 0
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350ad4f472dcae148a11c52c837d8d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallMaxDistance: 1
+  wallMaxDistance: 2
   wallSpeedMultiplier: 1.25
   minimumHeight: 2
   maxAngleRoll: 12
@@ -829,7 +829,7 @@ MonoBehaviour:
   jumpDuration: 2
   wallBouncing: 1.65
   cameraTransitionDuration: 2
-  wallGravityDownForce: 4
+  wallGravityDownForce: 10
   wallLayers: {fileID: 11400000, guid: 541da28cef493fb49b1ad049647a2f95, type: 2}
 --- !u!1 &5407619401830881081
 GameObject:

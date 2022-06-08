@@ -21,26 +21,24 @@ public class Movepad : Pad
         cooldown = isJump ? 0.5f : cooldown;
 
         if (DespawnPoint && SpawnPoint)
-        {
-            moveVector = transform.InverseTransformVector(DespawnPoint.localPosition - SpawnPoint.localPosition).normalized * Speed;
-        }
+            moveVector = (DespawnPoint.position - SpawnPoint.position).normalized * Speed;
 
         base.Start();
     }
 
     protected override void ApplyEffect(GameObject target)
     {
-        Vector3 currentMoveVector = GetMoveDirection();
-
         PhysicsEntity entity = target.GetComponentInParent<PhysicsEntity>();
+        Debug.Log("ApplyEffect on " + target.name);
+
         if (isJump)
-            entity.SetMoveVelocity(currentMoveVector);
+            entity.SetMoveVelocity(GetMoveDirection());
         
         else if (Sticky)
-            entity.ReceiveForce(currentMoveVector, Sticky);
+            entity.ReceiveForce(GetMoveDirection(), Sticky);
 
         else
-            entity.ReceiveMotion(currentMoveVector);
+            entity.ReceiveMotion(moveVector);
     }
 
     public Vector3 GetMoveDirection()

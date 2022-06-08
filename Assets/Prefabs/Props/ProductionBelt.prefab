@@ -700,6 +700,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3966210634412657073}
+  - component: {fileID: 7373126356754461029}
   - component: {fileID: 7729922738403025287}
   - component: {fileID: 7640681179037643344}
   m_Layer: 9
@@ -728,6 +729,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7373126356754461029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723685425368486121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2b7614c04e7294da74840480816e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 7761105875157362951}
+  detectLayers:
+    serializedVersion: 2
+    m_Bits: 6144
+  SpawnPoint: {fileID: 1732504925227908198}
+  DespawnPoint: {fileID: 6513269908428177055}
+  detectSize: {x: 0, y: 0, z: 0}
+  detectPosOffset: {x: 0, y: 0, z: 0}
+  overrideAutomaticSize: 0
+  cooldown: 0.05
+  moveVector: {x: 0, y: 0, z: 0}
+  Speed: 5
 --- !u!114 &7729922738403025287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,11 +773,12 @@ MonoBehaviour:
   DespawnPoint: {fileID: 6513269908428177055}
   detectSize: {x: 0, y: 0, z: 0}
   detectPosOffset: {x: 0, y: 0.1, z: 0}
+  overrideAutomaticSize: 0
+  cooldown: 0.05
   moveVector: {x: 0, y: 0, z: 0}
   Speed: 5
   isJump: 0
   Sticky: 0
-  overrideAutomaticSize: 0
   cooldownOverride: -1
 --- !u!114 &7640681179037643344
 MonoBehaviour:

@@ -34,6 +34,8 @@ public abstract class Pad : MonoBehaviour
     {
         clock = new Clock(cooldown);
 
+        detectPosOffset = transform.TransformVector(detectPosOffset);
+
         if (DespawnPoint && SpawnPoint)
         {
             if (!overrideAutomaticSize)
@@ -44,13 +46,16 @@ public abstract class Pad : MonoBehaviour
         {
             detectSize /= 2;
         }
+
+        //Debug.Log(meshRenderer.bounds.center);
         //Debug.Log(DespawnPoint.position + ", " + SpawnPoint.position + ", " + moveVector);
     }
 
 
     protected void Update()
     {
-        detectorCenter = DespawnPoint ? (DespawnPoint.localPosition + SpawnPoint.localPosition) / 2 : meshRenderer.bounds.center + detectPosOffset;
+        detectorCenter = DespawnPoint ? (DespawnPoint.position + SpawnPoint.position) / 2 :
+            meshRenderer.bounds.center + detectPosOffset;
         Collider[] colliders = Physics.OverlapBox(detectorCenter, detectSize, meshRenderer.transform.rotation, detectLayers);
         if (colliders.Length > 0)
         {
@@ -97,6 +102,9 @@ public abstract class Pad : MonoBehaviour
     {
         if (DespawnPoint && SpawnPoint)
             Gizmos.DrawLine(GetLowerExtremePoint(), GetUpperExtremePoint());
-        Gizmos.DrawCube(meshRenderer.bounds.center + detectPosOffset, detectSize);
+
+        //Gizmos.matrix = meshRenderer.localToWorldMatrix;
+        Gizmos.DrawCube(DespawnPoint ? (GetLowerExtremePoint() + GetUpperExtremePoint()) / 2 :
+            meshRenderer.bounds.center + detectPosOffset, detectSize);
     }
 }
