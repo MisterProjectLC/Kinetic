@@ -13,9 +13,6 @@ public class Movepad : Pad
     private bool isJump = true;
     public bool Sticky = false;
 
-    [SerializeField]
-    private float cooldownOverride = -1f;
-
     new protected void Start()
     {
         cooldown = isJump ? 0.5f : cooldown;
@@ -38,7 +35,7 @@ public class Movepad : Pad
             entity.ReceiveForce(GetMoveDirection(), Sticky);
 
         else
-            entity.ReceiveMotion(moveVector);
+            entity.ReceiveMotion(GetMoveDirection());
     }
 
     public Vector3 GetMoveDirection()

@@ -81,12 +81,12 @@ MonoBehaviour:
   DespawnPoint: {fileID: 0}
   detectSize: {x: 1.7, y: 5.48, z: 15.8}
   detectPosOffset: {x: -3.73, y: -0.1, z: 0}
+  overrideAutomaticSize: 0
+  cooldown: 0.05
   moveVector: {x: 0, y: 7, z: 0}
   Speed: 1
   isJump: 0
   Sticky: 0
-  overrideAutomaticSize: 0
-  cooldownOverride: -1
 --- !u!1 &3967901509796886742
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,14 +600,14 @@ MonoBehaviour:
     m_Bits: 6144
   SpawnPoint: {fileID: 0}
   DespawnPoint: {fileID: 0}
-  detectSize: {x: 12, y: 2, z: 15}
-  detectPosOffset: {x: 2, y: 2.5, z: 0}
+  detectSize: {x: 12, y: 7, z: 15}
+  detectPosOffset: {x: 2, y: 0, z: 0}
+  overrideAutomaticSize: 0
+  cooldown: 0.05
   moveVector: {x: 0, y: 7, z: 0}
   Speed: 1
   isJump: 0
   Sticky: 0
-  overrideAutomaticSize: 0
-  cooldownOverride: -1
 --- !u!1 &6579238260824270759
 GameObject:
   m_ObjectHideFlags: 0
