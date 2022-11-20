@@ -28,17 +28,32 @@ public class OptionsMenu : Menu
         for (LocalizationSystem.Language l = LocalizationSystem.Language._First + 1; l < LocalizationSystem.Language._Last; l++)
             languageDropdown.options.Add(new Dropdown.OptionData(l.ToString().ToUpper()));
 
-        int currentRes = 0, x = 0;
+        int currentRes = -1, x = 0;
         foreach (Resolution res in Screen.resolutions) {
             if (resolutions.Exists((Resolution ress) => { return ress.width == res.width && ress.height == res.height; }))
                 continue;
 
             if (Screen.currentResolution.width == res.width && Screen.currentResolution.height == res.height)
+            {
                 currentRes = x;
+                Debug.Log("CurrentRes " + Screen.currentResolution.width + "x" + Screen.currentResolution.height + ", ID = " + currentRes);
+            }
 
             resolutionDropdown.options.Add(new Dropdown.OptionData(res.width.ToString() + "x" + res.height.ToString()));
             resolutions.Add(res);
             x++;
+        }
+
+        if (currentRes == -1)
+        {
+            currentRes = resolutions.Count - 1;
+        }
+
+        if (Hermes.GetInt(Hermes.Properties.Resolution) == -1)
+        {
+            Hermes.SetProperty(Hermes.Properties.Resolution, currentRes);
+            resolutionDropdown.value = currentRes;
+            OnResolutionUpdate(currentRes);
         }
 
         AddSliderListener(Hermes.Properties.SoundVolume, OnSoundUpdate);
@@ -73,12 +88,6 @@ public class OptionsMenu : Menu
 
         //Debug.Log("Language " + Hermes.GetInt(Hermes.Properties.Language));
         //Debug.Log("Resolution " + Hermes.GetInt(Hermes.Properties.Resolution));
-
-        if (Hermes.GetInt(Hermes.Properties.Resolution) == -1) {
-            Hermes.SetProperty(Hermes.Properties.Resolution, currentRes);
-            resolutionDropdown.value = currentRes;
-            OnResolutionUpdate(currentRes);
-        }
 
         base.Start();
     }
@@ -129,7 +138,6 @@ public class OptionsMenu : Menu
     {
         Resolution res = resolutions[value];
         Screen.SetResolution(res.width, res.height, Screen.fullScreen);
-        Debug.Log(res.width + " " + res.height);
     }
 
 
