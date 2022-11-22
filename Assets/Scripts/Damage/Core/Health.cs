@@ -77,7 +77,7 @@ public class Health : MonoBehaviour
 
         lastAttack = source;
         lastAttackOnKill = null;
-        lastAttackOnKill += source.OnKill;
+        lastAttackOnKill += source?.OnKill;
         lastAttackTime = Time.time;
 
         if (currentHealth.Value <= CriticalHealth && !critical)

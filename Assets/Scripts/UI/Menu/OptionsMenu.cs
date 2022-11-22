@@ -28,7 +28,7 @@ public class OptionsMenu : Menu
         for (LocalizationSystem.Language l = LocalizationSystem.Language._First + 1; l < LocalizationSystem.Language._Last; l++)
             languageDropdown.options.Add(new Dropdown.OptionData(l.ToString().ToUpper()));
 
-        int currentRes = -1, x = 0;
+        int currentRes = -1, x = 0, largestRes = 0;
         foreach (Resolution res in Screen.resolutions) {
             if (resolutions.Exists((Resolution ress) => { return ress.width == res.width && ress.height == res.height; }))
                 continue;
@@ -36,7 +36,12 @@ public class OptionsMenu : Menu
             if (Screen.currentResolution.width == res.width && Screen.currentResolution.height == res.height)
             {
                 currentRes = x;
-                Debug.Log("CurrentRes " + Screen.currentResolution.width + "x" + Screen.currentResolution.height + ", ID = " + currentRes);
+                //Debug.Log("CurrentRes " + Screen.currentResolution.width + "x" + Screen.currentResolution.height + ", ID = " + currentRes);
+            }
+
+            if (x > 0 && res.width > resolutions[largestRes].width)
+            {
+                largestRes = x;
             }
 
             resolutionDropdown.options.Add(new Dropdown.OptionData(res.width.ToString() + "x" + res.height.ToString()));
@@ -46,7 +51,7 @@ public class OptionsMenu : Menu
 
         if (currentRes == -1)
         {
-            currentRes = resolutions.Count - 1;
+            currentRes = largestRes;
         }
 
         if (Hermes.GetInt(Hermes.Properties.Resolution) == -1)
@@ -88,6 +93,7 @@ public class OptionsMenu : Menu
 
         //Debug.Log("Language " + Hermes.GetInt(Hermes.Properties.Language));
         //Debug.Log("Resolution " + Hermes.GetInt(Hermes.Properties.Resolution));
+
 
         base.Start();
     }

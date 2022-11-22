@@ -6,7 +6,6 @@ public class WeaponAbility : Ability
     public Weapon WeaponRef;
 
     protected PlayerCharacterController player;
-    Camera playerCamera;
     protected float BackwardsForce = 10f;
 
 
@@ -19,14 +18,9 @@ public class WeaponAbility : Ability
         base.Awake();
     }
 
-    private void Start()
-    {
-        playerCamera = player.GetPlayerCamera();
-    }
-
     public override void Execute(Input input)
     {
-        player.ReceiveForce(-BackwardsForce * playerCamera.transform.forward);
+        player.ReceiveForce(-BackwardsForce * player.GetPlayerCamera().transform.forward);
         if (GetComponent<Animator>())
             GetComponent<Animator>().SetTrigger("Shoot");
 

@@ -26,6 +26,7 @@ public class PlayerFallHandler : MonoBehaviour, IFallHandler
                 GetComponentInParent<Health>().InflictDamage(2);
                 GetComponentInParent<CharacterController>().transform.position = FallRespawnPoint;
                 TimeUnderLimit = 0f;
+                Debug.Log("PlayerFallHandler");
             }
         }
         else
@@ -39,5 +40,6 @@ public class PlayerFallHandler : MonoBehaviour, IFallHandler
     {
         this.VerticalLimit = VerticalLimit;
         this.FallRespawnPoint = FallRespawnPoint.position;
+        Debug.Log("FALLFATAL");
     }
 }
